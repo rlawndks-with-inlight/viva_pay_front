@@ -1,0 +1,299 @@
+.overlay-header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1; /* 다른 요소 위에 표시하기 위한 z-index 설정 */
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 20px; /* 원하는 패딩 값으로 조절 */
+}
+
+.logo-button { /*heerim 로고*/
+  text-align: center; /* 텍스트 가운데 정렬 */
+  text-decoration: none; /* 링크의 기본 밑줄 스타일 제거 */
+  background-color: transparent; /* 배경색 투명으로 설정 */
+  border: none; /* 테두리 제거 */
+  cursor: pointer; /* 포인터 커서로 변경 */
+  display: flex; /* 자식 요소를 가로로 나란히 정렬 */
+  flex-direction: column; /* 자식 요소를 세로로 정렬 */
+  align-items: center; /* 자식 요소를 수직 가운데 정렬 */
+}
+
+.logo-text {
+  font-size: 36px;
+  font-weight: bold;
+  font-style: italic; /* 텍스트를 기울임체로 스타일링 */
+  color: white;
+  margin-left: 12vw;
+  margin-top: 2vw;
+}
+
+.sub-text {
+  font-size: 12px; /* 부가 텍스트의 글꼴 크기 조정 */
+  font-style: italic; /* 텍스트를 기울임체로 스타일링 */
+  color: white;
+  margin-left: 12vw;
+}
+
+.overlay-header .buttons {
+  display: flex;
+  gap: 14px;
+  font-size: 24px;
+  align-items: center;
+  margin-right: 11vw;
+  margin-top: 3vw;
+}
+
+.overlay-header .buttons a { /*한영 버튼*/
+  font-weight: bold;
+  text-decoration: none;
+  color: white; /* 링크 텍스트 색상 설정 */
+}
+
+.overlay-header .buttons a.active {
+  text-decoration: underline;
+}
+
+.overlay-header .buttons button { /*검색,더보기 버튼*/
+  background: transparent;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  color: white;
+}
+
+
+body {
+  margin: 0 !important;
+}
+ /*justify-content: flex-end;*/
+  /* 섹션 스타일 */
+.section {
+height: 100vh; /* 화면 높이만큼 섹션 높이 설정 */
+display: flex;
+align-items: flex-end; /* 가로로 배치하고 아래로 정렬 */
+justify-content: center;/*가운데로 정렬*/
+background-color: white;
+
+}
+
+  /* 섹션 활성화 스타일 */
+.active-section {
+/* background-color: lightgray;*/
+}
+
+/* 텍스트 오버레이 스타일 */
+.text-overlay {
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(255, 255, 255, 0); /* 배경 색상 및 투명도 설정 */
+  padding: none; /* 텍스트 주변 여백 설정 */
+  z-index: 1; /* 이미지 위에 오버레이되도록 설정 */
+}
+
+.text-overlay p {  
+  /*margin: 0;*/
+}
+
+/* 프로젝트 박스 스타일 */
+.project-box {
+  width: 100px; /* 네모 상자의 너비 설정 */
+  height: 25px; /* 네모 상자의 높이 설정 */
+  background-color: rgb(136, 209, 0); /* 초록색 배경색 설정 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 12vw;
+}
+
+/* 프로젝트 스타일 */
+.project-text {
+  color: white; /* 흰색 글자색 설정 */
+  font-size: 15px; /* 글자 크기 설정 */
+  font-weight: bold;
+}
+
+/*3섹션 타이틀 스타일*/
+.title { 
+  margin: 0 0 35px 0;
+  font-weight: bold;
+  font-size: 55px;
+  margin-left: 11.8vw;
+  animation: fadein 1s ease-in-out;
+}
+@keyframes fadein{
+  0%{
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100%{
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* 3섹션 "read more" 버튼 스타일 */
+.read-more-button {
+  background-color: transparent; /* 배경색 투명 설정 */
+  border: none; /* 테두리 제거 */
+  cursor: pointer;
+  margin-left: 25vw; /* 좌측 여백 설정 */
+}
+
+/* 3섹션 "read more" 버튼 텍스트 스타일 */
+.read-more-text {
+  color: black; /* 텍스트 색상 설정 */
+  font-size: 20px; /* 텍스트 크기 설정 */
+  font-weight: bold;
+  margin-right: 30px; /* 우측 여백 설정 */
+}
+
+/* 3섹션 "read more" 화살표 아이콘 스타일 */
+.arrow-icon {
+  font-size: 22px; /* 아이콘 크기 설정 */
+}
+
+/* 3번째 섹션 이미지 컨테이너 스타일 */
+.image-container {
+  justify-content: space-between;
+  max-width: 100%;
+}
+
+/* 3번째 섹션 이미지 스타일 */
+.image-container img {
+  height: 82vh; /*높이 설정 */
+  max-width: 25%;
+  object-fit: cover; /* 이미지가 잘리지 않고 화면에 맞게 크기 조정 */
+}
+/*2섹션 */
+.icon-text-container {
+}
+/* 2섹션 초록 박스 스타일 */
+.green-box {
+  width: 110px; /* 네모 상자의 너비 설정 */
+  height: 23px; /* 네모 상자의 높이 설정 */
+  background-color: rgb(136, 209, 0); /* 초록색 배경색 설정 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 4vw;
+}
+
+/* 2섹션 초록박스 텍스트 스타일 */
+.green-box-text {
+  color: white; /* 흰색 글자색 설정 */
+  font-size: 13px; /* 글자 크기 설정 */
+  font-weight: bold;
+}
+
+/* 2섹션 초록박스 텍스트 스타일 */
+.subtitle {
+  font-size: 3vw;
+  font-weight: bold;
+  margin-left: 4vw;
+}
+
+/* 2섹션 초록박스 텍스트 스타일 */
+.description {
+  margin-left: 4vw;
+}
+
+/* 2섹션 초록박스 텍스트 스타일 */
+.topics-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between; /* Adjust as needed */
+}
+
+/* 2섹션 초록박스 텍스트 스타일 */
+.topic {
+  display: flex;
+  flex-direction: column;
+  margin: 1rem; /* Adjust as needed */
+}
+
+/* 2섹션 노란색 글 텍스트 스타일 */
+.topic-title,
+.topic-number {
+  margin: 0.2rem 0; /* Adjust as needed */
+}
+.topic-title{
+
+}
+.topic-number {
+  font-weight: bold;
+  font-size: 6rem;
+}
+/* 2섹션 아이콘 콘테이너 스타일 */
+.icon-container {
+display: flex;
+margin-top: 30px; /* 화면 아래 여백 설정 */
+margin-bottom: 20px;
+
+}
+
+/* 2섹션 아이콘 이미지 스타일 */
+.icon-container img {
+  object-fit: cover; /* 이미지가 잘리지 않고 화면에 맞게 크기 조정 */
+  margin: 20px;
+}
+
+
+/* 2섹션 버튼 스타일 */
+.prev-button,
+.next-button {
+  width: 50px;
+  height: 50px;
+  background-color: white;
+  border-radius: 50%;
+  border: none;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.5); /* 그림자 추가 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  margin: 50px; /* 버튼과 아이콘 사이 간격 설정 */
+}
+
+/* 2섹션 버튼 내부 스타일 */
+.button-inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32px;
+}
+
+/* 2섹션 화살표 아이콘 스타일 */
+.leftarrow {
+  margin-right: 5px;
+  margin-bottom: 2px;
+  font-weight: bold;
+  color: lightgray;
+}
+
+/* 2섹션 화살표 아이콘 스타일 */
+.rightarrow {
+  margin-left: 5px;
+  margin-bottom: 2px;
+  font-weight: bold;
+  color: lightgray;
+}
+
+/* 1섹션 비디오 컨테이너 스타일 */
+.video-container {
+  position: relative;
+  width: 100%;
+  height: 100vh; /* 화면 크기에 꽉 채우도록 설정 */
+}
+
+/* 1섹션 비디오 스타일 */
+.fullscreen-video {
+  object-fit: cover; /* 비디오를 화면 크기에 맞게 늘리기 */
+  width: 100%;
+  height: 100%;
+}
+
+
+/* 수정중*/
