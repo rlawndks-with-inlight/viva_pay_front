@@ -1,8 +1,11 @@
 // components/Header.js
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { useState, useEffect } from 'react';
 
 const Header = () => {
+    const router = useRouter();
+    const { lang = 'kr' } = router.query;
     const [isVisible, setIsVisible] = useState(false);
     const [activeButton, setActiveButton] = useState(""); // 활성 버튼 상태 추가
 
@@ -21,10 +24,10 @@ const Header = () => {
             </Link>
             <div className="buttons">
                 <Link href="/en" legacyBehavior>
-                    <a className={activeButton === "en" ? "active" : ""}>EN</a>
+                    <a className={lang === "en" ? "active" : ""}>EN</a>
                 </Link>
                 <Link href="/kr" legacyBehavior>
-                    <a className={activeButton === "kr" ? "active" : ""}>KO</a>
+                    <a className={lang === "kr" ? "active" : ""}>KR</a>
                 </Link>
                 <button>
                     <img src="/icon/search.png" alt="Search Icon" width="40" height="40" />
