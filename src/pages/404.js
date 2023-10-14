@@ -8,7 +8,7 @@ const Page404 = () => {
       <Head>
         <title> 404 Page </title>
       </Head>
-      404
+      404 Page
     </>
   );
 }

@@ -1,10 +1,28 @@
 {
     "kr": {
         "YOUR_BRO": "니 브라우저 어쩌구",
-        "WORLD_LEADING": "세상은 읽는중"
+        "WORLD_LEADING": "세상을 이끄는",
+        "ARCHITECTURE": "건축양식과 디자인",
+        "INNOVATIONS": "우리는 미래와 그 이상을 바라보고",
+        "DESIGN_TOMORROW": "혁신과 도전을 통해 인류의 행복한 미래를 디자인합니다.",
+        "INTERNATIONAL": "여의도공원 제2세종문화회관 건립 기획 디자인공모",
+        "GYEONGGI": "제28회 경기도건축문화상, 경기도건축사회장상",
+        "KOREA": "2023 대한민국 녹색건축대전, 산업통상부 장관상",
+        "MINISTRY_OF_LAND": "2022 대한민국 녹색건축대전, 국토교통부장관상",
+        "ADDRESS": "05288 서울특별시 강동구 상일로6길 39",
+        "": ""
     },
     "en": {
         "YOUR_BRO": "Your browser does not support the video tag.",
-        "WORLD_LEADING": "World's Leading"
+        "WORLD_LEADING": "World's Leading",
+        "ARCHITECTURE": "Architecture & Design Practice",
+        "INNOVATIONS": "With Innovations and Challenges,",
+        "DESIGN_TOMORROW": "We Design Tomorrow & Beyond, for the next 100 years.",
+        "INTERNATIONAL": "International Design Competition for The 2nd SEJONG CENTER FOR PERFORMING ARTS",
+        "GYEONGGI": "28th Gyeonggi Architecture Festival Awards, KIRA Gyeonggi President Award",
+        "KOREA": "2023 Korea Green Building Award, Ministry of Trade, Industry and Energy Minister Award",
+        "MINISTRY_OF_LAND": "Ministry of Land, Infrastructure and Transport Minister Prize, 2022 Korea Green Building Award",
+        "ADDRESS": " 12F Gangdong Tower, 39, Sangil-ro 6-gil, Gangdong-gu, Seoul, 05288, South Korea",
+        "": ""
     }
 }
