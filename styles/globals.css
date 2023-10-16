@@ -337,6 +337,16 @@ background-color: white;
   margin-top: 8.2vw;
   margin-left: 12vw;
   margin-bottom: 2vw;
+  opacity: 0; /* 처음에는 안 보이게 설정 */
+  transform: translateX(-60px); /* 시작 위치 지정 */
+  /* fadein 애니메이션 효과 설정 */
+  transition: opacity 1s ease, transform 2s ease;
+}
+
+
+.green-box.in-view {
+  opacity: 1; /* 투명도를 1로 변경하여 나타나게 함 */
+  transform: translateX(0); /* Y축 이동을 0으로 변경하여 원래 위치로 이동 */
 }
 
 /* 2섹션 초록박스 텍스트 스타일 */
@@ -351,12 +361,30 @@ background-color: white;
   font-size: 3vw;
   font-weight: bold;
   margin-left: 12vw;
+  opacity: 0; /* 처음에는 안 보이게 설정 */
+  transform: translateY(30px); /* 시작 위치 지정 */
+  /* fadein 애니메이션 효과 설정 */
+  transition: opacity 1s ease, transform 2s ease;
+}
+
+.subtitle.in-view {
+  opacity: 1; /* 투명도를 1로 변경하여 나타나게 함 */
+  transform: translateY(0); /* Y축 이동을 0으로 변경하여 원래 위치로 이동 */
 }
 
 /* 2섹션 innovation 텍스트 스타일 */
 .description {
   font-size: 1.2rem;
   margin-left: 12vw;
+  opacity: 0; /* 처음에는 안 보이게 설정 */
+  transform: translateY(45px); /* 시작 위치 지정 */
+  /* fadein 애니메이션 효과 설정 */
+  transition: opacity 1s ease, transform 2s ease;
+}
+
+.description.in-view {
+  opacity: 1; /* 투명도를 1로 변경하여 나타나게 함 */
+  transform: translateY(0); /* Y축 이동을 0으로 변경하여 원래 위치로 이동 */
 }
 
 /* 2섹션 history box 텍스트 스타일 */
@@ -364,6 +392,15 @@ background-color: white;
   display: flex;
   justify-content: space-between; /* Adjust as needed */
   margin: 1.5vw 11vw 6vw 11vw; /* Adjust as needed */
+  opacity: 0; /* 처음에는 안 보이게 설정 */
+  transform: translateY(60px); /* 시작 위치 지정 */
+  /* fadein 애니메이션 효과 설정 */
+  transition: opacity 1s ease, transform 2s ease;
+}
+
+.topics-container.in-view {
+  opacity: 1; /* 투명도를 1로 변경하여 나타나게 함 */
+  transform: translateY(0); /* Y축 이동을 0으로 변경하여 원래 위치로 이동 */
 }
 
 /* 2섹션 history 덩어리 텍스트 스타일 */
@@ -467,6 +504,15 @@ object-fit: cover;
   justify-content: center;
   align-items: center;
   margin-left: 12vw;
+  opacity: 0; /* 처음에는 안 보이게 설정 */
+  transform: translateX(-60px); /* 시작 위치 지정 */
+  /* fadein 애니메이션 효과 설정 */
+  transition: opacity 1s ease, transform 2s ease;
+}
+
+.project-box.in-view {
+  opacity: 1; /* 투명도를 1로 변경하여 나타나게 함 */
+  transform: translateX(0); /* Y축 이동을 0으로 변경하여 원래 위치로 이동 */
 }
 
 /* 프로젝트 스타일 */
@@ -482,7 +528,17 @@ object-fit: cover;
   font-weight: bold;
   font-size: 55px;
   margin-left: 11.8vw;
+  opacity: 0; /* 처음에는 안 보이게 설정 */
+  transform: translateY(40px); /* 시작 위치 지정 */
+  /* fadein 애니메이션 효과 설정 */
+  transition: opacity 1s ease, transform 2s ease;
 }
+
+.title.in-view {
+  opacity: 1; /* 투명도를 1로 변경하여 나타나게 함 */
+  transform: translateY(0); /* Y축 이동을 0으로 변경하여 원래 위치로 이동 */
+}
+
 
 /* 3섹션 "read more" 버튼 스타일 */
 .read-more-button {
@@ -532,7 +588,7 @@ object-fit: cover;
   margin: 0 1vw 10px 1vw;
   cursor: pointer;
   opacity: 0; /* 처음에는 안 보이게 설정 */
-  transform: translateY(30px); /* 시작 위치 지정 */
+  transform: translateY(35px); /* 시작 위치 지정 */
   /* fadein 애니메이션 효과 설정 */
   transition: opacity 1s ease, transform 2s ease;
 }
@@ -597,7 +653,7 @@ object-fit: cover;
   text-align: center; /* 가운데 정렬을 위해 텍스트 정렬을 사용합니다. */
   margin-bottom: 10px; /* 버튼과 내용 사이의 간격을 조절합니다. */
   opacity: 0; /* 처음에는 안 보이게 설정 */
-  transform: translateY(30px); /* 시작 위치 지정 */
+  transform: translateY(50px); /* 시작 위치 지정 */
   /* fadein 애니메이션 효과 설정 */
   transition: opacity 1s ease, transform 2s ease;
 }
@@ -897,13 +953,21 @@ text-align: left; /* 텍스트 왼쪽 정렬 */
 /* 3번째 섹션 이미지 컨테이너 스타일 */
 .image-container {
   display: flex;
-  max-width: 100%;
+  max-width: 100%;  opacity: 0; /* 처음에는 안 보이게 설정 */
+  transform: translateY(30px); /* 시작 위치 지정 */
+  /* fadein 애니메이션 효과 설정 */
+  transition: opacity 1s ease, transform 2s ease;
+}
+
+.image-container.in-view {
+  opacity: 1; /* 투명도를 1로 변경하여 나타나게 함 */
+  transform: translateY(0); /* Y축 이동을 0으로 변경하여 원래 위치로 이동 */
 }
 
 .image-button {
   display: flex;
   width: 100%; /* 이미지 버튼의 너비를 100%로 설정 */
-  overflow: hidden;
+  overflow: -moz-hidden-unscrollable;
   transition: transform 0.3s ease;
 }
 

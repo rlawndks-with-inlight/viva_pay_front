@@ -293,15 +293,15 @@ const Home = () => {
                                 ) : index === 1 ? (
                                     <div className="text-overlay-section2">
                                         {/* 노란색 배경에 녹색 박스 모양의 텍스트 박스와 소제목, 설명 */}
-                                        <div className="green-box">
+                                        <div className={`green-box ${inViewItems2.includes("") ? "in-view" : ""}`}>
                                             <p className="green-box-text">WHO WE ARE</p>
                                         </div>
-                                        <div className="subtitle" > {langJson[lang]?.WORLD_LEADING}</div>
-                                        <div className="subtitle"> {langJson[lang]?.ARCHITECTURE}</div>
-                                        <div className="description" style={{ marginTop: '2vw' }}>{langJson[lang]?.INNOVATIONS}</div>
-                                        <div className="description" style={{ marginTop: '0.5vw' }}>{langJson[lang]?.DESIGN_TOMORROW}</div>
+                                        <div className={`subtitle ${inViewItems2.includes("") ? "in-view" : ""}`}> {langJson[lang]?.WORLD_LEADING}</div>
+                                        <div className={`subtitle ${inViewItems2.includes("") ? "in-view" : ""}`}> {langJson[lang]?.ARCHITECTURE}</div>
+                                        <div className={`description ${inViewItems2.includes("") ? "in-view" : ""}`} style={{ marginTop: '2vw' }}>{langJson[lang]?.INNOVATIONS}</div>
+                                        <div className={`description ${inViewItems2.includes("") ? "in-view" : ""}`} style={{ marginTop: '0.5vw' }}>{langJson[lang]?.DESIGN_TOMORROW}</div>
                                         {/* 주제와 설명 */}
-                                        <div className="topics-container">
+                                        <div className={`topics-container ${inViewItems2.includes("") ? "in-view" : ""}`}>
                                             <div className="topic">
                                                 <h2 className='topic-title'>History of Heerim</h2>
                                                 <p className='topic-number'>50+</p>
@@ -359,16 +359,16 @@ const Home = () => {
                                     </div>
                                 ) : index === 2 ? (
                                     <div className={`text-overlay`}>
-                                        <div className="project-box">
+                                        <div className={`project-box ${inViewItems3.includes("") ? "in-view" : ""}`}>
                                             <p className="project-text">PROJECT</p>
                                         </div>
-                                        <div className="title"> Heerim's Latest Selected Works
+                                        <div className={`title ${inViewItems3.includes("") ? "in-view" : ""}`}>Heerim's Latest Selected Works
                                             <button className="read-more-button" onClick={() => { window.location.href = "/404"; }}>
                                                 <span className="read-more-text">Read more</span>
                                                 <span className="arrow-icon">→</span>
                                             </button>
                                         </div>
-                                        <div class="image-container">
+                                        <div className={`image-container ${inViewItems3.includes("") ? "in-view" : ""}`}>
                                             <a class="image-button" href="/404" data-image="/image/image12.jpg" onMouseEnter={(e) => handleImageHover(e, "/image/image12.jpg")} onMouseLeave={restoreOriginalImage}>
                                                 <img src={hoveredImage || "/image/image11.jpg"} />
                                             </a>

@@ -11,21 +11,26 @@ const Header = () => {
     const [isScrollingDisabled, setScrollingDisabled] = useState(false);
 
     useEffect(() => {
-        // 스크롤 이벤트 핸들러를 추가하여 스크롤을 막습니다.
-        const disableScroll = (e) => {
-            if (isScrollingDisabled) {
-                e.preventDefault();
+        setIsVisible(true);
+
+        const handleScroll = () => {
+            if (isSection1Green && isScrollingDisabled) {
+                // 스크롤을 비활성화합니다.
+                window.scrollTo(0, 0); // 페이지 맨 위로 스크롤합니다.
             }
         };
 
-        // 스크롤 이벤트를 추가하고 스크롤을 막습니다.
-        window.addEventListener('scroll', disableScroll);
+        if (isSection1Green && isScrollingDisabled) {
+            // 이후 스크롤 이벤트를 모니터링합니다.
+            window.addEventListener('scroll', handleScroll);
+        }
 
-        // 컴포넌트가 언마운트될 때 이벤트를 제거하여 스크롤을 다시 활성화합니다.
         return () => {
-            window.removeEventListener('scroll', disableScroll);
+            // 컴포넌트가 언마운트될 때 이벤트 리스너를 제거합니다.
+            window.removeEventListener('scroll', handleScroll);
         };
-    }, [isScrollingDisabled]);
+    }, [isSection1Green, isScrollingDisabled]);
+
 
     useEffect(() => {
         setIsVisible(true);
