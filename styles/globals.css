@@ -588,7 +588,7 @@ object-fit: cover;
   margin: 0 1vw 10px 1vw;
   cursor: pointer;
   opacity: 0; /* 처음에는 안 보이게 설정 */
-  transform: translateY(35px); /* 시작 위치 지정 */
+  transform: translateY(30px); /* 시작 위치 지정 */
   /* fadein 애니메이션 효과 설정 */
   transition: opacity 1s ease, transform 2s ease;
 }
@@ -655,7 +655,7 @@ object-fit: cover;
   opacity: 0; /* 처음에는 안 보이게 설정 */
   transform: translateY(50px); /* 시작 위치 지정 */
   /* fadein 애니메이션 효과 설정 */
-  transition: opacity 1s ease, transform 2s ease;
+  transition: opacity 2s ease, transform 3s ease;
 }
 
 
@@ -743,9 +743,9 @@ object-fit: cover;
   font-size: 1vw;
   color: gray;
   opacity: 0; /* 처음에는 안 보이게 설정 */
-  transform: translateY(30px); /* 시작 위치 지정 */
+  transform: translateY(40px); /* 시작 위치 지정 */
   /* fadein 애니메이션 효과 설정 */
-  transition: opacity 1s ease, transform 2s ease;
+  transition: opacity 1s ease, transform 3s ease;
 }
 
 /* .searchsub 화면에 들어올 때 fadein 애니메이션 적용 */
@@ -767,9 +767,9 @@ object-fit: cover;
   margin-left: 12vw; /* 왼쪽 여백 추가 */
   padding-left: 2rem;
   opacity: 0; /* 처음에는 안 보이게 설정 */
-  transform: translateY(30px); /* 시작 위치 지정 */
+  transform: translateY(50px); /* 시작 위치 지정 */
   /* fadein 애니메이션 효과 설정 */
-  transition: opacity 1s ease, transform 2s ease;
+  transition: opacity 2s ease, transform 4s ease;
 }
 
 .searchheerim-input.in-view {
@@ -793,9 +793,9 @@ object-fit: cover;
 .searchtag-keywords {
   padding: 70px 0 110px 12vw;
   opacity: 0; /* 처음에는 안 보이게 설정 */
-  transform: translateY(30px); /* 시작 위치 지정 */
+  transform: translateY(60px); /* 시작 위치 지정 */
   /* fadein 애니메이션 효과 설정 */
-  transition: opacity 1s ease, transform 2s ease;
+  transition: opacity 3s ease, transform 5s ease;
 }
 
 .searchtag-keywords.in-view {
@@ -954,7 +954,7 @@ text-align: left; /* 텍스트 왼쪽 정렬 */
 .image-container {
   display: flex;
   max-width: 100%;  opacity: 0; /* 처음에는 안 보이게 설정 */
-  transform: translateY(30px); /* 시작 위치 지정 */
+  transform: translateY(70px); /* 시작 위치 지정 */
   /* fadein 애니메이션 효과 설정 */
   transition: opacity 1s ease, transform 2s ease;
 }

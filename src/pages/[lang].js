@@ -8,6 +8,56 @@ const sections = ["section1", "section2", "section3", "section4", "section5"]; /
 const totalIcons = 10; // 총 아이콘 개수
 const iconsPerPage = 7; // 한 페이지에 표시할 아이콘 개수
 
+
+const Topic = ({ title, initialValue, finalValue, inView }) => {
+    const [currentValue, setCurrentValue] = useState(initialValue);
+
+    useEffect(() => {
+        if (inView) {
+            let animationInterval;
+            if (currentValue < finalValue) {
+                const animationStep = (finalValue - initialValue) / 100; // You can adjust the step size
+                animationInterval = setInterval(() => {
+                    const newValue = currentValue + animationStep;
+                    setCurrentValue(Math.min(newValue, finalValue));
+
+                    if (newValue >= finalValue) {
+                        clearInterval(animationInterval); // Stop the animation
+                    }
+                }, 10); // You can adjust the interval
+            }
+
+            return () => clearInterval(animationInterval); // Clean up the interval when component unmounts or goes out of view
+        } else {
+            // Reset the value when out of view
+            setCurrentValue(initialValue);
+        }
+    }, [inView, currentValue, finalValue, initialValue]);
+
+    const addPlusSign = title === "History of Heerim" || title === "Professional Employees" || title === "Overseas Projects";
+
+    return (
+        <div>
+            <h2>{title}</h2>
+            <p className='topic-number'>
+                {addPlusSign ? Math.round(currentValue) + "+" : Math.round(currentValue)}
+            </p>
+        </div>
+    );
+};
+
+const TopicsContainer = ({ inView }) => {
+    return (
+        <div className={`topics-container ${inView ? "in-view" : ""}`}>
+            <Topic title="History of Heerim" initialValue={0} finalValue={50} inView={inView} />
+            <Topic title="Branch offices" initialValue={0} finalValue={15} inView={inView} />
+            <Topic title="Professional Employees" initialValue={0} finalValue={1400} inView={inView} />
+            <Topic title="Overseas Projects" initialValue={0} finalValue={300} inView={inView} />
+            <Topic title="World Ranking (WA2023)" initialValue={0} finalValue={8} inView={inView} />
+        </div>
+    );
+};
+
 const Home = () => {
 
 
@@ -24,6 +74,33 @@ const Home = () => {
     const [inViewItems3, setInViewItems3] = useState([]);
     const [inViewItems4, setInViewItems4] = useState([]);
     const [inViewItems5, setInViewItems5] = useState([]);
+    const [section2InView, setSection2InView] = useState(false); // section2의 inView 여부
+
+    //숫자 0부터 증가하는 애니메이션
+    useEffect(() => {
+        const handleScroll = () => {
+            const section2 = document.getElementById("section2");
+            if (section2) {
+                const rect = section2.getBoundingClientRect();
+                const isSection2InView = rect.top >= 0 && rect.bottom <= window.innerHeight;
+                if (isSection2InView !== section2InView) {
+                    setSection2InView(isSection2InView);
+                }
+            }
+        };
+
+        window.addEventListener("scroll", handleScroll);
+
+        return () => {
+            window.removeEventListener("scroll", handleScroll);
+        };
+    }, [section2InView]);
+
+    useEffect(() => {
+        if (section2InView) {
+            setInViewItems2([""]); // section2가 화면에 나타날 때 inViewItems2를 업데이트
+        }
+    }, [section2InView]);
 
     //fadein 애니메이션
     useEffect(() => {
@@ -301,27 +378,8 @@ const Home = () => {
                                         <div className={`description ${inViewItems2.includes("") ? "in-view" : ""}`} style={{ marginTop: '2vw' }}>{langJson[lang]?.INNOVATIONS}</div>
                                         <div className={`description ${inViewItems2.includes("") ? "in-view" : ""}`} style={{ marginTop: '0.5vw' }}>{langJson[lang]?.DESIGN_TOMORROW}</div>
                                         {/* 주제와 설명 */}
-                                        <div className={`topics-container ${inViewItems2.includes("") ? "in-view" : ""}`}>
-                                            <div className="topic">
-                                                <h2 className='topic-title'>History of Heerim</h2>
-                                                <p className='topic-number'>50+</p>
-                                            </div>
-                                            <div className="topic">
-                                                <h2 className='topic-title'>Branch offices</h2>
-                                                <p className='topic-number'>15</p>
-                                            </div>
-                                            <div className="topic">
-                                                <h2 className='topic-title'>Professional Employees</h2>
-                                                <p className='topic-number'>1,400+</p>
-                                            </div>
-                                            <div className="topic">
-                                                <h2 className='topic-title'>Overseas Projects</h2>
-                                                <p className='topic-number'>300+</p>
-                                            </div>
-                                            <div className="topic">
-                                                <h2 className='topic-title'>World Ranking (WA2023)</h2>
-                                                <p className='topic-number'>8</p>
-                                            </div>
+                                        <div>
+                                            <TopicsContainer inView={inViewItems2.includes("")} />
                                         </div>
                                         <div className="icon-container">
                                             {/* 이전 버튼 */}
