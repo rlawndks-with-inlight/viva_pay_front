@@ -16,20 +16,20 @@ const Topic = ({ title, initialValue, finalValue, inView }) => {
         if (inView) {
             let animationInterval;
             if (currentValue < finalValue) {
-                const animationStep = (finalValue - initialValue) / 100; // You can adjust the step size
+                const animationStep = (finalValue - initialValue) / 100; // 올라가는 단위 조절
                 animationInterval = setInterval(() => {
                     const newValue = currentValue + animationStep;
                     setCurrentValue(Math.min(newValue, finalValue));
 
                     if (newValue >= finalValue) {
-                        clearInterval(animationInterval); // Stop the animation
+                        clearInterval(animationInterval); // 애니메이션 멈춤
                     }
-                }, 10); // You can adjust the interval
+                }, 40); // 올라가는 속도 조절
             }
 
-            return () => clearInterval(animationInterval); // Clean up the interval when component unmounts or goes out of view
+            return () => clearInterval(animationInterval);
         } else {
-            // Reset the value when out of view
+            // 뷰를 나가면 리셋
             setCurrentValue(initialValue);
         }
     }, [inView, currentValue, finalValue, initialValue]);
