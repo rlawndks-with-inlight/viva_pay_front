@@ -7,116 +7,73 @@ const Header = () => {
     const router = useRouter();
     const { lang = 'kr' } = router.query;
     const [isVisible, setIsVisible] = useState(false);
-    const [isSearchVisible, setIsSearchVisible] = useState(false); // 검색 창 가시성 상태 추가
-    const [isMoreVisible, setIsMoreVisible] = useState(false); // 더보기 모달 창 가시성 상태 추가
-    const [activeButton, setActiveButton] = useState("");
-    const [searchQuery, setSearchQuery] = useState(""); // 검색어 상태 추가
+    const [isSection1Green, setIsSection1Green] = useState(false);
+    const [isScrollingDisabled, setScrollingDisabled] = useState(false);
+
+    useEffect(() => {
+        // 스크롤 이벤트 핸들러를 추가하여 스크롤을 막습니다.
+        const disableScroll = (e) => {
+            if (isScrollingDisabled) {
+                e.preventDefault();
+            }
+        };
+
+        // 스크롤 이벤트를 추가하고 스크롤을 막습니다.
+        window.addEventListener('scroll', disableScroll);
+
+        // 컴포넌트가 언마운트될 때 이벤트를 제거하여 스크롤을 다시 활성화합니다.
+        return () => {
+            window.removeEventListener('scroll', disableScroll);
+        };
+    }, [isScrollingDisabled]);
 
     useEffect(() => {
         setIsVisible(true);
     }, []);
 
-    // 검색 창 표시 함수
-    const showSearch = () => {
-        setIsSearchVisible(true);
-    };
-
-    // 검색 창 닫기 함수
-    const closeSearch = () => {
-        setIsSearchVisible(false);
-        setSearchQuery(""); // 검색어 초기화
-    };
-
-    // 검색어 입력 핸들러
-    const handleSearchInputChange = (e) => {
-        setSearchQuery(e.target.value);
-    };
-
-    // 검색 실행 함수
-    const handleSearch = () => {
-        // 여기에서 검색을 실행하거나 필요한 로직을 추가하세요.
-        console.log("Searching for:", searchQuery);
-        // 검색 이후에는 검색 창을 닫을 수 있도록
-        closeSearch();
-    };
-
     // 더보기 모달 표시 함수
     const showMore = () => {
-        setIsMoreVisible(true);
+        setIsSection1Green(true);
+        setScrollingDisabled(true);
+        // 스크롤 비활성화
     };
 
     // 더보기 모달 닫기 함수
     const closeMore = () => {
-        setIsMoreVisible(false);
+        setIsSection1Green(false);
+        setScrollingDisabled(false);
+        // 스크롤 활성화
     };
 
     return (
-        <header className={`overlay-header ${isVisible ? 'visible' : ''}`}>
+        <header className={`overlay-header ${isSection1Green ? 'section1-green' : ''}`}>
             <Link href="/" legacyBehavior>
-                <a className="logo-button">
+                <a className="logo-button" onClick={() => { window.location.reload() }}>
                     <span className="logo-text">heerim</span>
                     <span className="sub-text">Architects & Planners</span>
                 </a>
             </Link>
             <div className="buttons">
-                <Link href="/en" legacyBehavior>
-                    <a className={lang === "en" ? "active" : ""}>EN</a>
-                </Link>
-                <Link href="/kr" legacyBehavior>
-                    <a className={lang === "kr" ? "active" : ""}>KR</a>
-                </Link>
-                <button onClick={showSearch}>
-                    <img src="/icon/search.png" alt="Search Icon" width="40" height="40" />
-                </button>
-                <button onClick={showMore}>
-                    <img src="/icon/more.png" alt="More Icon" width="40" height="40" />
-                </button>
+                {isSection1Green ? null : ( // 녹색 섹션이 활성화되면 버튼을 숨김
+                    <>
+                        <Link href="/en" legacyBehavior>
+                            <a className={lang === "en" ? "active" : ""}>EN</a>
+                        </Link>
+                        <Link href="/kr" legacyBehavior>
+                            <a className={lang === "kr" ? "active" : ""}>KR</a>
+                        </Link>
+                        <button onClick={showMore}>
+                            <img src="/icon/more.png" alt="More Icon" width="40" height="40" />
+                        </button>
+                    </>
+                )}
             </div>
-            {isSearchVisible && (
-                <div className="search-modal">
-                    <div className="close-button-container">
-                        <button onClick={closeSearch} className="close-button">Close X</button>
-                    </div>
-                    <div className="search-container">
-                        <input
-                            type="text"
-                            placeholder="Type here"
-                            value={searchQuery}
-                            onChange={handleSearchInputChange}
-                            className="search-input" // 검색 입력란 스타일 추가
-                        />
-                        <a href="/link-to-search" onClick={() => { window.location.href = "/404"; }}>
-                            <button onClick={handleSearch} className="search-button">
-                                <img src="/icon/search.png" alt="Search Icon" width="60" height="60" />
-                            </button>
-                        </a>
-                    </div>
-                    <div className="recommend-keywords">
-                        <p className="keyword-title">Recommend Keywords</p>
-                        <button className="keyword-button" onClick={() => { window.location.reload() }}><Link href="/LaLuna">LaLuna</Link></button>
-                        <button className="keyword-button" onClick={() => { window.location.reload() }}><Link href="/DCM">DCM</Link></button>
-                        <button className="keyword-button" onClick={() => { window.location.reload() }}><Link href="/Pangyo">Pangyo</Link></button>
-                        <button className="keyword-button" onClick={() => { window.location.reload() }}><Link href="/Cheongna">Cheongna</Link></button>
-                        <button className="keyword-button" onClick={() => { window.location.reload() }}><Link href="/Azerbaijan">Azerbaijan</Link></button>
-                        <button className="keyword-button" onClick={() => { window.location.reload() }}><Link href="/Vietnam">Vietnam</Link></button>
-                        <button className="keyword-button" onClick={() => { window.location.reload() }}><Link href="/Awards">Awards</Link></button>
-                        <button className="keyword-button" onClick={() => { window.location.reload() }}><Link href="/Metagallery">Metagallery</Link></button>
-                        <button className="keyword-button" onClick={() => { window.location.reload() }}><Link href="/Residential">Residential</Link></button>
-                    </div>
-                </div>
-            )}
-            {isMoreVisible && (
-                <div className="more-modal">
-                    <Link href="/kr" legacyBehavior>
-                        <a className="more-logo-button" onClick={() => { window.location.reload() }}>
-                            <span className="more-logo-text">heerim</span>
-                            <span className="more-sub-text">Architects & Planners</span>
-                        </a>
-                    </Link>
+            {isSection1Green && (
+                <div className="more-container">
                     <div className="close-button-container">
                         <button onClick={closeMore} className="more-close-button">Close X</button>
                     </div>
-                    <div className="about-us-button">
+                    <div className="about-us-button" style={{ marginRight: "2" }}>
                         <div className="main-button-container">
                             <button className="main-button">
                                 <Link href="/IR" >ABOUT US</Link>
@@ -228,7 +185,6 @@ const Header = () => {
                             </div>
                         </a>
                     </div>
-                    {/* 녹색 모달 내용 */}
                 </div>
             )}
         </header >

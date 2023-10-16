@@ -4,7 +4,7 @@ import Link from 'next/link';
 import UserLayout from 'src/layouts';
 import langJson from 'src/data/lang.json'
 import { useRouter } from "next/router";
-const sections = ["section1", "section2", "section3", "section4", "section5", "section6"]; // 섹션 이름
+const sections = ["section1", "section2", "section3", "section4", "section5"]; // 섹션 이름
 const totalIcons = 10; // 총 아이콘 개수
 const iconsPerPage = 7; // 한 페이지에 표시할 아이콘 개수
 
@@ -17,11 +17,68 @@ const Home = () => {
     const [iconIndexes, setIconIndexes] = useState(Array.from({ length: iconsPerPage }, (_, i) => i)); // 표시되는 아이콘 인덱스 배열
     const sectionRefs = useRef([]);
     const videoRef = useRef(null); // 비디오 요소를 관리하기 위한 ref
-    const [headerVisible, setHeaderVisible] = useState(true); // 헤더 가시성 상태
-    const [headerHidden, setHeaderHidden] = useState(false); // 헤더 숨김 상태
     const [loading, setLoading] = useState(true);
     const [hoveredImage, setHoveredImage] = useState(""); // 호버된 이미지 상태
     const [searchQuery, setSearchQuery] = useState(""); // 검색어 상태 추가
+    const [inViewItems2, setInViewItems2] = useState([]);
+    const [inViewItems3, setInViewItems3] = useState([]);
+    const [inViewItems4, setInViewItems4] = useState([]);
+    const [inViewItems5, setInViewItems5] = useState([]);
+
+    //fadein 애니메이션
+    useEffect(() => {
+        const handleScroll = () => {
+            const updatedInViewItems2 = [];
+            const updatedInViewItems3 = [];
+            const updatedInViewItems4 = [];
+            const updatedInViewItems5 = [];
+            const fadeIn2 = document.querySelectorAll(".green-box");
+            const fadeIn3 = document.querySelectorAll(".project-box");
+            const fadeIn4 = document.querySelectorAll(".news-item");
+            const fadeIn5 = document.querySelectorAll(".bottom");
+
+            fadeIn2.forEach((item2) => {
+                const itemRect2 = item2.getBoundingClientRect();
+                if (itemRect2.top < window.innerHeight && itemRect2.bottom >= 0) {
+                    updatedInViewItems2.push(item2.id);
+                }
+            });
+
+            fadeIn3.forEach((item3) => {
+                const itemRect3 = item3.getBoundingClientRect();
+                if (itemRect3.top < window.innerHeight && itemRect3.bottom >= 0) {
+                    updatedInViewItems3.push(item3.id);
+                }
+            });
+
+            fadeIn4.forEach((item4) => {
+                const itemRect4 = item4.getBoundingClientRect();
+                if (itemRect4.top < window.innerHeight && itemRect4.bottom >= 0) {
+                    updatedInViewItems4.push(item4.id);
+                }
+            });
+
+            fadeIn5.forEach((item5) => {
+                const itemRect5 = item5.getBoundingClientRect();
+                if (itemRect5.top < window.innerHeight && itemRect5.bottom >= 0) {
+                    updatedInViewItems5.push(item5.id);
+                }
+            });
+
+            setInViewItems2(updatedInViewItems2);
+            setInViewItems3(updatedInViewItems3);
+            setInViewItems4(updatedInViewItems4);
+            setInViewItems5(updatedInViewItems5);
+        };
+
+        // 스크롤 이벤트 리스너 등록
+        window.addEventListener("scroll", handleScroll);
+
+        // 컴포넌트가 언마운트되면 이벤트 리스너 제거
+        return () => {
+            window.removeEventListener("scroll", handleScroll);
+        };
+    }, []);
 
     // 클릭된 아이콘에 대한 처리
     const handleIconClick = (iconIndex) => {
@@ -159,38 +216,6 @@ const Home = () => {
         }
     };
 
-    useEffect(() => {
-        // 마우스 이벤트를 처리하는 함수
-        const handleMouseEnter = () => {
-            // 헤더가 숨겨져 있고 마우스가 헤더의 위치로 진입하면 헤더 표시
-            if (headerHidden) {
-                setHeaderVisible(true);
-                setHeaderHidden(false);
-            }
-        };
-
-        // 헤더 밖으로 마우스가 나갈 때 숨김 처리
-        const handleMouseLeave = (e) => {
-            const headerHeight = 60; // 헤더의 높이 (적절한 값으로 수정)
-            const mouseY = e.clientY;
-
-            // 헤더가 표시 중이고 마우스가 헤더 위로 벗어날 때 헤더 숨김 처리
-            if (headerVisible && mouseY <= headerHeight) {
-                setHeaderVisible(false);
-                setHeaderHidden(true);
-            }
-        };
-
-        // 마우스 이벤트 리스너를 추가합니다.
-        window.addEventListener("mouseenter", handleMouseEnter);
-        window.addEventListener("mouseleave", handleMouseLeave);
-
-        // 컴포넌트가 언마운트될 때 마우스 이벤트 리스너를 제거합니다.
-        return () => {
-            window.removeEventListener("mouseenter", handleMouseEnter);
-            window.removeEventListener("mouseleave", handleMouseLeave);
-        };
-    }, [headerVisible, headerHidden]);
 
     // 이전 아이콘 표시 함수
     const showPreviousIcons = () => {
@@ -365,7 +390,7 @@ const Home = () => {
                                             {/* 첫 번째 행 */}
                                             <div className="news-row">
                                                 {/* 뉴스 아이템 1 */}
-                                                <a href="/404" className="news-item">
+                                                <a href="/404" className={`news-item ${inViewItems4.includes("") ? "in-view" : ""}`}>
                                                     <div className="news-box">
                                                         <p className="news-text">News</p>
                                                     </div>
@@ -376,7 +401,7 @@ const Home = () => {
                                                     <span className="arrow-icon" style={{ marginLeft: "20px", color: "orange", fontWeight: "bold" }}>→</span>
                                                 </a>
                                                 {/* 뉴스 아이템 2 */}
-                                                <a href="/404" className="news-item">
+                                                <a href="/404" className={`news-item ${inViewItems4.includes("") ? "in-view" : ""}`} >
                                                     <div className="news-box">
                                                         <p className="news-text">News</p>
                                                     </div>
@@ -387,7 +412,7 @@ const Home = () => {
                                                     <span className="arrow-icon" style={{ marginLeft: "20px", color: "orange", fontWeight: "bold" }}>→</span>
                                                 </a>
                                                 {/* 뉴스 아이템 3 */}
-                                                <a href="/404" className="news-item">
+                                                <a href="/404" className={`news-item ${inViewItems4.includes("") ? "in-view" : ""}`} >
                                                     <div className="news-box">
                                                         <p className="news-text">News</p>
                                                     </div>
@@ -401,7 +426,7 @@ const Home = () => {
                                             {/* 두 번째 행 */}
                                             <div className="news-row">
                                                 {/* 뉴스 아이템 4 */}
-                                                <a href="/404" className="news-item">
+                                                <a href="/404" className={`news-item ${inViewItems4.includes("") ? "in-view" : ""}`} >
                                                     <div className="news-box">
                                                         <p className="news-text">News</p>
                                                     </div>
@@ -412,7 +437,7 @@ const Home = () => {
                                                     <span className="arrow-icon" style={{ marginLeft: "20px", color: "orange", fontWeight: "bold" }}>→</span>
                                                 </a>
                                                 {/* 뉴스 아이템 5 */}
-                                                <a href="/404" className="news-item">
+                                                <a href="/404" className={`news-item ${inViewItems4.includes("") ? "in-view" : ""}`} >
                                                     <div className="news-box">
                                                         <p className="news-text">News</p>
                                                     </div>
@@ -423,7 +448,7 @@ const Home = () => {
                                                     <span className="arrow-icon" style={{ marginLeft: "20px", color: "orange", fontWeight: "bold" }}>→</span>
                                                 </a>
                                                 {/* 뉴스 아이템 6 */}
-                                                <a href="/404" className="news-item">
+                                                <a href="/404" className={`news-item ${inViewItems4.includes("") ? "in-view" : ""}`}>
                                                     <div className="news-box">
                                                         <p className="news-text">News</p>
                                                     </div>
@@ -436,7 +461,7 @@ const Home = () => {
                                             </div>
                                         </div>
                                         {/* 유튜브 액자 버튼 */}
-                                        <div className="youtube-button-container">
+                                        <div className={`youtube-button-container ${inViewItems4.includes("") ? "in-view" : ""}`}>
                                             {/* 유튜브1 버튼 */}
                                             <a className="youtube-button" href="https://www.youtube.com/watch?v=OLrv8OGTUnQ" target="_blank" rel="noopener noreferrer">
                                                 <img src="/image/youtube1.jpg" alt="youtube1 Image" />
@@ -462,27 +487,27 @@ const Home = () => {
                                 ) : index === 4 ? (
                                     <div className="section4">
                                         <div className="searchheerim-container">
-                                            <span className="search-title">Search
+                                            <span className={`search-title ${inViewItems5.includes("") ? "in-view" : ""}`}>Search
                                             </span>
-                                            <span className="search-title2" style={{ marginLeft: "10px" }}>heerim.com
+                                            <span className={`search-title2 ${inViewItems5.includes("") ? "in-view" : ""}`} style={{ marginLeft: "10px" }}>heerim.com
                                             </span>
-                                            <p className="searchsub">Creative Leadership of Heerim designs the new future never experienced before.</p>
+                                            <p className={`searchsub ${inViewItems5.includes("") ? "in-view" : ""}`}>Creative Leadership of Heerim designs the new future never experienced before.</p>
                                             <div className="searchheerim">
                                                 <input
+                                                    className={`searchheerim-input ${inViewItems5.includes("") ? "in-view" : ""}`}
                                                     type="text"
                                                     placeholder="Type here"
                                                     value={searchQuery}
-                                                    onChange={handleSearchInputChange}
-                                                    className="searchheerim-input" // 검색 입력란 스타일 추가
+                                                    onChange={handleSearchInputChange} // 검색 입력란 스타일 추가
                                                 />
                                                 <a href="/link-to-search" style={{ borderBottom: "5px solid white" }} onClick={() => { window.location.href = "/404"; }}>
-                                                    <button onClick={handleSearch} className="searchheerim-button">
+                                                    <button onClick={handleSearch} className={`searchheerim-button"${inViewItems5.includes("") ? "in-view" : ""}`}>
                                                         Search
                                                         <img src="/icon/search.png" alt="Search Icon" width="40" height="40" />
                                                     </button>
                                                 </a>
                                             </div>
-                                            <div className="searchtag-keywords">
+                                            <div className={`searchtag-keywords ${inViewItems5.includes("") ? "in-view" : ""}`}>
                                                 <button className="searchtag-button" onClick={() => { window.location.reload() }}><Link href="/LaLuna">#LaLuna</Link></button>
                                                 <button className="searchtag-button" onClick={() => { window.location.reload() }}><Link href="/DCM">#DCM</Link></button>
                                                 <button className="searchtag-button" onClick={() => { window.location.reload() }}><Link href="/Pangyo">#Pangyo</Link></button>

@@ -18,6 +18,7 @@
   display: flex; /* 자식 요소를 가로로 나란히 정렬 */
   flex-direction: column; /* 자식 요소를 세로로 정렬 */
   align-items: center; /* 자식 요소를 수직 가운데 정렬 */
+  z-index: 2;
 }
 
 .logo-text {
@@ -25,7 +26,7 @@
   font-weight: bold;
   font-style: italic; /* 텍스트를 기울임체로 스타일링 */
   color: white;
-  margin-left: 12vw;
+  margin-left: 7vw;
   margin-top: 2vw;
 }
 
@@ -33,7 +34,7 @@
   font-size: 12px; /* 부가 텍스트의 글꼴 크기 조정 */
   font-style: italic; /* 텍스트를 기울임체로 스타일링 */
   color: white;
-  margin-left: 12vw;
+  margin-left: 7vw;
 }
 
 .overlay-header .buttons {
@@ -65,6 +66,7 @@
   color: white;
 }
 
+  /* 삭제됨 */
 /* 검색 모달 스타일링 */
 .search-modal {
   position: fixed;
@@ -78,6 +80,7 @@
   z-index: 9999;
   }
   
+  /* 삭제됨 */
 .close-button {
   position: absolute;
   top: 70px; /* 원하는 위치로 조정하세요 */
@@ -90,6 +93,7 @@
 
 }
 
+  /* 삭제됨 */
 /* 검색 입력란 스타일링 */
 .search-input {
     background: transparent; /* 투명 배경 추가 */
@@ -102,6 +106,7 @@
     padding-left: 2rem;
 }
 
+  /* 삭제됨 */
 /* 검색 버튼 스타일링 */
 .search-button {
     background: transparent; /* 투명 배경 추가 */
@@ -109,15 +114,19 @@
     cursor: pointer;
 }
 
+  /* 삭제됨 */
 .recommend-keywords {
   margin-top: 12px;
   margin-left: 13vw;
 }
 
+  /* 삭제됨 */
 .keyword-title {
   font-size: 25px;
   font-weight: bold;
 }
+
+  /* 삭제됨 */
 /*추천 키워드 버튼*/
 .keyword-button {
   border: none; /* 외곽선 없애기 */
@@ -134,48 +143,22 @@
   }
 }
 
+  /* 삭제됨 */
 .keyword-button a{
   color: black;
   text-decoration: none;
 }
 
 /* 더보기 모달 스타일링 */
-.more-modal {
+.more-container {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
   background-color: rgb(146, 208, 30);; /* 녹색 배경 추가 */
-  display: flex;
-  flex-direction: column;
-  z-index: 9999;
+  z-index: 1;
     }
-    
-.more-logo-button { /*heerim 로고*/
-  text-decoration: none; /* 링크의 기본 밑줄 스타일 제거 */
-  background-color: transparent; /* 배경색 투명으로 설정 */
-  border: none; /* 테두리 제거 */
-  cursor: pointer; /* 포인터 커서로 변경 */
-  display: flex; /* 자식 요소를 가로로 나란히 정렬 */
-  flex-direction: column; /* 자식 요소를 세로로 정렬 */
-}
-
-.more-logo-text {
-  font-size: 36px;
-  font-weight: bold;
-  font-style: italic; /* 텍스트를 기울임체로 스타일링 */
-  color: white;
-  margin-top: 2.5vw;
-  margin-left: 13vw;
-}
-
-.more-sub-text { /*Architecture & Planner 글자*/
-  font-size: 12px; /* 부가 텍스트의 글꼴 크기 조정 */
-  font-style: italic; /* 텍스트를 기울임체로 스타일링 */
-  color: white;
-  margin-left: 13vw;
-}
 
   .more-close-button {
     position: absolute;
@@ -187,15 +170,14 @@
     cursor: pointer;
     font-size: 1.5rem;
     font-weight: bold;
-  
+    z-index: 1;
   }
   
   /* about-us-button 스타일 */
 .about-us-button {
   display: flex;
-  align-items: flex-start; /* 왼쪽 정렬 */
-  text-align: center; /* 텍스트 중앙 정렬 */
   margin-left: 12vw;
+  margin-top: 5vw;
 }
 
 /* 메인 버튼 스타일 */
@@ -246,9 +228,9 @@
 
 /* 더보기 아래쪽 아이콘 버튼 스타일*/
 .icon-button-container {
-  position: fixed;
-  bottom: 115px; /* 원하는 거리 조절 */
-  left: 12vw; /* 원하는 거리 조절 */
+  display: flex;
+  margin-left: 12vw;
+  margin-top: 9vw;
   text-align: center;
 }
 
@@ -256,6 +238,7 @@
   display: inline-block;
   flex-direction: flex-start; /* 왼쪽 정렬 */
   text-decoration: none; /*링크 밑줄 제거*/
+  padding-top: 10px;
   transition: opacity 0.3s ease; /* 호버 시 투명도 전환 애니메이션 */
 }
 
@@ -285,6 +268,7 @@
 
 body {
   margin: 0 !important;
+  overflow-x: hidden;
 }
  /*justify-content: flex-end;*/
   /* 섹션 스타일 */
@@ -505,7 +489,7 @@ object-fit: cover;
   background-color: transparent; /* 배경색 투명 설정 */
   border: none; /* 테두리 제거 */
   cursor: pointer;
-  margin-left: 25vw; /* 좌측 여백 설정 */
+  margin-left: 12vw; /* 좌측 여백 설정 */
 }
 
 .read-more-button:hover .read-more-text{
@@ -530,12 +514,13 @@ object-fit: cover;
 
 /* 4섹션 */
 .news-list {
-  margin: 0 0 30px 0;
+  margin: 20px 0 10px  0;
 }
 
 .news-row {
   display: flex;
-  margin: 20px 10vw 20px 10.2vw;
+  justify-content: space-between;
+  margin: 20px 5vw 20px 5.2vw;
 }
 
 /* 뉴스 아이템들 스타일 */
@@ -544,8 +529,18 @@ object-fit: cover;
   box-sizing: border-box;
   background-color: transparent;
   text-decoration: none;
-  margin: 0 2vw 10px 3vw;
+  margin: 0 1vw 10px 1vw;
   cursor: pointer;
+  opacity: 0; /* 처음에는 안 보이게 설정 */
+  transform: translateY(30px); /* 시작 위치 지정 */
+  /* fadein 애니메이션 효과 설정 */
+  transition: opacity 1s ease, transform 2s ease;
+}
+
+/* news-item이 화면에 들어올 때 fadein 애니메이션 적용 */
+.news-item.in-view {
+  opacity: 1; /* 투명도를 1로 변경하여 나타나게 함 */
+  transform: translateY(0); /* Y축 이동을 0으로 변경하여 원래 위치로 이동 */
 }
 
 .news-item:hover .news-more-link{
@@ -601,6 +596,17 @@ object-fit: cover;
 .youtube-button-container {
   text-align: center; /* 가운데 정렬을 위해 텍스트 정렬을 사용합니다. */
   margin-bottom: 10px; /* 버튼과 내용 사이의 간격을 조절합니다. */
+  opacity: 0; /* 처음에는 안 보이게 설정 */
+  transform: translateY(30px); /* 시작 위치 지정 */
+  /* fadein 애니메이션 효과 설정 */
+  transition: opacity 1s ease, transform 2s ease;
+}
+
+
+/* news-item이 화면에 들어올 때 fadein 애니메이션 적용 */
+.youtube-button-container.in-view {
+  opacity: 1; /* 투명도를 1로 변경하여 나타나게 함 */
+  transform: translateY(0); /* Y축 이동을 0으로 변경하여 원래 위치로 이동 */
 }
 
 .youtube-button{
@@ -641,25 +647,55 @@ object-fit: cover;
   width: 99vw;
   padding-top: 100px;
 }
+
 .search-title {
   margin-left: 12vw;
   font-size: 3vw;
   font-weight: bold;
   color: orange;
-  
+  opacity: 0; /* 처음에는 안 보이게 설정 */
+  transform: translateY(30px); /* 시작 위치 지정 */
+  /* fadein 애니메이션 효과 설정 */
+  transition: opacity 1s ease, transform 2s ease;
+}
+
+/* .search-title이 화면에 들어올 때 fadein 애니메이션 적용 */
+.search-title.in-view {
+  opacity: 1; /* 투명도를 1로 변경하여 나타나게 함 */
+  transform: translateY(0); /* Y축 이동을 0으로 변경하여 원래 위치로 이동 */
 }
 
 .search-title2 {
   font-size: 3vw;
   font-weight: bold;
   color: white;
+  opacity: 0; /* 처음에는 안 보이게 설정 */
+  transform: translateY(30px); /* 시작 위치 지정 */
+  /* fadein 애니메이션 효과 설정 */
+  transition: opacity 1s ease, transform 2s ease;
 
+}
+
+/* .search-title2이 화면에 들어올 때 fadein 애니메이션 적용 */
+.search-title2.in-view {
+  opacity: 1; /* 투명도를 1로 변경하여 나타나게 함 */
+  transform: translateY(0); /* Y축 이동을 0으로 변경하여 원래 위치로 이동 */
 }
 
 .searchsub {
   margin-left: 12vw;
   font-size: 1vw;
   color: gray;
+  opacity: 0; /* 처음에는 안 보이게 설정 */
+  transform: translateY(30px); /* 시작 위치 지정 */
+  /* fadein 애니메이션 효과 설정 */
+  transition: opacity 1s ease, transform 2s ease;
+}
+
+/* .searchsub 화면에 들어올 때 fadein 애니메이션 적용 */
+.searchsub.in-view {
+  opacity: 1; /* 투명도를 1로 변경하여 나타나게 함 */
+  transform: translateY(0); /* Y축 이동을 0으로 변경하여 원래 위치로 이동 */
 }
 
 /* 검색 입력란 스타일링 */
@@ -674,11 +710,20 @@ object-fit: cover;
   margin-top: 40px; /* 위쪽 여백 추가 */
   margin-left: 12vw; /* 왼쪽 여백 추가 */
   padding-left: 2rem;
+  opacity: 0; /* 처음에는 안 보이게 설정 */
+  transform: translateY(30px); /* 시작 위치 지정 */
+  /* fadein 애니메이션 효과 설정 */
+  transition: opacity 1s ease, transform 2s ease;
+}
+
+.searchheerim-input.in-view {
+  opacity: 1; /* 투명도를 1로 변경하여 나타나게 함 */
+  transform: translateY(0); /* Y축 이동을 0으로 변경하여 원래 위치로 이동 */
 }
 
 /* 검색 버튼 스타일링 */
 .searchheerim-button {
-  background: transparent; /* 투명 배경 추가 */
+  background-color: transparent;
   border: none;
   font-size: 20px;
   color: white;
@@ -691,6 +736,15 @@ object-fit: cover;
 
 .searchtag-keywords {
   padding: 70px 0 110px 12vw;
+  opacity: 0; /* 처음에는 안 보이게 설정 */
+  transform: translateY(30px); /* 시작 위치 지정 */
+  /* fadein 애니메이션 효과 설정 */
+  transition: opacity 1s ease, transform 2s ease;
+}
+
+.searchtag-keywords.in-view {
+  opacity: 1; /* 투명도를 1로 변경하여 나타나게 함 */
+  transform: translateY(0); /* Y축 이동을 0으로 변경하여 원래 위치로 이동 */
 }
 
 /*검색태그 키워드 버튼*/
