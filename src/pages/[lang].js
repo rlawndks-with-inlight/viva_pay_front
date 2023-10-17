@@ -68,13 +68,24 @@ const Home = () => {
     const sectionRefs = useRef([]);
     const videoRef = useRef(null); // 비디오 요소를 관리하기 위한 ref
     const [loading, setLoading] = useState(true);
-    const [hoveredImage, setHoveredImage] = useState(""); // 호버된 이미지 상태
     const [searchQuery, setSearchQuery] = useState(""); // 검색어 상태 추가
     const [inViewItems2, setInViewItems2] = useState([]);
     const [inViewItems3, setInViewItems3] = useState([]);
     const [inViewItems4, setInViewItems4] = useState([]);
     const [inViewItems5, setInViewItems5] = useState([]);
     const [section2InView, setSection2InView] = useState(false); // section2의 inView 여부
+    const [hoveredImage, setHoveredImage] = useState(null);
+    const [hoveredText, setHoveredText] = useState(null);
+
+    const handleImageHover = (imageSrc, text) => {
+        setHoveredImage(imageSrc);
+        setHoveredText(text);
+    };
+
+    const handleImageLeave = () => {
+        setHoveredImage(null);
+        setHoveredText(null);
+    };
 
     //숫자 0부터 증가하는 애니메이션
     useEffect(() => {
@@ -318,17 +329,6 @@ const Home = () => {
         setIconIndexes(newIconIndexes);
     };
 
-    // 이미지 변경 함수
-    const handleImageHover = (e, imageSrc) => {
-        e.preventDefault(); // 이벤트 중지
-        setHoveredImage(imageSrc); // 호버된 이미지 업데이트
-    };
-
-    // 이미지 복원 함수
-    const restoreOriginalImage = () => {
-        setHoveredImage(""); // 호버 이미지를 초기화하여 원래 이미지로 돌아감
-    };
-
     // 검색어 입력 핸들러
     const handleSearchInputChange = (e) => {
         setSearchQuery(e.target.value);
@@ -426,19 +426,113 @@ const Home = () => {
                                                 <span className="arrow-icon">→</span>
                                             </button>
                                         </div>
-                                        <div className={`image-container ${inViewItems3.includes("") ? "in-view" : ""}`}>
-                                            <a class="image-button" href="/404" data-image="/image/image12.jpg" onMouseEnter={(e) => handleImageHover(e, "/image/image12.jpg")} onMouseLeave={restoreOriginalImage}>
-                                                <img src={hoveredImage || "/image/image11.jpg"} />
-                                            </a>
-                                            <a class="image-button" href="/404" data-image="/image/image22.jpg" onMouseEnter={(e) => handleImageHover(e, "/image/image22.jpg")} onMouseLeave={restoreOriginalImage}>
-                                                <img src={hoveredImage || "/image/image21.jpg"} />
-                                            </a>
-                                            <a class="image-button" href="/404" data-image="/image/image32.jpg" onMouseEnter={(e) => handleImageHover(e, "/image/image32.jpg")} onMouseLeave={restoreOriginalImage}>
-                                                <img src={hoveredImage || "/image/image31.jpg"} />
-                                            </a>
-                                            <a class="image-button" href="/404" data-image="/image/image42.jpg" onMouseEnter={(e) => handleImageHover(e, "/image/image42.jpg")} onMouseLeave={restoreOriginalImage}>
-                                                <img src={hoveredImage || "/image/image41.jpg"} />
-                                            </a>
+                                        <div className={`image-container ${inViewItems3.includes("") ? "in-view" : ""}`}
+                                            onMouseLeave={handleImageLeave}>
+                                            {hoveredImage ? (
+                                                <div className="hoverimage-container">
+                                                    <img className="hoverimage" src={hoveredImage} alt="Hovered Image" />
+                                                    {hoveredText && (
+                                                        <div className="yellow-box">
+                                                            <div className="image-text">
+                                                                {hoveredText}
+                                                            </div>
+                                                        </div>
+                                                    )}
+                                                </div>
+                                            ) : (
+                                                <>
+                                                    <a
+                                                        className="image-button"
+                                                        href="/404"
+                                                        onMouseEnter={() => handleImageHover("/image/image121.jpg", (
+                                                            <div className="hoverimage-overlay">
+                                                                <div className="hoverimage-text">
+                                                                    <p className="hoverplace">Incheon, Korea</p>
+                                                                    <p className="hoverbuilding">Incheon International Airport</p>
+                                                                    <p className="hoverbuilding"> Passenger Terminal 2</p>
+                                                                </div>
+                                                            </div>
+                                                        ))
+                                                        }
+                                                    >
+                                                        <img src="/image/image11.jpg" alt="Image 1" />
+                                                        <div className="image-overlay">
+                                                            <div className="image-text">
+                                                                <p className="place">Incheon, Korea</p>
+                                                                <p className="building">Incheon International Airport</p>
+                                                                <p className="building">Passenger Terminal 2</p>
+                                                            </div>
+                                                        </div>
+                                                    </a>
+                                                    <a
+                                                        className="image-button"
+                                                        href="/404"
+                                                        onMouseEnter={() => handleImageHover("/image/image221.jpg", (
+                                                            <div className="hoverimage-overlay">
+                                                                <div className="hoverimage-text">
+                                                                    <p className="hoverplace">Seoul, Korea</p>
+                                                                    <p className="hoverbuilding">The 2nd Sejong center for</p>
+                                                                    <p className="hoverbuilding"> performing arts</p>
+                                                                </div>
+                                                            </div>
+                                                        ))
+                                                        }
+                                                    >
+                                                        <img src="/image/image21.jpg" alt="Image 2" />
+                                                        <div className="image-overlay">
+                                                            <div className="image-text">
+                                                                <p className="place">Seoul, Korea</p>
+                                                                <p className="building">The 2nd Sejong center for</p>
+                                                                <p className="building"> performing arts</p>
+                                                            </div>
+                                                        </div>
+                                                    </a>
+                                                    <a
+                                                        className="image-button"
+                                                        href="/404"
+                                                        onMouseEnter={() => handleImageHover("/image/image321.jpg", (
+                                                            <div className="hoverimage-overlay">
+                                                                <div className="hoverimage-text">
+                                                                    <p className="hoverplace">Seongnam, Korea</p>
+                                                                    <p className="hoverbuilding">HD Hyundai Global R&D</p>
+                                                                    <p className="hoverbuilding"> Center</p>
+                                                                </div>
+                                                            </div>
+                                                        ))
+                                                        }
+                                                    >
+                                                        <img src="/image/image31.jpg" alt="Image 3" />
+                                                        <div className="image-overlay">
+                                                            <div className="image-text">
+                                                                <p className="place">Seongnam, Korea</p>
+                                                                <p className="building">HD Hyundai Global R&D</p>
+                                                                <p className="building"> Center</p>
+                                                            </div>
+                                                        </div>
+                                                    </a>
+                                                    <a
+                                                        className="image-button"
+                                                        href="/404"
+                                                        onMouseEnter={() => handleImageHover("/image/image421.jpg", (
+                                                            <div className="hoverimage-overlay">
+                                                                <div className="hoverimage-text">
+                                                                    <p className="hoverplace">Baku, Azerbaijan</p>
+                                                                    <p className="hoverbuilding">SOCAR Tower</p>
+                                                                </div>
+                                                            </div>
+                                                        ))
+                                                        }
+                                                    >
+                                                        <img src="/image/image41.jpg" alt="Image 4" />
+                                                        <div className="image-overlay">
+                                                            <div className="image-text">
+                                                                <p className="place">Baku, Azerbaijan</p>
+                                                                <p className="building">SOCAR Tower</p>
+                                                            </div>
+                                                        </div>
+                                                    </a>
+                                                </>
+                                            )}
                                         </div>
                                     </div>
                                 ) : index === 3 ? (

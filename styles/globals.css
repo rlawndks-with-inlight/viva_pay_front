@@ -627,24 +627,23 @@ object-fit: cover;
 .news-title {
   font-size: 1.13vw;
   display: -webkit-box;
-  -webkit-line-clamp: 2; /* Limit to two lines */
+  -webkit-line-clamp: 2; /* 2줄 제한 */
   -webkit-box-orient: vertical;
   overflow: hidden; /* 넘치는 부분 숨김 */
   color: black;
 }
 
 
-/* Style for the news date */
+/* news date 스타일 */
 .news-date {
-  /* Add styles for the news date */
   color: gray;
   margin-bottom: 40px;
-  font-size: 14px; /* Adjust the font size as needed */
+  font-size: 14px;
 }
 
-/* Style for the read more link */
+/* read more link 스타일 */
 .news-more-link {
-  font-size: 22px; /* Adjust the font size as needed */
+  font-size: 22px; 
   color: orange;
   transition: letter-spacing 0.5s ease; /* 호버 시 letter-spacing에 효과를 추가합니다. */
 }
@@ -952,11 +951,15 @@ text-align: left; /* 텍스트 왼쪽 정렬 */
 
 /* 3번째 섹션 이미지 컨테이너 스타일 */
 .image-container {
+  cursor: pointer; /* 포인터 커서로 변경 */
+  overflow: hidden;
   display: flex;
-  max-width: 100%;  opacity: 0; /* 처음에는 안 보이게 설정 */
+  min-width: 100%;  
+  object-fit: cover; /* 이미지가 잘리지 않고 화면에 맞게 크기 조정 */
+  opacity: 0; /* 처음에는 안 보이게 설정 */
   transform: translateY(70px); /* 시작 위치 지정 */
   /* fadein 애니메이션 효과 설정 */
-  transition: opacity 1s ease, transform 2s ease;
+  transition: opacity 1.5s ease, transform 3s ease;
 }
 
 .image-container.in-view {
@@ -964,21 +967,68 @@ text-align: left; /* 텍스트 왼쪽 정렬 */
   transform: translateY(0); /* Y축 이동을 0으로 변경하여 원래 위치로 이동 */
 }
 
-.image-button {
-  display: flex;
-  width: 100%; /* 이미지 버튼의 너비를 100%로 설정 */
-  overflow: -moz-hidden-unscrollable;
-  transition: transform 0.3s ease;
-}
-
-.image-button:hover {
-  transform: scale(1.1);
-}
-
 /* 3번째 섹션 이미지 스타일 */
 .image-container img{
   height: 82vh; /*높이 설정 */
   max-width: 100%;
   object-fit: cover; /* 이미지가 잘리지 않고 화면에 맞게 크기 조정 */
+}
 
+.hoverimage {
+  transition: transform 5s; /* 확대 애니메이션 지속 시간을 조절할 수 있습니다. */
+  transform: scale(1); /* 초기 크기 */
+}
+
+.hoverimage:hover {
+  transform: scale(1.1); /* 호버 시 크기 확대 */
+}
+
+.image-button {
+  display: flex;
+  width: 100%; /* 이미지 버튼의 너비를 100%로 설정 */
+}
+
+.image-overlay {
+  position: absolute;
+  bottom: 0;
+  background: transparent; /* 투명한 배경 */
+  color: white;
+  width: 100%;
+  opacity: 1;
+  text-align: left; /* 왼쪽 정렬 */
+  padding: 2.2rem; /* 여백 추가 */
+  z-index: 9999;
+}
+
+.place {
+}
+
+.building {
+  margin: 0;
+  padding: 0;
+  font-size: 1.5vw;
+  font-weight: bold;
+
+}
+
+.hoverimage-overlay {
+  position: absolute;
+  bottom: 0;
+  background: transparent; /* 투명한 배경 */
+  color: white;
+  width: 100%;
+  text-align: left; /* 왼쪽 정렬 */
+  padding: 2.2rem; /* 여백 추가 */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+}
+
+.hoverplace {
+}
+
+.hoverbuilding {
+  margin: 0;
+  padding: 0;
+  font-size: 1.5vw;
+  font-weight: bold;
 }
