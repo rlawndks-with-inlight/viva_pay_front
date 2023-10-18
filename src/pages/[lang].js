@@ -38,7 +38,7 @@ const Topic = ({ title, initialValue, finalValue, inView }) => {
 
     return (
         <div>
-            <h2>{title}</h2>
+            <p className="topic-title">{title}</p>
             <p className='topic-number'>
                 {addPlusSign ? Math.round(currentValue) + "+" : Math.round(currentValue)}
             </p>
@@ -354,32 +354,36 @@ const Home = () => {
                                 ref={(el) => (sectionRefs.current[index] = el)}
                             >
                                 {index === 0 ? (
-                                    <div className="video-container">
-                                        <video
-                                            autoPlay
-                                            loop
-                                            muted
-                                            playsInline
-                                            className="fullscreen-video"
-                                            ref={videoRef}
-                                        >
-                                            <source src="/video/video.mp4" type="video/mp4" />
-                                            {langJson[lang]?.YOUR_BRO}
-                                        </video>
+                                    <div className="section1">
+                                        <div className="video-container">
+                                            <video
+                                                autoPlay
+                                                loop
+                                                muted
+                                                playsInline
+                                                className="fullscreen-video"
+                                                ref={videoRef}
+                                            >
+                                                <source src="/video/video.mp4" type="video/mp4" />
+                                                {langJson[lang]?.YOUR_BRO}
+                                            </video>
+                                        </div>
                                     </div>
                                 ) : index === 1 ? (
                                     <div className="text-overlay-section2">
-                                        {/* 노란색 배경에 녹색 박스 모양의 텍스트 박스와 소제목, 설명 */}
-                                        <div className={`green-box ${inViewItems2.includes("") ? "in-view" : ""}`}>
-                                            <p className="green-box-text">WHO WE ARE</p>
-                                        </div>
-                                        <div className={`subtitle ${inViewItems2.includes("") ? "in-view" : ""}`}> {langJson[lang]?.WORLD_LEADING}</div>
-                                        <div className={`subtitle ${inViewItems2.includes("") ? "in-view" : ""}`}> {langJson[lang]?.ARCHITECTURE}</div>
-                                        <div className={`description ${inViewItems2.includes("") ? "in-view" : ""}`} style={{ marginTop: '2vw' }}>{langJson[lang]?.INNOVATIONS}</div>
-                                        <div className={`description ${inViewItems2.includes("") ? "in-view" : ""}`} style={{ marginTop: '0.5vw' }}>{langJson[lang]?.DESIGN_TOMORROW}</div>
-                                        {/* 주제와 설명 */}
-                                        <div>
-                                            <TopicsContainer inView={inViewItems2.includes("")} />
+                                        <div className="yellow">
+                                            {/* 노란색 배경에 녹색 박스 모양의 텍스트 박스와 소제목, 설명 */}
+                                            <div className={`green-box ${inViewItems2.includes("") ? "in-view" : ""}`}>
+                                                <p className="green-box-text">WHO WE ARE</p>
+                                            </div>
+                                            <div className={`subtitle ${inViewItems2.includes("") ? "in-view" : ""}`}> {langJson[lang]?.WORLD_LEADING}</div>
+                                            <div className={`subtitle ${inViewItems2.includes("") ? "in-view" : ""}`}> {langJson[lang]?.ARCHITECTURE}</div>
+                                            <div className={`description ${inViewItems2.includes("") ? "in-view" : ""}`} style={{ marginTop: '2vw' }}>{langJson[lang]?.INNOVATIONS}</div>
+                                            <div className={`description ${inViewItems2.includes("") ? "in-view" : ""}`} style={{ marginTop: '0.5vw' }}>{langJson[lang]?.DESIGN_TOMORROW}</div>
+                                            {/* 주제와 설명 */}
+                                            <div>
+                                                <TopicsContainer inView={inViewItems2.includes("")} />
+                                            </div>
                                         </div>
                                         <div className="icon-container">
                                             {/* 이전 버튼 */}
@@ -416,7 +420,7 @@ const Home = () => {
                                         </div>
                                     </div>
                                 ) : index === 2 ? (
-                                    <div className={`text-overlay`}>
+                                    <div className="section3">
                                         <div className={`project-box ${inViewItems3.includes("") ? "in-view" : ""}`}>
                                             <p className="project-text">PROJECT</p>
                                         </div>
@@ -637,7 +641,7 @@ const Home = () => {
                                         </button>
                                     </div>
                                 ) : index === 4 ? (
-                                    <div className="section4">
+                                    <div className="section5">
                                         <div className="searchheerim-container">
                                             <span className={`search-title ${inViewItems5.includes("") ? "in-view" : ""}`}>Search
                                             </span>
@@ -653,7 +657,11 @@ const Home = () => {
                                                     onChange={handleSearchInputChange} // 검색 입력란 스타일 추가
                                                 />
                                                 <a href="/link-to-search" style={{ borderBottom: "5px solid white" }} onClick={() => { window.location.href = "/404"; }}>
-                                                    <button onClick={handleSearch} className={`searchheerim-button"${inViewItems5.includes("") ? "in-view" : ""}`}>
+                                                    <button onClick={handleSearch} className={`searchheerim-button"${inViewItems5.includes("") ? "in-view" : ""}`} style={{
+                                                        background: "transparent", // Set the background to transparent
+                                                        border: "none", // Remove the border
+                                                        color: "white",
+                                                    }}>
                                                         Search
                                                         <img src="/icon/search.png" alt="Search Icon" width="40" height="40" />
                                                     </button>

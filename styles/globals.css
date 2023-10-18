@@ -286,14 +286,6 @@ background-color: white;
 /* background-color: lightgray;*/
 }
 
-/* 텍스트 오버레이 스타일 */
-.text-overlay {
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background-color: rgba(255, 255, 255, 0); /* 배경 색상 및 투명도 설정 */
-  padding: none; /* 텍스트 주변 여백 설정 */
-}
 
 .text-overlay p {  
   /*margin: 0;*/
@@ -302,7 +294,7 @@ background-color: white;
 /* 1섹션 비디오 컨테이너 스타일 */
 .video-container {
   position: relative;
-  width: 100%;
+  width: 100vw;
   height: 100vh; /* 화면 크기에 꽉 채우도록 설정 */
 }
 
@@ -322,8 +314,8 @@ background-color: white;
   background-size: cover; /* Adjust to your needs */
   background-repeat: no-repeat;
   background-position: center top;
-  min-width: 100%;  
-  min-height: 100vh;
+  width: 100vw;
+  height: 100vh;
 }
 
 /* 2섹션 초록 박스 스타일 */
@@ -376,6 +368,7 @@ background-color: white;
 .description {
   font-size: 1.2rem;
   margin-left: 12vw;
+  color: gray;
   opacity: 0; /* 처음에는 안 보이게 설정 */
   transform: translateY(45px); /* 시작 위치 지정 */
   /* fadein 애니메이션 효과 설정 */
@@ -416,29 +409,21 @@ background-color: white;
 }
 
 .topic-title{
- color: rgb(255, 212, 132);
+ color: rgb(255, 238, 202);
 }
 
 .topic-number {
   font-weight: bold;
-  font-size: 6rem;
+  font-size: 5vw;
 }
 
-/* 2섹션 아이콘 콘테이너 스타일 */
+/* 2섹션 아이콘 콘테이너 스타일 *//* Assuming .icon-container is the parent container for the buttons */
 .icon-container {
-  display: flex;
-  justify-content: center; /* 아이콘 중앙 정렬 */
-  align-items: flex-end; /* 아이콘 아래로 정렬 */
-padding-top: 1rem;
-margin-top: auto; /* 아이콘 위 여백 설정 */
-background-color: white;
-object-fit: cover;
-}
-
-/* 2섹션 아이콘 이미지 스타일 */
-.icon-container img {
-  object-fit: cover; /* 이미지가 잘리지 않고 화면에 맞게 크기 조정 */
-  margin: 2rem 2rem 0 2rem;
+  display: flex; /* Make its children flex items */
+  justify-content: space-between; /* Spread items evenly with space on both sides */
+  align-items: flex-end; /* Vertically center the items */
+  width: 100vw;
+  background-color: white;
 }
 
 .section2-icon {
@@ -446,11 +431,8 @@ object-fit: cover;
   background-color: transparent;
   font-size: 14px;
   font-weight: bold;
-  margin-bottom: 2rem;
-}
-
-.section2icon-description {
-  text-align: center;
+  margin-top: 4vh;
+  margin-bottom: 4vh;
 }
 
 /* 2섹션 버튼 스타일 */
@@ -492,6 +474,7 @@ object-fit: cover;
   font-weight: bold;
   color: lightgray;
 }
+
 
 /* 3섹션 */
 
@@ -699,7 +682,7 @@ object-fit: cover;
 /* 5섹션 */
 .searchheerim-container {
   background-color: rgb(37, 37, 37);
-  width: 99vw;
+  width: 100vw;
   padding-top: 100px;
 }
 
@@ -776,18 +759,6 @@ object-fit: cover;
   transform: translateY(0); /* Y축 이동을 0으로 변경하여 원래 위치로 이동 */
 }
 
-/* 검색 버튼 스타일링 */
-.searchheerim-button {
-  background-color: transparent;
-  border: none;
-  font-size: 20px;
-  color: white;
-  cursor: pointer;
-}
-
-.searchheerim-button a {
-  margin-top: 20px;
-}
 
 .searchtag-keywords {
   padding: 70px 0 110px 12vw;
