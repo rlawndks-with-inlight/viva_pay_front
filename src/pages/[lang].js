@@ -436,10 +436,8 @@ const Home = () => {
                                                 <div className="hoverimage-container">
                                                     <img className="hoverimage" src={hoveredImage} alt="Hovered Image" />
                                                     {hoveredText && (
-                                                        <div className="yellow-box">
-                                                            <div className="image-text">
-                                                                {hoveredText}
-                                                            </div>
+                                                        <div className="image-text">
+                                                            {hoveredText}
                                                         </div>
                                                     )}
                                                 </div>
@@ -452,8 +450,12 @@ const Home = () => {
                                                             <div className="hoverimage-overlay">
                                                                 <div className="hoverimage-text">
                                                                     <p className="hoverplace">Incheon, Korea</p>
-                                                                    <p className="hoverbuilding">Incheon International Airport</p>
-                                                                    <p className="hoverbuilding"> Passenger Terminal 2</p>
+                                                                    <p className="hoverbuilding">{langJson[lang]?.ICN}</p>
+                                                                    <p className="hoverbuilding">{langJson[lang]?.ICNA}</p>
+                                                                    <button className="hoverread-more-button" onClick={() => { window.location.href = "/404"; }}>
+                                                                        <span className="hoverread-more-text">Read more</span>
+                                                                        <span className="hoverarrow-icon">→</span>
+                                                                    </button>
                                                                 </div>
                                                             </div>
                                                         ))
@@ -463,8 +465,8 @@ const Home = () => {
                                                         <div className="image-overlay">
                                                             <div className="image-text">
                                                                 <p className="place">Incheon, Korea</p>
-                                                                <p className="building">Incheon International Airport</p>
-                                                                <p className="building">Passenger Terminal 2</p>
+                                                                <p className="building">{langJson[lang]?.ICN}</p>
+                                                                <p className="building">{langJson[lang]?.ICNA}</p>
                                                             </div>
                                                         </div>
                                                     </a>
@@ -475,8 +477,12 @@ const Home = () => {
                                                             <div className="hoverimage-overlay">
                                                                 <div className="hoverimage-text">
                                                                     <p className="hoverplace">Seoul, Korea</p>
-                                                                    <p className="hoverbuilding">The 2nd Sejong center for</p>
-                                                                    <p className="hoverbuilding"> performing arts</p>
+                                                                    <p className="hoverbuilding">{langJson[lang]?.YEOUIDO}</p>
+                                                                    <p className="hoverbuilding">{langJson[lang]?.ARTS}</p>
+                                                                    <button className="hoverread-more-button" onClick={() => { window.location.href = "/404"; }}>
+                                                                        <span className="hoverread-more-text">Read more</span>
+                                                                        <span className="hoverarrow-icon">→</span>
+                                                                    </button>
                                                                 </div>
                                                             </div>
                                                         ))
@@ -486,8 +492,8 @@ const Home = () => {
                                                         <div className="image-overlay">
                                                             <div className="image-text">
                                                                 <p className="place">Seoul, Korea</p>
-                                                                <p className="building">The 2nd Sejong center for</p>
-                                                                <p className="building"> performing arts</p>
+                                                                <p className="building">{langJson[lang]?.YEOUIDO}</p>
+                                                                <p className="building">{langJson[lang]?.ARTS}</p>
                                                             </div>
                                                         </div>
                                                     </a>
@@ -498,8 +504,12 @@ const Home = () => {
                                                             <div className="hoverimage-overlay">
                                                                 <div className="hoverimage-text">
                                                                     <p className="hoverplace">Seongnam, Korea</p>
-                                                                    <p className="hoverbuilding">HD Hyundai Global R&D</p>
-                                                                    <p className="hoverbuilding"> Center</p>
+                                                                    <p className="hoverbuilding">{langJson[lang]?.HYUNDAI}</p>
+                                                                    <p className="hoverbuilding">{langJson[lang]?.CENTER}</p>
+                                                                    <button className="hoverread-more-button" onClick={() => { window.location.href = "/404"; }}>
+                                                                        <span className="hoverread-more-text">Read more</span>
+                                                                        <span className="hoverarrow-icon">→</span>
+                                                                    </button>
                                                                 </div>
                                                             </div>
                                                         ))
@@ -509,8 +519,8 @@ const Home = () => {
                                                         <div className="image-overlay">
                                                             <div className="image-text">
                                                                 <p className="place">Seongnam, Korea</p>
-                                                                <p className="building">HD Hyundai Global R&D</p>
-                                                                <p className="building"> Center</p>
+                                                                <p className="building">{langJson[lang]?.HYUNDAI}</p>
+                                                                <p className="building">{langJson[lang]?.CENTER}</p>
                                                             </div>
                                                         </div>
                                                     </a>
@@ -521,7 +531,11 @@ const Home = () => {
                                                             <div className="hoverimage-overlay">
                                                                 <div className="hoverimage-text">
                                                                     <p className="hoverplace">Baku, Azerbaijan</p>
-                                                                    <p className="hoverbuilding">SOCAR Tower</p>
+                                                                    <p className="hoverbuilding">{langJson[lang]?.SOCAR}</p>
+                                                                    <button className="hoverread-more-button" onClick={() => { window.location.href = "/404"; }}>
+                                                                        <span className="hoverread-more-text">Read more</span>
+                                                                        <span className="hoverarrow-icon">→</span>
+                                                                    </button>
                                                                 </div>
                                                             </div>
                                                         ))
@@ -531,7 +545,7 @@ const Home = () => {
                                                         <div className="image-overlay">
                                                             <div className="image-text">
                                                                 <p className="place">Baku, Azerbaijan</p>
-                                                                <p className="building">SOCAR Tower</p>
+                                                                <p className="building">{langJson[lang]?.SOCAR}</p>
                                                             </div>
                                                         </div>
                                                     </a>
@@ -681,54 +695,62 @@ const Home = () => {
                                         </div>
                                         <div className="bottom">
                                             <div className="seoulhqsupport">
-                                                <span className="seoulhq">SEOUL HQ
-                                                </span>
-                                                <span className="support">SUPPORT
-                                                </span>
+                                                <div className="hqcontainer">
+                                                    <span className="seoulhq">SEOUL HQ
+                                                    </span>
+                                                    <div className="hq">
+                                                        <div className="hq-container">
+                                                            <div className="address">
+                                                                <div className="hq1">Address </div>
+                                                                <div className="hq1">Tel</div>
+                                                            </div>
+                                                        </div>
+                                                        <div className="hq-container">
+                                                            <div className="address">
+                                                                <div className="hq2">{langJson[lang]?.ADDRESS}</div>
+                                                                <div className="hq2">+82-23410-9000</div>
+                                                                <div className="hq2">+82-2-3490-8500 (International call)</div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div className="supcontainer">
+                                                    <span className="support">SUPPORT
+                                                    </span>
+                                                    <div className="sup">
+                                                        <div className="hq-container">
+                                                            <div className="address">
+                                                                <div className="hq3">General Inquiries </div>
+                                                                <div className="hq3">Career</div>
+                                                                <div className="hq3">About Reporting </div>
+                                                                <div className="hq3">Misconduct</div>
+                                                            </div>
+                                                        </div>
+                                                        <div className="hq-container">
+                                                            <div className="address">
+                                                                <div className="hq4">webmaster@heerim.com</div>
+                                                                <div className="hq4">recruit@heerim.com</div>
+                                                                <div className="hq4">hot_line_em@heerim.com</div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                                 <span className="iconbottom">
                                                     {/* 인스타그램 버튼 */}
                                                     <a className="icon-bottom" href="https://www.instagram.com/heerim_architects_official/" target="_blank" rel="noopener noreferrer">
                                                         <img src="/icon/instagram.svg" alt="Instagram Icon" width="40" height="40" />
                                                     </a>
                                                     {/* 유튜브 버튼 */}
-                                                    <a className="icon-bottom" style={{ marginLeft: "35px" }} href="https://www.youtube.com/channel/UCPwQIrf17KFyqvXeq8NVY_Q" target="_blank" rel="noopener noreferrer">
+                                                    <a className="icon-bottom" href="https://www.youtube.com/channel/UCPwQIrf17KFyqvXeq8NVY_Q" target="_blank" rel="noopener noreferrer">
                                                         <img src="/icon/youtube.svg" alt="YouTube Icon" width="40" height="40" />
                                                     </a>
                                                     {/* 핀터레스트 버튼 */}
-                                                    <a className="icon-bottom" style={{ marginLeft: "35px" }} href="https://www.pinterest.co.kr/heerim_architects_official/" target="_blank" rel="noopener noreferrer">
+                                                    <a className="icon-bottom" href="https://www.pinterest.co.kr/heerim_architects_official/" target="_blank" rel="noopener noreferrer">
                                                         <img src="/icon/pinterest.svg" alt="Pinterest Icon" width="40" height="40" />
                                                     </a>
                                                 </span>
                                             </div>
                                             <div className="hq">
-                                                <div className="hq-container">
-                                                    <div className="address">
-                                                        <div className="hq1">Address </div>
-                                                        <div className="hq1">Tel</div>
-                                                    </div>
-                                                </div>
-                                                <div className="hq-container">
-                                                    <div className="address">
-                                                        <div className="hq2">{langJson[lang]?.ADDRESS}</div>
-                                                        <div className="hq2">+82-23410-9000</div>
-                                                        <div className="hq2">+82-2-3490-8500 (International call)</div>
-                                                    </div>
-                                                </div>
-                                                <div className="hq-container">
-                                                    <div className="address">
-                                                        <div className="hq3">General Inquiries </div>
-                                                        <div className="hq3">Career</div>
-                                                        <div className="hq3">About Reporting </div>
-                                                        <div className="hq3">Misconduct</div>
-                                                    </div>
-                                                </div>
-                                                <div className="hq-container">
-                                                    <div className="address">
-                                                        <div className="hq4">webmaster@heerim.com</div>
-                                                        <div className="hq4">recruit@heerim.com</div>
-                                                        <div className="hq4">hot_line_em@heerim.com</div>
-                                                    </div>
-                                                </div>
                                             </div>
                                             <div className="copyright">
                                                 <div className="reserved">
