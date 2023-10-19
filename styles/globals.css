@@ -1042,7 +1042,7 @@ text-align: left; /* 텍스트 왼쪽 정렬 */
 /* 수정중 */
 
 .hoverimage {
-  transform: translateX(-10vw); /* 시작 위치 지정 */
+  transform: translateX(-5vw); /* 시작 위치 지정 */
   /* fadein, 이동, 확대 애니메이션 효과 설정 */
   transition: transform 1.5s ease; /* 왼쪽에서 오른쪽으로 이동함 */
   /* transition: transform 5s ease;  5초 확대 */
