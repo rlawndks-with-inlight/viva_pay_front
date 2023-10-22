@@ -14,8 +14,51 @@ const Headerwrappers = styled.header`
   justify-content: space-between;
   padding: 10px 20px;
 `
-
-
+const Logo = styled.a`/*heerim 로고*/
+text-align: center; /* 텍스트 가운데 정렬 */
+text-decoration: none; /* 링크의 기본 밑줄 스타일 제거 */
+background-color: transparent; /* 배경색 투명으로 설정 */
+border: none; /* 테두리 제거 */
+cursor: pointer; /* 포인터 커서로 변경 */
+display: flex; /* 자식 요소를 가로로 나란히 정렬 */
+flex-direction: column; /* 자식 요소를 세로로 정렬 */
+align-items: center; /* 자식 요소를 수직 가운데 정렬 */
+z-index: 2;
+`
+const Logotext = styled.span`
+font-size: 36px;
+font-weight: bold;
+font-style: italic; /* 텍스트를 기울임체로 스타일링 */
+color: white;
+margin-left: 7vw;
+margin-top: 2vw;
+`
+const Subtext = styled.span`/*Architecture & Planner 글자*/
+font-size: 12px; /* 부가 텍스트의 글꼴 크기 조정 */
+font-style: italic; /* 텍스트를 기울임체로 스타일링 */
+color: white;
+margin-left: 7vw;
+`
+const Headerbuttons=styled.div`
+display: flex;
+gap: 14px;
+font-size: 24px;/*한영 버튼 크기*/
+align-items: center;
+margin-right: 11vw;
+margin-top: 3vw;
+`
+const EnKr = styled.a` /*한영 버튼*/
+font-weight: bold;
+text-decoration: none;
+color: white; /* 링크 텍스트 색상 설정 */
+  cursor: pointer;
+  &:hover{
+    text-decoration: underline;
+  }
+  &.active{
+    text-decoration: underline;
+  }
+`
 const Header = () => {
     const router = useRouter();
     const { lang = 'kr' } = router.query;
@@ -66,26 +109,26 @@ const Header = () => {
     return (
         <Headerwrappers className={`${isSection1Green ? 'section1-green' : ''}`}>
             <Link href="/" legacyBehavior>
-                <a className="logo-button" onClick={() => { window.location.reload() }}>
-                    <span className="logo-text">heerim</span>
-                    <span className="sub-text">Architects & Planners</span>
-                </a>
+                <Logo onClick={() => { window.location.reload() }}>
+                    <Logotext>heerim</Logotext>
+                    <Subtext>Architects & Planners</Subtext>
+                </Logo>
             </Link>
-            <div className="buttons">
+            <Headerbuttons>
                 {isSection1Green ? null : ( // 녹색 섹션이 활성화되면 버튼을 숨김
                     <>
                         <Link href="/en" legacyBehavior>
-                            <a className={lang === "en" ? "active" : ""}>EN</a>
+                            <EnKr className={lang === "en" ? "active" : ""}>EN</EnKr>
                         </Link>
                         <Link href="/kr" legacyBehavior>
-                            <a className={lang === "kr" ? "active" : ""}>KR</a>
+                            <EnKr className={lang === "kr" ? "active" : ""}>KR</EnKr>
                         </Link>
                         <button onClick={showMore}>
                             <img src="/icon/more.png" alt="More Icon" width="40" height="40" />
                         </button>
                     </>
                 )}
-                </div>
+                </Headerbuttons>
             {isSection1Green && (
                 <div className="more-container">
                     <div className="close-button-container">
