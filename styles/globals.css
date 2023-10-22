@@ -1,14 +1,3 @@
-.overlay-header {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 1; /* 다른 요소 위에 표시하기 위한 z-index 설정 */
-  display: flex;
-  justify-content: space-between;
-  padding: 10px 20px; /* 원하는 패딩 값으로 조절 */
-}
-
 .logo-button { /*heerim 로고*/
   text-align: center; /* 텍스트 가운데 정렬 */
   text-decoration: none; /* 링크의 기본 밑줄 스타일 제거 */
@@ -37,7 +26,7 @@
   margin-left: 7vw;
 }
 
-.overlay-header .buttons {
+.buttons {
   display: flex;
   gap: 14px;
   font-size: 24px;/*한영 버튼 크기*/
@@ -46,19 +35,19 @@
   margin-top: 3vw;
 }
 
-.overlay-header .buttons a { /*한영 버튼*/
+.buttons a { /*한영 버튼*/
   font-weight: bold;
   text-decoration: none;
   color: white; /* 링크 텍스트 색상 설정 */
 }
 
-.overlay-header .buttons a.active {
+.buttons a.active {
   text-decoration: underline;
 }
-.overlay-header .buttons :hover{
+.buttons :hover{
   text-decoration: underline;
 }
-.overlay-header .buttons button { /*검색,더보기 버튼*/
+.buttons button { /*검색,더보기 버튼*/
   background: transparent;
   border: none;
   font-size: 16px;
@@ -326,7 +315,7 @@ background-color: white;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 8.2vw;
+  margin-top: 8.2vh;
   margin-left: 12vw;
   margin-bottom: 2vw;
   opacity: 0; /* 처음에는 안 보이게 설정 */
@@ -384,7 +373,7 @@ background-color: white;
 .topics-container {
   display: flex;
   justify-content: space-between; /* Adjust as needed */
-  margin: 1.5vw 11vw 6vw 11vw; /* Adjust as needed */
+  margin: 1.5vh 11vw 6vw 12vw; /* Adjust as needed */
   opacity: 0; /* 처음에는 안 보이게 설정 */
   transform: translateY(60px); /* 시작 위치 지정 */
   /* fadein 애니메이션 효과 설정 */
@@ -399,16 +388,17 @@ background-color: white;
 /* 2섹션 history 덩어리 텍스트 스타일 */
 .topic {
   flex-direction: column;
-  margin: 1rem; /* Adjust as needed */
+  margin: 1vh; /* Adjust as needed */
 }
 
 /* 2섹션 historyof 글 텍스트 스타일 */
 .topic-title,
 .topic-number {
-  margin: 0.2rem 0; /* Adjust as needed */
+  margin: 0.1vw 0 0.1vw 0; 
 }
 
 .topic-title{
+  margin-top: 5vh;
  color: rgb(255, 238, 202);
 }
 
@@ -419,10 +409,10 @@ background-color: white;
 
 /* 2섹션 아이콘 콘테이너 스타일 */
 .icon-container {
-  display: flex; 
-  
+  display: flex;
+  overflow-x: auto;
   position: absolute;
-  top: 179.5%;
+  top: 179.8vh;
   justify-content: space-between; 
   align-items: flex-end;
   width: 100vw;
@@ -432,17 +422,26 @@ background-color: white;
 .section2-icon {
   border: none;
   background-color: transparent;
-  font-size: 14px;
+  font-size: 1.5vh;
   font-weight: bold;
   margin-top: 4vh;
   margin-bottom: 4vh;
+  cursor: pointer;
+}
+
+.section2-icon .section2icon-description {
+  transition: color 0.5s ease; /* 색상 변화 시간과 속도 설정 */
+}
+
+.section2-icon:hover .section2icon-description {
+  color: rgb(136, 209, 0);
 }
 
 /* 2섹션 버튼 스타일 */
 .prev-button,
 .next-button {
-  width: 50px;
-  height: 50px;
+  width: 5vh;
+  height: 5vh;
   background-color: white;
   border-radius: 50%;
   border: none;
@@ -451,7 +450,7 @@ background-color: white;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  margin: 0 4rem 5rem 4rem; /* 버튼과 아이콘 사이 간격 설정 */
+  margin: 0 8vh 7.5vh 8vh; /* 버튼과 아이콘 사이 간격 설정 */
 }
 
 /* 2섹션 버튼 내부 스타일 */
@@ -459,21 +458,21 @@ background-color: white;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 32px;
+  font-size: 3.2vh;
 }
 
 /* 2섹션 화살표 아이콘 스타일 */
 .leftarrow {
-  margin-right: 5px;
-  margin-bottom: 2px;
+  margin-right: 0.4vh;
+  margin-bottom: 0.4vh;
   font-weight: bold;
   color: lightgray;
 }
 
 /* 2섹션 화살표 아이콘 스타일 */
 .rightarrow {
-  margin-left: 5px;
-  margin-bottom: 2px;
+  margin-left: 0.4vh;
+  margin-bottom: 0.4vh;
   font-weight: bold;
   color: lightgray;
 }
@@ -490,6 +489,7 @@ background-color: white;
   justify-content: center;
   align-items: center;
   margin-left: 12vw;
+  margin-bottom: 2vh;
   opacity: 0; /* 처음에는 안 보이게 설정 */
   transform: translateX(-60px); /* 시작 위치 지정 */
   /* fadein 애니메이션 효과 설정 */
@@ -573,7 +573,7 @@ background-color: white;
 
 /* 3섹션 이미지 스타일 */
 .image-container img{
-  height: 82vh; /*높이 설정 */
+  height: 75vh; /*높이 설정 */
   max-width: 100%;
   object-fit: cover; /* 이미지가 잘리지 않고 화면에 맞게 크기 조정 */
 }
@@ -671,13 +671,13 @@ background-color: white;
 
 /* 4section */
 .news-list {
-  margin: 20px 0 10px  0;
+  margin: 20px 0 6vh  0;
 }
 
 .news-row {
   display: flex;
   justify-content: space-between;
-  margin: 20px 5vw 20px 5.2vw;
+  margin: 0 5vw 0 5.2vw;
 }
 
 /* 뉴스 아이템들 스타일 */
@@ -686,7 +686,7 @@ background-color: white;
   box-sizing: border-box;
   background-color: transparent;
   text-decoration: none;
-  margin: 0 1vw 10px 1vw;
+  margin: 0 1vh 10px 1vh;
   cursor: pointer;
   opacity: 0; /* 처음에는 안 보이게 설정 */
   transform: translateY(30px); /* 시작 위치 지정 */
@@ -710,8 +710,8 @@ background-color: white;
 }
 /* 뉴스 박스 스타일 */
 .news-box {
-  width: 65px; /* 네모 상자의 너비 설정 */
-  height: 25px; /* 네모 상자의 높이 설정 */
+  width: 6vh; /* 네모 상자의 너비 설정 */
+  height: 2.5vh; /* 네모 상자의 높이 설정 */
   background-color: rgb(136, 209, 0); /* 초록색 배경색 설정 */
   display: flex;
   justify-content: center;
@@ -721,7 +721,7 @@ background-color: white;
 /* 뉴스 스타일 */
 .news-text {
   color: white; /* 흰색 글자색 설정 */
-  font-size: 15px; /* 글자 크기 설정 */
+  font-size: 1.5vh; /* 글자 크기 설정 */
   font-weight: bold;
 }
 
@@ -738,13 +738,13 @@ background-color: white;
 /* news date 스타일 */
 .news-date {
   color: gray;
-  margin-bottom: 40px;
-  font-size: 14px;
+  margin-bottom: 1.5vw;
+  font-size: 1.1vw;
 }
 
 /* read more link 스타일 */
 .news-more-link {
-  font-size: 22px; 
+  font-size: 1.13vw;
   color: orange;
   transition: letter-spacing 0.5s ease; /* 호버 시 letter-spacing에 효과를 추가합니다. */
 }
@@ -776,8 +776,8 @@ background-color: white;
   transform: scale(1.1);
 }
 .youtube-button img{
-  width: 17vw;
-  height: 17vw;
+  width: 22vh;
+  height: 20vh;
 }
 
 /* 4섹션 유튜브 "read more" 버튼 스타일 */
@@ -801,12 +801,12 @@ background-color: white;
 .searchheerim-container {
   background-color: rgb(37, 37, 37);
   width: 100vw;
-  padding-top: 100px;
+  padding-top: 10vh;
 }
 
 .search-title {
   margin-left: 12vw;
-  font-size: 3vw;
+  font-size: 8vh;
   font-weight: bold;
   color: orange;
   opacity: 0; /* 처음에는 안 보이게 설정 */
@@ -822,7 +822,7 @@ background-color: white;
 }
 
 .search-title2 {
-  font-size: 3vw;
+  font-size: 7vh;
   font-weight: bold;
   color: white;
   opacity: 0; /* 처음에는 안 보이게 설정 */
@@ -840,7 +840,7 @@ background-color: white;
 
 .searchsub {
   margin-left: 12vw;
-  font-size: 1vw;
+  font-size: 2vh;
   color: gray;
   opacity: 0; /* 처음에는 안 보이게 설정 */
   transform: translateY(40px); /* 시작 위치 지정 */
@@ -863,9 +863,9 @@ background-color: white;
   height: 40px;
   color: white;
   font-size: 20px; /* 폰트 크기 키우기 */
-  margin-top: 40px; /* 위쪽 여백 추가 */
+  margin-top: 2vh; /* 위쪽 여백 추가 */
   margin-left: 12vw; /* 왼쪽 여백 추가 */
-  padding-left: 2rem;
+  padding-left: 2vh;
   opacity: 0; /* 처음에는 안 보이게 설정 */
   transform: translateY(50px); /* 시작 위치 지정 */
   /* fadein 애니메이션 효과 설정 */
@@ -877,9 +877,12 @@ background-color: white;
   transform: translateY(0); /* Y축 이동을 0으로 변경하여 원래 위치로 이동 */
 }
 
+.searchheerim-button {
+  cursor: pointer;
+}
 
 .searchtag-keywords {
-  padding: 70px 0 110px 12vw;
+  padding: 6vh 0 12vh 12vw;
   opacity: 0; /* 처음에는 안 보이게 설정 */
   transform: translateY(60px); /* 시작 위치 지정 */
   /* fadein 애니메이션 효과 설정 */
@@ -894,7 +897,7 @@ background-color: white;
 /*검색태그 키워드 버튼*/
 .searchtag-button {
 border: none; /* 외곽선 없애기 */
-font-size: 18px;
+font-size: 2vh;
 background-color: transparent;
 border-radius: 50px; /* 50px 반지름으로 둥글게 */
 margin: 0 5px 0 0; /* 버튼 간격 설정 */
@@ -913,18 +916,18 @@ transition: color 0.3s; /* 배경색 전환 애니메이션 */
 
 .seoulhqsupport {
   display: flex;
-  margin-bottom: 40px;
+  margin-bottom: 1.5vh;
 
 }
 .seoulhq {
-  font-size: 20px;
+  font-size: 2.2vh;
   font-weight: bold;
   color: rgb(136, 209, 0);
   margin-left: 12.5vw;
 }
 
 .support {
-  font-size: 20px;
+  font-size: 2.2vh;
   font-weight: bold;
   color: rgb(136, 209, 0);
 }
@@ -997,12 +1000,12 @@ text-align: left; /* 텍스트 왼쪽 정렬 */
 .copyright {
   display: flex; /* Flexbox 설정 */
   align-items: center; /* 세로 중앙 정렬 */
-  margin-bottom: 70px;
+  margin-bottom: 2vh;
 }
 
 .reserved {
-  margin-left: 12.5vw;
-  font-size: 20px;
+  margin-left: 12vw;
+  font-size: 2vh;
   flex: 1; /* 남은 공간을 차지하도록 설정 */
 }
 
@@ -1022,17 +1025,17 @@ text-align: left; /* 텍스트 왼쪽 정렬 */
   flex-direction: row;
   background-color: rgb(131, 187, 72); /* 회색 배경 추가 */
   border-radius: 50px; /* 회색 배경과 함께 버튼에 radius 추가 */
-  padding: 10px;
+  padding:1.1vh;
   margin-right: 12vw;
 }
 
 .Newsletterbutton img {
-  width: 25px;
-  height: 25px;
+  width: 2.1vh;
+  height: 2.1vh;
 }
 
 .Newsletterbutton a {
-  font-size: 20px;
+  font-size: 2vh;
   margin: 0 15px 0 15px;
   color: white;
 }

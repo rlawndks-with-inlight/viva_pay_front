@@ -1,3 +1,3 @@
-import Home from "./[lang]";
+import Home from "./[Home]";
 
 export default Home;

@@ -1,7 +1,7 @@
-// pages/index.js
+// pages/home.js
 import React, { useEffect, useState, useRef } from "react";
 import Link from 'next/link';
-import UserLayout from 'src/layouts';
+import UserLayout from 'src/layouts/UserLayout';
 import langJson from 'src/data/lang.json'
 import { useRouter } from "next/router";
 const sections = ["section1", "section2", "section3", "section4", "section5"]; // 섹션 이름
@@ -60,7 +60,6 @@ const TopicsContainer = ({ inView }) => {
 
 const Home = () => {
 
-
     const router = useRouter();
     const { lang = 'kr' } = router.query;
     const [activeSection, setActiveSection] = useState(0); // 활성 섹션 인덱스
@@ -76,7 +75,7 @@ const Home = () => {
     const [section2InView, setSection2InView] = useState(false); // section2의 inView 여부
     const [hoveredImage, setHoveredImage] = useState(null);
     const [hoveredText, setHoveredText] = useState(null);
-
+    
     const handleImageHover = (imageSrc, text) => {
         setHoveredImage(imageSrc);
         setHoveredText(text);
@@ -297,11 +296,6 @@ const Home = () => {
             }
 
         }
-
-        // section4 이후의 섹션에서는 스크롤 이벤트를 무시합니다.
-        if (newActiveSection >= 3) {
-            return;
-        }
     };
 
 
@@ -339,7 +333,7 @@ const Home = () => {
         // 여기에서 검색을 실행하거나 필요한 로직을 추가하세요.
         console.log("Searching for:", searchQuery);
         // 검색 이후에는 검색 창을 닫을 수 있도록
-        closeSearch();
+        // closeSearch();
     };
     return (
         <>
@@ -402,8 +396,7 @@ const Home = () => {
                                                     <img
                                                         src={`/icon/${iconIndex}.png`}
                                                         alt={`Icon ${iconIndex}`}
-                                                        width="100"
-                                                        height="100"
+                                                        style={{width:"10vh", height:"10vh"}}
                                                     />
                                                     <div className="section2icon-description">
                                                         {/* 아이콘에 대한 설명 */}
@@ -670,16 +663,15 @@ const Home = () => {
                                                     value={searchQuery}
                                                     onChange={handleSearchInputChange} // 검색 입력란 스타일 추가
                                                 />
-                                                <a href="/link-to-search" style={{ borderBottom: "5px solid white" }} onClick={() => { window.location.href = "/404"; }}>
-                                                    <button onClick={handleSearch} className={`searchheerim-button"${inViewItems5.includes("") ? "in-view" : ""}`} style={{
+                                                    <button  className={`searchheerim-button"${inViewItems5.includes("") ? "in-view" : ""}`} onClick={() => { window.location.href = "/404"; }} style={{
                                                         background: "transparent", // Set the background to transparent
                                                         border: "none", // Remove the border
                                                         color: "white",
+                                                        borderBottom:"5px solid white",
                                                     }}>
                                                         Search
                                                         <img src="/icon/search.png" alt="Search Icon" width="40" height="40" />
                                                     </button>
-                                                </a>
                                             </div>
                                             <div className={`searchtag-keywords ${inViewItems5.includes("") ? "in-view" : ""}`}>
                                                 <button className="searchtag-button" onClick={() => { window.location.reload() }}><Link href="/LaLuna">#LaLuna</Link></button>
@@ -696,8 +688,7 @@ const Home = () => {
                                         <div className="bottom">
                                             <div className="seoulhqsupport">
                                                 <div className="hqcontainer">
-                                                    <span className="seoulhq">SEOUL HQ
-                                                    </span>
+                                                    <span className="seoulhq">SEOUL HQ</span>
                                                     <div className="hq">
                                                         <div className="hq-container">
                                                             <div className="address">
@@ -715,8 +706,7 @@ const Home = () => {
                                                     </div>
                                                 </div>
                                                 <div className="supcontainer">
-                                                    <span className="support">SUPPORT
-                                                    </span>
+                                                    <span className="support">SUPPORT</span>
                                                     <div className="sup">
                                                         <div className="hq-container">
                                                             <div className="address">
@@ -738,19 +728,17 @@ const Home = () => {
                                                 <span className="iconbottom">
                                                     {/* 인스타그램 버튼 */}
                                                     <a className="icon-bottom" href="https://www.instagram.com/heerim_architects_official/" target="_blank" rel="noopener noreferrer">
-                                                        <img src="/icon/instagram.svg" alt="Instagram Icon" width="40" height="40" />
+                                                        <img src="/icon/instagram.svg" alt="Instagram Icon" style={{width:"4vh", height:"4vh"}} />
                                                     </a>
                                                     {/* 유튜브 버튼 */}
                                                     <a className="icon-bottom" href="https://www.youtube.com/channel/UCPwQIrf17KFyqvXeq8NVY_Q" target="_blank" rel="noopener noreferrer">
-                                                        <img src="/icon/youtube.svg" alt="YouTube Icon" width="40" height="40" />
+                                                        <img src="/icon/youtube.svg" alt="YouTube Icon" style={{width:"4vh", height:"4vh"}}  />
                                                     </a>
                                                     {/* 핀터레스트 버튼 */}
                                                     <a className="icon-bottom" href="https://www.pinterest.co.kr/heerim_architects_official/" target="_blank" rel="noopener noreferrer">
-                                                        <img src="/icon/pinterest.svg" alt="Pinterest Icon" width="40" height="40" />
+                                                        <img src="/icon/pinterest.svg" alt="Pinterest Icon" style={{width:"4vh", height:"4vh"}}  />
                                                     </a>
                                                 </span>
-                                            </div>
-                                            <div className="hq">
                                             </div>
                                             <div className="copyright">
                                                 <div className="reserved">
@@ -766,14 +754,13 @@ const Home = () => {
                                         </div>
                                     </div>
                                 ) : (
-                                    <div>{section}</div>
+                                    <div>{sectionName}</div>
                                 )
                                 }
                             </div>
                         ))}
                     </div>
                 </>}
-
         </>
     );
 };

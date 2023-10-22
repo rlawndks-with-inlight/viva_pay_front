@@ -2,6 +2,19 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useState, useEffect } from 'react';
+import styled from 'styled-components';
+
+const Headerwrappers = styled.header`
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1; 
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 20px;
+`
+
 
 const Header = () => {
     const router = useRouter();
@@ -51,7 +64,7 @@ const Header = () => {
     };
 
     return (
-        <header className={`overlay-header ${isSection1Green ? 'section1-green' : ''}`}>
+        <Headerwrappers className={`${isSection1Green ? 'section1-green' : ''}`}>
             <Link href="/" legacyBehavior>
                 <a className="logo-button" onClick={() => { window.location.reload() }}>
                     <span className="logo-text">heerim</span>
@@ -72,7 +85,7 @@ const Header = () => {
                         </button>
                     </>
                 )}
-            </div>
+                </div>
             {isSection1Green && (
                 <div className="more-container">
                     <div className="close-button-container">
@@ -192,7 +205,7 @@ const Header = () => {
                     </div>
                 </div>
             )}
-        </header >
+        </Headerwrappers >
     );
 };
 
