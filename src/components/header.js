@@ -25,21 +25,15 @@ flex-direction: column; /* 자식 요소를 세로로 정렬 */
 align-items: center; /* 자식 요소를 수직 가운데 정렬 */
 z-index: 2;
 `
-const Logotext = styled.span`
-font-size: 36px;
-font-weight: bold;
+const Logotext = styled.span` /* 로고 글자 스타일 */
+font-size: ${(props) => props.fontSize};
+font-weight: ${(props) => props.fontWeight};
 font-style: italic; /* 텍스트를 기울임체로 스타일링 */
 color: white;
 margin-left: 7vw;
-margin-top: 2vw;
+margin-top: ${(props) => props.marginTop};
 `
-const Subtext = styled.span`/* Architecture & Planner 글자 */
-font-size: 12px; /* 부가 텍스트의 글꼴 크기 조정 */
-font-style: italic; /* 텍스트를 기울임체로 스타일링 */
-color: white;
-margin-left: 7vw;
-`
-const Headerbuttons = styled.div`
+const HeaderButtons = styled.div` /* 헤더의 오른쪽 스타일 */
 display: flex;
 gap: 14px;
 font-size: 24px;/* 한영 버튼 크기 */
@@ -66,7 +60,104 @@ font-size: 16px;
 cursor: pointer;
 color: white;
 `
-
+const MoreContainer = styled.div` /* more 모달 스타일링 */
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background-color: rgb(146, 208, 30);; /* 녹색 배경 추가 */
+z-index: 1;
+`
+const MoreClose = styled.button` /* more close 버튼 */
+position: absolute;
+top: 70px; /* 원하는 위치로 조정하세요 */
+right: 12vw; /* 원하는 위치로 조정하세요 */
+color: white;
+background: transparent; /* 투명 배경 추가 */
+border: none;
+cursor: pointer;
+font-size: 1.5rem;
+font-weight: bold;
+z-index: 1;
+`
+const TotalButtonContainer = styled.div` /* 더보기 내용 전체 버튼 */
+display: flex;
+margin-left: 12vw;
+margin-top: 5vw;
+`
+const TitleButton = styled.button`
+display: block; /* 메인 버튼을 블록 레벨 요소로 변경 */
+font-size: 44px;
+font-weight: bold;
+text-align: center; /* 텍스트 중앙 정렬 */
+text-decoration: none;
+color: white; /* 메인 버튼 텍스트 색상을 흰색으로 설정 */
+background-color: transparent; /* 배경을 투명하게 설정 */
+padding: 190px 100px 0 0;  /* 버튼 패딩 조절 */
+border: none; /* 버튼 테두리 제거 */
+  a{
+    color: white;
+    text-decoration: none;
+  }
+`
+const SubButton = styled.button`
+display: flex;
+flex-direction: column; /* 서브 버튼을 세로로 정렬 */
+align-items: flex-start; /* 왼쪽 정렬 */
+border: none;
+padding: 0;
+margin: 30px 0 0 0;
+font-size: 24px;
+background: transparent; /* 투명 배경 추가 */
+text-align: left; /* 텍스트 왼쪽 정렬 */
+  a{
+    text-decoration: none;
+    margin-bottom: 30px;
+    color: white; /* 서브 버튼 텍스트 색상 설정 */
+    &:hover{
+      color: white; /* 호버 시 밑줄의 색상을 흰색으로 변경 */
+      text-decoration: underline; /* 호버 시 밑줄 표시 */
+    }
+  }
+`
+const MoreIconButtonContainer = styled.div`
+display: flex; /* 더보기 아래쪽 아이콘 버튼 스타일*/
+margin-left: 12vw;
+margin-top: 9vw;
+text-align: center;
+`
+const MoreIconButton = styled.a`
+transition: opacity 0.3s ease; /* 호버 시 투명도 전환 애니메이션 */
+text-decoration: none; /*링크 밑줄 제거*/
+  img{
+    width: 40px;
+    height: 40px;
+    &:hover{
+      opacity: 0.7; /* 호버 시 투명도를 0.7로 변경 (1이 원래 투명도) */
+}
+  }
+`
+const LocationButton = styled.div`
+display: flex; /* 더보기 아래쪽 map 버튼 스타일*/
+flex-direction: row;
+background-color: rgb(131, 187, 72); /* 회색 배경 추가 */
+border-radius: 50px; /* 회색 배경과 함께 버튼에 radius 추가 */
+padding: 10px;
+cursor: pointer;
+  img{
+    width: 25px;
+    height: 25px;
+  }
+  a{
+    font-size: 20px;
+    margin: 0 15px 0 15px;
+    color: white;
+  }
+  &:hover{
+    opacity: 0.7; /* 호버 시 투명도를 0.7로 변경 (1이 원래 투명도) */
+}
+`
 const Header = () => {
     const router = useRouter();
     const { lang = 'kr' } = router.query;
@@ -118,17 +209,18 @@ const Header = () => {
         <Headerwrappers className={`${isSection1Green ? 'section1-green' : ''}`}>
             <Link href="/" legacyBehavior>
                 <Logo onClick={() => { window.location.reload() }}>
-                    <Logotext>heerim</Logotext>
-                    <Subtext>Architects & Planners</Subtext>
+                    <Logotext fontSize="36px" fontWeight="bold" marginTop="2vw">
+                        heerim</Logotext>
+                    <Logotext fontSize="12px" >Architects & Planners</Logotext>
                 </Logo>
             </Link>
-            <Headerbuttons>
+            <HeaderButtons>
                 {isSection1Green ? null : ( // 녹색 섹션이 활성화되면 버튼을 숨김
                     <>
-                        <Link href="/en" legacyBehavior>
+                        <Link href="/en" >
                             <EnKr className={lang === "en" ? "active" : ""}>EN</EnKr>
                         </Link>
-                        <Link href="/kr" legacyBehavior>
+                        <Link href="/kr" >
                             <EnKr className={lang === "kr" ? "active" : ""}>KR</EnKr>
                         </Link>
                         <More onClick={showMore}>
@@ -136,125 +228,89 @@ const Header = () => {
                         </More>
                     </>
                 )}
-            </Headerbuttons>
+            </HeaderButtons>
             {isSection1Green && (
-                <div className="more-container">
-                    <div className="close-button-container">
-                        <button onClick={closeMore} className="more-close-button">Close X</button>
-                    </div>
-                    <div className="about-us-button" style={{ marginRight: "2" }}>
-                        <div className="main-button-container">
-                            <button className="main-button">
+                <MoreContainer>
+                    <MoreClose onClick={closeMore}>Close X</MoreClose>
+                    <TotalButtonContainer>
+                        <div >
+                            <TitleButton>
                                 <Link href="/IR" >ABOUT US</Link>
-                            </button>
-                            <div className="sub-buttons">
-                                <button className="sub-button">
-                                    <Link href="/about-us/corporate-profile" >Corporate Profile</Link>
-                                </button>
-                                <button className="sub-button">
-                                    <Link href="/about-us/leadership" >Leadership</Link>
-                                </button>
-                                <button className="sub-button">
-                                    <Link href="/about-us/News" >News</Link>
-                                </button>
-                                <button className="sub-button">
-                                    <Link href="/about-us/PR" >PR </Link>
-                                </button>
-                                <button className="sub-button">
-                                    <Link href="/about-us/Recruit" >Recruit</Link>
-                                </button>
-                            </div>
+                            </TitleButton>
+                            <SubButton>
+                                <Link href="/about-us/corporate-profile" >Corporate Profile</Link>
+                                <Link href="/about-us/leadership" >Leadership</Link>
+                                <Link href="/about-us/News" >News</Link>
+                                <Link href="/about-us/PR" >PR </Link>
+                                <Link href="/about-us/Recruit" >Recruit</Link>
+                            </SubButton>
                         </div>
-                        <div className="main-button-container">
-                            <button className="main-button">
+                        <div >
+                            <TitleButton >
                                 <Link href="/IR" >PROJECTS</Link>
-                            </button>
-                            <div className="sub-buttons">
-                                <button className="sub-button">
-                                    <Link href="/projects/Selected Works">Selected Works</Link>
-                                </button>
-                                <button className="sub-button">
-                                    <Link href="/projects/All" >All</Link>
-                                </button>
-                                <button className="sub-button">
-                                    <Link href="/projects/DESIGN" >DESIGN</Link>
-                                </button>
-                                <button className="sub-button">
-                                    <Link href="/projects/CM" >CM</Link>
-                                </button>
-                            </div>
+                            </TitleButton>
+                            <SubButton >
+                                <Link href="/projects/Selected Works">Selected Works</Link>
+                                <Link href="/projects/All" >All</Link>
+                                <Link href="/projects/DESIGN" >DESIGN</Link>
+                                <Link href="/projects/CM" >CM</Link>
+                            </SubButton>
                         </div>
-                        <div className="main-button-container">
-                            <button className="main-button">
+                        <div >
+                            <TitleButton>
                                 <Link href="/IR" >EXPERTISE</Link>
-                            </button>
-                            <div className="sub-buttons">
-                                <button className="sub-button">
-                                    <Link href="/EXPERTISE/Services" >Services</Link>
-                                </button>
-                                <button className="sub-button">
-                                    <Link href="/EXPERTISE/Markets" >Markets</Link>
-                                </button>
-                                <button className="sub-button">
-                                    <Link href="/EXPERTISE/Research" >Research & Idea</Link>
-                                </button>
-                                <button className="sub-button">
-                                    <Link href="/EXPERTISE/VR" >VR/AR</Link>
-                                </button>
-                            </div>
+                            </TitleButton>
+                            <SubButton >
+                                <Link href="/EXPERTISE/Services" >Services</Link>
+                                <Link href="/EXPERTISE/Markets" >Markets</Link>
+                                <Link href="/EXPERTISE/Research" >Research & Idea</Link>
+                                <Link href="/EXPERTISE/VR" >VR/AR</Link>
+                            </SubButton>
                         </div>
-                        <div className="main-button-container">
-                            <button className="main-button">
+                        <div>
+                            <TitleButton>
                                 <Link href="/IR" >IR</Link>
-                            </button>
-                            <div className="sub-buttons">
-                                <button className="sub-button">
-                                    <Link href="/https://www.heerim.com/en/ir/finance.php" >Finance</Link>
-                                </button>
-                                <button className="sub-button">
-                                    <Link href="/IR/Analyst_Report" >Analyst Report</Link>
-                                </button>
-                                <button className="sub-button">
-                                    <Link href="/IR/IR_Material" >IR Material</Link>
-                                </button>
-                            </div>
+                            </TitleButton>
+                            <SubButton >
+                                <Link href="/IR/Finance">Finance</Link>
+                                <Link href="/IR/Analyst_Report" >Analyst Report</Link>
+                                <Link href="/IR/IR_Material" >IR Material</Link>
+                            </SubButton>
                         </div>
-                        <div className="main-button-container">
-                            <button className="main-button">
+                        <div>
+                            <TitleButton>
                                 <Link href="/IR" >CONTACT</Link>
-                            </button>
+                            </TitleButton>
                         </div>
-                    </div>
+                    </TotalButtonContainer>
                     {/* 인스타그램 버튼 */}
-                    <div className="icon-button-container">
+                    <MoreIconButtonContainer>
                         {/* 인스타그램 버튼 */}
-                        <a className="icon-button" href="https://www.instagram.com/heerim_architects_official/" target="_blank" rel="noopener noreferrer">
-                            <img src="/icon/instagram.svg" alt="Instagram Icon" width="40" height="40" />
-                        </a>
-                        {/* 유튜브 버튼 */}
-                        <a className="icon-button" style={{ marginLeft: "35px" }} href="https://www.youtube.com/channel/UCPwQIrf17KFyqvXeq8NVY_Q" target="_blank" rel="noopener noreferrer">
-                            <img src="/icon/youtube.svg" alt="YouTube Icon" width="40" height="40" />
-                        </a>
-                        {/* 핀터레스트 버튼 */}
-                        <a className="icon-button" style={{ marginLeft: "35px" }} href="https://www.pinterest.co.kr/heerim_architects_official/" target="_blank" rel="noopener noreferrer">
-                            <img src="/icon/pinterest.svg" alt="Pinterest Icon" width="40" height="40" />
-                        </a>
+                        <MoreIconButton>
+                            <Link href="https://www.instagram.com/heerim_architects_official/" target="_blank" rel="noopener noreferrer">
+                                <img src="/icon/instagram.svg" alt="Instagram Icon" />
+                            </Link>
+                            {/* 유튜브 버튼 */}
+                            <Link style={{ marginLeft: "35px" }} href="https://www.youtube.com/channel/UCPwQIrf17KFyqvXeq8NVY_Q" target="_blank" rel="noopener noreferrer">
+                                <img src="/icon/youtube.svg" alt="YouTube Icon" />
+                            </Link>
+                            {/* 핀터레스트 버튼 */}
+                            <Link style={{ marginLeft: "35px" }} href="https://www.pinterest.co.kr/heerim_architects_official/" target="_blank" rel="noopener noreferrer">
+                                <img src="/icon/pinterest.svg" alt="Pinterest Icon" />
+                            </Link>
+                        </MoreIconButton>
                         {/* 디자인 지도 버튼 */}
-                        <a className="icon-button" style={{ marginLeft: "35px" }} href="https://www.google.com/maps/d/viewer?mid=1ZYdnpbxRgC5-zu5GpoOU8zd_E-v24aXT&ll=13.728397502246512%2C71.13522019999999&z=3" target="_blank" rel="noopener noreferrer">
-                            <div className="location-button">
-                                <img src="/icon/location.svg" alt="Location Icon" />
-                                <a> Design map </a>
-                            </div>
-                        </a>
+                        <LocationButton style={{ marginLeft: "35px" }} href="https://www.google.com/maps/d/viewer?mid=1ZYdnpbxRgC5-zu5GpoOU8zd_E-v24aXT&ll=13.728397502246512%2C71.13522019999999&z=3" target="_blank" rel="noopener noreferrer">
+                            <img src="/icon/location.svg" alt="Location Icon" />
+                            <a> Design map </a>
+                        </LocationButton>
                         {/* CM 지도 버튼 */}
-                        <a className="icon-button" style={{ marginLeft: "10px" }} href="https://www.google.com/maps/d/viewer?mid=1aWEovb5OXGAdqH_D-QojV6l96tLYT2S0&ll=24.118227897040363%2C55.94565490000001&z=3" target="_blank" rel="noopener noreferrer">
-                            <div className="location-button" >
-                                <img src="/icon/location.svg" alt="Location Icon" />
-                                <a className="location-description"> CM map </a>
-                            </div>
-                        </a>
-                    </div>
-                </div>
+                        <LocationButton style={{ marginLeft: "10px" }} href="https://www.google.com/maps/d/viewer?mid=1aWEovb5OXGAdqH_D-QojV6l96tLYT2S0&ll=24.118227897040363%2C55.94565490000001&z=3" target="_blank" rel="noopener noreferrer">
+                            <img src="/icon/location.svg" alt="Location Icon" />
+                            <a> CM map </a>
+                        </LocationButton>
+                    </MoreIconButtonContainer>
+                </MoreContainer>
             )}
         </Headerwrappers >
     );
