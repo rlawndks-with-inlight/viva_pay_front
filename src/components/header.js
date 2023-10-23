@@ -14,7 +14,7 @@ const Headerwrappers = styled.header`
   justify-content: space-between;
   padding: 10px 20px;
 `
-const Logo = styled.a`/*heerim 로고*/
+const Logo = styled.a`/* heerim 로고 */
 text-align: center; /* 텍스트 가운데 정렬 */
 text-decoration: none; /* 링크의 기본 밑줄 스타일 제거 */
 background-color: transparent; /* 배경색 투명으로 설정 */
@@ -33,21 +33,21 @@ color: white;
 margin-left: 7vw;
 margin-top: 2vw;
 `
-const Subtext = styled.span`/*Architecture & Planner 글자*/
+const Subtext = styled.span`/* Architecture & Planner 글자 */
 font-size: 12px; /* 부가 텍스트의 글꼴 크기 조정 */
 font-style: italic; /* 텍스트를 기울임체로 스타일링 */
 color: white;
 margin-left: 7vw;
 `
-const Headerbuttons=styled.div`
+const Headerbuttons = styled.div`
 display: flex;
 gap: 14px;
-font-size: 24px;/*한영 버튼 크기*/
+font-size: 24px;/* 한영 버튼 크기 */
 align-items: center;
 margin-right: 11vw;
 margin-top: 3vw;
 `
-const EnKr = styled.a` /*한영 버튼*/
+const EnKr = styled.a` /* 한영 버튼 */
 font-weight: bold;
 text-decoration: none;
 color: white; /* 링크 텍스트 색상 설정 */
@@ -59,6 +59,14 @@ color: white; /* 링크 텍스트 색상 설정 */
     text-decoration: underline;
   }
 `
+const More = styled.button` /* 더보기 버튼 */
+background: transparent;
+border: none;
+font-size: 16px;
+cursor: pointer;
+color: white;
+`
+
 const Header = () => {
     const router = useRouter();
     const { lang = 'kr' } = router.query;
@@ -123,12 +131,12 @@ const Header = () => {
                         <Link href="/kr" legacyBehavior>
                             <EnKr className={lang === "kr" ? "active" : ""}>KR</EnKr>
                         </Link>
-                        <button onClick={showMore}>
+                        <More onClick={showMore}>
                             <img src="/icon/more.png" alt="More Icon" width="40" height="40" />
-                        </button>
+                        </More>
                     </>
                 )}
-                </Headerbuttons>
+            </Headerbuttons>
             {isSection1Green && (
                 <div className="more-container">
                     <div className="close-button-container">
