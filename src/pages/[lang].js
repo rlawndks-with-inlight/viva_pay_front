@@ -1,6 +1,7 @@
 // pages/home.js
 import React, { useEffect, useState, useRef } from "react";
 import Link from 'next/link';
+import Header from "src/components/header";
 import UserLayout from 'src/layouts/UserLayout';
 import langJson from 'src/data/lang.json'
 import { useRouter } from "next/router";
@@ -337,7 +338,8 @@ const Home = () => {
     };
     return (
         <>
-            {!loading &&
+            {!loading &&(
+                <UserLayout activeSection={activeSection}> 
                 <>
                     <div>
                         {sections.map((section, index) => (
@@ -760,7 +762,9 @@ const Home = () => {
                             </div>
                         ))}
                     </div>
-                </>}
+                </>
+                </UserLayout>
+            )}
         </>
     );
 };

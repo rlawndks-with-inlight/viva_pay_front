@@ -2,17 +2,19 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useState, useEffect } from 'react';
-import styled from 'styled-components';
+import styled, {css} from 'styled-components';
 
 const Headerwrappers = styled.header`
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 1; 
-  display: flex;
-  justify-content: space-between;
-  padding: 10px 20px;
+`
+const Normal = styled.header`
+position: fixed;
+top: 0;
+left: 0;
+right: 0;
+z-index: 1; 
+display: flex;
+justify-content: space-between;
+padding: 10px 20px;
 `
 const Logo = styled.a`/* heerim 로고 */
 text-align: center; /* 텍스트 가운데 정렬 */
@@ -40,17 +42,17 @@ font-size: 24px;/* 한영 버튼 크기 */
 align-items: center;
 margin-right: 11vw;
 margin-top: 3vw;
-`
-const EnKr = styled.a` /* 한영 버튼 */
-font-weight: bold;
-text-decoration: none;
-color: white; /* 링크 텍스트 색상 설정 */
-  cursor: pointer;
-  &:hover{
-    text-decoration: underline;
-  }
-  &.active{
-    text-decoration: underline;
+  a{ /* 한영 버튼 */
+    font-weight: bold;
+    text-decoration: none;
+    color: white;
+    cursor: pointer;
+      &:hover{
+        text-decoration: underline;
+      }
+      &.active{
+        text-decoration: underline;
+      }
   }
 `
 const More = styled.button` /* 더보기 버튼 */
@@ -158,24 +160,24 @@ cursor: pointer;
     opacity: 0.7; /* 호버 시 투명도를 0.7로 변경 (1이 원래 투명도) */
 }
 `
-const Header = () => {
+const Header = ({activeSection}) => {
     const router = useRouter();
     const { lang = 'kr' } = router.query;
     const [isVisible, setIsVisible] = useState(false);
-    const [isSection1Green, setIsSection1Green] = useState(false);
+    const [isMoreClicked, setIsMoreClicked] = useState(false);
     const [isScrollingDisabled, setScrollingDisabled] = useState(false);
 
     useEffect(() => {
         setIsVisible(true);
 
         const handleScroll = () => {
-            if (isSection1Green && isScrollingDisabled) {
+            if (isMoreClicked && isScrollingDisabled) {
                 // 스크롤을 비활성화합니다.
                 window.scrollTo(0, 0); // 페이지 맨 위로 스크롤합니다.
             }
         };
 
-        if (isSection1Green && isScrollingDisabled) {
+        if (isMoreClicked && isScrollingDisabled) {
             // 이후 스크롤 이벤트를 모니터링합니다.
             window.addEventListener('scroll', handleScroll);
         }
@@ -184,7 +186,7 @@ const Header = () => {
             // 컴포넌트가 언마운트될 때 이벤트 리스너를 제거합니다.
             window.removeEventListener('scroll', handleScroll);
         };
-    }, [isSection1Green, isScrollingDisabled]);
+    }, [isMoreClicked, isScrollingDisabled]);
 
 
     useEffect(() => {
@@ -193,43 +195,45 @@ const Header = () => {
 
     // 더보기 모달 표시 함수
     const showMore = () => {
-        setIsSection1Green(true);
+        setIsMoreClicked(true);
         setScrollingDisabled(true);
         // 스크롤 비활성화
     };
 
     // 더보기 모달 닫기 함수
     const closeMore = () => {
-        setIsSection1Green(false);
+        setIsMoreClicked(false);
         setScrollingDisabled(false);
         // 스크롤 활성화
     };
 
     return (
-        <Headerwrappers className={`${isSection1Green ? 'section1-green' : ''}`}>
-            <Link href="/" legacyBehavior>
-                <Logo onClick={() => { window.location.reload() }}>
-                    <Logotext fontSize="36px" fontWeight="bold" marginTop="2vw">
-                        heerim</Logotext>
-                    <Logotext fontSize="12px" >Architects & Planners</Logotext>
-                </Logo>
-            </Link>
-            <HeaderButtons>
-                {isSection1Green ? null : ( // 녹색 섹션이 활성화되면 버튼을 숨김
-                    <>
-                        <Link href="/en" >
-                            <EnKr className={lang === "en" ? "active" : ""}>EN</EnKr>
-                        </Link>
-                        <Link href="/kr" >
-                            <EnKr className={lang === "kr" ? "active" : ""}>KR</EnKr>
-                        </Link>
-                        <More onClick={showMore}>
-                            <img src="/icon/more.png" alt="More Icon" width="40" height="40" />
-                        </More>
-                    </>
-                )}
-            </HeaderButtons>
-            {isSection1Green && (
+        <Headerwrappers className={`${isMoreClicked ? 'showMore' : ''}`} >
+            <Normal activeSection={activeSection}>
+                <Link href="/" legacyBehavior>
+                    <Logo onClick={() => { window.location.reload() }}>
+                        <Logotext fontSize="36px" fontWeight="bold" marginTop="2vw">
+                            heerim</Logotext>
+                        <Logotext fontSize="12px" >Architects & Planners</Logotext>
+                    </Logo>
+                </Link>
+                <HeaderButtons>
+                    {isMoreClicked ? null : ( // 녹색 섹션이 활성화되면 버튼을 숨김
+                        <>
+                            <Link href="/en" legacyBehavior >
+                                <a className={lang === "en" ? "active" : ""}>EN</a>
+                            </Link>
+                            <Link href="/kr" legacyBehavior>
+                                <a className={lang === "kr" ? "active" : ""}>KR</a>
+                            </Link>
+                            <More onClick={showMore}>
+                                <img src="/icon/more.png" alt="More Icon" width="40" height="40" />
+                            </More>
+                        </>
+                    )}
+                </HeaderButtons>
+            </Normal>
+            {isMoreClicked && (
                 <MoreContainer>
                     <MoreClose onClick={closeMore}>Close X</MoreClose>
                     <TotalButtonContainer>
