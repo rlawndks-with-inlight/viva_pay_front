@@ -1,7 +1,6 @@
 // pages/home.js
 import React, { useEffect, useState, useRef } from "react";
 import Link from 'next/link';
-import Header from "src/components/header";
 import UserLayout from 'src/layouts/UserLayout';
 import langJson from 'src/data/lang.json'
 import { useRouter } from "next/router";
@@ -35,7 +34,7 @@ const Topic = ({ title, initialValue, finalValue, inView }) => {
         }
     }, [inView, currentValue, finalValue, initialValue]);
 
-    const addPlusSign = title === "History of Heerim" || title === "Professional Employees" || title === "Overseas Projects";
+    const addPlusSign = title === "History of Payvery" || title === "Professional Employees" || title === "Overseas Projects";
 
     return (
         <div>
@@ -50,11 +49,11 @@ const Topic = ({ title, initialValue, finalValue, inView }) => {
 const TopicsContainer = ({ inView }) => {
     return (
         <div className={`topics-container ${inView ? "in-view" : ""}`}>
-            <Topic title="History of Heerim" initialValue={0} finalValue={50} inView={inView} />
+            <Topic title="History of Payvery" initialValue={0} finalValue={50} inView={inView} />
             <Topic title="Branch offices" initialValue={0} finalValue={15} inView={inView} />
             <Topic title="Professional Employees" initialValue={0} finalValue={1400} inView={inView} />
             <Topic title="Overseas Projects" initialValue={0} finalValue={300} inView={inView} />
-            <Topic title="World Ranking (WA2023)" initialValue={0} finalValue={8} inView={inView} />
+            <Topic title="World Ranking" initialValue={0} finalValue={8} inView={inView} />
         </div>
     );
 };
@@ -66,9 +65,9 @@ const Home = () => {
     const [activeSection, setActiveSection] = useState(0); // 활성 섹션 인덱스
     const [iconIndexes, setIconIndexes] = useState(Array.from({ length: iconsPerPage }, (_, i) => i)); // 표시되는 아이콘 인덱스 배열
     const sectionRefs = useRef([]);
-    const videoRef = useRef(null); // 비디오 요소를 관리하기 위한 ref
     const [loading, setLoading] = useState(true);
     const [searchQuery, setSearchQuery] = useState(""); // 검색어 상태 추가
+    const [inViewItems1, setInViewItems1] = useState([]);
     const [inViewItems2, setInViewItems2] = useState([]);
     const [inViewItems3, setInViewItems3] = useState([]);
     const [inViewItems4, setInViewItems4] = useState([]);
@@ -116,14 +115,23 @@ const Home = () => {
     //fadein 애니메이션
     useEffect(() => {
         const handleScroll = () => {
+            const updatedInViewItems1 = [];
             const updatedInViewItems2 = [];
             const updatedInViewItems3 = [];
             const updatedInViewItems4 = [];
             const updatedInViewItems5 = [];
-            const fadeIn2 = document.querySelectorAll(".green-box");
-            const fadeIn3 = document.querySelectorAll(".project-box");
-            const fadeIn4 = document.querySelectorAll(".news-item");
-            const fadeIn5 = document.querySelectorAll(".bottom");
+            const fadeIn1 = document.querySelectorAll(".section1");
+            const fadeIn2 = document.querySelectorAll(".section2");
+            const fadeIn3 = document.querySelectorAll(".section3");
+            const fadeIn4 = document.querySelectorAll(".section4");
+            const fadeIn5 = document.querySelectorAll(".section5");
+
+            fadeIn1.forEach((item1) => {
+                const itemRect1 = item1.getBoundingClientRect();
+                if (itemRect1.top < window.innerHeight && itemRect1.bottom >= 0) {
+                    updatedInViewItems1.push(item1.id);
+                }
+            });
 
             fadeIn2.forEach((item2) => {
                 const itemRect2 = item2.getBoundingClientRect();
@@ -153,6 +161,7 @@ const Home = () => {
                 }
             });
 
+            setInViewItems1(updatedInViewItems1);
             setInViewItems2(updatedInViewItems2);
             setInViewItems3(updatedInViewItems3);
             setInViewItems4(updatedInViewItems4);
@@ -196,16 +205,16 @@ const Home = () => {
     const getIconDescription = (iconIndex) => {
         // 각 아이콘에 대한 설명을 정의합니다.
         const iconDescriptions = {
-            0: "Aviation Transportation",
-            1: "Remodeling",
-            2: "Urban Design Landscape Design",
-            3: "Education Science Technology",
-            4: "Residential",
-            5: "Interior Design",
-            6: "Healthcare",
-            7: "Office Headquarters",
-            8: "Sports",
-            9: "Broadcasting",
+            0: "description0",
+            1: "description1",
+            2: "description2",
+            3: "description3",
+            4: "description4",
+            5: "description5",
+            6: "description6",
+            7: "description7",
+            8: "description8",
+            9: "description9",
             // 다른 아이콘들에 대한 설명을 추가하세요
         };
 
@@ -231,34 +240,12 @@ const Home = () => {
         if (!loading) {
             window.addEventListener("wheel", handleScroll, { passive: false });
 
-            // Intersection Observer를 사용하여 section1이 화면에 나타나는지 감시합니다.
             const options = {
                 root: null,
                 rootMargin: "0px",
                 threshold: 0.5, // 섹션 1이 화면에 50% 이상 들어올 때 이벤트 발생
             };
-
-            const handleIntersection = (entries) => {
-                if (entries[0].isIntersecting) {
-                    videoRef.current.play(); // section1이 화면에 나타나면 비디오 재생
-                } else {
-                    videoRef.current.pause(); // section1이 화면에서 벗어나면 비디오 일시 정지
-                }
-            };
-
-            const observer = new IntersectionObserver(handleIntersection, options);
-            observer.observe(sectionRefs.current[0]);
-
-            // 컴포넌트가 언마운트될 때 이벤트 리스너 및 Intersection Observer를 제거합니다.
-            return () => {
-                window.removeEventListener("wheel", handleScroll);
-                observer.disconnect();
-            };
         }
-
-
-        // 스크롤 이벤트를 추가합니다.
-
     }, [activeSection, loading]);
 
     const handleScroll = (e) => {
@@ -287,14 +274,6 @@ const Home = () => {
             const sectionHeight = element.clientHeight;
             const scrollToY = sectionTop + sectionHeight / 2 - screenCenter;
             window.scrollTo({ top: scrollToY, behavior: "smooth" });
-
-            // section1로 돌아온 경우
-            if (newActiveSection === 0) {
-                videoRef.current.play(); // 비디오 재생
-            } else {
-                videoRef.current.pause(); // 비디오 일시 정지
-                videoRef.current.currentTime = 0; // 비디오를 처음으로 되감깁니다.
-            }
 
         }
     };
@@ -351,31 +330,19 @@ const Home = () => {
                             >
                                 {index === 0 ? (
                                     <div className="section1">
-                                        <div className="video-container">
-                                            <video
-                                                autoPlay
-                                                loop
-                                                muted
-                                                playsInline
-                                                className="fullscreen-video"
-                                                ref={videoRef}
-                                            >
-                                                <source src="/video/video.mp4" type="video/mp4" />
-                                                {langJson[lang]?.YOUR_BRO}
-                                            </video>
-                                        </div>
+                                    <div className={`sec1title ${inViewItems1.includes("") ? "in-view" : ""}`} style={{marginTop:'4em'}}> {langJson[lang]?.FOLLOW}</div>
+                                    <div className={`sec1title ${inViewItems1.includes("") ? "in-view" : ""}`}> {langJson[lang]?.SUPPORT}</div>
                                     </div>
                                 ) : index === 1 ? (
-                                    <div className="text-overlay-section2">
+                                    <div className="section2">
                                         <div className="yellow">
                                             {/* 노란색 배경에 녹색 박스 모양의 텍스트 박스와 소제목, 설명 */}
                                             <div className={`green-box ${inViewItems2.includes("") ? "in-view" : ""}`}>
-                                                <p className="green-box-text">WHO WE ARE</p>
+                                                <p className="green-box-text">Who we are</p>
                                             </div>
-                                            <div className={`subtitle ${inViewItems2.includes("") ? "in-view" : ""}`}> {langJson[lang]?.WORLD_LEADING}</div>
-                                            <div className={`subtitle ${inViewItems2.includes("") ? "in-view" : ""}`}> {langJson[lang]?.ARCHITECTURE}</div>
-                                            <div className={`description ${inViewItems2.includes("") ? "in-view" : ""}`} style={{ marginTop: '2vw' }}>{langJson[lang]?.INNOVATIONS}</div>
-                                            <div className={`description ${inViewItems2.includes("") ? "in-view" : ""}`} style={{ marginTop: '0.5vw' }}>{langJson[lang]?.DESIGN_TOMORROW}</div>
+                                            <div className={`subtitle ${inViewItems2.includes("") ? "in-view" : ""}`}> {langJson[lang]?.FOLLOW}</div>
+                                            <div className={`subtitle ${inViewItems2.includes("") ? "in-view" : ""}`}> {langJson[lang]?.SUPPORT}</div>
+                                            <div className={`description ${inViewItems2.includes("") ? "in-view" : ""}`} style={{ marginTop: '2vw' }}>{langJson[lang]?.DESCIRPTION}</div>
                                             {/* 주제와 설명 */}
                                             <div>
                                                 <TopicsContainer inView={inViewItems2.includes("")} />
@@ -416,14 +383,9 @@ const Home = () => {
                                     </div>
                                 ) : index === 2 ? (
                                     <div className="section3">
-                                        <div className={`project-box ${inViewItems3.includes("") ? "in-view" : ""}`}>
-                                            <p className="project-text">PROJECT</p>
+                                        <div className={`title ${inViewItems3.includes("") ? "in-view" : ""}`}>Our Service
                                         </div>
-                                        <div className={`title ${inViewItems3.includes("") ? "in-view" : ""}`}>Heerim's Latest Selected Works
-                                            <button className="read-more-button" onClick={() => { window.location.href = "/404"; }}>
-                                                <span className="read-more-text">Read more</span>
-                                                <span className="arrow-icon">→</span>
-                                            </button>
+                                        <div className={`sec3description ${inViewItems3.includes("") ? "in-view" : ""}`} style={{ color:"black", margin:"none"}}>{langJson[lang]?.DESCIRPTION}
                                         </div>
                                         <div className={`image-container ${inViewItems3.includes("") ? "in-view" : ""}`}
                                             onMouseLeave={handleImageLeave}>
@@ -456,7 +418,7 @@ const Home = () => {
                                                         ))
                                                         }
                                                     >
-                                                        <img src="/image/image11.jpg" alt="Image 1" />
+                                                        <img src="/image/macbook.png" alt="Image 1" />
                                                         <div className="image-overlay">
                                                             <div className="image-text">
                                                                 <p className="place">Incheon, Korea</p>
@@ -483,7 +445,7 @@ const Home = () => {
                                                         ))
                                                         }
                                                     >
-                                                        <img src="/image/image21.jpg" alt="Image 2" />
+                                                        <img src="/image/cardreader.png" alt="Image 2" />
                                                         <div className="image-overlay">
                                                             <div className="image-text">
                                                                 <p className="place">Seoul, Korea</p>
@@ -510,7 +472,7 @@ const Home = () => {
                                                         ))
                                                         }
                                                     >
-                                                        <img src="/image/image31.jpg" alt="Image 3" />
+                                                        <img src="/image/kiosk.png" alt="Image 3" />
                                                         <div className="image-overlay">
                                                             <div className="image-text">
                                                                 <p className="place">Seongnam, Korea</p>
@@ -536,7 +498,7 @@ const Home = () => {
                                                         ))
                                                         }
                                                     >
-                                                        <img src="/image/image41.jpg" alt="Image 4" />
+                                                        <img src="/image/scanner.png" alt="Image 4" />
                                                         <div className="image-overlay">
                                                             <div className="image-text">
                                                                 <p className="place">Baku, Azerbaijan</p>
@@ -559,8 +521,8 @@ const Home = () => {
                                                     <div className="news-box">
                                                         <p className="news-text">News</p>
                                                     </div>
-                                                    <h3 className="news-title">{langJson[lang]?.INTERNATIONAL}
-                                                    </h3>
+                                                    <p className="news-title">{langJson[lang]?.FIRSTNEWS}
+                                                    </p>
                                                     <p className="news-date">2023-10-11</p>
                                                     <span className="news-more-link"> Read more</span>
                                                     <span className="arrow-icon" style={{ marginLeft: "20px", color: "orange", fontWeight: "bold" }}>→</span>
@@ -570,22 +532,20 @@ const Home = () => {
                                                     <div className="news-box">
                                                         <p className="news-text">News</p>
                                                     </div>
-                                                    <h3 className="news-title">{langJson[lang]?.GYEONGGI}
-                                                    </h3>
-                                                    <p className="news-date">2023-10-02</p>
+                                                    <p className="news-title">{langJson[lang]?.SECONDNEWS}
+                                                    </p>
                                                     <span className="news-more-link"> Read more</span>
-                                                    <span className="arrow-icon" style={{ marginLeft: "20px", color: "orange", fontWeight: "bold" }}>→</span>
+                                                    <span className="arrow-icon" >→</span>
                                                 </a>
                                                 {/* 뉴스 아이템 3 */}
                                                 <a href="/404" className={`news-item ${inViewItems4.includes("") ? "in-view" : ""}`} >
                                                     <div className="news-box">
                                                         <p className="news-text">News</p>
                                                     </div>
-                                                    <h3 className="news-title">{langJson[lang]?.KOREA}
-                                                    </h3>
-                                                    <p className="news-date">2023-09-11</p>
+                                                    <p className="news-title">{langJson[lang]?.THIRDNEWS}
+                                                    </p>
                                                     <span className="news-more-link"> Read more</span>
-                                                    <span className="arrow-icon" style={{ marginLeft: "20px", color: "orange", fontWeight: "bold" }}>→</span>
+                                                    <span className="arrow-icon" >→</span>
                                                 </a>
                                             </div>
                                             {/* 두 번째 행 */}
@@ -595,33 +555,30 @@ const Home = () => {
                                                     <div className="news-box">
                                                         <p className="news-text">News</p>
                                                     </div>
-                                                    <h3 className="news-title">International Architecture Awards 2023
-                                                    </h3>
-                                                    <p className="news-date">2023-08-21</p>
+                                                    <p className="news-title">{langJson[lang]?.FOURTHNEWS}
+                                                    </p>
                                                     <span className="news-more-link"> Read more</span>
-                                                    <span className="arrow-icon" style={{ marginLeft: "20px", color: "orange", fontWeight: "bold" }}>→</span>
+                                                    <span className="arrow-icon">→</span>
                                                 </a>
                                                 {/* 뉴스 아이템 5 */}
                                                 <a href="/404" className={`news-item ${inViewItems4.includes("") ? "in-view" : ""}`} >
                                                     <div className="news-box">
                                                         <p className="news-text">News</p>
                                                     </div>
-                                                    <h3 className="news-title">Prix Versailles 2022, Special Prize Exterior(Sports)
-                                                    </h3>
-                                                    <p className="news-date">2023-01-13</p>
+                                                    <p className="news-title">{langJson[lang]?.FIFTHNEWS}
+                                                    </p>
                                                     <span className="news-more-link"> Read more</span>
-                                                    <span className="arrow-icon" style={{ marginLeft: "20px", color: "orange", fontWeight: "bold" }}>→</span>
+                                                    <span className="arrow-icon" >→</span>
                                                 </a>
                                                 {/* 뉴스 아이템 6 */}
                                                 <a href="/404" className={`news-item ${inViewItems4.includes("") ? "in-view" : ""}`}>
                                                     <div className="news-box">
                                                         <p className="news-text">News</p>
                                                     </div>
-                                                    <h3 className="news-title">{langJson[lang]?.MINISTRY_OF_LAND}
-                                                    </h3>
-                                                    <p className="news-date">2022-12-11</p>
+                                                    <p className="news-title">{langJson[lang]?.SIXTHNEWS}
+                                                    </p>
                                                     <span className="news-more-link"> Read more</span>
-                                                    <span className="arrow-icon" style={{ marginLeft: "20px", color: "orange", fontWeight: "bold" }}>→</span>
+                                                    <span className="arrow-icon" >→</span>
                                                 </a>
                                             </div>
                                         </div>
@@ -644,19 +601,18 @@ const Home = () => {
                                                 <img src="/image/youtube4.jpg" alt="youtube4 Image" />
                                             </a>
                                         </div>
-                                        <button className="youtube-more-button" onClick={() => { window.location.href = "/404"; }}>
-                                            <span className="news-more-link">Read more</span>
-                                            <span className="arrow-icon" style={{ marginLeft: "20px", color: "orange", fontWeight: "bold" }}>→</span>
-                                        </button>
                                     </div>
                                 ) : index === 4 ? (
-                                    <div className="section5">
+                                    <div className="section5"><div className="sec5title">
+                                    <span class="bold-text">성공</span>으로 가는 과정을 계획하는데 <span class="bold-text">함께</span>하겠습니다.
+                                  </div>
+                                  
                                         <div className="searchheerim-container">
                                             <span className={`search-title ${inViewItems5.includes("") ? "in-view" : ""}`}>Search
                                             </span>
-                                            <span className={`search-title2 ${inViewItems5.includes("") ? "in-view" : ""}`} style={{ marginLeft: "10px" }}>heerim.com
+                                            <span className={`search-title2 ${inViewItems5.includes("") ? "in-view" : ""}`} style={{ marginLeft: "10px" }}>Payvery.com
                                             </span>
-                                            <p className={`searchsub ${inViewItems5.includes("") ? "in-view" : ""}`}>Creative Leadership of Heerim designs the new future never experienced before.</p>
+                                            <p className={`searchsub ${inViewItems5.includes("") ? "in-view" : ""}`}>Creative Leadership of Payvery designs the new future never experienced before.</p>
                                             <div className="searchheerim">
                                                 <input
                                                     className={`searchheerim-input ${inViewItems5.includes("") ? "in-view" : ""}`}
@@ -676,82 +632,47 @@ const Home = () => {
                                                     </button>
                                             </div>
                                             <div className={`searchtag-keywords ${inViewItems5.includes("") ? "in-view" : ""}`}>
-                                                <button className="searchtag-button" onClick={() => { window.location.reload() }}><Link href="/LaLuna">#LaLuna</Link></button>
-                                                <button className="searchtag-button" onClick={() => { window.location.reload() }}><Link href="/DCM">#DCM</Link></button>
-                                                <button className="searchtag-button" onClick={() => { window.location.reload() }}><Link href="/Pangyo">#Pangyo</Link></button>
-                                                <button className="searchtag-button" onClick={() => { window.location.reload() }}><Link href="/Cheongna">#Cheongna</Link></button>
-                                                <button className="searchtag-button" onClick={() => { window.location.reload() }}><Link href="/Azerbaijan">#Azerbaijan</Link></button>
-                                                <button className="searchtag-button" onClick={() => { window.location.reload() }}><Link href="/Vietnam">#Vietnam</Link></button>
-                                                <button className="searchtag-button" onClick={() => { window.location.reload() }}><Link href="/Awards">#Awards</Link></button>
-                                                <button className="searchtag-button" onClick={() => { window.location.reload() }}><Link href="/Metagallery">#Metagallery</Link></button>
-                                                <button className="searchtag-button" onClick={() => { window.location.reload() }}><Link href="/Residential">#Residential</Link></button>
+                                                <button className="searchtag-button" onClick={() => { window.location.reload() }}><Link href="/Payvery">#Payvery</Link></button>
+                                                <button className="searchtag-button" onClick={() => { window.location.reload() }}><Link href="/Purplevery">#Purplevery</Link></button>
+                                                <button className="searchtag-button" onClick={() => { window.location.reload() }}><Link href="/Pg">#Pg</Link></button>
+                                                <button className="searchtag-button" onClick={() => { window.location.reload() }}><Link href="/Payment_gateway">#Payment_gateway</Link></button>
+                                                <button className="searchtag-button" onClick={() => { window.location.reload() }}><Link href="/Customer">#Customer</Link></button>
                                             </div>
                                         </div>
                                         <div className="bottom">
                                             <div className="seoulhqsupport">
                                                 <div className="hqcontainer">
-                                                    <span className="seoulhq">SEOUL HQ</span>
                                                     <div className="hq">
                                                         <div className="hq-container">
                                                             <div className="address">
-                                                                <div className="hq1">Address </div>
+                                                                <div className="hq1">Add </div>
                                                                 <div className="hq1">Tel</div>
                                                             </div>
                                                         </div>
                                                         <div className="hq-container">
                                                             <div className="address">
                                                                 <div className="hq2">{langJson[lang]?.ADDRESS}</div>
-                                                                <div className="hq2">+82-23410-9000</div>
-                                                                <div className="hq2">+82-2-3490-8500 (International call)</div>
+                                                                <div className="hq2">070-8080-3499</div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div className="supcontainer">
-                                                    <span className="support">SUPPORT</span>
                                                     <div className="sup">
                                                         <div className="hq-container">
                                                             <div className="address">
-                                                                <div className="hq3">General Inquiries </div>
-                                                                <div className="hq3">Career</div>
-                                                                <div className="hq3">About Reporting </div>
-                                                                <div className="hq3">Misconduct</div>
+                                                                <div className="hq3">E-mail. </div>
+                                                                <div className="hq3">FAX.</div>
                                                             </div>
                                                         </div>
                                                         <div className="hq-container">
                                                             <div className="address">
-                                                                <div className="hq4">webmaster@heerim.com</div>
-                                                                <div className="hq4">recruit@heerim.com</div>
-                                                                <div className="hq4">hot_line_em@heerim.com</div>
+                                                                <div className="hq4">purplevery222@gmail.com</div>
+                                                                <div className="hq4">0504-144-9419</div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <span className="iconbottom">
-                                                    {/* 인스타그램 버튼 */}
-                                                    <a className="icon-bottom" href="https://www.instagram.com/heerim_architects_official/" target="_blank" rel="noopener noreferrer">
-                                                        <img src="/icon/instagram.svg" alt="Instagram Icon" style={{width:"4vh", height:"4vh"}} />
-                                                    </a>
-                                                    {/* 유튜브 버튼 */}
-                                                    <a className="icon-bottom" href="https://www.youtube.com/channel/UCPwQIrf17KFyqvXeq8NVY_Q" target="_blank" rel="noopener noreferrer">
-                                                        <img src="/icon/youtube.svg" alt="YouTube Icon" style={{width:"4vh", height:"4vh"}}  />
-                                                    </a>
-                                                    {/* 핀터레스트 버튼 */}
-                                                    <a className="icon-bottom" href="https://www.pinterest.co.kr/heerim_architects_official/" target="_blank" rel="noopener noreferrer">
-                                                        <img src="/icon/pinterest.svg" alt="Pinterest Icon" style={{width:"4vh", height:"4vh"}}  />
-                                                    </a>
-                                                </span>
-                                            </div>
-                                            <div className="copyright">
-                                                <div className="reserved">
-                                                    © 2023. Heerim Architects & Planners Co., Ltd. All rights reserved
-                                                </div>
-                                                <a className="Newsletter-buttons" href="https://www.heerim.com/kr/etc/newsletter_application.php" target="_blank" rel="noopener noreferrer">
-                                                    <div className="Newsletterbutton">
-                                                        <img src="/icon/file.svg" alt="Newsletter Icon" />
-                                                        <a> Newsletter Application </a>
-                                                    </div>
-                                                </a>
                                             </div>
                                         </div>
                                     </div>

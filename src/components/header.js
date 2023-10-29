@@ -214,8 +214,8 @@ const Header = ({activeSection}) => {
                 <Link href="/" legacyBehavior>
                     <Logo onClick={() => { window.location.reload() }}>
                         <Logotext fontSize="36px" fontWeight="bold" marginTop="2vw" activeSection={activeSection}>
-                            heerim</Logotext>
-                        <Logotext fontSize="12px" activeSection={activeSection}>Architects & Planners</Logotext>
+                            PAYVERY</Logotext>
+                        <Logotext fontSize="12px" activeSection={activeSection}></Logotext>
                     </Logo>
                 </Link>
                 <HeaderButtons activeSection={activeSection}>
