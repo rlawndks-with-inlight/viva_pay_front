@@ -28,20 +28,20 @@ align-items: center; /* 자식 요소를 수직 가운데 정렬 */
 z-index: 2;
 `
 const Logotext = styled.span` /* 로고 글자 스타일 */
-font-size: ${(props) => props.fontSize};
-font-weight: ${(props) => props.fontWeight};
+font-size: 2.6em;
+font-weight: bold;
 font-style: italic; /* 텍스트를 기울임체로 스타일링 */
 color: ${(props) => (props.activeSection === 0 ? 'white' : 'black')};
-margin-left: 7vw;
-margin-top: ${(props) => props.marginTop};
+margin-left: 2em;
+margin-top: 1em;
 `
 const HeaderButtons = styled.div` /* 헤더의 오른쪽 스타일 */
 display: flex;
-gap: 14px;
-font-size: 24px;/* 한영 버튼 크기 */
+gap: 0.4em;
+font-size: 1.5em;/* 한영 버튼 크기 */
 align-items: center;
-margin-right: 11vw;
-margin-top: 3vw;
+margin-right: 7em;
+margin-top: 2em;
   a{ /* 한영 버튼 */
     font-weight: bold;
     text-decoration: none;
@@ -58,8 +58,8 @@ margin-top: 3vw;
 `
 const More = styled.button` /* 더보기 버튼 */
 background: transparent;
-border: none;
-font-size: 16px;
+border: none; 
+font-size: 1em;
 cursor: pointer;
 color: white;
 `
@@ -69,40 +69,57 @@ top: 0;
 left: 0;
 width: 100%;
 height: 100%;
-background-color: rgb(146, 208, 30);; /* 녹색 배경 추가 */
+background-color: rgb(0, 104, 232);; /* 파란색 배경 추가 */
 z-index: 1;
 `
 const MoreClose = styled.button` /* more close 버튼 */
-position: absolute;
-top: 70px; /* 원하는 위치로 조정하세요 */
-right: 12vw; /* 원하는 위치로 조정하세요 */
+position: fixed;
+top: 4em; /* 원하는 위치로 조정하세요 */
+right: 8em; /* 원하는 위치로 조정하세요 */
 color: white;
 background: transparent; /* 투명 배경 추가 */
 border: none;
 cursor: pointer;
-font-size: 1.5rem;
+font-size: 1.5em;
 font-weight: bold;
 z-index: 1;
+@media only screen and (max-width: 1400px) {
+    top: 2.4em;
+    right: 2em;
+}
 `
 const TotalButtonContainer = styled.div` /* 더보기 내용 전체 버튼 */
 display: flex;
-margin-left: 12vw;
-margin-top: 5vw;
+margin-left: 10em;
+margin-top: 3.5em;
+@media only screen and (max-width: 1400px) {
+    margin-left: 1em;
+    margin-top: 2em;
+}
 `
 const TitleButton = styled.button`
 display: block; /* 메인 버튼을 블록 레벨 요소로 변경 */
-font-size: 44px;
+font-size: 2.7vw;
 font-weight: bold;
-text-align: center; /* 텍스트 중앙 정렬 */
+text-align: left; /* 텍스트 중앙 정렬 */
 text-decoration: none;
 color: white; /* 메인 버튼 텍스트 색상을 흰색으로 설정 */
 background-color: transparent; /* 배경을 투명하게 설정 */
-padding: 190px 100px 0 0;  /* 버튼 패딩 조절 */
+padding: 5em 2em 0 0;  /* 버튼 패딩 조절 */
 border: none; /* 버튼 테두리 제거 */
   a{
     color: white;
     text-decoration: none;
   }
+@media only screen and (max-width: 1400px) {
+    font-size: 3.5vw;
+    padding: 5em 1em 0 0;  /* 버튼 패딩 조절 */
+}
+
+@media only screen and (max-width: 800px) {
+    font-size: 3vw;
+    padding: 7em 0.5vw 0 0;  /* 버튼 패딩 조절 */
+}
 `
 const SubButton = styled.button`
 display: flex;
@@ -110,25 +127,31 @@ flex-direction: column; /* 서브 버튼을 세로로 정렬 */
 align-items: flex-start; /* 왼쪽 정렬 */
 border: none;
 padding: 0;
-margin: 30px 0 0 0;
-font-size: 24px;
+margin-top: 1em;
+font-size: 1.3em;
 background: transparent; /* 투명 배경 추가 */
 text-align: left; /* 텍스트 왼쪽 정렬 */
   a{
     text-decoration: none;
-    margin-bottom: 30px;
+    margin-bottom: 1.5em;
     color: white; /* 서브 버튼 텍스트 색상 설정 */
     &:hover{
       color: white; /* 호버 시 밑줄의 색상을 흰색으로 변경 */
       text-decoration: underline; /* 호버 시 밑줄 표시 */
     }
   }
+@media only screen and (max-width: 800px) {
+    font-size: 2vw;
+}
 `
 const MoreIconButtonContainer = styled.div`
 display: flex; /* 더보기 아래쪽 아이콘 버튼 스타일*/
 margin-left: 12vw;
-margin-top: 9vw;
+margin-top: 1em;
 text-align: center;
+@media only screen and (max-width: 1255px) {
+margin-left: 4em;
+}
 `
 const MoreIconButton = styled.a`
 transition: opacity 0.3s ease; /* 호버 시 투명도 전환 애니메이션 */
@@ -144,7 +167,7 @@ text-decoration: none; /*링크 밑줄 제거*/
 const LocationButton = styled.div`
 display: flex; /* 더보기 아래쪽 map 버튼 스타일*/
 flex-direction: row;
-background-color: rgb(131, 187, 72); /* 회색 배경 추가 */
+background-color: rgb(255, 194, 0); /* 회색 배경 추가 */
 border-radius: 50px; /* 회색 배경과 함께 버튼에 radius 추가 */
 padding: 10px;
 cursor: pointer;
@@ -155,7 +178,7 @@ cursor: pointer;
   a{
     font-size: 20px;
     margin: 0 15px 0 15px;
-    color: white;
+    color: black;
   }
   &:hover{
     opacity: 0.7; /* 호버 시 투명도를 0.7로 변경 (1이 원래 투명도) */
@@ -205,9 +228,9 @@ const Header = ({ activeSection, isMoreClicked, handleMoreButtonClick, setIsMore
         <Headerwrappers activeSection={activeSection} className={`${isMoreClicked ? 'showMore' : ''}`} >
                 <Link href="/" legacyBehavior>
                     <Logo onClick={() => { window.location.reload() }}>
-                        <Logotext fontSize="36px" fontWeight="bold" marginTop="2vw" activeSection={activeSection}>
-                            PAYVERY</Logotext>
-                        <Logotext fontSize="12px" activeSection={activeSection}></Logotext>
+                        <Logotext activeSection={activeSection}>
+                            PAYVERY
+                            </Logotext>
                     </Logo>
                 </Link>
                 <HeaderButtons activeSection={activeSection}>
