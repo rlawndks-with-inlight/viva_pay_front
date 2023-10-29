@@ -37,17 +37,7 @@ background-color: white;
   font-weight: bold;
   color: white;
   margin-left: 5em;
-  opacity: 0; /* 처음에는 안 보이게 설정 */
-  transform: translateY(30px); /* 시작 위치 지정 */
-  /* fadein 애니메이션 효과 설정 */
-  transition: opacity 1s ease, transform 2s ease;
   }
-  
-  .sec1title.in-view {
-  opacity: 1; /* 투명도를 1로 변경하여 나타나게 함 */
-  transform: translateY(0); /* Y축 이동을 0으로 변경하여 원래 위치로 이동 */
-  }
-
 
 
 /* 2section */
@@ -655,6 +645,10 @@ color: gray;
   margin-bottom: 0.5em;
 }
 
+.hq1 img{
+  width: 1em;
+  height: 1em;
+}
 /*  hq2 스타일 수정 */
 .hq2 {
   margin-bottom: 0.5em;
@@ -665,6 +659,11 @@ color: gray;
 .hq3 {
   margin-bottom: 0.5em;
   margin-left: 3em;
+}
+
+.hq3 img {
+  width: 1em;
+  height: 1em;
 }
 
 /*  hq4 스타일 수정 */

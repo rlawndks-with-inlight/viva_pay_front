@@ -67,7 +67,6 @@ const Home = () => {
     const sectionRefs = useRef([]);
     const [loading, setLoading] = useState(true);
     const [searchQuery, setSearchQuery] = useState(""); // 검색어 상태 추가
-    const [inViewItems1, setInViewItems1] = useState([]);
     const [inViewItems2, setInViewItems2] = useState([]);
     const [inViewItems3, setInViewItems3] = useState([]);
     const [inViewItems4, setInViewItems4] = useState([]);
@@ -115,23 +114,14 @@ const Home = () => {
     //fadein 애니메이션
     useEffect(() => {
         const handleScroll = () => {
-            const updatedInViewItems1 = [];
             const updatedInViewItems2 = [];
             const updatedInViewItems3 = [];
             const updatedInViewItems4 = [];
             const updatedInViewItems5 = [];
-            const fadeIn1 = document.querySelectorAll(".section1");
             const fadeIn2 = document.querySelectorAll(".section2");
             const fadeIn3 = document.querySelectorAll(".section3");
             const fadeIn4 = document.querySelectorAll(".section4");
             const fadeIn5 = document.querySelectorAll(".section5");
-
-            fadeIn1.forEach((item1) => {
-                const itemRect1 = item1.getBoundingClientRect();
-                if (itemRect1.top < window.innerHeight && itemRect1.bottom >= 0) {
-                    updatedInViewItems1.push(item1.id);
-                }
-            });
 
             fadeIn2.forEach((item2) => {
                 const itemRect2 = item2.getBoundingClientRect();
@@ -161,7 +151,6 @@ const Home = () => {
                 }
             });
 
-            setInViewItems1(updatedInViewItems1);
             setInViewItems2(updatedInViewItems2);
             setInViewItems3(updatedInViewItems3);
             setInViewItems4(updatedInViewItems4);
@@ -330,8 +319,8 @@ const Home = () => {
                             >
                                 {index === 0 ? (
                                     <div className="section1">
-                                    <div className={`sec1title ${inViewItems1.includes("") ? "in-view" : ""}`} style={{marginTop:'4em'}}> {langJson[lang]?.FOLLOW}</div>
-                                    <div className={`sec1title ${inViewItems1.includes("") ? "in-view" : ""}`}> {langJson[lang]?.SUPPORT}</div>
+                                    <div className="sec1title" style={{marginTop:'4em'}}> {langJson[lang]?.FOLLOW}</div>
+                                    <div className="sec1title"> {langJson[lang]?.SUPPORT}</div>
                                     </div>
                                 ) : index === 1 ? (
                                     <div className="section2">
@@ -645,8 +634,12 @@ const Home = () => {
                                                     <div className="hq">
                                                         <div className="hq-container">
                                                             <div className="address">
-                                                                <div className="hq1">Add </div>
-                                                                <div className="hq1">Tel</div>
+                                                                <div className="hq1">
+                                                                    <img src="/icon/location-dot.svg" alt="Location Icon" /> Add
+                                                                </div>
+                                                                <div className="hq1">
+                                                                    <img src="/icon/mobile.svg" alt="Mobile Icon" /> Tel
+                                                                </div>
                                                             </div>
                                                         </div>
                                                         <div className="hq-container">
@@ -661,8 +654,12 @@ const Home = () => {
                                                     <div className="sup">
                                                         <div className="hq-container">
                                                             <div className="address">
-                                                                <div className="hq3">E-mail. </div>
-                                                                <div className="hq3">FAX.</div>
+                                                                <div className="hq3">
+                                                                    <img src="/icon/email.svg" alt="Email Icon" /> E-mail
+                                                                </div>
+                                                                <div className="hq3">
+                                                                    <img src="/icon/fax.svg" alt="FAX Icon" /> FAX
+                                                                </div>
                                                             </div>
                                                         </div>
                                                         <div className="hq-container">

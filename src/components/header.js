@@ -2,7 +2,7 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useState, useEffect } from 'react';
-import styled, {css} from 'styled-components';
+import styled from 'styled-components';
 
 const Headerwrappers = styled.header`
 position: fixed;
@@ -161,11 +161,10 @@ cursor: pointer;
     opacity: 0.7; /* 호버 시 투명도를 0.7로 변경 (1이 원래 투명도) */
 }
 `
-const Header = ({activeSection}) => {
+const Header = ({ activeSection, isMoreClicked, handleMoreButtonClick, setIsMoreClicked, closeMore, updateHeaderVisibility }) => {
     const router = useRouter();
     const { lang = 'kr' } = router.query;
     const [isVisible, setIsVisible] = useState(false);
-    const [isMoreClicked, setIsMoreClicked] = useState(false);
     const [isScrollingDisabled, setScrollingDisabled] = useState(false);
 
 
@@ -199,15 +198,8 @@ const Header = ({activeSection}) => {
     const showMore = () => {
         setIsMoreClicked(true);
         setScrollingDisabled(true);
-        // 스크롤 비활성화
     };
 
-    // 더보기 모달 닫기 함수
-    const closeMore = () => {
-        setIsMoreClicked(false);
-        setScrollingDisabled(false);
-        // 스크롤 활성화
-    };
 
     return (
         <Headerwrappers activeSection={activeSection} className={`${isMoreClicked ? 'showMore' : ''}`} >
@@ -227,7 +219,7 @@ const Header = ({activeSection}) => {
                             <Link href="/kr" legacyBehavior>
                                 <a className={lang === "kr" ? "active" : ""}>KR</a>
                             </Link>
-                            <More onClick={showMore}>
+                            <More onClick={handleMoreButtonClick}>
                                 <img src="/icon/more.png" alt="More Icon" width="40" height="40" />
                             </More>
                         </>
