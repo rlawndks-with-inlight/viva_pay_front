@@ -109,7 +109,7 @@ border: none; /* 버튼 테두리 제거 */
     text-decoration: none;
   }
 @media only screen and (max-width: 1400px) {
-    font-size: 2.5vw;
+    font-size: 3vw;
     padding: 5em 1em 0 0;  /* 버튼 패딩 조절 */
 }
 @media only screen and (max-width: 550px) {
@@ -123,7 +123,7 @@ align-items: flex-start; /* 왼쪽 정렬 */
 border: none;
 padding: 0;
 margin-top: 1em;
-font-size: 1.3em;
+font-size: 1.2em;
 background: transparent; /* 투명 배경 추가 */
 text-align: left; /* 텍스트 왼쪽 정렬 */
   a{
@@ -135,12 +135,6 @@ text-align: left; /* 텍스트 왼쪽 정렬 */
       text-decoration: underline; /* 호버 시 밑줄 표시 */
     }
   }
-@media only screen and (max-width: 800px) {
-    font-size: 2vw;
-}
-@media only screen and (max-width: 650px) {
-    font-size: 0.7em;
-}
 `
 const MoreIconButtonContainer = styled.div`
 position: fixed;
