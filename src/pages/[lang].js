@@ -74,6 +74,8 @@ const Home = () => {
     const [section2InView, setSection2InView] = useState(false); // section2의 inView 여부
     const [hoveredImage, setHoveredImage] = useState(null);
     const [hoveredText, setHoveredText] = useState(null);
+    const [windowWidth, setWindowWidth] = useState(0); // 새로운 변수: 화면 너비를 저장
+
     
     const handleImageHover = (imageSrc, text) => {
         setHoveredImage(imageSrc);
@@ -211,62 +213,78 @@ const Home = () => {
         return iconDescriptions[iconIndex] || "";
     };
 
-    useEffect(() => {
-        setLoading(true);
-        console.log(router.query)
-        if (!(
-            lang == 'kr' ||
-            lang == 'en' ||
-            !lang
-        )) {
-            router.push('/404')
-        } else {
-            setLoading(false);
-        }
-    }, [router.query])
 
-    useEffect(() => {
-        if (!loading) {
-            window.addEventListener("wheel", handleScroll, { passive: false });
+  useEffect(() => {
+    setLoading(true);
 
-            const options = {
-                root: null,
-                rootMargin: "0px",
-                threshold: 0.5, // 섹션 1이 화면에 50% 이상 들어올 때 이벤트 발생
-            };
-        }
-    }, [activeSection, loading]);
+    if (!(lang === "kr" || lang === "en" || !lang)) {
+      router.push("/404");
+    } else {
+      setLoading(false);
+    }
+  }, [router.query]);
 
-    const handleScroll = (e) => {
-        // 스크롤 이벤트를 중지합니다.
-        e.preventDefault();
+  useEffect(() => {
+    // 스크립트 로딩 및 언어 확인 이후에 화면 크기 업데이트 리스너 추가
+    if (!loading) {
+      // 함수를 선언하여 화면 크기를 업데이트하는 로직
+      const updateWindowWidth = () => {
+        setWindowWidth(window.innerWidth);
+      };
 
-        // 현재 화면의 중앙 위치를 계산합니다.
-        const screenHeight = window.innerHeight;
-        const screenCenter = screenHeight / 2;
+      // 초기화 단계에서 한 번 실행하고, 화면 크기가 변경될 때마다 실행
+      updateWindowWidth();
+      window.addEventListener("resize", updateWindowWidth);
 
-        // 마우스 휠 방향에 따라 이동할 섹션을 결정합니다.
-        let newActiveSection = activeSection;
-        if (e.deltaY > 0 && activeSection < sections.length - 1) {
-            newActiveSection = activeSection + 1;
-        } else if (e.deltaY < 0 && activeSection > 0) {
-            newActiveSection = activeSection - 1;
-        }
+      // 화면 크기가 1400보다 큰 경우에만 스크롤 이벤트 리스너 추가
+      if (windowWidth >= 1400) {
+        window.addEventListener("wheel", handleScroll, { passive: false });
+      }
+    }
 
-        // 새로운 활성 섹션을 설정합니다.
-        setActiveSection(newActiveSection);
-
-        // 화면을 스크롤하여 새로운 섹션의 가운데로 이동합니다.
-        const element = sectionRefs.current[newActiveSection];
-        if (element) {
-            const sectionTop = element.offsetTop;
-            const sectionHeight = element.clientHeight;
-            const scrollToY = sectionTop + sectionHeight / 2 - screenCenter;
-            window.scrollTo({ top: scrollToY, behavior: "smooth" });
-
-        }
+    // 이 컴포넌트가 언마운트될 때 이벤트 리스너 정리
+    return () => {
+      window.removeEventListener("resize", updateWindowWidth);
+      window.removeEventListener("wheel", handleScroll);
     };
+  }, [activeSection, loading, windowWidth]);
 
+  const updateWindowWidth = () => {
+    setWindowWidth(window.innerWidth);
+  };
+
+  const handleScroll = (e) => {
+    // 스크롤 이벤트를 중지합니다.
+    e.preventDefault();
+
+    // 현재 화면의 중앙 위치를 계산합니다.
+    const screenHeight = window.innerHeight;
+    const screenCenter = screenHeight / 2;
+
+    // 마우스 휠 방향에 따라 이동할 섹션을 결정합니다.
+    let newActiveSection = activeSection;
+    if (e.deltaY > 0 && activeSection < sections.length - 1) {
+      newActiveSection = activeSection + 1;
+    } else if (e.deltaY < 0 && activeSection > 0) {
+      newActiveSection = activeSection - 1;
+    }
+
+    // 새로운 활성 섹션을 설정합니다.
+    setActiveSection(newActiveSection);
+
+    // 화면을 스크롤하여 새로운 섹션의 가운데로 이동합니다.
+    const element = sectionRefs.current[newActiveSection];
+    if (element) {
+      const sectionTop = element.offsetTop;
+      const sectionHeight = element.clientHeight;
+      const scrollToY = sectionTop + sectionHeight / 2 - screenCenter;
+
+      // Check screen width before scrolling
+      if (windowWidth >= 1400) {
+        window.scrollTo({ top: scrollToY, behavior: "smooth" });
+      }
+    }
+  };
 
     // 이전 아이콘 표시 함수
     const showPreviousIcons = () => {
@@ -319,8 +337,8 @@ const Home = () => {
                             >
                                 {index === 0 ? (
                                     <div className="section1">
-                                    <div className="sec1title" style={{marginTop:'4em'}}> {langJson[lang]?.FOLLOW}</div>
-                                    <div className="sec1title"> {langJson[lang]?.SUPPORT}</div>
+                                    <div className="sec1title"> {langJson[lang]?.FOLLOW}</div>
+                                    <div className="sec1title" style={{marginTop:"2.5em"}}> {langJson[lang]?.SUPPORT}</div>
                                     </div>
                                 ) : index === 1 ? (
                                     <div className="section2">
@@ -630,44 +648,30 @@ const Home = () => {
                                         </div>
                                         <div className="bottom">
                                             <div className="seoulhqsupport">
-                                                <div className="hqcontainer">
-                                                    <div className="hq">
-                                                        <div className="hq-container">
-                                                            <div className="address">
-                                                                <div className="hq1">
-                                                                    <img src="/icon/location-dot.svg" alt="Location Icon" /> Add
-                                                                </div>
-                                                                <div className="hq1">
-                                                                    <img src="/icon/mobile.svg" alt="Mobile Icon" /> Tel
-                                                                </div>
-                                                            </div>
+                                                <div className="hq">
+                                                    <div className="address">
+                                                        <div className="hq1">
+                                                            <img src="/icon/location-dot.svg" alt="Location Icon" /> Add
                                                         </div>
-                                                        <div className="hq-container">
-                                                            <div className="address">
-                                                                <div className="hq2">{langJson[lang]?.ADDRESS}</div>
-                                                                <div className="hq2">070-8080-3499</div>
-                                                            </div>
+                                                        <div className="hq1">
+                                                            <img src="/icon/mobile.svg" alt="Mobile Icon" /> Tel
                                                         </div>
                                                     </div>
+                                                    <div className="address">
+                                                        <div className="hq2">{langJson[lang]?.ADDRESS}</div>
+                                                        <div className="hq2">070-8080-3499</div>
+                                                    </div>
                                                 </div>
-                                                <div className="supcontainer">
-                                                    <div className="sup">
-                                                        <div className="hq-container">
-                                                            <div className="address">
-                                                                <div className="hq3">
-                                                                    <img src="/icon/email.svg" alt="Email Icon" /> E-mail
-                                                                </div>
-                                                                <div className="hq3">
-                                                                    <img src="/icon/fax.svg" alt="FAX Icon" /> FAX
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div className="hq-container">
-                                                            <div className="address">
-                                                                <div className="hq4">purplevery222@gmail.com</div>
-                                                                <div className="hq4">0504-144-9419</div>
-                                                            </div>
-                                                        </div>
+                                                <div className="sup">
+                                                    <div className="address">
+                                                        <div className="hq3">
+                                                            <img src="/icon/email.svg" alt="Email Icon" /> E-mail</div>
+                                                        <div className="hq3">
+                                                            <img src="/icon/fax.svg" alt="FAX Icon" /> FAX</div>
+                                                    </div>
+                                                    <div className="address">
+                                                        <div className="hq4">purplevery222@gmail.com</div>
+                                                        <div className="hq4">0504-144-9419</div>
                                                     </div>
                                                 </div>
                                             </div>

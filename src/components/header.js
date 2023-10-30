@@ -36,12 +36,13 @@ margin-left: 2em;
 margin-top: 1em;
 `
 const HeaderButtons = styled.div` /* 헤더의 오른쪽 스타일 */
+position: fixed;
+top: 5.5%;
+right: 5%;
 display: flex;
 gap: 0.4em;
 font-size: 1.5em;/* 한영 버튼 크기 */
 align-items: center;
-margin-right: 7em;
-margin-top: 2em;
   a{ /* 한영 버튼 */
     font-weight: bold;
     text-decoration: none;

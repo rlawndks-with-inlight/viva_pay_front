@@ -32,11 +32,14 @@ background-color: white;
   width: 100%;
   height: 100%;
 }
+
 .sec1title {
+  position: absolute;
+  top: 30%;
+  left: 10%;
   font-size:3.1em;
   font-weight: bold;
   color: white;
-  margin-left: 5em;
   }
 
 
@@ -615,14 +618,20 @@ transition: color 0.3s; /* 배경색 전환 애니메이션 */
 }
 }
 
+.bottom {
+  margin-top: 6em;
+}
 .seoulhqsupport {
   display: flex;
   margin-bottom: 5em;
   margin-left: 10em;
-}
 
-.bottom {
-  margin-top: 6em;
+  /* 미디어 쿼리를 사용하여 스타일 변경 */
+  @media screen and (max-width: 1250px) {
+    flex-direction: column;
+    margin-bottom: 2em;
+    margin-left: 7em;
+  }
 }
 
 /* hq스타일 */
@@ -636,7 +645,6 @@ display: flex;
 
 /* address 스타일 */
 .address {
-display: flex;
 flex-direction: column; /* 서브 버튼을 세로로 정렬 */
 align-items: flex-start; /* 왼쪽 정렬 */
 font-size: 1em;
@@ -662,6 +670,11 @@ color: gray;
 .hq3 {
   margin-bottom: 0.5em;
   margin-left: 3em;
+
+    /* 미디어 쿼리를 사용하여 스타일 변경 */
+@media screen and (max-width: 1250px) {
+ margin-left: 0;
+}
 }
 
 .hq3 img {
