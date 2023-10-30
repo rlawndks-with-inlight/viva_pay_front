@@ -65,8 +65,8 @@ color: white;
 `
 const MoreContainer = styled.div` /* more 모달 스타일링 */
 position: fixed;
-top: 0;
-left: 0;
+top: 0%;
+left: 0%;
 width: 100%;
 height: 100%;
 background-color: rgb(0, 104, 232);; /* 파란색 배경 추가 */
@@ -89,13 +89,10 @@ z-index: 1;
 }
 `
 const TotalButtonContainer = styled.div` /* 더보기 내용 전체 버튼 */
+position: fixed;
+top: 6%;
+left: 5%;
 display: flex;
-margin-left: 10em;
-margin-top: 3.5em;
-@media only screen and (max-width: 1400px) {
-    margin-left: 1em;
-    margin-top: 2em;
-}
 `
 const TitleButton = styled.button`
 display: block; /* 메인 버튼을 블록 레벨 요소로 변경 */
@@ -112,13 +109,11 @@ border: none; /* 버튼 테두리 제거 */
     text-decoration: none;
   }
 @media only screen and (max-width: 1400px) {
-    font-size: 3.5vw;
+    font-size: 2.5vw;
     padding: 5em 1em 0 0;  /* 버튼 패딩 조절 */
 }
-
-@media only screen and (max-width: 800px) {
-    font-size: 3vw;
-    padding: 7em 0.5vw 0 0;  /* 버튼 패딩 조절 */
+@media only screen and (max-width: 550px) {
+    font-size: 1em;
 }
 `
 const SubButton = styled.button`
@@ -143,15 +138,16 @@ text-align: left; /* 텍스트 왼쪽 정렬 */
 @media only screen and (max-width: 800px) {
     font-size: 2vw;
 }
+@media only screen and (max-width: 650px) {
+    font-size: 0.7em;
+}
 `
 const MoreIconButtonContainer = styled.div`
+position: fixed;
+bottom: 10%;
+left: 10%;
 display: flex; /* 더보기 아래쪽 아이콘 버튼 스타일*/
-margin-left: 12vw;
-margin-top: 1em;
 text-align: center;
-@media only screen and (max-width: 1255px) {
-margin-left: 4em;
-}
 `
 const MoreIconButton = styled.a`
 transition: opacity 0.3s ease; /* 호버 시 투명도 전환 애니메이션 */
@@ -163,6 +159,15 @@ text-decoration: none; /*링크 밑줄 제거*/
       opacity: 0.7; /* 호버 시 투명도를 0.7로 변경 (1이 원래 투명도) */
 }
   }
+@media only screen and (max-width: 650px) {
+    img{
+    width: 25px;
+    height: 25px;
+    &:hover{
+      opacity: 0.7; /* 호버 시 투명도를 0.7로 변경 (1이 원래 투명도) */
+}
+  }
+}
 `
 const LocationButton = styled.div`
 display: flex; /* 더보기 아래쪽 map 버튼 스타일*/
@@ -177,11 +182,25 @@ cursor: pointer;
   }
   a{
     font-size: 20px;
-    margin: 0 15px 0 15px;
+    margin: 0 10px 0 10px;
     color: black;
   }
   &:hover{
     opacity: 0.7; /* 호버 시 투명도를 0.7로 변경 (1이 원래 투명도) */
+}
+@media only screen and (max-width: 650px) {
+padding: 7px;
+  img{
+    width: 15px;
+    height: 15px;
+  }
+  a{
+    font-size: 12px;
+    color: black;
+  }
+  &:hover{
+    opacity: 0.7; /* 호버 시 투명도를 0.7로 변경 (1이 원래 투명도) */
+}
 }
 `
 const Header = ({ activeSection, isMoreClicked, handleMoreButtonClick, setIsMoreClicked, closeMore, updateHeaderVisibility }) => {
