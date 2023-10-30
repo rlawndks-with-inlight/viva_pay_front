@@ -14,26 +14,21 @@ display: flex;
 justify-content: space-between;
 padding: none;
 margin: none;
-background-color: ${(props) => (props.activeSection === 0 ? 'transparent' : 'rgba(255, 255, 255, 0.7)')};
+background-color: ${(props) => (props.activeSection === 0 ? 'transparent' : 'rgba(128, 128, 128, 0.7)')};
 `
 const Logo = styled.a`/* heerim 로고 */
-text-align: center; /* 텍스트 가운데 정렬 */
-text-decoration: none; /* 링크의 기본 밑줄 스타일 제거 */
-background-color: transparent; /* 배경색 투명으로 설정 */
-border: none; /* 테두리 제거 */
-cursor: pointer; /* 포인터 커서로 변경 */
-display: flex; /* 자식 요소를 가로로 나란히 정렬 */
-flex-direction: column; /* 자식 요소를 세로로 정렬 */
-align-items: center; /* 자식 요소를 수직 가운데 정렬 */
-z-index: 2;
+cursor:pointer;
+    img {
+        position: absolute;
+        width: 20em;
+        height: 8em;
+        left: 10%;
+        z-index: 2;
+    }
 `
 const Logotext = styled.span` /* 로고 글자 스타일 */
 font-size: 2.6em;
-font-weight: bold;
-font-style: italic; /* 텍스트를 기울임체로 스타일링 */
 color: ${(props) => (props.activeSection === 0 ? 'white' : 'black')};
-margin-left: 2em;
-margin-top: 1em;
 `
 const HeaderButtons = styled.div` /* 헤더의 오른쪽 스타일 */
 position: fixed;
@@ -242,9 +237,7 @@ const Header = ({ activeSection, isMoreClicked, handleMoreButtonClick, setIsMore
         <Headerwrappers activeSection={activeSection} className={`${isMoreClicked ? 'showMore' : ''}`} >
                 <Link href="/" legacyBehavior>
                     <Logo onClick={() => { window.location.reload() }}>
-                        <Logotext activeSection={activeSection}>
-                            PAYVERY
-                            </Logotext>
+                        <img activeSection={activeSection} src="/image/Logo.png" alt="Logo" />
                     </Logo>
                 </Link>
                 <HeaderButtons activeSection={activeSection}>

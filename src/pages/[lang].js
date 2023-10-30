@@ -5,8 +5,9 @@ import UserLayout from 'src/layouts/UserLayout';
 import langJson from 'src/data/lang.json'
 import { useRouter } from "next/router";
 const sections = ["section1", "section2", "section3", "section4", "section5"]; // 섹션 이름
-const totalIcons = 10; // 총 아이콘 개수
-const iconsPerPage = 7; // 한 페이지에 표시할 아이콘 개수
+const totalIcons = 16; // 총 아이콘 개수
+const iconsPerPageLarge = 6; // 큰 화면에서 표시할 아이콘 개수
+const iconsPerPageSmall = 4; // 작은 화면에서 표시할 아이콘 개수
 
 
 const Topic = ({ title, initialValue, finalValue, inView }) => {
@@ -63,7 +64,7 @@ const Home = () => {
     const router = useRouter();
     const { lang = 'kr' } = router.query;
     const [activeSection, setActiveSection] = useState(0); // 활성 섹션 인덱스
-    const [iconIndexes, setIconIndexes] = useState(Array.from({ length: iconsPerPage }, (_, i) => i)); // 표시되는 아이콘 인덱스 배열
+    const [iconIndexes, setIconIndexes] = useState(Array.from({ length: iconsPerPageLarge }, (_, i) => i)); // 표시되는 아이콘 인덱스 배열
     const sectionRefs = useRef([]);
     const [loading, setLoading] = useState(true);
     const [searchQuery, setSearchQuery] = useState(""); // 검색어 상태 추가
@@ -182,6 +183,13 @@ const Home = () => {
             7: "/https://www.heerim.com/kr/project/project_list.php?cate=8",
             8: "/https://www.heerim.com/kr/project/project_list.php?cate=9",
             9: "/https://www.heerim.com/kr/project/project_list.php?cate=10",
+            10: "/https://www.heerim.com/kr/project/project_list.php?cate=11",
+            11: "/https://www.heerim.com/kr/project/project_list.php?cate=12",
+            12: "/https://www.heerim.com/kr/project/project_list.php?cate=13",
+            13: "/https://www.heerim.com/kr/project/project_list.php?cate=14",
+            14: "/https://www.heerim.com/kr/project/project_list.php?cate=15",
+            15: "/https://www.heerim.com/kr/project/project_list.php?cate=16",
+            16: "/https://www.heerim.com/kr/project/project_list.php?cate=17",
             // 다른 아이콘들에 대한 링크를 추가하세요
         };
 
@@ -206,6 +214,13 @@ const Home = () => {
             7: "description7",
             8: "description8",
             9: "description9",
+            10: "description10",
+            11: "description11",
+            12: "description12",
+            13: "description13",
+            14: "description14",
+            15: "description15",
+            16: "description16",
             // 다른 아이콘들에 대한 설명을 추가하세요
         };
 
@@ -213,7 +228,30 @@ const Home = () => {
         return iconDescriptions[iconIndex] || "";
     };
 
+    // 화면 너비 변화 감지 및 아이콘 개수 업데이트
+    useEffect(() => {
+        const handleResize = () => {
+            const newWindowWidth = window.innerWidth;
+            setWindowWidth(newWindowWidth);
 
+            // 화면 너비가 1400 이하인 경우 아이콘 개수를 작게 설정, 그렇지 않으면 크게 설정
+            if (newWindowWidth <= 1400) {
+                setIconIndexes(Array.from({ length: iconsPerPageSmall }, (_, i) => i));
+            } else {
+                setIconIndexes(Array.from({ length: iconsPerPageLarge }, (_, i) => i));
+            }
+        };
+
+        // 초기화 단계에서 한 번 실행하고, 화면 크기가 변경될 때마다 실행
+        handleResize();
+        window.addEventListener("resize", handleResize);
+
+        return () => {
+            window.removeEventListener("resize", handleResize);
+        };
+    }, []);
+
+  // 한,영 번역
   useEffect(() => {
     setLoading(true);
 
@@ -236,8 +274,8 @@ const Home = () => {
       updateWindowWidth();
       window.addEventListener("resize", updateWindowWidth);
 
-      // 화면 크기가 1400보다 큰 경우에만 스크롤 이벤트 리스너 추가
-      if (windowWidth >= 1400) {
+      // 화면 크기가 1300보다 큰 경우에만 스크롤 이벤트 리스너 추가
+      if (windowWidth >= 1300) {
         window.addEventListener("wheel", handleScroll, { passive: false });
       }
     }
@@ -280,7 +318,7 @@ const Home = () => {
       const scrollToY = sectionTop + sectionHeight / 2 - screenCenter;
 
       // Check screen width before scrolling
-      if (windowWidth >= 1400) {
+      if (windowWidth >= 1300) {
         window.scrollTo({ top: scrollToY, behavior: "smooth" });
       }
     }
@@ -590,22 +628,18 @@ const Home = () => {
                                             </div>
                                         </div>
                                         {/* 유튜브 액자 버튼 */}
-                                        <div className={`youtube-button-container ${inViewItems4.includes("") ? "in-view" : ""}`}>
+                                        <div className={`newsbutton-container ${inViewItems4.includes("") ? "in-view" : ""}`}>
                                             {/* 유튜브1 버튼 */}
-                                            <a className="youtube-button" href="https://www.youtube.com/watch?v=OLrv8OGTUnQ" target="_blank" rel="noopener noreferrer">
-                                                <img src="/image/youtube1.jpg" alt="youtube1 Image" />
+                                            <a className="newsbutton" href="https://www.youtube.com/watch?v=OLrv8OGTUnQ" target="_blank" rel="noopener noreferrer">
+                                                <img src="/image/newsimage1.png" alt="youtube1 Image" />
                                             </a>
                                             {/* 유튜브2 버튼 */}
-                                            <a className="youtube-button" style={{ marginLeft: "35px" }} href="https://www.youtube.com/watch?v=REof-nC8Ck8&feature=youtu.be" target="_blank" rel="noopener noreferrer">
-                                                <img src="/image/youtube2.jpg" alt="youtube2 Image" />
+                                            <a className="newsbutton" style={{ marginLeft: "15px" }} href="https://www.youtube.com/watch?v=REof-nC8Ck8&feature=youtu.be" target="_blank" rel="noopener noreferrer">
+                                                <img src="/image/newsimage2.png" alt="youtube2 Image" />
                                             </a>
                                             {/* 유튜브3 버튼 */}
-                                            <a className="youtube-button" style={{ marginLeft: "35px" }} href="https://www.youtube.com/watch?v=Lu8uHwNpHEQ" target="_blank" rel="noopener noreferrer">
-                                                <img src="/image/youtube3.jpg" alt="youtube3 Image" />
-                                            </a>
-                                            {/* 유튜브4 버튼 */}
-                                            <a className="youtube-button" style={{ marginLeft: "35px" }} href="https://www.youtube.com/watch?v=B9FQ3Cz0agM&feature=youtu.be" target="_blank" rel="noopener noreferrer">
-                                                <img src="/image/youtube4.jpg" alt="youtube4 Image" />
+                                            <a className="newsbutton" style={{ marginLeft: "15px" }} href="https://www.youtube.com/watch?v=Lu8uHwNpHEQ" target="_blank" rel="noopener noreferrer">
+                                                <img src="/image/newsimage3.png" alt="youtube3 Image" />
                                             </a>
                                         </div>
                                     </div>
@@ -651,10 +685,10 @@ const Home = () => {
                                                 <div className="hq">
                                                     <div className="address">
                                                         <div className="hq1">
-                                                            <img src="/icon/location-dot.svg" alt="Location Icon" /> Add
+                                                            <img src="/icon/location.png" alt="Location Icon" /> Add
                                                         </div>
                                                         <div className="hq1">
-                                                            <img src="/icon/mobile.svg" alt="Mobile Icon" /> Tel
+                                                            <img src="/icon/mobile.png" alt="Mobile Icon" /> Tel
                                                         </div>
                                                     </div>
                                                     <div className="address">
@@ -665,9 +699,9 @@ const Home = () => {
                                                 <div className="sup">
                                                     <div className="address">
                                                         <div className="hq3">
-                                                            <img src="/icon/email.svg" alt="Email Icon" /> E-mail</div>
+                                                            <img src="/icon/email.png" alt="Email Icon" /> E-mail</div>
                                                         <div className="hq3">
-                                                            <img src="/icon/fax.svg" alt="FAX Icon" /> FAX</div>
+                                                            <img src="/icon/fax.png" alt="FAX Icon" /> FAX</div>
                                                     </div>
                                                     <div className="address">
                                                         <div className="hq4">purplevery222@gmail.com</div>
