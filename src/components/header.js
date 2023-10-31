@@ -15,6 +15,10 @@ justify-content: space-between;
 padding: none;
 margin: none;
 background-color: ${(props) => (props.activeSection === 0 ? 'transparent' : 'rgba(0, 0, 0, 0.2)')};
+@media only screen and (max-width: 1300px), (max-height: 800px) {
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
 `
 const LogoButton = styled.button`
   text-align: center;

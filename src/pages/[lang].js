@@ -76,7 +76,7 @@ const Home = () => {
     const [hoveredImage, setHoveredImage] = useState(null);
     const [hoveredText, setHoveredText] = useState(null);
     const [windowWidth, setWindowWidth] = useState(0); // 초기 화면 너비 설정
-    const [windowHeight, setWindowHeight] = useState(0); // 초기 화면
+    const [windowHeight, setWindowHeight] = useState(0); // 초기 화면 높이 설정
 
     
     const handleImageHover = (imageSrc, text) => {
@@ -231,26 +231,25 @@ const Home = () => {
 
     // 화면 너비 변화 감지 및 아이콘 개수 업데이트
     useEffect(() => {
-        const handleResize = () => {
-            const newWindowWidth = window.innerWidth;
-            setWindowWidth(newWindowWidth);
-            const newWindowHeight = window.innerHeight;
-            setWindowHeight(newWindowHeight);
+        // 함수를 선언하여 화면 크기를 업데이트하는 로직
+      const updateWindowDimensions = () => {
+          setWindowWidth(window.innerWidth);
+          setWindowHeight(window.innerHeight);
 
             // 화면 너비가 1300 이하인 경우 아이콘 개수를 작게 설정, 그렇지 않으면 크게 설정
-            if (newWindowWidth <= 1300 || newWindowHeight<=800) {
+            if (window.innerWidth <= 1300 || window.innerHeight <= 800) {
                 setIconIndexes(Array.from({ length: iconsPerPageSmall }, (_, i) => i));
             } else {
                 setIconIndexes(Array.from({ length: iconsPerPageLarge }, (_, i) => i));
             }
         };
 
-        // 초기화 단계에서 한 번 실행하고, 화면 크기가 변경될 때마다 실행
-        handleResize();
-        window.addEventListener("resize", handleResize);
+      // 초기화 단계에서 한 번 실행하고, 화면 크기가 변경될 때마다 실행
+      updateWindowDimensions();
+      window.addEventListener("resize", updateWindowDimensions);
 
         return () => {
-            window.removeEventListener("resize", handleResize);
+            window.removeEventListener("resize", updateWindowDimensions);
         };
     }, []);
 

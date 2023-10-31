@@ -665,7 +665,8 @@ color: gray;
 
   /* 미디어 쿼리를 사용하여 스타일 변경 */
  @media screen and (max-width: 1400px) {
-  padding: 5em 0 6em 14.5vw;
+  font-size: 1.9vw;
+  padding: 3vw 0 5vw 14.5vw;
    }
 }
 

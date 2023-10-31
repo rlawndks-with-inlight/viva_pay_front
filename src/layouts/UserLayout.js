@@ -11,7 +11,7 @@ const UserLayout = ({ activeSection, children, updateHeaderVisibility }) => {
         const mouseY = e.clientY;
 
         if (!moreButtonClicked) {
-            // Always show the header if activeSection is 0
+            // 섹션0에서는 항상 보임
             setShowHeader(activeSection === 0 || (activeSection >= 1 && activeSection <= 4 && mouseY < 0.11 * window.innerHeight));
         }
     };
