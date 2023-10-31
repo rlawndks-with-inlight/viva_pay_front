@@ -44,7 +44,7 @@ background-color: white;
   }
 
 
-/* 2section */
+/* 2section sec2 */
 
 /* 2섹션 스타일 */
 .section2 {
@@ -67,9 +67,9 @@ background-color: white;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 8.2em;
-  margin-left: 12em;
-  margin-bottom: 2em;
+  position: absolute;
+  top: 112%;
+  left: 20%;
   opacity: 0; /* 처음에는 안 보이게 설정 */
   transform: translateX(-60px); /* 시작 위치 지정 */
   /* fadein 애니메이션 효과 설정 */
@@ -94,12 +94,19 @@ background-color: white;
   font-size: 3.1em;
   font-weight: bold;
   font-family: 'Playfair Display', serif;
-  margin-left: 3.8em;
+  position: absolute;
+  top: 118%;
+  left: 20%;
   color: white;
   opacity: 0; /* 처음에는 안 보이게 설정 */
   transform: translateY(30px); /* 시작 위치 지정 */
   /* fadein 애니메이션 효과 설정 */
   transition: opacity 1s ease, transform 2s ease;
+
+  /* 미디어 쿼리를 사용하여 스타일 변경 */
+  @media screen and (max-width: 1400px) {
+    font-size: 4.9vw;
+  }
 }
 
 .subtitle.in-view {
@@ -110,12 +117,19 @@ background-color: white;
 /* 2섹션 innovation 텍스트 스타일 */
 .description {
   font-size: 1.2em;
-  margin-left: 10em;
+  position: absolute;
+  top: 135%;
+  left: 20%;
   color: white;
   opacity: 0; /* 처음에는 안 보이게 설정 */
   transform: translateY(45px); /* 시작 위치 지정 */
   /* fadein 애니메이션 효과 설정 */
   transition: opacity 1s ease, transform 2s ease;
+
+  /* 미디어 쿼리를 사용하여 스타일 변경 */
+  @media screen and (max-width: 1400px) {
+    font-size: 1.9vw;
+  }
 }
 
 .description.in-view {
@@ -127,11 +141,18 @@ background-color: white;
 .topics-container {
   display: flex;
   justify-content: space-between; 
-  margin: 1.5em 11em 6em 12em; 
+  position: absolute;
+  top: 145%;
+  left: 20%;
   opacity: 0; /* 처음에는 안 보이게 설정 */
   transform: translateY(60px); /* 시작 위치 지정 */
   /* fadein 애니메이션 효과 설정 */
   transition: opacity 1s ease, transform 2s ease;
+
+  /* 미디어 쿼리를 사용하여 스타일 변경 */
+  @media screen and (max-width: 1400px) {
+
+  }
 }
 
 .topics-container.in-view {
@@ -142,15 +163,16 @@ background-color: white;
 /* 2섹션 historyof 글 텍스트 스타일 */
 .topic-title,
 .topic-number {
-  margin: 0;  
+  margin: 0 3vw 0 0;  
+
    /* 미디어 쿼리를 사용하여 스타일 변경 */
   @media screen and (max-width: 1400px) {
-  font-size: ;
+
     }
   }
 
 .topic-title{
-  margin-top: 5em;
+  margin-top: 3em;
  color: rgb(255, 194, 0);
 }
 
@@ -158,6 +180,11 @@ background-color: white;
   color: white;
   font-weight: bold;
   font-size: 5.2em;
+
+  /* 미디어 쿼리를 사용하여 스타일 변경 */
+  @media screen and (max-width: 1400px) {
+    font-size: 5.5vw;
+  }
 }
 
 /* 2섹션 아이콘 콘테이너 스타일 */
@@ -234,12 +261,13 @@ background-color: white;
 /* 3section */
 
 /*3섹션 타이틀 스타일*/
-.title { 
+.title {
+  position: absolute;
+  top: 205%;
+  left: 11.5%;
   font-weight: bold;
   font-size: 3.5em;
   font-family: 'Playfair Display', serif;
-  margin-bottom: 0.2em;
-  margin-left: 3.5em;
   opacity: 0; /* 처음에는 안 보이게 설정 */
   transform: translateY(40px); /* 시작 위치 지정 */
   /* fadein 애니메이션 효과 설정 */
@@ -252,8 +280,9 @@ background-color: white;
 }
 
 .sec3description {
-  margin-left: 12.5em;
-  margin-bottom: 4em;
+  position: absolute;
+  top: 214%;
+  left: 11.5%;
   opacity: 0; /* 처음에는 안 보이게 설정 */
   transform: translateY(50px); /* 시작 위치 지정 */
   /* fadein 애니메이션 효과 설정 */
@@ -379,7 +408,9 @@ background-color: white;
 
 /* 4section sec4*/
 .news-list {
-  margin-bottom: 3em;
+  position: absolute;
+  top: 310%;
+  left: 2%;
 }
 
 .news-row {
@@ -391,8 +422,6 @@ background-color: white;
 
 /* 뉴스 아이템들 스타일 */
 .news-item {
-  position: relative; /* 상대 위치 지정 */
-  box-sizing: border-box;
   background-color: transparent;
   text-decoration: none;
   width: 33%;
@@ -437,9 +466,17 @@ background-color: white;
 
 .news-title {
   font-size: 1em;
-  flex-wrap: wrap;
-  -webkit-box-orient: vertical;
   color: gray;
+  
+
+   /* 미디어 쿼리를 사용하여 스타일 변경 */
+   @media screen and (max-height: 850px) {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+   }
 }
 
 
@@ -469,10 +506,11 @@ background-color: white;
   text-align: center; /* 가운데 정렬을 위해 텍스트 정렬을 사용합니다. */
   border: solid gray 1px;
   border-radius: 20px;
-  padding: 10px;
-  margin-left: 22.5vw;
-  margin-right: 22.5vw;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  margin-right: 0.7em;
   margin-bottom: 3.5em; /* 버튼과 내용 사이의 간격을 조절합니다. */
+  margin-left: 1em;
   opacity: 0; /* 처음에는 안 보이게 설정 */
   transform: translateY(50px); /* 시작 위치 지정 */
   /* fadein 애니메이션 효과 설정 */
@@ -496,8 +534,7 @@ background-color: white;
   transform: scale(1.1);
 }
 .newsbutton img{
-  width: 17em;
-  height: 10em;
+  width: 30vw;
   border-radius: 20px;
 }
 
@@ -516,7 +553,7 @@ color: gray;
 .searchheerim-container {
   background-color: rgb(0, 104, 232);
   width: 100vw;
-  padding-top: 4em;
+  padding-top: 4vh;
 }
 
 .search-title {
@@ -528,6 +565,11 @@ color: gray;
   transform: translateY(2em); /* 시작 위치 지정 */
   /* fadein 애니메이션 효과 설정 */
   transition: opacity 1s ease, transform 2s ease;
+
+  /* 미디어 쿼리를 사용하여 스타일 변경 */
+ @media screen and (max-width: 1400px) {
+  font-size: 5.8vw;
+   }
 }
 
 /* .search-title이 화면에 들어올 때 fadein 애니메이션 적용 */
@@ -544,6 +586,10 @@ color: gray;
   transform: translateY(1.5em); /* 시작 위치 지정 */
   /* fadein 애니메이션 효과 설정 */
   transition: opacity 1s ease, transform 3s ease;
+  /* 미디어 쿼리를 사용하여 스타일 변경 */
+ @media screen and (max-width: 1400px) {
+  font-size: 5.8vw;
+   }
 
 }
 
@@ -561,6 +607,11 @@ color: gray;
   transform: translateY(2em); /* 시작 위치 지정 */
   /* fadein 애니메이션 효과 설정 */
   transition: opacity 1s ease, transform 3s ease;
+  /* 미디어 쿼리를 사용하여 스타일 변경 */
+ @media screen and (max-width: 1400px) {
+  font-size: 1.9vw;
+  margin-left: 8em;
+   }
 }
 
 /* .searchsub 화면에 들어올 때 fadein 애니메이션 적용 */
@@ -584,6 +635,12 @@ color: gray;
   transform: translateY(50px); /* 시작 위치 지정 */
   /* fadein 애니메이션 효과 설정 */
   transition: opacity 2s ease, transform 4s ease;
+
+  /* 미디어 쿼리를 사용하여 스타일 변경 */
+ @media screen and (max-width: 1400px) {
+  width: 50vw; /* 검색창의 가로 너비 조정 */
+  margin-left: 15vw;
+   }
 }
 
 .searchheerim-input.in-view {
@@ -600,11 +657,16 @@ color: gray;
 }
 
 .searchtag-keywords {
-  padding: 5em 0 6em 12em;
+  padding: 10vh 0 12vh 12em;
   opacity: 0; /* 처음에는 안 보이게 설정 */
   transform: translateY(6em); /* 시작 위치 지정 */
   /* fadein 애니메이션 효과 설정 */
   transition: opacity 3s ease, transform 5s ease;
+
+  /* 미디어 쿼리를 사용하여 스타일 변경 */
+ @media screen and (max-width: 1400px) {
+  padding: 5em 0 6em 14.5vw;
+   }
 }
 
 .searchtag-keywords.in-view {
@@ -633,11 +695,11 @@ transition: color 0.3s; /* 배경색 전환 애니메이션 */
 }
 
 .bottom {
-  margin-top: 6em;
+  margin-top: 6vh;
 }
 .seoulhqsupport {
   display: flex;
-  margin-bottom: 5em;
+  margin-bottom: 5vh;
   margin-left: 10em;
 
   /* 미디어 쿼리를 사용하여 스타일 변경 */

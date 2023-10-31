@@ -14,25 +14,26 @@ display: flex;
 justify-content: space-between;
 padding: none;
 margin: none;
-background-color: ${(props) => (props.activeSection === 0 ? 'transparent' : 'rgba(128, 128, 128, 0.7)')};
+background-color: ${(props) => (props.activeSection === 0 ? 'transparent' : 'rgba(0, 0, 0, 0.2)')};
 `
-const Logo = styled.a`/* heerim 로고 */
-cursor:pointer;
-    img {
-        position: absolute;
-        width: 20em;
-        height: 8em;
-        left: 10%;
-        z-index: 2;
-    }
-`
-const Logotext = styled.span` /* 로고 글자 스타일 */
-font-size: 2.6em;
-color: ${(props) => (props.activeSection === 0 ? 'white' : 'black')};
-`
+const LogoButton = styled.button`
+  text-align: center;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  margin-left: 10%;
+  flex-direction: column;
+  align-items: center;
+  z-index: 2;
+  background: url('/image/Logo.png');
+  width: 18em; /* Set the width and height as per your image */
+  height: 7em;
+  background-size: cover;
+`;
 const HeaderButtons = styled.div` /* 헤더의 오른쪽 스타일 */
 position: fixed;
-top: 5.5%;
+top: 2.5%;
 right: 5%;
 display: flex;
 gap: 0.4em;
@@ -235,10 +236,8 @@ const Header = ({ activeSection, isMoreClicked, handleMoreButtonClick, setIsMore
 
     return (
         <Headerwrappers activeSection={activeSection} className={`${isMoreClicked ? 'showMore' : ''}`} >
-                <Link href="/" legacyBehavior>
-                    <Logo onClick={() => { window.location.reload() }}>
-                        <img activeSection={activeSection} src="/image/Logo.png" alt="Logo" />
-                    </Logo>
+                <Link href="/" legacyBehavior> 
+                <LogoButton onClick={() => { window.location.reload() }}></LogoButton>
                 </Link>
                 <HeaderButtons activeSection={activeSection}>
                     {isMoreClicked ? null : ( // 녹색 섹션이 활성화되면 버튼을 숨김

@@ -75,7 +75,8 @@ const Home = () => {
     const [section2InView, setSection2InView] = useState(false); // section2의 inView 여부
     const [hoveredImage, setHoveredImage] = useState(null);
     const [hoveredText, setHoveredText] = useState(null);
-    const [windowWidth, setWindowWidth] = useState(0); // 새로운 변수: 화면 너비를 저장
+    const [windowWidth, setWindowWidth] = useState(0); // 초기 화면 너비 설정
+    const [windowHeight, setWindowHeight] = useState(0); // 초기 화면
 
     
     const handleImageHover = (imageSrc, text) => {
@@ -233,9 +234,11 @@ const Home = () => {
         const handleResize = () => {
             const newWindowWidth = window.innerWidth;
             setWindowWidth(newWindowWidth);
+            const newWindowHeight = window.innerHeight;
+            setWindowHeight(newWindowHeight);
 
-            // 화면 너비가 1400 이하인 경우 아이콘 개수를 작게 설정, 그렇지 않으면 크게 설정
-            if (newWindowWidth <= 1400) {
+            // 화면 너비가 1300 이하인 경우 아이콘 개수를 작게 설정, 그렇지 않으면 크게 설정
+            if (newWindowWidth <= 1300 || newWindowHeight<=800) {
                 setIconIndexes(Array.from({ length: iconsPerPageSmall }, (_, i) => i));
             } else {
                 setIconIndexes(Array.from({ length: iconsPerPageLarge }, (_, i) => i));
@@ -266,39 +269,38 @@ const Home = () => {
     // 스크립트 로딩 및 언어 확인 이후에 화면 크기 업데이트 리스너 추가
     if (!loading) {
       // 함수를 선언하여 화면 크기를 업데이트하는 로직
-      const updateWindowWidth = () => {
+    const updateWindowDimensions = () => {
         setWindowWidth(window.innerWidth);
+        setWindowHeight(window.innerHeight);
       };
 
       // 초기화 단계에서 한 번 실행하고, 화면 크기가 변경될 때마다 실행
-      updateWindowWidth();
-      window.addEventListener("resize", updateWindowWidth);
+    updateWindowDimensions();
+    window.addEventListener("resize", updateWindowDimensions);
 
-      // 화면 크기가 1300보다 큰 경우에만 스크롤 이벤트 리스너 추가
-      if (windowWidth >= 1300) {
+      // 화면 크기가 1300 보다 큰 경우에만 스크롤 이벤트 리스너 추가
+      if (windowWidth > 1300 && windowHeight >= 800) {
         window.addEventListener("wheel", handleScroll, { passive: false });
       }
     }
 
     // 이 컴포넌트가 언마운트될 때 이벤트 리스너 정리
     return () => {
-      window.removeEventListener("resize", updateWindowWidth);
-      window.removeEventListener("wheel", handleScroll);
+        window.removeEventListener("resize", updateWindowDimensions);
+        window.removeEventListener("wheel", handleScroll);
     };
-  }, [activeSection, loading, windowWidth]);
+  }, [activeSection, loading, windowWidth, windowHeight]);
 
-  const updateWindowWidth = () => {
+  const updateWindowDimensions = () => {
     setWindowWidth(window.innerWidth);
+    setWindowHeight(window.innerHeight);
   };
 
   const handleScroll = (e) => {
     // 스크롤 이벤트를 중지합니다.
     e.preventDefault();
 
-    // 현재 화면의 중앙 위치를 계산합니다.
-    const screenHeight = window.innerHeight;
-    const screenCenter = screenHeight / 2;
-
+    if (windowWidth > 1300 || windowHeight >= 800) {
     // 마우스 휠 방향에 따라 이동할 섹션을 결정합니다.
     let newActiveSection = activeSection;
     if (e.deltaY > 0 && activeSection < sections.length - 1) {
@@ -315,10 +317,10 @@ const Home = () => {
     if (element) {
       const sectionTop = element.offsetTop;
       const sectionHeight = element.clientHeight;
+      const screenCenter = windowHeight / 2;
       const scrollToY = sectionTop + sectionHeight / 2 - screenCenter;
 
       // Check screen width before scrolling
-      if (windowWidth >= 1300) {
         window.scrollTo({ top: scrollToY, behavior: "smooth" });
       }
     }
@@ -386,7 +388,7 @@ const Home = () => {
                                                 <p className="green-box-text">Who we are</p>
                                             </div>
                                             <div className={`subtitle ${inViewItems2.includes("") ? "in-view" : ""}`}> {langJson[lang]?.FOLLOW}</div>
-                                            <div className={`subtitle ${inViewItems2.includes("") ? "in-view" : ""}`}> {langJson[lang]?.SUPPORT}</div>
+                                            <div className={`subtitle ${inViewItems2.includes("") ? "in-view" : ""}`} style={{marginTop:"1em"}}> {langJson[lang]?.SUPPORT}</div>
                                             <div className={`description ${inViewItems2.includes("") ? "in-view" : ""}`} style={{ marginTop: '2vw' }}>{langJson[lang]?.DESCIRPTION}</div>
                                             {/* 주제와 설명 */}
                                             <div>
@@ -568,7 +570,6 @@ const Home = () => {
                                                     </div>
                                                     <p className="news-title">{langJson[lang]?.FIRSTNEWS}
                                                     </p>
-                                                    <p className="news-date">2023-10-11</p>
                                                     <span className="news-more-link"> Read more</span>
                                                     <span className="arrow-icon" style={{ marginLeft: "20px", color: "orange", fontWeight: "bold" }}>→</span>
                                                 </a>
@@ -629,15 +630,15 @@ const Home = () => {
                                         </div>
                                         {/* 유튜브 액자 버튼 */}
                                         <div className={`newsbutton-container ${inViewItems4.includes("") ? "in-view" : ""}`}>
-                                            {/* 유튜브1 버튼 */}
+                                            {/* news1 버튼 */}
                                             <a className="newsbutton" href="https://www.youtube.com/watch?v=OLrv8OGTUnQ" target="_blank" rel="noopener noreferrer">
                                                 <img src="/image/newsimage1.png" alt="youtube1 Image" />
                                             </a>
-                                            {/* 유튜브2 버튼 */}
+                                            {/* news2 버튼 */}
                                             <a className="newsbutton" style={{ marginLeft: "15px" }} href="https://www.youtube.com/watch?v=REof-nC8Ck8&feature=youtu.be" target="_blank" rel="noopener noreferrer">
                                                 <img src="/image/newsimage2.png" alt="youtube2 Image" />
                                             </a>
-                                            {/* 유튜브3 버튼 */}
+                                            {/* news3 버튼 */}
                                             <a className="newsbutton" style={{ marginLeft: "15px" }} href="https://www.youtube.com/watch?v=Lu8uHwNpHEQ" target="_blank" rel="noopener noreferrer">
                                                 <img src="/image/newsimage3.png" alt="youtube3 Image" />
                                             </a>
