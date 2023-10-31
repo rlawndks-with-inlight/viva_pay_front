@@ -31,9 +31,13 @@ const LogoButton = styled.button`
   align-items: center;
   z-index: 2;
   background: url('/image/Logo.png');
-  width: 18em; /* Set the width and height as per your image */
+  width: 18em; 
   height: 7em;
   background-size: cover;
+@media only screen and (max-width: 500px), (max-height: 800px) {
+    width: 45vw;
+    height: 7vh;
+}
 `;
 const HeaderButtons = styled.div` /* 헤더의 오른쪽 스타일 */
 position: fixed;
@@ -43,6 +47,7 @@ display: flex;
 gap: 0.4em;
 font-size: 1.5em;/* 한영 버튼 크기 */
 align-items: center;
+z-index: 3;
   a{ /* 한영 버튼 */
     font-weight: bold;
     text-decoration: none;
@@ -56,6 +61,10 @@ align-items: center;
         text-decoration: underline;
       }
   }
+@media only screen and (max-width: 500px), (max-height: 800px) {
+    top: 1%;
+    font-size: 4vw;
+}
 `
 const More = styled.button` /* 더보기 버튼 */
 background: transparent;

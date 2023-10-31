@@ -5,7 +5,7 @@ body {
  /*justify-content: flex-end;*/
   /* 섹션 스타일 */
 .section {
-height: 100vh; /* 화면 높이만큼 섹션 높이 설정 */
+height: 100vh;
 display: flex;
 align-items: flex-end; /* 가로로 배치하고 아래로 정렬 */
 justify-content: center;/*가운데로 정렬*/
@@ -74,6 +74,11 @@ background-color: white;
   transform: translateX(-60px); /* 시작 위치 지정 */
   /* fadein 애니메이션 효과 설정 */
   transition: opacity 1s ease, transform 2s ease;
+  /* 미디어 쿼리를 사용하여 스타일 변경 */
+  @media screen and (max-width: 800px) {
+    left: 0%;
+    margin-left: 5vw;
+  }
 }
 
 
@@ -107,6 +112,12 @@ background-color: white;
   @media screen and (max-width: 1400px) {
     font-size: 4.9vw;
   }
+  /* 미디어 쿼리를 사용하여 스타일 변경 */
+  @media screen and (max-width: 800px) {
+    left: 0%;
+    margin-left: 5vw;
+    font-size: 7vw;
+  }
 }
 
 .subtitle.in-view {
@@ -128,7 +139,13 @@ background-color: white;
 
   /* 미디어 쿼리를 사용하여 스타일 변경 */
   @media screen and (max-width: 1400px) {
-    font-size: 1.9vw;
+    font-size: 2.5vw;
+  }
+  /* 미디어 쿼리를 사용하여 스타일 변경 */
+  @media screen and (max-width: 800px) {
+    left: 0%;
+    margin-left: 5vw;
+    font-size: 4vw;
   }
 }
 
@@ -150,8 +167,9 @@ background-color: white;
   transition: opacity 1s ease, transform 2s ease;
 
   /* 미디어 쿼리를 사용하여 스타일 변경 */
-  @media screen and (max-width: 1400px) {
-
+  @media screen and (max-width: 800px) {
+    left: 0%;
+    margin-left: 5vw;
   }
 }
 
@@ -163,17 +181,22 @@ background-color: white;
 /* 2섹션 historyof 글 텍스트 스타일 */
 .topic-title,
 .topic-number {
-  margin: 0 3vw 0 0;  
+  margin: 0 3vh 0 0;  
 
    /* 미디어 쿼리를 사용하여 스타일 변경 */
-  @media screen and (max-width: 1400px) {
-
+  @media screen and (max-width: 800px) {
+      margin: 0;
     }
   }
 
 .topic-title{
-  margin-top: 3em;
- color: rgb(255, 194, 0);
+  margin-top: 5vh;
+ color: rgb(255, 194, 0);  
+
+ /* 미디어 쿼리를 사용하여 스타일 변경 */
+@media screen and (max-width: 800px) {
+  font-size: 3.5vw;
+  }
 }
 
 .topic-number {
@@ -196,17 +219,8 @@ background-color: white;
   justify-content: space-between; 
   align-items: flex-end;
   width: 100%;
+  height: 20.5%;
   background-color: white;
-}
-
-.section2-icon {
-  border: none;
-  background-color: transparent;
-  font-size: 0.9em;
-  font-weight: bold;
-  margin-top: 2.7em;
-  margin-bottom: 2.7em;
-  cursor: pointer;
 }
 
 .section2-icon .section2icon-description {
@@ -214,51 +228,10 @@ background-color: white;
 }
 
 .section2-icon:hover .section2icon-description {
-  color: rgb(136, 209, 0);
+  color: rgb(0, 104, 232);
 }
 
-/* 2섹션 버튼 스타일 */
-.prev-button,
-.next-button {
-  width: 3.5em;
-  height: 3.5em;
-  background-color: white;
-  border-radius: 50%;
-  border: none;
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.5); /* 그림자 추가 */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  margin: 0 8em 5.2em 8em; /* 버튼과 아이콘 사이 간격 설정 */
-}
-
-/* 2섹션 버튼 내부 스타일 */
-.button-inner {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 2.2em;
-}
-
-/* 2섹션 화살표 아이콘 스타일 */
-.leftarrow {
-  margin-right: 0.2em;
-  margin-bottom: 0.12em;
-  font-weight: bold;
-  color: lightgray;
-}
-
-/* 2섹션 화살표 아이콘 스타일 */
-.rightarrow {
-  margin-left: 0.2em;
-  margin-bottom: 0.12em;
-  font-weight: bold;
-  color: lightgray;
-}
-
-
-/* 3section */
+/* 3section sec3 */
 
 /*3섹션 타이틀 스타일*/
 .title {
@@ -272,6 +245,11 @@ background-color: white;
   transform: translateY(40px); /* 시작 위치 지정 */
   /* fadein 애니메이션 효과 설정 */
   transition: opacity 1s ease, transform 2s ease;
+
+  /* 미디어 쿼리를 사용하여 스타일 변경 */
+  @media screen and (max-width: 800px) {
+  font-size: 5vw;
+  }
 }
 
 .title.in-view {
@@ -287,6 +265,11 @@ background-color: white;
   transform: translateY(50px); /* 시작 위치 지정 */
   /* fadein 애니메이션 효과 설정 */
   transition: opacity 1.2s ease, transform 2.5s ease;
+
+  /* 미디어 쿼리를 사용하여 스타일 변경 */
+  @media screen and (max-width: 800px) {
+  font-size: 4vw;
+  }
 }
 
 .sec3description.in-view {
@@ -331,11 +314,23 @@ background-color: white;
   max-width: 100%;
   opacity: 1;
   text-align: left; /* 왼쪽 정렬 */
-  padding: 2.2em; /* 여백 추가 */
+  margin-left: 2.2em; /* 여백 추가 */
+  margin-bottom: 2.2em; /* 여백 추가 */
   z-index: 9999;
+  
+  /* 미디어 쿼리를 사용하여 스타일 변경 */
+  @media screen and (max-width: 700px), (max-height: 850px) {
+    margin-left: 2vw; /* 여백 추가 */
+    margin-bottom: 2vw; /* 여백 추가 */
+  }
 }
 
 .place {
+  
+  /* 미디어 쿼리를 사용하여 스타일 변경 */
+  @media screen and (max-width: 700px), (max-height: 850px) {
+    font-size: 2vw;
+  }
 }
 
 .building {
@@ -344,6 +339,11 @@ background-color: white;
   font-size: 1.5em;
   font-weight: bold;
   white-space: pre;
+  
+  /* 미디어 쿼리를 사용하여 스타일 변경 */
+  @media screen and (max-width: 1550px), (max-height: 850px) {
+    font-size: 1.2vw;
+  }
 }
 
 .hoverimage-container {
@@ -418,6 +418,11 @@ background-color: white;
   text-align: left;
   justify-content: space-around ;
   margin: 0 5em 0 5.2em;
+  
+  /* 미디어 쿼리를 사용하여 스타일 변경 */
+  @media screen and (max-width: 800px), (max-height: 850px) {
+    margin: 0;
+  }
 }
 
 /* 뉴스 아이템들 스타일 */
@@ -456,42 +461,54 @@ background-color: white;
   display: flex;
   justify-content: center;
   align-items: center;
+  
+  /* 미디어 쿼리를 사용하여 스타일 변경 */
+  @media screen and (max-width: 500px), (max-height: 800px) {
+    width: 11vw; /* 네모 상자의 너비 설정 */
+    height: 5vw; /* 네모 상자의 높이 설정 */
+  }
 }
 
 /* 뉴스 스타일 */
 .news-text {
   color: white; /* 흰색 글자색 설정 */
   font-size: 1em; /* 글자 크기 설정 */
+  
+  /* 미디어 쿼리를 사용하여 스타일 변경 */
+  @media screen and (max-width: 500px), (max-height: 800px) {
+   font-size: 3vw;
+  }
 }
 
 .news-title {
   font-size: 1em;
   color: gray;
   
-
    /* 미디어 쿼리를 사용하여 스타일 변경 */
-   @media screen and (max-height: 850px) {
+   @media screen and (max-width: 1200px), (max-height: 800px) {
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
-    -webkit-line-clamp: 1;
+    -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
    }
-}
-
-
-/* news date 스타일 */
-.news-date {
-  color: gray;
-  margin-bottom: 1.5em;
-  font-size: 1.1em;
+  
+   /* 미디어 쿼리를 사용하여 스타일 변경 */
+   @media screen and (max-width: 500px), (max-height: 800px) {
+    font-size: 3vw;
+   }
 }
 
 /* read more link 스타일 */
 .news-more-link {
   font-size: 1.13em;
   color: #FFC217;
-  transition: letter-spacing 0.5s ease; /* 호버 시 letter-spacing에 효과를 추가합니다. */
+  transition: letter-spacing 0.5s ease; /* 호버 시 letter-spacing에 효과를 추가합니다. */ 
+
+  /* 미디어 쿼리를 사용하여 스타일 변경 */
+  @media screen and (max-width: 500px), (max-height: 800px) {
+    font-size: 3vw;
+  }
 }
 
 /* 2섹션 "read more" 화살표 아이콘 스타일 */
@@ -500,6 +517,10 @@ background-color: white;
   margin-left: 0.7em;
   color: #FFC217;
   font-weight: bold;
+  /* 미디어 쿼리를 사용하여 스타일 변경 */
+  @media screen and (max-width: 500px), (max-height: 800px) {
+    font-size: 3vw;
+  }
 }
 
 .newsbutton-container {
@@ -535,7 +556,14 @@ background-color: white;
 }
 .newsbutton img{
   width: 30vw;
+  height: 15vw;
   border-radius: 20px;
+  /* 미디어 쿼리를 사용하여 스타일 변경 */
+  @media screen and (max-width: 1200px), (max-height: 800px) {
+    width: 25vw;
+    height: 12.5vw;
+  }
+  
 }
 
 /* 5section */
@@ -544,6 +572,10 @@ background-color: white;
   margin-bottom: 0.7em;
   text-align: center;
 color: gray;
+
+@media only screen and (max-width: 800px), (max-height: 500px) {
+  font-size: 4.15vw;
+}
 }
 
 .bold-text {
@@ -567,7 +599,7 @@ color: gray;
   transition: opacity 1s ease, transform 2s ease;
 
   /* 미디어 쿼리를 사용하여 스타일 변경 */
- @media screen and (max-width: 1400px) {
+ @media screen and (max-width: 1250px) {
   font-size: 5.8vw;
    }
 }
@@ -587,7 +619,7 @@ color: gray;
   /* fadein 애니메이션 효과 설정 */
   transition: opacity 1s ease, transform 3s ease;
   /* 미디어 쿼리를 사용하여 스타일 변경 */
- @media screen and (max-width: 1400px) {
+ @media screen and (max-width: 1250px) {
   font-size: 5.8vw;
    }
 
@@ -608,7 +640,7 @@ color: gray;
   /* fadein 애니메이션 효과 설정 */
   transition: opacity 1s ease, transform 3s ease;
   /* 미디어 쿼리를 사용하여 스타일 변경 */
- @media screen and (max-width: 1400px) {
+ @media screen and (max-width: 1250px) {
   font-size: 1.9vw;
   margin-left: 8em;
    }
@@ -637,7 +669,7 @@ color: gray;
   transition: opacity 2s ease, transform 4s ease;
 
   /* 미디어 쿼리를 사용하여 스타일 변경 */
- @media screen and (max-width: 1400px) {
+ @media screen and (max-width: 1250px) {
   width: 50vw; /* 검색창의 가로 너비 조정 */
   margin-left: 15vw;
    }
@@ -652,10 +684,6 @@ color: gray;
   color: white;
 }
 
-.searchheerim-button {
-  cursor: pointer;
-}
-
 .searchtag-keywords {
   padding: 10vh 0 12vh 12em;
   opacity: 0; /* 처음에는 안 보이게 설정 */
@@ -664,7 +692,7 @@ color: gray;
   transition: opacity 3s ease, transform 5s ease;
 
   /* 미디어 쿼리를 사용하여 스타일 변경 */
- @media screen and (max-width: 1400px) {
+ @media screen and (max-width: 1100px) {
   font-size: 1.9vw;
   padding: 3vw 0 5vw 14.5vw;
    }
@@ -708,6 +736,11 @@ transition: color 0.3s; /* 배경색 전환 애니메이션 */
     flex-direction: column;
     margin-bottom: 2em;
     margin-left: 7em;
+  }
+  
+  @media screen and (max-width: 500px), (max-height: 500px) {
+    margin-left: 2vw;
+    font-size: 3vw;
   }
 }
 

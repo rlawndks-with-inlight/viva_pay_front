@@ -4,12 +4,80 @@ import Link from 'next/link';
 import UserLayout from 'src/layouts/UserLayout';
 import langJson from 'src/data/lang.json'
 import { useRouter } from "next/router";
+import styled from 'styled-components';
 const sections = ["section1", "section2", "section3", "section4", "section5"]; // 섹션 이름
 const totalIcons = 16; // 총 아이콘 개수
 const iconsPerPageLarge = 6; // 큰 화면에서 표시할 아이콘 개수
 const iconsPerPageSmall = 4; // 작은 화면에서 표시할 아이콘 개수
 
+const IconButton = styled.button`
+border: none;
+background-color: transparent;
+font-size: 0.9em;
+font-weight: bold;
+margin-bottom: 5vh;
+cursor: pointer;
+@media only screen and (max-width: 500px), (max-height: 500px) {
+  margin: 0;
+  font-size: 2vw;
+}
+    img{
+  width: 10vh;
+  height: 10vh;
 
+    @media only screen and (max-width: 500px), (max-height: 500px) {
+        margin: 0;
+        width: 12vw;
+        height: 12vw;
+    }
+
+    }
+`
+const PrevButton = styled.button`
+border: none;
+cursor: pointer;
+margin-bottom: 2.5%;
+margin-left: 20%;
+z-index: 2;
+background-size: cover;
+background-color: transparent;
+@media only screen and (max-width: 1100px), (max-height: 800px) {
+    margin-left: 5%;
+}
+@media only screen and (max-width: 500px), (max-height: 500px) {
+    margin: 0;
+    img{
+        width: 8vw;
+        height: 12vw;
+    }
+}
+`
+const NextButton = styled.button`
+border: none;
+cursor: pointer;
+margin-bottom: 2.5%;
+margin-right: 20%;
+z-index: 2;
+background-size: cover;
+background-color: transparent;
+@media only screen and (max-width: 1100px), (max-height: 800px) {
+    margin-right: 5%;
+}
+@media only screen and (max-width: 500px), (max-height: 500px) {
+    margin: 0;
+    img{
+        width: 8vw;
+        height: 12vw;
+    }
+}
+`
+const SearchButton = styled.button`
+cursor: pointer;
+    img{
+        width: 20px;
+        height: 20px;
+    }
+`
 const Topic = ({ title, initialValue, finalValue, inView }) => {
     const [currentValue, setCurrentValue] = useState(initialValue);
 
@@ -396,35 +464,29 @@ const Home = () => {
                                         </div>
                                         <div className="icon-container">
                                             {/* 이전 버튼 */}
-                                            <button className="prev-button" onClick={showPreviousIcons}>
-                                                <div className="button-inner">
-                                                    <span className="leftarrow">&#5130;</span> {/* 왼쪽 화살표 */}
-                                                </div>
-                                            </button>
+                                            <PrevButton className="prev-button" onClick={showPreviousIcons}>
+                                                <img src="/icon/prev.png" alt="Prev icon"/>
+                                            </PrevButton>
                                             {/* 아이콘 내용 */}
                                             {iconIndexes.map((iconIndex) => (
-                                                <button
+                                                <IconButton
                                                     key={`icon-${iconIndex}`}
-                                                    className="section2-icon"
                                                     onClick={() => handleIconClick(iconIndex)}
                                                 >
                                                     <img
                                                         src={`/icon/${iconIndex}.png`}
                                                         alt={`Icon ${iconIndex}`}
-                                                        style={{width:"10vh", height:"10vh"}}
                                                     />
                                                     <div className="section2icon-description">
                                                         {/* 아이콘에 대한 설명 */}
                                                         {getIconDescription(iconIndex)}
                                                     </div>
-                                                </button>
+                                                </IconButton>
                                             ))}
                                             {/* 다음 버튼 */}
-                                            <button className="next-button" onClick={showNextIcons}>
-                                                <div className="button-inner">
-                                                    <span className="rightarrow">&#5125;</span> {/* 오른쪽 화살표 */}
-                                                </div>
-                                            </button>
+                                            <NextButton className="next-button" onClick={showNextIcons}>
+                                                <img src="/icon/next.png" alt="Next icon"/>
+                                            </NextButton>
                                         </div>
                                     </div>
                                 ) : index === 2 ? (
@@ -662,15 +724,15 @@ const Home = () => {
                                                     value={searchQuery}
                                                     onChange={handleSearchInputChange} // 검색 입력란 스타일 추가
                                                 />
-                                                    <button  className={`searchheerim-button"${inViewItems5.includes("") ? "in-view" : ""}`} onClick={() => { window.location.href = "/404"; }} style={{
+                                                    <SearchButton  className={`searchheerim-button"${inViewItems5.includes("") ? "in-view" : ""}`} onClick={() => { window.location.href = "/404"; }} style={{
                                                         background: "transparent", // Set the background to transparent
                                                         border: "none", // Remove the border
                                                         color: "white",
                                                         borderBottom:"5px solid white",
                                                     }}>
                                                         Search
-                                                        <img src="/icon/search.png" alt="Search Icon" width="40" height="40" />
-                                                    </button>
+                                                        <img src="/icon/search.png" alt="Search Icon"/>
+                                                    </SearchButton>
                                             </div>
                                             <div className={`searchtag-keywords ${inViewItems5.includes("") ? "in-view" : ""}`}>
                                                 <button className="searchtag-button" onClick={() => { window.location.reload() }}><Link href="/Payvery">#Payvery</Link></button>
