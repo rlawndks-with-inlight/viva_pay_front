@@ -31,18 +31,17 @@ const LogoButton = styled.button`
   align-items: center;
   z-index: 2;
   background: url('/image/Logo.png');
-  width: 18em; 
+  width: 17em; 
   height: 7em;
   background-size: cover;
-@media only screen and (max-width: 500px), (max-height: 800px) {
-    width: 45vw;
-    height: 7vh;
+@media only screen and (max-width: 500px) {
+    width: 10em;
+    height: 4em;
 }
 `;
 const HeaderButtons = styled.div` /* 헤더의 오른쪽 스타일 */
-position: fixed;
-top: 2.5%;
-right: 5%;
+margin-top: 0.5em;
+margin-right: 2em ;
 display: flex;
 gap: 0.4em;
 font-size: 1.5em;/* 한영 버튼 크기 */
@@ -61,8 +60,8 @@ z-index: 3;
         text-decoration: underline;
       }
   }
-@media only screen and (max-width: 500px), (max-height: 800px) {
-    top: 1%;
+@media only screen and (max-width: 500px) {
+    top: 1.2%;
     font-size: 4vw;
 }
 `
@@ -122,8 +121,9 @@ border: none; /* 버튼 테두리 제거 */
     font-size: 3vw;
     padding: 5em 1em 0 0;  /* 버튼 패딩 조절 */
 }
-@media only screen and (max-width: 550px) {
+@media only screen and (max-width: 500px) {
     font-size: 1em;
+    padding: 5em 0.4em 0 0; 
 }
 `
 const SubButton = styled.button`
@@ -136,6 +136,9 @@ margin-top: 1em;
 font-size: 1.2em;
 background: transparent; /* 투명 배경 추가 */
 text-align: left; /* 텍스트 왼쪽 정렬 */
+@media only screen and (max-width: 500px) {
+    font-size: 0.8em;
+}
   a{
     text-decoration: none;
     margin-bottom: 1.5em;
@@ -249,24 +252,24 @@ const Header = ({ activeSection, isMoreClicked, handleMoreButtonClick, setIsMore
 
     return (
         <Headerwrappers activeSection={activeSection} className={`${isMoreClicked ? 'showMore' : ''}`} >
-                <Link href="/" legacyBehavior> 
+            <Link href="/" legacyBehavior>
                 <LogoButton onClick={() => { window.location.reload() }}></LogoButton>
-                </Link>
-                <HeaderButtons activeSection={activeSection}>
-                    {isMoreClicked ? null : ( // 녹색 섹션이 활성화되면 버튼을 숨김
-                        <>
-                            <Link href="/en" legacyBehavior >
-                                <a className={lang === "en" ? "active" : ""}>EN</a>
-                            </Link>
-                            <Link href="/kr" legacyBehavior>
-                                <a className={lang === "kr" ? "active" : ""}>KR</a>
-                            </Link>
-                            <More onClick={handleMoreButtonClick}>
-                                <img src="/icon/more.png" alt="More Icon" width="40" height="40" />
-                            </More>
-                        </>
-                    )}
-                </HeaderButtons>
+            </Link>
+            <HeaderButtons activeSection={activeSection}>
+                {isMoreClicked ? null : ( // 녹색 섹션이 활성화되면 버튼을 숨김
+                    <>
+                        <Link href="/en" legacyBehavior >
+                            <a className={lang === "en" ? "active" : ""}>EN</a>
+                        </Link>
+                        <Link href="/kr" legacyBehavior>
+                            <a className={lang === "kr" ? "active" : ""}>KR</a>
+                        </Link>
+                        <More onClick={handleMoreButtonClick}>
+                            <img src="/icon/more.png" alt="More Icon" width="40" height="40" />
+                        </More>
+                    </>
+                )}
+            </HeaderButtons>
             {isMoreClicked && (
                 <MoreContainer>
                     <MoreClose onClick={closeMore}>Close X</MoreClose>
