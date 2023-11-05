@@ -29,7 +29,7 @@ const LogoButton = styled.button`
   margin-left: 10%;
   flex-direction: column;
   align-items: center;
-  z-index: 2;
+  z-index: 9999;
   background: url('/image/Logo.png');
   width: 17em; 
   height: 7em;
@@ -79,7 +79,7 @@ left: 0%;
 width: 100%;
 height: 100%;
 background-color: rgb(0, 104, 232);; /* 파란색 배경 추가 */
-z-index: 1;
+z-index: 9999;
 `
 const MoreClose = styled.button` /* more close 버튼 */
 position: fixed;
@@ -91,7 +91,7 @@ border: none;
 cursor: pointer;
 font-size: 1.5em;
 font-weight: bold;
-z-index: 1;
+z-index: 9999;
 @media only screen and (max-width: 1400px) {
     top: 2.4em;
     right: 2em;

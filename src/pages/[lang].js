@@ -98,7 +98,7 @@ left: 5%;
 font-weight: bold;
 font-size: 4vw;
 `
-const ImageContainer = styled.div`
+const M3ImageContainer = styled.div`
 position: absolute;
 top: 205%;
   width: 100%; /* 컨테이너의 너비를 화면 너비에 맞춥니다. */
@@ -115,9 +115,9 @@ top: 205%;
   div{
 position: absolute;
 left: 8%;
-margin-top: 26%;
+margin-top: 7em;
 background: transparent; /* 투명한 배경 */
-z-index: 9999;
+z-index: 5;
 color: white;
 @media only screen and (width: 540px), (height: 720px) {
 margin-top: 95px;
@@ -164,20 +164,14 @@ overflow-x: scroll;
     background-color: blue;
 }
 ::-webkit-scrollbar {
-    width: 1px;
-
+    width: 100%;
+    height: 10px;
 }
 `
 const M4Button = styled.a`
 display: inline-block; /* 인라인 블록 요소로 만들어 옆에 다른 요소가 올 수 있도록 합니다. */
 margin: 0; /* 여백 제거 */
 padding: none;
-img{
-margin-top: 1em;
-  width: 12em;
-  height: 8em;
-  border-radius: 20px;
-}
 `
 const M5Title = styled.div`
 font-size: 1em;
@@ -189,6 +183,24 @@ span{
     font-weight: bold;
 }
 `
+const Section = styled.div`
+height: ${(props) => props.height};
+background-size: cover;
+background-color: ${(props) => props.background};
+background-image:  url(${props => props.image});
+overflow: hidden;
+`
+const W1Title = styled.div`
+margin-top: ${(props) => props.magtop};
+margin-left: 9.5vw;
+font-size: 3.1em;
+font-weight: bold;
+font-family: 'Playfair Display', serif;
+border: 1px solid transparent;
+color: white;
+`
+/* 2section sec2 2섹션 스타일  */
+
 const SearchContainer = styled.div`
 background-color: rgb(0, 104, 232);
 width: 100vw;
@@ -242,7 +254,7 @@ font-size: 0.9em;
 font-weight: bold;
 margin-bottom: 4vh;
 cursor: pointer;
-@media only screen and (max-width: 600px), (max-height: 500px) {
+@media only screen and (max-width: 600px) {
   margin: 0 0 5vh 0;
   font-size: 2vw;
 }
@@ -263,13 +275,13 @@ border: none;
 cursor: pointer;
 margin-bottom: 4vh;
 margin-left: 20%;
-z-index: 2;
+z-index: 1;
 background-size: cover;
 background-color: transparent;
 @media only screen and (max-width: 1100px), (max-height: 800px) {
     margin-left: 5%;
 }
-@media only screen and (max-width: 600px), (max-height: 500px) {
+@media only screen and (max-width: 600px), (max-height: 520px) {
   margin: 0 0 5vh 0;
     img{
   width: 30px;
@@ -282,13 +294,13 @@ border: none;
 cursor: pointer;
 margin-bottom: 4vh;
 margin-right: 20%;
-z-index: 2;
+z-index: 1;
 background-size: cover;
 background-color: transparent;
 @media only screen and (max-width: 1100px), (max-height: 800px) {
     margin-right: 5%;
 }
-@media only screen and (max-width: 600px), (max-height: 500px) {
+@media only screen and (max-width: 600px), (max-height: 520px) {
   margin: 0 0 5vh 0;
     img{
   width: 30px;
@@ -304,7 +316,7 @@ cursor: pointer;
     }
 `
 const Topic = ({ title, initialValue, finalValue, inView }) => {
-  const [currentValue, setCurrentValue] = useState(inView && window.innerWidth >= 600 ? initialValue : finalValue);
+    const [currentValue, setCurrentValue] = useState(inView && window.innerWidth >= 600 ? initialValue : finalValue);
 
     useEffect(() => {
         // 화면 너비가 600 이상일 때만 실행
@@ -370,7 +382,10 @@ const Home = () => {
     const [inViewItems3, setInViewItems3] = useState([]);
     const [inViewItems4, setInViewItems4] = useState([]);
     const [inViewItems5, setInViewItems5] = useState([]);
-    const [section2InView, setSection2InView] = useState(false); // section2의 inView 여부
+    const [section2InView, setSection2InView] = useState(false);
+    const [section3InView, setSection3InView] = useState(false);
+    const [section4InView, setSection4InView] = useState(false);
+    const [section5InView, setSection5InView] = useState(false);
     const [hoveredImage, setHoveredImage] = useState(null);
     const [hoveredText, setHoveredText] = useState(null);
     const [windowWidth, setWindowWidth] = useState(0); // 초기 화면 너비 설정
@@ -389,13 +404,13 @@ const Home = () => {
     // 숫자 0부터 증가하는 애니메이션
     useEffect(() => {
         const handleScroll = () => {
-                            const section2 = document.getElementById("section2");
-                if (section2) {
-                    const rect = section2.getBoundingClientRect();
-                    const isSection2InView = rect.top >= 0 && rect.bottom <= window.innerHeight;
-                    if (isSection2InView !== section2InView) {
-                        setSection2InView(isSection2InView);
-                                    }
+            const section2 = document.getElementById("section2");
+            if (section2) {
+                const rect = section2.getBoundingClientRect();
+                const isSection2InView = rect.top >= 0 && rect.bottom <= window.innerHeight;
+                if (isSection2InView !== section2InView) {
+                    setSection2InView(isSection2InView);
+                }
             }
         };
 
@@ -416,21 +431,13 @@ const Home = () => {
     useEffect(() => {
         const handleScroll = () => {
             if (window.innerWidth >= 600) {
-                const updatedInViewItems2 = [];
                 const updatedInViewItems3 = [];
                 const updatedInViewItems4 = [];
                 const updatedInViewItems5 = [];
-                const fadeIn2 = document.querySelectorAll(".section2");
                 const fadeIn3 = document.querySelectorAll(".section3");
                 const fadeIn4 = document.querySelectorAll(".section4");
                 const fadeIn5 = document.querySelectorAll(".section5");
 
-                fadeIn2.forEach((item2) => {
-                    const itemRect2 = item2.getBoundingClientRect();
-                    if (itemRect2.top < window.innerHeight && itemRect2.bottom >= 0) {
-                        updatedInViewItems2.push(item2.id);
-                    }
-                });
 
                 fadeIn3.forEach((item3) => {
                     const itemRect3 = item3.getBoundingClientRect();
@@ -453,7 +460,6 @@ const Home = () => {
                     }
                 });
 
-                setInViewItems2(updatedInViewItems2);
                 setInViewItems3(updatedInViewItems3);
                 setInViewItems4(updatedInViewItems4);
                 setInViewItems5(updatedInViewItems5);
@@ -593,7 +599,6 @@ const Home = () => {
         setWindowWidth(window.innerWidth);
         setWindowHeight(window.innerHeight);
     };
-
     const handleScroll = (e) => {
         // 스크롤 이벤트를 중지합니다.
         e.preventDefault();
@@ -712,7 +717,7 @@ const Home = () => {
                                     <M3>
                                         <M3Title>Our Service</M3Title>
                                         <M3Subtitle>Follow your dream. We support your dream.</M3Subtitle>
-                                        <ImageContainer>
+                                        <M3ImageContainer>
                                             <a
                                                 href="/404">
                                                 <div>
@@ -748,7 +753,7 @@ const Home = () => {
                                                 </div>
                                                 <img src="/image/scanner.png" alt="Image 4" />
                                             </a>
-                                        </ImageContainer>
+                                        </M3ImageContainer>
                                     </M3>
                                     <NewsList>
                                         {/* 뉴스 아이템 1 */}
@@ -906,16 +911,16 @@ const Home = () => {
                                     ref={(el) => (sectionRefs.current[index] = el)}
                                 >
                                     {index === 0 ? (
-                                        <div className="section1">
-                                            <div className="sec1title"> {langJson[lang]?.FOLLOW}</div>
-                                            <div className="sec1title" style={{ marginTop: "2.5em" }}> {langJson[lang]?.SUPPORT}</div>
-                                        </div>
+                                        <Section height="100vh" image="/image/galaxy.png">
+                                            <W1Title magtop="4em" > {langJson[lang]?.FOLLOW}</W1Title>
+                                            <W1Title magtop="2em" > {langJson[lang]?.SUPPORT}</W1Title>
+                                        </Section>
                                     ) : index === 1 ? (
-                                        <div className="section2">
+                                        <Section height="100vh" image="/image/blue.png">
                                             <div className="yellow">
                                                 {/* 노란색 배경에 녹색 박스 모양의 텍스트 박스와 소제목, 설명 */}
-                                                <div className={`green-box ${inViewItems2.includes("") ? "in-view" : ""}`}>
-                                                    <p className="green-box-text">Who we are</p>
+                                                <div className={`yellow-box ${inViewItems2.includes("") ? "in-view" : ""}`}>
+                                                    <p className="yellow-box-text">Who we are</p>
                                                 </div>
                                                 <div className={`subtitle ${inViewItems2.includes("") ? "in-view" : ""}`}> {langJson[lang]?.FOLLOW}</div>
                                                 <div className={`subtitle ${inViewItems2.includes("") ? "in-view" : ""}`} style={{ marginTop: "1em" }}> {langJson[lang]?.SUPPORT}</div>
@@ -924,41 +929,41 @@ const Home = () => {
                                                 <div>
                                                     <TopicsContainer inView={inViewItems2.includes("")} />
                                                 </div>
+                                                <div className="icon-container">
+                                                    {/* 이전 버튼 */}
+                                                    <PrevButton className="prev-button" onClick={showPreviousIcons}>
+                                                        <img src="/icon/prev.png" alt="Prev icon" />
+                                                    </PrevButton>
+                                                    {/* 아이콘 내용 */}
+                                                    {iconIndexes.map((iconIndex) => (
+                                                        <IconButton
+                                                            key={`icon-${iconIndex}`}
+                                                            onClick={() => handleIconClick(iconIndex)}
+                                                        >
+                                                            <img
+                                                                src={`/icon/${iconIndex}.png`}
+                                                                alt={`Icon ${iconIndex}`}
+                                                            />
+                                                            <div className="section2icon-description">
+                                                                {/* 아이콘에 대한 설명 */}
+                                                                {getIconDescription(iconIndex)}
+                                                            </div>
+                                                        </IconButton>
+                                                    ))}
+                                                    {/* 다음 버튼 */}
+                                                    <NextButton className="next-button" onClick={showNextIcons}>
+                                                        <img src="/icon/next.png" alt="Next icon" />
+                                                    </NextButton>
+                                                </div>
                                             </div>
-                                            <div className="icon-container">
-                                                {/* 이전 버튼 */}
-                                                <PrevButton className="prev-button" onClick={showPreviousIcons}>
-                                                    <img src="/icon/prev.png" alt="Prev icon" />
-                                                </PrevButton>
-                                                {/* 아이콘 내용 */}
-                                                {iconIndexes.map((iconIndex) => (
-                                                    <IconButton
-                                                        key={`icon-${iconIndex}`}
-                                                        onClick={() => handleIconClick(iconIndex)}
-                                                    >
-                                                        <img
-                                                            src={`/icon/${iconIndex}.png`}
-                                                            alt={`Icon ${iconIndex}`}
-                                                        />
-                                                        <div className="section2icon-description">
-                                                            {/* 아이콘에 대한 설명 */}
-                                                            {getIconDescription(iconIndex)}
-                                                        </div>
-                                                    </IconButton>
-                                                ))}
-                                                {/* 다음 버튼 */}
-                                                <NextButton className="next-button" onClick={showNextIcons}>
-                                                    <img src="/icon/next.png" alt="Next icon" />
-                                                </NextButton>
-                                            </div>
-                                        </div>
+                                        </Section>
                                     ) : index === 2 ? (
-                                        <div className="section3">
-                                            <div className={`title ${inViewItems3.includes("") ? "in-view" : ""}`}>Our Service
+                                        <Section height="100vh">
+                                            <div className="title">Our Service
                                             </div>
-                                            <div className={`sec3description ${inViewItems3.includes("") ? "in-view" : ""}`} style={{ color: "black", margin: "none" }}>{langJson[lang]?.DESCIRPTION}
+                                            <div className="sec3description"style={{ color: "black", margin: "none" }}>{langJson[lang]?.DESCIRPTION}
                                             </div>
-                                            <div className={`image-container ${inViewItems3.includes("") ? "in-view" : ""}`}
+                                            <div className="image-container"
                                                 onMouseLeave={handleImageLeave}>
                                                 {hoveredImage ? (
                                                     <div className="hoverimage-container">
@@ -1080,15 +1085,15 @@ const Home = () => {
                                                     </>
                                                 )}
                                             </div>
-                                        </div>
+                                        </Section>
                                     ) : index === 3 ? (
-                                        <div className="section4">
+                                        <Section height="95vh">
                                             {/* 뉴스 아이템 리스트 */}
                                             <div className="news-list">
                                                 {/* 첫 번째 행 */}
                                                 <div className="news-row">
                                                     {/* 뉴스 아이템 1 */}
-                                                    <a href="/404" className={`news-item ${inViewItems4.includes("") ? "in-view" : ""}`}>
+                                                    <a href="/404" className="news-item">
                                                         <div className="news-box">
                                                             <p className="news-text">News</p>
                                                         </div>
@@ -1098,7 +1103,7 @@ const Home = () => {
                                                         <span className="arrow-icon" style={{ marginLeft: "20px", color: "orange", fontWeight: "bold" }}>→</span>
                                                     </a>
                                                     {/* 뉴스 아이템 2 */}
-                                                    <a href="/404" className={`news-item ${inViewItems4.includes("") ? "in-view" : ""}`} >
+                                                    <a href="/404" className="news-item">
                                                         <div className="news-box">
                                                             <p className="news-text">News</p>
                                                         </div>
@@ -1108,7 +1113,7 @@ const Home = () => {
                                                         <span className="arrow-icon" >→</span>
                                                     </a>
                                                     {/* 뉴스 아이템 3 */}
-                                                    <a href="/404" className={`news-item ${inViewItems4.includes("") ? "in-view" : ""}`} >
+                                                    <a href="/404" className="news-item">
                                                         <div className="news-box">
                                                             <p className="news-text">News</p>
                                                         </div>
@@ -1121,7 +1126,7 @@ const Home = () => {
                                                 {/* 두 번째 행 */}
                                                 <div className="news-row">
                                                     {/* 뉴스 아이템 4 */}
-                                                    <a href="/404" className={`news-item ${inViewItems4.includes("") ? "in-view" : ""}`} >
+                                                    <a href="/404" className="news-item">
                                                         <div className="news-box">
                                                             <p className="news-text">News</p>
                                                         </div>
@@ -1131,7 +1136,7 @@ const Home = () => {
                                                         <span className="arrow-icon">→</span>
                                                     </a>
                                                     {/* 뉴스 아이템 5 */}
-                                                    <a href="/404" className={`news-item ${inViewItems4.includes("") ? "in-view" : ""}`} >
+                                                    <a href="/404" className="news-item">
                                                         <div className="news-box">
                                                             <p className="news-text">News</p>
                                                         </div>
@@ -1141,7 +1146,7 @@ const Home = () => {
                                                         <span className="arrow-icon" >→</span>
                                                     </a>
                                                     {/* 뉴스 아이템 6 */}
-                                                    <a href="/404" className={`news-item ${inViewItems4.includes("") ? "in-view" : ""}`}>
+                                                    <a href="/404" className="news-item">
                                                         <div className="news-box">
                                                             <p className="news-text">News</p>
                                                         </div>
@@ -1152,42 +1157,44 @@ const Home = () => {
                                                     </a>
                                                 </div>
                                             </div>
-                                            {/* 뉴스 액자 버튼 */}
-                                            <div className={`newsbutton-container ${inViewItems4.includes("") ? "in-view" : ""}`}>
-                                                {/* news1 버튼 */}
-                                                <a className="newsbutton" href="https://www.youtube.com/watch?v=OLrv8OGTUnQ" target="_blank" rel="noopener noreferrer">
-                                                    <img src="/image/newsimage1.png" alt="youtube1 Image" />
-                                                </a>
-                                                {/* news2 버튼 */}
-                                                <a className="newsbutton" style={{ marginLeft: "15px" }} href="https://www.youtube.com/watch?v=REof-nC8Ck8&feature=youtu.be" target="_blank" rel="noopener noreferrer">
-                                                    <img src="/image/newsimage2.png" alt="youtube2 Image" />
-                                                </a>
-                                                {/* news3 버튼 */}
-                                                <a className="newsbutton" style={{ marginLeft: "15px" }} href="https://www.youtube.com/watch?v=Lu8uHwNpHEQ" target="_blank" rel="noopener noreferrer">
-                                                    <img src="/image/newsimage3.png" alt="youtube3 Image" />
-                                                </a>
+                                            <div style={{}}>
+                                                {/* 뉴스 액자 버튼 */}
+                                                <div className="newsbutton-container">
+                                                    {/* news1 버튼 */}
+                                                    <a className="newsbutton" href="https://www.youtube.com/watch?v=OLrv8OGTUnQ" target="_blank" rel="noopener noreferrer">
+                                                        <img src="/image/newsimage1.png" alt="youtube1 Image" />
+                                                    </a>
+                                                    {/* news2 버튼 */}
+                                                    <a className="newsbutton" style={{ marginLeft: "15px" }} href="https://www.youtube.com/watch?v=REof-nC8Ck8&feature=youtu.be" target="_blank" rel="noopener noreferrer">
+                                                        <img src="/image/newsimage2.png" alt="youtube2 Image" />
+                                                    </a>
+                                                    {/* news3 버튼 */}
+                                                    <a className="newsbutton" style={{ marginLeft: "15px" }} href="https://www.youtube.com/watch?v=Lu8uHwNpHEQ" target="_blank" rel="noopener noreferrer">
+                                                        <img src="/image/newsimage3.png" alt="youtube3 Image" />
+                                                    </a>
+                                                </div>
                                             </div>
-                                        </div>
+                                        </Section>
                                     ) : index === 4 ? (
-                                        <div className="section5">
+                                        <Section height="90vh">
                                             <div className="sec5title">
                                                 <span class="bold-text">성공</span>으로 가는 과정을 계획하는데 <span class="bold-text">함께</span>하겠습니다.
                                             </div>
                                             <div className="searchheerim-container">
-                                                <span className={`search-title ${inViewItems5.includes("") ? "in-view" : ""}`}>Search
+                                                <span className="search-title">Search
                                                 </span>
-                                                <span className={`search-title2 ${inViewItems5.includes("") ? "in-view" : ""}`} style={{ marginLeft: "10px" }}>Payvery.com
+                                                <span className="search-title2 " style={{ marginLeft: "10px" }}>Payvery.com
                                                 </span>
-                                                <p className={`searchsub ${inViewItems5.includes("") ? "in-view" : ""}`}>Creative Leadership of Payvery designs the new future never experienced before.</p>
+                                                <p className="searchsub">Creative Leadership of Payvery designs the new future never experienced before.</p>
                                                 <div className="searchheerim">
                                                     <input
-                                                        className={`searchheerim-input ${inViewItems5.includes("") ? "in-view" : ""}`}
+                                                        className="searchheerim-input"
                                                         type="text"
                                                         placeholder="Type here"
                                                         value={searchQuery}
                                                         onChange={handleSearchInputChange} // 검색 입력란 스타일 추가
                                                     />
-                                                    <SearchButton className={`searchheerim-button"${inViewItems5.includes("") ? "in-view" : ""}`} onClick={() => { window.location.href = "/404"; }} style={{
+                                                    <SearchButton className="searchheerim-button" onClick={() => { window.location.href = "/404"; }} style={{
                                                         background: "transparent", // Set the background to transparent
                                                         border: "none", // Remove the border
                                                         color: "white",
@@ -1197,7 +1204,7 @@ const Home = () => {
                                                         <img src="/icon/search.png" alt="Search Icon" />
                                                     </SearchButton>
                                                 </div>
-                                                <div className={`searchtag-keywords ${inViewItems5.includes("") ? "in-view" : ""}`}>
+                                                <div className="searchtag-keywords">
                                                     <button className="searchtag-button" onClick={() => { window.location.reload() }}><Link href="/Payvery">#Payvery</Link></button>
                                                     <button className="searchtag-button" onClick={() => { window.location.reload() }}><Link href="/Purplevery">#Purplevery</Link></button>
                                                     <button className="searchtag-button" onClick={() => { window.location.reload() }}><Link href="/Pg">#Pg</Link></button>
@@ -1235,7 +1242,7 @@ const Home = () => {
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
+                                        </Section>
                                     ) : (
                                         <div>{sectionName}</div>
                                     )}
