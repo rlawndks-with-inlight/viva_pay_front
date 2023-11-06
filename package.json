@@ -161,5 +161,10 @@
       "react": "$react"
     }
   },
-  "sideEffects": false
+  "sideEffects": false,
+  "main": ".eslintrc.js",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": ""
 }

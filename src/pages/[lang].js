@@ -239,7 +239,7 @@ margin-bottom: 2em;
 margin-left: 2vw;
 `
 const Section = styled.div`
-height: 100vh;
+height: ${(props) => props.height};
 background-size: cover;
 background-color: ${(props) => props.background};
 background-image:  url(${props => props.image});
@@ -250,35 +250,33 @@ overflow: hidden;
 const W1Title = styled.div`
 margin-top: ${(props) => props.magtop};
 margin-left: 9.5vw;
-font-size: 3.1em;
+font-size: 5em;
 font-weight: bold;
 font-family: 'Playfair Display', serif;
 border: 1px solid transparent;
 color: white;
 `
 /* 2section sec2 2섹션 스타일  */
+const W2IconContainer = styled.div`
+display: flex;
 
+overflow-x: hidden;
+justify-content: space-between;
+align-items: flex-end;
+width: 100%;
+background-color: white;
+`
 const W2IconButton = styled.button`
 border: none;
 background-color: transparent;
 font-size: 0.9em;
 font-weight: bold;
-margin-bottom: 4vh;
+margin-top: 1em;
+margin-bottom: 2em;
 cursor: pointer;
-@media only screen and (max-width: 600px) {
-  margin: 0 0 5vh 0;
-  font-size: 2vw;
-}
     img{
-  width: 10vh;
-  height: 10vh;
-
-    @media only screen and (max-width: 600px) {
-        margin: 0;
-        width: 12vw;
-        height: 12vw;
-    }
-
+  width: 7em;
+  height: 7em;
     }
 `
 const PrevButton = styled.button`
@@ -327,11 +325,11 @@ cursor: pointer;
     }
 `
 const Topic = ({ title, initialValue, finalValue, inView }) => {
-    const [currentValue, setCurrentValue] = useState(inView && window.innerWidth <=930 ? initialValue : finalValue);
+    const [currentValue, setCurrentValue] = useState(inView && window.innerWidth <=1280 ? initialValue : finalValue);
 
     useEffect(() => {
-        // 화면 너비가 930 이상일 때만 실행
-        if (window.innerWidth >= 930) {
+        // 화면 너비가 1280 이상일 때만 실행
+        if (window.innerWidth >= 1280) {
             if (inView) {
                 let animationInterval;
                 if (currentValue < finalValue) {
@@ -368,7 +366,7 @@ const Topic = ({ title, initialValue, finalValue, inView }) => {
 
 
 const TopicsContainer = ({ inView }) => {
-    const isWideScreen = window.innerWidth >= 930;
+    const isWideScreen = window.innerWidth >= 1280;
     return (
         <div className={`topics-container ${inView && isWideScreen ? "in-view" : ""}`}>
             <Topic title="History of Payvery" initialValue={0} finalValue={50} inView={inView && isWideScreen} />
@@ -442,7 +440,7 @@ const Home = () => {
     // fade-in 애니메이션
     useEffect(() => {
         const handleScroll = () => {
-            if (window.innerWidth >= 930) {
+            if (window.innerWidth >= 1280) {
                 const updatedInViewItems3 = [];
                 const updatedInViewItems4 = [];
                 const updatedInViewItems5 = [];
@@ -614,11 +612,11 @@ const Home = () => {
     
     
     const handleScroll = (e) => {
-        if (windowWidth > 1300 || windowHeight >= 800) {
-            // 스크롤 이벤트를 중지합니다.
-            e.preventDefault();
-    
-            if (isSmoothScrollEnabled) {
+if (windowWidth > 1300 || windowHeight >= 800) {
+        // 스크롤 이벤트를 중지합니다.
+        e.preventDefault();
+
+        if (isSmoothScrollEnabled) {
                 // 마우스 휠 방향에 따라 이동할 섹션을 결정합니다.
                 let newActiveSection = activeSection;
                 if (e.deltaY > 0 && activeSection < sections.length - 1) {
@@ -701,7 +699,7 @@ const Home = () => {
         // closeSearch();
     };
 
-    const isMobile = typeof window !== "undefined" ? window.innerWidth <= 930 : false;
+    const isMobile = typeof window !== "undefined" ? window.innerWidth <= 1280 : false;
     const initialValueForMobile = 50; // 예를 들어, 초기값을 변경하려면 여기에 값을 설정
     const initialValue = isMobile ? initialValueForMobile : 0;
     return (
@@ -945,26 +943,28 @@ const Home = () => {
                                     {index === 0 ? (
                                         <div className="section1">
                                         <Section height="100vh" image="/image/galaxy.png">
-                                            <W1Title magtop="4em" > {langJson[lang]?.FOLLOW}</W1Title>
-                                            <W1Title magtop="2em" > {langJson[lang]?.SUPPORT}</W1Title>
+                                            <W1Title magtop="40vh" > {langJson[lang]?.FOLLOW}</W1Title>
+                                            <W1Title > {langJson[lang]?.SUPPORT}</W1Title>
                                         </Section>
                                         </div>
                                     ) : index === 1 ? (
                                         <div className="section2">
-                                        <Section image="/image/blue.png">
+                                        <Section height="80vh" image="/image/blue.png">
                                             <div className="yellow">
                                                 {/* 노란색 배경에 녹색 박스 모양의 텍스트 박스와 소제목, 설명 */}
                                                 <div className={`yellow-box ${inViewItems2.includes("") ? "in-view" : ""}`}>
                                                     <p className="yellow-box-text">Who we are</p>
                                                 </div>
                                                 <div className={`subtitle ${inViewItems2.includes("") ? "in-view" : ""}`}> {langJson[lang]?.FOLLOW}</div>
-                                                <div className={`subtitle ${inViewItems2.includes("") ? "in-view" : ""}`} style={{ marginTop: "1em" }}> {langJson[lang]?.SUPPORT}</div>
+                                                <div className={`subtitle ${inViewItems2.includes("") ? "in-view" : ""}`}> {langJson[lang]?.SUPPORT}</div>
                                                 <div className={`description ${inViewItems2.includes("") ? "in-view" : ""}`} style={{ marginTop: '2vw' }}>{langJson[lang]?.DESCIRPTION}</div>
                                                 {/* 주제와 설명 */}
                                                 <div>
                                                     <TopicsContainer inView={inViewItems2.includes("")} />
                                                 </div>
-                                                <div className="icon-container">
+                                            </div>
+                                        </Section>
+                                                <W2IconContainer>
                                                     {/* 이전 버튼 */}
                                                     <PrevButton className="prev-button" onClick={showPreviousIcons}>
                                                         <img src="/icon/prev.png" alt="Prev icon" />
@@ -989,9 +989,7 @@ const Home = () => {
                                                     <NextButton className="next-button" onClick={showNextIcons}>
                                                         <img src="/icon/next.png" alt="Next icon" />
                                                     </NextButton>
-                                                </div>
-                                            </div>
-                                        </Section>
+                                                </W2IconContainer>
                                         </div>
                                     ) : index === 2 ? (
                                         <div className="section3">
