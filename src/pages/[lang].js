@@ -18,13 +18,11 @@ const M1 = styled.div`
 background-image: url("/image/galaxy.png");
 background-size: cover;
 height: 100vh;
-display: flex;
+border: 1px solid transparent;
 `
 const M1Title = styled.div`
-position: absolute;
-display: flex;
-top: 30%;
-left: 10%;
+margin-top: 30vh;
+margin-left: 1.5em;
 font-size:3.1em;
 font-weight: bold;
 font-family: 'Playfair Display', serif;
@@ -36,86 +34,100 @@ color: white;
 const M2 = styled.div`
   background-image: url("/image/blue.png");
   background-size: cover; 
-height: 70vh;
+border: 1px solid transparent;
 `
 const M2YellowBox = styled.div`
-width: 26%; /* 네모 상자의 너비 설정 */
-height: 3.5%; /* 네모 상자의 높이 설정 */
+width: 6em; /* 네모 상자의 너비 설정 */
+height: 1.4em; /* 네모 상자의 높이 설정 */
 background-color:rgb(255, 194, 0); /* 노란색 배경색 설정 */
 border-top-right-radius: 10px;
 border-bottom-right-radius: 10px;
-margin-top: 10p;
-position: absolute;
-top: 105%;
-left: 5%;
+margin-top: 2em;
+margin-left: 2.7em;
 display: flex;
 justify-content: center;
 align-items: center;
 p{
   color: black; /* 흰색 글자색 설정 */
-  font-size: 4vw; /* 글자 크기 설정 */
+  font-size: 0.9em; /* 글자 크기 설정 */
   font-weight: bold;
 }
 `
 const M2Subtitle = styled.div`
-font-size: 1.7em;
+margin-left: 0.8em;
+font-size: 3em;
 font-weight: bold;
 font-family: 'Playfair Display', serif;
-position: absolute;
-top: 110%;
-left: 5%;
 color: white;
 `
 const M2Description = styled.div`
-position: absolute;
-top: 127%;
-left: 5%;
+margin-left: 1.7em;
+font-size: 1.5em;
 color: white;
 `
-const IconContainer = styled.div`
+const M2IconContainer = styled.div`
 display: flex;
 justify-content: space-between;
 align-items: center;
 background-color: white;
-height: 20vh;
+`
+const M2IconButton = styled.button`
+border: none;
+background-color: transparent;
+font-size: 0.9em;
+font-weight: bold;
+margin-bottom: 2em;
+cursor: pointer;
+@media only screen and (max-width: 600px) {
+  margin: 0 0 5vh 0;
+  font-size: 2vw;
+}
+    img{
+  width: 4em;
+  height: 4em;
+
+    @media only screen and (max-width: 600px) {
+        margin: 0;
+        width: 12vw;
+        height: 12vw;
+    }
+
+    }
 `
 const M3 = styled.div`
-height: 120vh;
 background-color: transparent;
 `
 const M3Title = styled.div`
-position: absolute;
-top: 192%;
-left: 5%;
+margin-top: 0.5em;
+margin-left: 0.9em;
 font-weight: bold;
-font-size: 10vw;
+font-size: 3em;
 font-family: 'Playfair Display', serif;
 `
 const M3Subtitle = styled.div`
-position: absolute;
-top: 200%;
-left: 5%;
+margin-left: 3.5em;
 font-weight: bold;
-font-size: 4vw;
+font-size: 0.8em;
 `
 const M3ImageContainer = styled.div`
-position: absolute;
-top: 205%;
+margin-top: 2em;
   width: 100%; /* 컨테이너의 너비를 화면 너비에 맞춥니다. */
   object-fit: cover; /* 이미지가 잘리지 않고 화면에 맞게 크기 조정 */
   a {
   text-decoration: none;
   }
   img{
-    margin-left: 5%;
+    margin-left: 1%;
   object-fit: cover; /* 이미지가 잘리지 않고 화면에 맞게 크기 조정 */
-    height: 25vh;
-    width: 90%;
+    height: 21em;
+    width: 98%;
+@media only screen and (min-width: 540px) {
+  }
   }
   div{
 position: absolute;
-left: 8%;
-margin-top: 7em;
+left: 5%;
+margin-top: 14em;
 background: transparent; /* 투명한 배경 */
 z-index: 5;
 color: white;
@@ -127,12 +139,12 @@ margin-top: 95px;
 const Place = styled.p`
 margin: 0;
 padding: 0;
-font-size: 2.5vw;
+font-size: 1em;
 `
 const Building = styled.p`
 margin: 0;
 padding: 0;
-font-size: 4vw;
+font-size: 1.5em;
 font-weight: bold;
 `
 const NewsList = styled.div`
@@ -146,8 +158,9 @@ a{
 `
 const NewsContent = styled.p`
 color: gray;
-font-size: 0.7em;
-margin-top: 1vw;
+font-size: 0.9em;
+margin-top: 0.4em;
+margin-bottom: 0;
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
@@ -156,22 +169,12 @@ margin-top: 1vw;
 `
 const M4ButtonContainer = styled.div`
 display: flex;
-overflow-x: auto; /* 가로 스크롤 활성화 */
+overflow: hidden; 
 white-space: nowrap; /* 텍스트 줄 바꿈 방지 */
 width: 100%; /* 100% 너비로 설정 또는 원하는 너비로 설정 */
-overflow-x: scroll;
-::-webkit-scrollbar-thumb {
-    background-color: blue;
-}
-::-webkit-scrollbar {
-    width: 100%;
-    height: 10px;
-}
 `
 const M4Button = styled.a`
 display: inline-block; /* 인라인 블록 요소로 만들어 옆에 다른 요소가 올 수 있도록 합니다. */
-margin: 0; /* 여백 제거 */
-padding: none;
 `
 const M5Title = styled.div`
 font-size: 1em;
@@ -183,12 +186,66 @@ span{
     font-weight: bold;
 }
 `
+const M5SearchContainer = styled.div`
+background-color: rgb(0, 104, 232);
+width: 100%;
+padding-top: 3em;
+span{
+    font-size: 2em;
+    font-weight: bold;
+}
+p{
+  font-size: 0.8em;
+  margin-left: 12vw;
+  color: #CACACA;
+}
+@media only screen and (max-width: 360px) {
+    span{
+        font-size: 9vw;
+    }
+}
+`
+const M5SearchInput = styled.input`
+background: transparent; /* 투명 배경 추가 */
+border: none;
+border-bottom: 0.3em solid white; /* 하단 테두리 추가 (선택 사항) */
+width: 65%; /* 검색창의 가로 너비 조정 */
+height: 1.3em;
+font-size: 1.2em; /* 폰트 크기 키우기 */
+margin-top: 2.5em; /* 위쪽 여백 추가 */
+margin-left: 11vw;
+padding-left: 0.7em;
+::placeholder{
+    color: white;
+}
+`
+const M5SearchTag = styled.div`
+padding: 5vw 0 5vw 0;
+margin-left: 10vw;
+button{
+border: none; /* 외곽선 없애기 */
+font-size: 0.9em;
+background-color: transparent;
+    a{
+  color: #CACACA;
+text-decoration: none;
+    }
+}
+`
+const M5Contact = styled.div`
+display: flex;
+  flex-direction: column;
+margin-bottom: 2em;
+margin-left: 2vw;
+`
 const Section = styled.div`
-height: ${(props) => props.height};
+height: 100vh;
 background-size: cover;
 background-color: ${(props) => props.background};
 background-image:  url(${props => props.image});
 overflow: hidden;
+@media only screen and (max-width: 320px) {
+}
 `
 const W1Title = styled.div`
 margin-top: ${(props) => props.magtop};
@@ -201,53 +258,7 @@ color: white;
 `
 /* 2section sec2 2섹션 스타일  */
 
-const SearchContainer = styled.div`
-background-color: rgb(0, 104, 232);
-width: 100vw;
-padding-top: 4vh;
-span{
-    font-size: 2em;
-    font-weight: bold;
-}
-p{
-  font-size: 0.8em;
-  margin-left: 1.5em;
-  color: #CACACA;
-}
-@media only screen and (max-width: 320px) {
-    span{
-        font-size: 9vw;
-    }
-}
-`
-const SearchInput = styled.input`
-background: transparent; /* 투명 배경 추가 */
-border: none;
-border-bottom: 0.3em solid white; /* 하단 테두리 추가 (선택 사항) */
-width: 70%; /* 검색창의 가로 너비 조정 */
-height: 1.3em;
-font-size: 1.2em; /* 폰트 크기 키우기 */
-margin-top: 2.5em; /* 위쪽 여백 추가 */
-margin-left: 1em;
-padding-left: 1.2em;
-::placeholder{
-    color: white;
-}
-`
-const SearchTag = styled.div`
-padding: 3vw 0 5vw 2.5em;
-button{
-border: none; /* 외곽선 없애기 */
-font-size: 0%.8;
-background-color: transparent;
-margin: 0 0.5em 0 0; /* 버튼 간격 설정 */
-    a{
-  color: #CACACA;
-text-decoration: none;
-    }
-}
-`
-const IconButton = styled.button`
+const W2IconButton = styled.button`
 border: none;
 background-color: transparent;
 font-size: 0.9em;
@@ -316,11 +327,11 @@ cursor: pointer;
     }
 `
 const Topic = ({ title, initialValue, finalValue, inView }) => {
-    const [currentValue, setCurrentValue] = useState(inView && window.innerWidth >= 600 ? initialValue : finalValue);
+    const [currentValue, setCurrentValue] = useState(inView && window.innerWidth <=930 ? initialValue : finalValue);
 
     useEffect(() => {
-        // 화면 너비가 600 이상일 때만 실행
-        if (window.innerWidth >= 600) {
+        // 화면 너비가 930 이상일 때만 실행
+        if (window.innerWidth >= 930) {
             if (inView) {
                 let animationInterval;
                 if (currentValue < finalValue) {
@@ -357,7 +368,7 @@ const Topic = ({ title, initialValue, finalValue, inView }) => {
 
 
 const TopicsContainer = ({ inView }) => {
-    const isWideScreen = window.innerWidth >= 600;
+    const isWideScreen = window.innerWidth >= 930;
     return (
         <div className={`topics-container ${inView && isWideScreen ? "in-view" : ""}`}>
             <Topic title="History of Payvery" initialValue={0} finalValue={50} inView={inView && isWideScreen} />
@@ -390,6 +401,7 @@ const Home = () => {
     const [hoveredText, setHoveredText] = useState(null);
     const [windowWidth, setWindowWidth] = useState(0); // 초기 화면 너비 설정
     const [windowHeight, setWindowHeight] = useState(0); // 초기 화면 높이 설정
+    let isSmoothScrollEnabled = activeSection < 2; // 섹션 2까지만 부드러운 스크롤 활성화
 
     const handleImageHover = (imageSrc, text) => {
         setHoveredImage(imageSrc);
@@ -430,7 +442,7 @@ const Home = () => {
     // fade-in 애니메이션
     useEffect(() => {
         const handleScroll = () => {
-            if (window.innerWidth >= 600) {
+            if (window.innerWidth >= 930) {
                 const updatedInViewItems3 = [];
                 const updatedInViewItems4 = [];
                 const updatedInViewItems5 = [];
@@ -599,35 +611,58 @@ const Home = () => {
         setWindowWidth(window.innerWidth);
         setWindowHeight(window.innerHeight);
     };
+    
+    
     const handleScroll = (e) => {
-        // 스크롤 이벤트를 중지합니다.
-        e.preventDefault();
-
         if (windowWidth > 1300 || windowHeight >= 800) {
-            // 마우스 휠 방향에 따라 이동할 섹션을 결정합니다.
-            let newActiveSection = activeSection;
-            if (e.deltaY > 0 && activeSection < sections.length - 1) {
-                newActiveSection = activeSection + 1;
-            } else if (e.deltaY < 0 && activeSection > 0) {
-                newActiveSection = activeSection - 1;
-            }
-
-            // 새로운 활성 섹션을 설정합니다.
-            setActiveSection(newActiveSection);
-
-            // 화면을 스크롤하여 새로운 섹션의 가운데로 이동합니다.
-            const element = sectionRefs.current[newActiveSection];
-            if (element) {
-                const sectionTop = element.offsetTop;
-                const sectionHeight = element.clientHeight;
-                const screenCenter = windowHeight / 2;
-                const scrollToY = sectionTop + sectionHeight / 2 - screenCenter;
-
-                // Check screen width before scrolling
-                window.scrollTo({ top: scrollToY, behavior: "smooth" });
+            // 스크롤 이벤트를 중지합니다.
+            e.preventDefault();
+    
+            if (isSmoothScrollEnabled) {
+                // 마우스 휠 방향에 따라 이동할 섹션을 결정합니다.
+                let newActiveSection = activeSection;
+                if (e.deltaY > 0 && activeSection < sections.length - 1) {
+                    newActiveSection = activeSection + 1;
+                } else if (e.deltaY < 0 && activeSection > 0) {
+                    newActiveSection = activeSection - 1;
+                }
+    
+                // 새로운 활성 섹션을 설정합니다.
+                setActiveSection(newActiveSection);
+    
+                // 화면을 스크롤하여 새로운 섹션의 가운데로 이동합니다.
+                const element = sectionRefs.current[newActiveSection];
+                if (element) {
+                    const sectionTop = element.offsetTop;
+                    const sectionHeight = element.clientHeight;
+                    const screenCenter = windowHeight / 2;
+                    const scrollToY = sectionTop + sectionHeight / 2 - screenCenter;
+    
+                    // Check screen width before scrolling
+                    window.scrollTo({ top: scrollToY, behavior: "smooth" });
+                }
+    
+                // 섹션 2 이후로는 일반 스크롤 동작을 활성화합니다.
+                if (newActiveSection > 2) {
+                    isSmoothScrollEnabled = false;
+                }
+            } else if (activeSection !== 1 && activeSection !== 2) {
+                // 현재 섹션이 1 또는 2가 아닌 경우에만 일반 스크롤 동작을 수행합니다.
+                // 이전 또는 다음 섹션으로 이동하는 기능을 추가할 필요가 없습니다.
             }
         }
     };
+    
+    // 이후의 스크롤 이벤트를 처리할 때, 이전에 설정한 스크롤 핸들러를 제거합니다.
+    useEffect(() => {
+        if (!isSmoothScrollEnabled) {
+            window.removeEventListener("wheel", handleScroll);
+        } else {
+            window.addEventListener("wheel", handleScroll);
+        }
+    }, [isSmoothScrollEnabled]);
+    
+    
 
     // 이전 아이콘 표시 함수
     const showPreviousIcons = () => {
@@ -666,7 +701,7 @@ const Home = () => {
         // closeSearch();
     };
 
-    const isMobile = typeof window !== "undefined" ? window.innerWidth < 600 : false;
+    const isMobile = typeof window !== "undefined" ? window.innerWidth <= 930 : false;
     const initialValueForMobile = 50; // 예를 들어, 초기값을 변경하려면 여기에 값을 설정
     const initialValue = isMobile ? initialValueForMobile : 0;
     return (
@@ -679,23 +714,23 @@ const Home = () => {
                                 <Mobile>
                                     <M1>
                                         <M1Title>{langJson[lang]?.FOLLOW}</M1Title>
-                                        <M1Title style={{ marginTop: "2.5em" }}> {langJson[lang]?.SUPPORT}</M1Title>
+                                        <M1Title style={{ marginTop:"0", marginBottom: "5em" }}> {langJson[lang]?.SUPPORT}</M1Title>
                                     </M1>
                                     <M2>
                                         <M2YellowBox><p>Who we are</p></M2YellowBox>
                                         <M2Subtitle> {langJson[lang]?.FOLLOW}</M2Subtitle>
-                                        <M2Subtitle style={{ marginTop: "1.2em" }}> {langJson[lang]?.SUPPORT}</M2Subtitle>
+                                        <M2Subtitle> {langJson[lang]?.SUPPORT}</M2Subtitle>
                                         <M2Description>{langJson[lang]?.DESCIRPTION}</M2Description>
                                         <TopicsContainer />
                                     </M2>
-                                    <IconContainer>
+                                    <M2IconContainer>
                                         {/* 이전 버튼 */}
                                         <PrevButton className="prev-button" onClick={showPreviousIcons}>
                                             <img src="/icon/prev.png" alt="Prev icon" />
                                         </PrevButton>
                                         {/* 아이콘 내용 */}
                                         {iconIndexes.map((iconIndex) => (
-                                            <IconButton
+                                            <M2IconButton
                                                 key={`icon-${iconIndex}`}
                                                 onClick={() => handleIconClick(iconIndex)}
                                             >
@@ -707,13 +742,13 @@ const Home = () => {
                                                     {/* 아이콘에 대한 설명 */}
                                                     {getIconDescription(iconIndex)}
                                                 </div>
-                                            </IconButton>
+                                            </M2IconButton>
                                         ))}
                                         {/* 다음 버튼 */}
                                         <NextButton className="next-button" onClick={showNextIcons}>
                                             <img src="/icon/next.png" alt="Next icon" />
                                         </NextButton>
-                                    </IconContainer>
+                                    </M2IconContainer>
                                     <M3>
                                         <M3Title>Our Service</M3Title>
                                         <M3Subtitle>Follow your dream. We support your dream.</M3Subtitle>
@@ -722,8 +757,7 @@ const Home = () => {
                                                 href="/404">
                                                 <div>
                                                     <Place>Incheon, Korea</Place>
-                                                    <Building>{langJson[lang]?.ICN}</Building>
-                                                    <Building>{langJson[lang]?.ICNA}</Building>
+                                                    <Building>{langJson[lang]?.MICN}</Building>
                                                 </div>
                                                 <img src="/image/macbook.png" alt="Image 1" />
                                             </a>
@@ -731,8 +765,7 @@ const Home = () => {
                                                 href="/404">
                                                 <div >
                                                     <Place>Seoul, Korea</Place>
-                                                    <Building>{langJson[lang]?.YEOUIDO}</Building>
-                                                    <Building>{langJson[lang]?.ARTS}</Building>
+                                                    <Building>{langJson[lang]?.MYEOUIDO}</Building>
                                                 </div>
                                                 <img src="/image/cardreader.png" alt="Image 2" />
                                             </a>
@@ -740,15 +773,14 @@ const Home = () => {
                                                 href="/404">
                                                 <div>
                                                     <Place>Seongnam, Korea</Place>
-                                                    <Building>{langJson[lang]?.HYUNDAI}</Building>
-                                                    <Building>{langJson[lang]?.CENTER}</Building>
+                                                    <Building>{langJson[lang]?.MHYUNDAI}</Building>
                                                 </div>
                                                 <img src="/image/kiosk.png" alt="Image 3" />
                                             </a>
                                             <a
                                                 href="/404">
                                                 <div>
-                                                    <Place>Baku, Azerbaijan</Place>
+                                                    <Place >Baku, Azerbaijan</Place>
                                                     <Building>{langJson[lang]?.SOCAR}</Building>
                                                 </div>
                                                 <img src="/image/scanner.png" alt="Image 4" />
@@ -845,12 +877,12 @@ const Home = () => {
                                     <M5Title>
                                         <span>성공</span>으로 가는 과정을 계획하는데 <span>함께</span>하겠습니다.
                                     </M5Title>
-                                    <SearchContainer>
-                                        <span style={{ marginLeft: "0.6em", color: "#FFC200" }}>Search</span>
+                                    <M5SearchContainer>
+                                        <span style={{ marginLeft: "12vw", color: "#FFC200" }}>Search</span>
                                         <span style={{ color: "white" }}>Payvery.com</span>
                                         <p>Creative Leadership of Payvery designs the new future never experienced before.</p>
                                         <div className="searchheerim">
-                                            <SearchInput
+                                            <M5SearchInput
                                                 type="text"
                                                 placeholder="Type here"
                                                 value={searchQuery}
@@ -864,16 +896,16 @@ const Home = () => {
                                                 <img src="/icon/search.png" alt="Search Icon" />
                                             </SearchButton>
                                         </div>
-                                        <SearchTag>
+                                        <M5SearchTag>
                                             <button onClick={() => { window.location.reload() }}><Link href="/Payvery">#Payvery</Link></button>
                                             <button onClick={() => { window.location.reload() }}><Link href="/Purplevery">#Purplevery</Link></button>
                                             <button onClick={() => { window.location.reload() }}><Link href="/Pg">#Pg</Link></button>
                                             <button onClick={() => { window.location.reload() }}><Link href="/Payment_gateway">#Payment_gateway</Link></button>
                                             <button onClick={() => { window.location.reload() }}><Link href="/Customer">#Customer</Link></button>
-                                        </SearchTag>
-                                    </SearchContainer>
+                                        </M5SearchTag>
+                                    </M5SearchContainer>
                                     <div className="bottom">
-                                        <div className="seoulhqsupport">
+                                        <M5Contact>
                                             <div className="hq">
                                                 <div className="address">
                                                     <div className="hq1">
@@ -900,7 +932,7 @@ const Home = () => {
                                                     <div className="hq4">0504-144-9419</div>
                                                 </div>
                                             </div>
-                                        </div>
+                                        </M5Contact>
                                     </div>
                                 </Mobile>
                             ) : (sections.map((section, index) => (
@@ -911,12 +943,15 @@ const Home = () => {
                                     ref={(el) => (sectionRefs.current[index] = el)}
                                 >
                                     {index === 0 ? (
+                                        <div className="section1">
                                         <Section height="100vh" image="/image/galaxy.png">
                                             <W1Title magtop="4em" > {langJson[lang]?.FOLLOW}</W1Title>
                                             <W1Title magtop="2em" > {langJson[lang]?.SUPPORT}</W1Title>
                                         </Section>
+                                        </div>
                                     ) : index === 1 ? (
-                                        <Section height="100vh" image="/image/blue.png">
+                                        <div className="section2">
+                                        <Section image="/image/blue.png">
                                             <div className="yellow">
                                                 {/* 노란색 배경에 녹색 박스 모양의 텍스트 박스와 소제목, 설명 */}
                                                 <div className={`yellow-box ${inViewItems2.includes("") ? "in-view" : ""}`}>
@@ -936,7 +971,7 @@ const Home = () => {
                                                     </PrevButton>
                                                     {/* 아이콘 내용 */}
                                                     {iconIndexes.map((iconIndex) => (
-                                                        <IconButton
+                                                        <W2IconButton
                                                             key={`icon-${iconIndex}`}
                                                             onClick={() => handleIconClick(iconIndex)}
                                                         >
@@ -948,7 +983,7 @@ const Home = () => {
                                                                 {/* 아이콘에 대한 설명 */}
                                                                 {getIconDescription(iconIndex)}
                                                             </div>
-                                                        </IconButton>
+                                                        </W2IconButton>
                                                     ))}
                                                     {/* 다음 버튼 */}
                                                     <NextButton className="next-button" onClick={showNextIcons}>
@@ -957,8 +992,10 @@ const Home = () => {
                                                 </div>
                                             </div>
                                         </Section>
+                                        </div>
                                     ) : index === 2 ? (
-                                        <Section height="100vh">
+                                        <div className="section3">
+                                        <Section>
                                             <div className="title">Our Service
                                             </div>
                                             <div className="sec3description"style={{ color: "black", margin: "none" }}>{langJson[lang]?.DESCIRPTION}
@@ -1086,8 +1123,10 @@ const Home = () => {
                                                 )}
                                             </div>
                                         </Section>
+                                        </div>
                                     ) : index === 3 ? (
-                                        <Section height="95vh">
+                                        <div className="section4">
+                                        <Section >
                                             {/* 뉴스 아이템 리스트 */}
                                             <div className="news-list">
                                                 {/* 첫 번째 행 */}
@@ -1174,9 +1213,7 @@ const Home = () => {
                                                     </a>
                                                 </div>
                                             </div>
-                                        </Section>
-                                    ) : index === 4 ? (
-                                        <Section height="90vh">
+                                            
                                             <div className="sec5title">
                                                 <span class="bold-text">성공</span>으로 가는 과정을 계획하는데 <span class="bold-text">함께</span>하겠습니다.
                                             </div>
@@ -1243,8 +1280,9 @@ const Home = () => {
                                                 </div>
                                             </div>
                                         </Section>
+                                        </div>
                                     ) : (
-                                        <div>{sectionName}</div>
+                                        <div>{}</div>
                                     )}
                                 </div>
                             ))

@@ -91,10 +91,6 @@ body {
     margin-left: 5vw;
     font-size: 1em;
   }
-  /* 미디어 쿼리를 사용하여 스타일 변경 */
-  @media screen and (max-height: 520px) {
-    top: 140%;
-  }
 }
 
 .description.in-view {
@@ -106,16 +102,10 @@ body {
 .topics-container {
   display: flex;
   justify-content: space-between;
-  margin-left: 11vw;
+  margin-left: 2.4em;
 
   /* 미디어 쿼리를 사용하여 스타일 변경 */
-  @media screen and (max-width: 800px) {
-    left: 0%;
-    margin-left: 5vw;
-  }
-
-  /* 미디어 쿼리를 사용하여 스타일 변경 */
-  @media screen and (min-width: 600px) {
+  @media screen and (width < height) {
     opacity: 0;
     /* 처음에는 안 보이게 설정 */
     transform: translateY(60px);
@@ -126,7 +116,7 @@ body {
 }
 
 .topics-container.in-view {
-  @media screen and (min-width: 600px) {
+  @media screen and (width < height) {
     opacity: 1;
     /* 투명도를 1로 변경하여 나타나게 함 */
     transform: translateY(0);
@@ -146,16 +136,12 @@ body {
 }
 
 .topic-title {
-  margin-top: 5vh;
+  margin-top: 3em;
   color: rgb(255, 194, 0);
 
   /* 미디어 쿼리를 사용하여 스타일 변경 */
   @media screen and (max-width: 900px) {
     font-size: 0.8em;
-  }
-  /* 미디어 쿼리를 사용하여 스타일 변경 */
-  @media screen and (max-height: 520px) {
-    margin-top: 12vh;
   }
 }
 
@@ -163,21 +149,16 @@ body {
   color: white;
   font-weight: bold;
   font-size: 5.2em;
+  margin-bottom: 0.3em;
 
   /* 미디어 쿼리를 사용하여 스타일 변경 */
   @media screen and (max-width: 1400px) {
     font-size: 5.5vw;
   }
-  /* 미디어 쿼리를 사용하여 스타일 변경 */
-  @media screen and (max-height: 520px) {
-    font-size: 3em;
-  }
 }
 
 /* 2섹션 아이콘 콘테이너 스타일 */
 .icon-container {
-  position: absolute;
-  bottom: -100%;
   display: flex;
   overflow-x: hidden;
   justify-content: space-between;
@@ -200,14 +181,16 @@ body {
 
 /*3섹션 타이틀 스타일*/
 .title {
+  margin-top: 6vh;
+  margin-left: 10vw;
   font-weight: bold;
   font-size: 3.5em;
-  font-family: 'Playfair Display', serif;
+  font-family: 'Playfair Display', serif;/*
   opacity: 0;
-  /* 처음에는 안 보이게 설정 */
+  /* 처음에는 안 보이게 설정 *//*
   transform: translateY(40px);
   /* 시작 위치 지정 */
-  /* fadein 애니메이션 효과 설정 */
+  /* fadein 애니메이션 효과 설정 *//*
   transition: opacity 1s ease, transform 2s ease;
 
   /* 미디어 쿼리를 사용하여 스타일 변경 */
@@ -221,19 +204,21 @@ body {
   }
 }
 
-.title.in-view {
+.title.in-view {/* 
   opacity: 1;
-  /* 투명도를 1로 변경하여 나타나게 함 */
+  투명도를 1로 변경하여 나타나게 함 
   transform: translateY(0);
   /* Y축 이동을 0으로 변경하여 원래 위치로 이동 */
 }
 
 .sec3description {
+  margin-bottom: 3vh;
+  margin-left: 10vw;/*
   opacity: 0;
-  /* 처음에는 안 보이게 설정 */
+  /* 처음에는 안 보이게 설정 *//*
   transform: translateY(50px);
   /* 시작 위치 지정 */
-  /* fadein 애니메이션 효과 설정 */
+  /* fadein 애니메이션 효과 설정 *//*
   transition: opacity 1.2s ease, transform 2.5s ease;
 
   /* 미디어 쿼리를 사용하여 스타일 변경 */
@@ -247,9 +232,9 @@ body {
   }
 }
 
-.sec3description.in-view {
+.sec3description.in-view {/* 
   opacity: 1;
-  /* 투명도를 1로 변경하여 나타나게 함 */
+  /* 투명도를 1로 변경하여 나타나게 함 
   transform: translateY(0);
   /* Y축 이동을 0으로 변경하여 원래 위치로 이동 */
 }
@@ -262,17 +247,17 @@ body {
   width: 100%;
   /* 컨테이너의 너비를 화면 너비에 맞춥니다. */
   object-fit: cover;
-  /* 이미지가 잘리지 않고 화면에 맞게 크기 조정 */
+  /* 이미지가 잘리지 않고 화면에 맞게 크기 조정 *//*
   opacity: 0;
-  /* 처음에는 안 보이게 설정 */
+  /* 처음에는 안 보이게 설정 *//*
   transform: translateY(70px);
   /* 시작 위치 지정 */
-  /* fadein 애니메이션 효과 설정 */
-  transition: opacity 1.5s ease, transform 3s ease;
+  /* fadein 애니메이션 효과 설정 *//*
+  transition: opacity 1.5s ease, transform 3s ease;*/
 }
 
-.image-container.in-view {
-  opacity: 1;  /* 투명도를 1로 변경하여 나타나게 함 */
+.image-container.in-view {/* 
+  opacity: 1;  /* 투명도를 1로 변경하여 나타나게 함 *//* 
   transform: translateY(0);  /* Y축 이동을 0으로 변경하여 원래 위치로 이동 */
 }
 
@@ -283,6 +268,7 @@ body {
 }
 
 .image-button {
+  text-decoration: none;
   display: flex;
   max-width: 100%;  /* 이미지 버튼의 너비를 100%로 설정 */
 }
@@ -308,6 +294,8 @@ body {
     margin-left: 1em; /* 여백 추가 */
     margin-bottom: 1em; /* 여백 추가 */
   }
+}
+.image-text {
 }
 
 .place {
@@ -416,6 +404,7 @@ body {
 
 /* 4section sec4 */
 .news-list {
+  margin-top: 2vh;
 }
 
 .news-row {
@@ -437,12 +426,12 @@ body {
   text-decoration: none;
   width: 33%;
   margin: 0 1em 2em 1em;
-  cursor: pointer;
+  cursor: pointer;/*
   opacity: 0;
-  /* 처음에는 안 보이게 설정 */
+  /* 처음에는 안 보이게 설정 *//*
   transform: translateY(30px);
   /* 시작 위치 지정 */
-  /* fadein 애니메이션 효과 설정 */
+  /* fadein 애니메이션 효과 설정 *//*
   transition: opacity 1s ease, transform 2s ease;
 
   /* 미디어 쿼리를 사용하여 스타일 변경 */
@@ -452,9 +441,9 @@ body {
 }
 
 /* news-item이 화면에 들어올 때 fadein 애니메이션 적용 */
-.news-item.in-view {
+.news-item.in-view {/* 
   opacity: 1;
-  /* 투명도를 1로 변경하여 나타나게 함 */
+  /* 투명도를 1로 변경하여 나타나게 함 *//* 
   transform: translateY(0);
   /* Y축 이동을 0으로 변경하여 원래 위치로 이동 */
 }
@@ -581,11 +570,11 @@ body {
   border: solid gray 1px;
   border-radius: 20px;
   padding-top: 10px;
-  padding-bottom: 10px;  /* 버튼과 내용 사이의 간격을 조절합니다. */
-  opacity: 0; /* 처음에는 안 보이게 설정 */
+  padding-bottom: 10px;  /* 버튼과 내용 사이의 간격을 조절합니다. *//*
+  opacity: 0; /* 처음에는 안 보이게 설정 *//*
   transform: translateY(50px);  /* 시작 위치 지정 */
-  /* fadein 애니메이션 효과 설정 */
-  transition: opacity 2s ease, transform 3s ease;
+  /* fadein 애니메이션 효과 설정 *//*
+  transition: opacity 2s ease, transform 3s ease;*/
   width: 98%;
   display: flex;
   /* 미디어 쿼리를 사용하여 스타일 변경 */
@@ -601,9 +590,9 @@ body {
 
 
 /* news-item이 화면에 들어올 때 fadein 애니메이션 적용 */
-.newsbutton-container.in-view {
+.newsbutton-container.in-view {/* 
   opacity: 1;
-  /* 투명도를 1로 변경하여 나타나게 함 */
+  /* 투명도를 1로 변경하여 나타나게 함 *//* 
   transform: translateY(0);
   /* Y축 이동을 0으로 변경하여 원래 위치로 이동 */
   flex-wrap: nowrap !important;
@@ -665,12 +654,12 @@ body {
   margin-left: 2.6em;
   font-size: 4.6em;
   font-weight: bold;
-  color: #FFC200;
+  color: #FFC200;/*
   opacity: 0;
-  /* 처음에는 안 보이게 설정 */
+  /* 처음에는 안 보이게 설정 *//*
   transform: translateY(2em);
   /* 시작 위치 지정 */
-  /* fadein 애니메이션 효과 설정 */
+  /* fadein 애니메이션 효과 설정 *//*
   transition: opacity 1s ease, transform 2s ease;
 
   /* 미디어 쿼리를 사용하여 스타일 변경 */
@@ -691,9 +680,9 @@ body {
 }
 
 /* .search-title이 화면에 들어올 때 fadein 애니메이션 적용 */
-.search-title.in-view {
+.search-title.in-view {/* 
   opacity: 1;
-  /* 투명도를 1로 변경하여 나타나게 함 */
+  /* 투명도를 1로 변경하여 나타나게 함 *//* 
   transform: translateY(0);
   /* Y축 이동을 0으로 변경하여 원래 위치로 이동 */
 }
@@ -701,12 +690,12 @@ body {
 .search-title2 {
   font-size: 4.6em;
   font-weight: bold;
-  color: white;
+  color: white;/*
   opacity: 0;
-  /* 처음에는 안 보이게 설정 */
+  /* 처음에는 안 보이게 설정 *//*
   transform: translateY(1.5em);
   /* 시작 위치 지정 */
-  /* fadein 애니메이션 효과 설정 */
+  /* fadein 애니메이션 효과 설정 *//*
   transition: opacity 1s ease, transform 3s ease;
 
   /* 미디어 쿼리를 사용하여 스타일 변경 */
@@ -727,9 +716,9 @@ body {
 }
 
 /* .search-title2이 화면에 들어올 때 fadein 애니메이션 적용 */
-.search-title2.in-view {
+.search-title2.in-view {/* 
   opacity: 1;
-  /* 투명도를 1로 변경하여 나타나게 함 */
+  /* 투명도를 1로 변경하여 나타나게 함 *//* 
   transform: translateY(0);
   /* Y축 이동을 0으로 변경하여 원래 위치로 이동 */
 }
@@ -737,12 +726,12 @@ body {
 .searchsub {
   margin-left: 11em;
   font-size: 1.1em;
-  color: #CACACA;
+  color: #CACACA;/*
   opacity: 0;
-  /* 처음에는 안 보이게 설정 */
+  /* 처음에는 안 보이게 설정 *//*
   transform: translateY(2em);
   /* 시작 위치 지정 */
-  /* fadein 애니메이션 효과 설정 */
+  /* fadein 애니메이션 효과 설정 *//*
   transition: opacity 1s ease, transform 3s ease;
 
   /* 미디어 쿼리를 사용하여 스타일 변경 */
@@ -758,9 +747,9 @@ body {
 }
 
 /* .searchsub 화면에 들어올 때 fadein 애니메이션 적용 */
-.searchsub.in-view {
+.searchsub.in-view {/* 
   opacity: 1;
-  /* 투명도를 1로 변경하여 나타나게 함 */
+  /* 투명도를 1로 변경하여 나타나게 함 *//* 
   transform: translateY(0);
   /* Y축 이동을 0으로 변경하여 원래 위치로 이동 */
 }
@@ -775,10 +764,10 @@ body {
   font-size: 1.2em;/* 폰트 크기 키우기 */
   margin-top: 2.5em; /* 위쪽 여백 추가 */
   margin-left: 9.8em;/* 왼쪽 여백 추가 */
-  padding-left: 1.2em;
-  opacity: 0;/* 처음에는 안 보이게 설정 */
+  padding-left: 1.2em;/*
+  opacity: 0;/* 처음에는 안 보이게 설정 *//*
   transform: translateY(50px);/* 시작 위치 지정 */
-  /* fadein 애니메이션 효과 설정 */
+  /* fadein 애니메이션 효과 설정 *//*
   transition: opacity 2s ease, transform 4s ease;
 
   /* 미디어 쿼리를 사용하여 스타일 변경 */
@@ -794,9 +783,9 @@ body {
   }
 }
 
-.searchheerim-input.in-view {
+.searchheerim-input.in-view {/* 
   opacity: 1;
-  /* 투명도를 1로 변경하여 나타나게 함 */
+  /* 투명도를 1로 변경하여 나타나게 함 *//* 
   transform: translateY(0);
   /* Y축 이동을 0으로 변경하여 원래 위치로 이동 */
 }
@@ -806,12 +795,12 @@ body {
 }
 
 .searchtag-keywords {
-  padding: 10vh 0 12vh 12em;
+  padding: 10vh 0 12vh 12em;/*
   opacity: 0;
-  /* 처음에는 안 보이게 설정 */
+  /* 처음에는 안 보이게 설정 *//*
   transform: translateY(6em);
   /* 시작 위치 지정 */
-  /* fadein 애니메이션 효과 설정 */
+  /* fadein 애니메이션 효과 설정 *//*
   transition: opacity 3s ease, transform 5s ease;
 
   /* 미디어 쿼리를 사용하여 스타일 변경 */
@@ -821,9 +810,9 @@ body {
   }
 }
 
-.searchtag-keywords.in-view {
+.searchtag-keywords.in-view {/* 
   opacity: 1;
-  /* 투명도를 1로 변경하여 나타나게 함 */
+  /* 투명도를 1로 변경하여 나타나게 함 *//* 
   transform: translateY(0);
   /* Y축 이동을 0으로 변경하여 원래 위치로 이동 */
 }
@@ -859,7 +848,7 @@ body {
 .seoulhqsupport {
   display: flex;
   margin-bottom: 5vh;
-  margin-left: 10em;
+margin-left: 10em;
 
   /* 미디어 쿼리를 사용하여 스타일 변경 */
   @media screen and (max-width: 1250px) {
