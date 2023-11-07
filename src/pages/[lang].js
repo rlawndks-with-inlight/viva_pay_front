@@ -163,9 +163,16 @@ margin-bottom: 0;
 `
 const M4ButtonContainer = styled.div`
 display: flex;
-overflow: hidden; 
 white-space: nowrap; /* 텍스트 줄 바꿈 방지 */
 width: 100%; /* 100% 너비로 설정 또는 원하는 너비로 설정 */
+overflow-x: scroll;
+::-webkit-scrollbar-thumb {
+    background-color: blue;
+}
+::-webkit-scrollbar {
+    width: 100%;
+    height: 13px;
+}
 `
 const M4Button = styled.a`
 display: inline-block; /* 인라인 블록 요소로 만들어 옆에 다른 요소가 올 수 있도록 합니다. */
@@ -851,15 +858,15 @@ if (windowWidth > 1280 || windowHeight >= 800) {
                                     </NewsList>
                                     <M4ButtonContainer>
                                         {/* news1 버튼 */}
-                                        <M4Button className="newsbutton" href="https://www.youtube.com/watch?v=OLrv8OGTUnQ" target="_blank" rel="noopener noreferrer">
+                                        <M4Button href="https://www.youtube.com/watch?v=OLrv8OGTUnQ" target="_blank" rel="noopener noreferrer">
                                             <img src="/image/newsimage1.png" alt="youtube1 Image" />
                                         </M4Button>
                                         {/* news2 버튼 */}
-                                        <M4Button className="newsbutton" style={{ marginLeft: "15px" }} href="https://www.youtube.com/watch?v=REof-nC8Ck8&feature=youtu.be" target="_blank" rel="noopener noreferrer">
+                                        <M4Button href="https://www.youtube.com/watch?v=REof-nC8Ck8&feature=youtu.be" target="_blank" rel="noopener noreferrer">
                                             <img src="/image/newsimage2.png" alt="youtube2 Image" />
                                         </M4Button>
                                         {/* news3 버튼 */}
-                                        <M4Button className="newsbutton" style={{ marginLeft: "15px" }} href="https://www.youtube.com/watch?v=Lu8uHwNpHEQ" target="_blank" rel="noopener noreferrer">
+                                        <M4Button  href="https://www.youtube.com/watch?v=Lu8uHwNpHEQ" target="_blank" rel="noopener noreferrer">
                                             <img src="/image/newsimage3.png" alt="youtube3 Image" />
                                         </M4Button>
                                     </M4ButtonContainer>

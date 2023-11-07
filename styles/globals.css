@@ -76,7 +76,7 @@ body {
   display: flex;
   justify-content: space-between;
   margin-left: 1em;
-    @media screen and (min-width: 1280px) {
+    @media screen and (width >= 1280px) {
       margin-left: 12vw;
       margin-right: 12vw;
       opacity: 0;  /* 처음에는 안 보이게 설정 */
@@ -88,8 +88,10 @@ body {
 }
 
 .topics-container.in-view {
+  @media screen and (width >= 1280px) {
     opacity: 1;  /* 투명도를 1로 변경하여 나타나게 함 */
     transform: translateY(0);  /* Y축 이동을 0으로 변경하여 원래 위치로 이동 */
+  }
 }
 
 /* 2섹션 historyof 글 텍스트 스타일 */
@@ -577,7 +579,6 @@ body {
   @media screen and (max-height: 450px) {
     width: 15em;
     height: 8em;
-
   }
 
 }
