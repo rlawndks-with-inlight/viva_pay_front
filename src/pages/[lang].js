@@ -347,58 +347,57 @@ cursor: pointer;
         height: 20px;
     }
 `
-
 const Topic = ({ title, initialValue, finalValue }) => {
     const [currentValue, setCurrentValue] = useState(initialValue);
     const [inViewRef, inView] = useInView({
-      triggerOnce: false, // 한 번만 트리거
+        triggerOnce: false, // 한 번만 트리거
     });
-  
+
     useEffect(() => {
-      if (inView) {
-        let animationInterval;
-        if (currentValue < finalValue) {
-          const animationStep = (finalValue - initialValue) / 100; // 올라가는 단위 조절
-          animationInterval = setInterval(() => {
-            const newValue = currentValue + animationStep;
-            setCurrentValue(Math.min(newValue, finalValue));
-  
-            if (newValue >= finalValue) {
-              clearInterval(animationInterval); // 애니메이션 멈춤
+        if (inView) {
+            let animationInterval;
+            if (currentValue < finalValue) {
+                const animationStep = (finalValue - initialValue) / 100; // 올라가는 단위 조절
+                animationInterval = setInterval(() => {
+                    const newValue = currentValue + animationStep;
+                    setCurrentValue(Math.min(newValue, finalValue));
+
+                    if (newValue >= finalValue) {
+                        clearInterval(animationInterval); // 애니메이션 멈춤
+                    }
+                }, 40); // 올라가는 속도 조절
             }
-          }, 40); // 올라가는 속도 조절
+
+            return () => clearInterval(animationInterval);
+        } else {
+            // 뷰를 나가면 리셋
+            setCurrentValue(initialValue);
         }
-  
-        return () => clearInterval(animationInterval);
-      } else {
-        // 뷰를 나가면 리셋
-        setCurrentValue(initialValue);
-      }
     }, [inView, currentValue, finalValue, initialValue]);
-  
+
     const addPlusSign = title === "History of Payvery" || title === "Professional Employees" || title === "Overseas Projects";
-  
+
     return (
-      <div ref={inViewRef}>
-        <p className="topic-title">{title}</p>
-        <p className={`topic-number ${inView ? "in-view" : ""}`}>
-          {addPlusSign ? Math.round(currentValue) + "+" : Math.round(currentValue)}
-        </p>
-      </div>
+        <div ref={inViewRef}>
+            <p className="topic-title">{title}</p>
+            <p className={`topic-number ${inView ? "in-view" : ""}`}>
+                {addPlusSign ? Math.round(currentValue) + "+" : Math.round(currentValue)}
+            </p>
+        </div>
     );
-  };
-  const TopicsContainer = () => {
+};
+const TopicsContainer = () => {
     return (
-      <div className="topics-container">
-        <Topic title="History of Payvery" initialValue={0} finalValue={50} />
-        <Topic title="Branch offices" initialValue={0} finalValue={15} />
-        <Topic title="Professional Employees" initialValue={0} finalValue={1400} />
-        <Topic title="Overseas Projects" initialValue={0} finalValue={300} />
-        <Topic title="World Ranking" initialValue={0} finalValue={8} />
-      </div>
+        <div className="topics-container">
+            <Topic title="History of Payvery" initialValue={0} finalValue={50} />
+            <Topic title="Branch offices" initialValue={0} finalValue={15} />
+            <Topic title="Professional Employees" initialValue={0} finalValue={1400} />
+            <Topic title="Overseas Projects" initialValue={0} finalValue={300} />
+            <Topic title="World Ranking" initialValue={0} finalValue={8} />
+        </div>
     );
-  };
-  
+};
+
 const Home = () => {
 
     const router = useRouter();
@@ -530,7 +529,6 @@ const Home = () => {
             // 초기화 단계에서 한 번 실행하고, 화면 크기가 변경될 때마다 실행
             updateWindowDimensions();
             window.addEventListener("resize", updateWindowDimensions);
-
         }
 
         // 이 컴포넌트가 언마운트될 때 이벤트 리스너 정리
@@ -582,7 +580,7 @@ const Home = () => {
         // closeSearch();
     };
 
-    const isMobile = typeof window !== "undefined" ? window.innerWidth <= 900 : false;
+    const isMobile = typeof window !== "undefined" ? window.innerWidth <= 1280 : false;
     return (
         <>
             {!loading && (
@@ -593,23 +591,23 @@ const Home = () => {
                                 <Mobile>
                                     <M1>
                                         <AnimateUp>
-                                        <M1Title>{langJson[lang]?.FOLLOW}</M1Title>
-                                        <M1Title style={{ marginTop: "0", marginBottom: "5em" }}> {langJson[lang]?.SUPPORT}</M1Title>
+                                            <M1Title>{langJson[lang]?.FOLLOW}</M1Title>
+                                            <M1Title style={{ marginTop: "0", marginBottom: "5em" }}> {langJson[lang]?.SUPPORT}</M1Title>
                                         </AnimateUp>
                                     </M1>
                                     <M2>
                                         <M2YellowBox><p>Who we are</p></M2YellowBox>
                                         <AnimateUp>
-                                        <M2Subtitle> {langJson[lang]?.FOLLOW}</M2Subtitle>
+                                            <M2Subtitle> {langJson[lang]?.FOLLOW}</M2Subtitle>
                                         </AnimateUp>
                                         <AnimateUp>
-                                        <M2Subtitle> {langJson[lang]?.SUPPORT}</M2Subtitle>
+                                            <M2Subtitle> {langJson[lang]?.SUPPORT}</M2Subtitle>
                                         </AnimateUp>
                                         <AnimateUp>
-                                        <M2Description>{langJson[lang]?.DESCIRPTION}</M2Description>
+                                            <M2Description>{langJson[lang]?.DESCIRPTION}</M2Description>
                                         </AnimateUp>
                                         <AnimateUp>
-                                        <TopicsContainer />
+                                            <TopicsContainer />
                                         </AnimateUp>
                                     </M2>
                                     <M2IconContainer>
@@ -640,187 +638,187 @@ const Home = () => {
                                     </M2IconContainer>
                                     <M3>
                                         <AnimateUp>
-                                        <M3Title>Our Service</M3Title>
+                                            <M3Title>Our Service</M3Title>
                                         </AnimateUp>
                                         <AnimateUp>
-                                        <M3Subtitle>Follow your dream. We support your dream.</M3Subtitle>
+                                            <M3Subtitle>Follow your dream. We support your dream.</M3Subtitle>
                                         </AnimateUp>
                                         <AnimateUp>
-                                        <M3ImageContainer>
-                                            <a
-                                                href="/404">
-                                                <div>
-                                                    <Place>Incheon, Korea</Place>
-                                                    <Building>{langJson[lang]?.MICN}</Building>
-                                                </div>
-                                                <img src="/image/macbook.png" alt="Image 1" />
-                                            </a>
-                                            <a
-                                                href="/404">
-                                                <div >
-                                                    <Place>Seoul, Korea</Place>
-                                                    <Building>{langJson[lang]?.MYEOUIDO}</Building>
-                                                </div>
-                                                <img src="/image/cardreader.png" alt="Image 2" />
-                                            </a>
-                                            <a
-                                                href="/404">
-                                                <div>
-                                                    <Place>Seongnam, Korea</Place>
-                                                    <Building>{langJson[lang]?.MHYUNDAI}</Building>
-                                                </div>
-                                                <img src="/image/kiosk.png" alt="Image 3" />
-                                            </a>
-                                            <a
-                                                href="/404">
-                                                <div>
-                                                    <Place >Baku, Azerbaijan</Place>
-                                                    <Building>{langJson[lang]?.SOCAR}</Building>
-                                                </div>
-                                                <img src="/image/scanner.png" alt="Image 4" />
-                                            </a>
-                                        </M3ImageContainer>
+                                            <M3ImageContainer>
+                                                <a
+                                                    href="/404">
+                                                    <div>
+                                                        <Place>Incheon, Korea</Place>
+                                                        <Building>{langJson[lang]?.MICN}</Building>
+                                                    </div>
+                                                    <img src="/image/macbook.png" alt="Image 1" />
+                                                </a>
+                                                <a
+                                                    href="/404">
+                                                    <div >
+                                                        <Place>Seoul, Korea</Place>
+                                                        <Building>{langJson[lang]?.MYEOUIDO}</Building>
+                                                    </div>
+                                                    <img src="/image/cardreader.png" alt="Image 2" />
+                                                </a>
+                                                <a
+                                                    href="/404">
+                                                    <div>
+                                                        <Place>Seongnam, Korea</Place>
+                                                        <Building>{langJson[lang]?.MHYUNDAI}</Building>
+                                                    </div>
+                                                    <img src="/image/kiosk.png" alt="Image 3" />
+                                                </a>
+                                                <a
+                                                    href="/404">
+                                                    <div>
+                                                        <Place >Baku, Azerbaijan</Place>
+                                                        <Building>{langJson[lang]?.SOCAR}</Building>
+                                                    </div>
+                                                    <img src="/image/scanner.png" alt="Image 4" />
+                                                </a>
+                                            </M3ImageContainer>
                                         </AnimateUp>
                                     </M3>
                                     <NewsList>
                                         {/* 뉴스 아이템 1 */}
                                         <AnimateUp>
-                                        <a href="/404">
-                                            <div style={{ marginTop: "0.5em" }}>
-                                                <div className="news-box">
-                                                    <p className="news-text">News</p>
+                                            <a href="/404">
+                                                <div style={{ marginTop: "0.5em" }}>
+                                                    <div className="news-box">
+                                                        <p className="news-text">News</p>
+                                                    </div>
+                                                    <NewsContent>{langJson[lang]?.FIRSTNEWS}
+                                                    </NewsContent>
+                                                    <span className="news-more-link"> Read more</span>
+                                                    <span className="arrow-icon" >→</span>
                                                 </div>
-                                                <NewsContent>{langJson[lang]?.FIRSTNEWS}
-                                                </NewsContent>
-                                                <span className="news-more-link"> Read more</span>
-                                                <span className="arrow-icon" >→</span>
-                                            </div>
-                                        </a>
+                                            </a>
                                         </AnimateUp>
                                         {/* 뉴스 아이템 2 */}
                                         <AnimateUp>
-                                        <a href="/404"  >
-                                            <div style={{ marginTop: "0.5em" }}>
-                                                <div className="news-box">
-                                                    <p className="news-text">News</p>
+                                            <a href="/404"  >
+                                                <div style={{ marginTop: "0.5em" }}>
+                                                    <div className="news-box">
+                                                        <p className="news-text">News</p>
+                                                    </div>
+                                                    <NewsContent>{langJson[lang]?.SECONDNEWS}
+                                                    </NewsContent>
+                                                    <span className="news-more-link"> Read more</span>
+                                                    <span className="arrow-icon" >→</span>
                                                 </div>
-                                                <NewsContent>{langJson[lang]?.SECONDNEWS}
-                                                </NewsContent>
-                                                <span className="news-more-link"> Read more</span>
-                                                <span className="arrow-icon" >→</span>
-                                            </div>
-                                        </a>
+                                            </a>
                                         </AnimateUp>
                                         {/* 뉴스 아이템 3 */}
                                         <AnimateUp>
-                                        <a href="/404"  >
-                                            <div style={{ marginTop: "0.5em" }}>
-                                                <div className="news-box">
-                                                    <p className="news-text">News</p>
+                                            <a href="/404"  >
+                                                <div style={{ marginTop: "0.5em" }}>
+                                                    <div className="news-box">
+                                                        <p className="news-text">News</p>
+                                                    </div>
+                                                    <NewsContent>{langJson[lang]?.THIRDNEWS}
+                                                    </NewsContent>
+                                                    <span className="news-more-link"> Read more</span>
+                                                    <span className="arrow-icon" >→</span>
                                                 </div>
-                                                <NewsContent>{langJson[lang]?.THIRDNEWS}
-                                                </NewsContent>
-                                                <span className="news-more-link"> Read more</span>
-                                                <span className="arrow-icon" >→</span>
-                                            </div>
-                                        </a>
+                                            </a>
                                         </AnimateUp>
                                         {/* 뉴스 아이템 4 */}
                                         <AnimateUp>
-                                        <a href="/404" >
-                                            <div style={{ marginTop: "0.5em" }}>
-                                                <div className="news-box">
-                                                    <p className="news-text">News</p>
+                                            <a href="/404" >
+                                                <div style={{ marginTop: "0.5em" }}>
+                                                    <div className="news-box">
+                                                        <p className="news-text">News</p>
+                                                    </div>
+                                                    <NewsContent>{langJson[lang]?.FOURTHNEWS}
+                                                    </NewsContent>
+                                                    <span className="news-more-link"> Read more</span>
+                                                    <span className="arrow-icon">→</span>
                                                 </div>
-                                                <NewsContent>{langJson[lang]?.FOURTHNEWS}
-                                                </NewsContent>
-                                                <span className="news-more-link"> Read more</span>
-                                                <span className="arrow-icon">→</span>
-                                            </div>
-                                        </a>
+                                            </a>
                                         </AnimateUp>
                                         {/* 뉴스 아이템 5 */}
                                         <AnimateUp>
-                                        <a href="/404">
-                                            <div style={{ marginTop: "0.5em" }}>
-                                                <div className="news-box">
-                                                    <p className="news-text">News</p>
+                                            <a href="/404">
+                                                <div style={{ marginTop: "0.5em" }}>
+                                                    <div className="news-box">
+                                                        <p className="news-text">News</p>
+                                                    </div>
+                                                    <NewsContent>{langJson[lang]?.FIFTHNEWS}
+                                                    </NewsContent>
+                                                    <span className="news-more-link"> Read more</span>
+                                                    <span className="arrow-icon" >→</span>
                                                 </div>
-                                                <NewsContent>{langJson[lang]?.FIFTHNEWS}
-                                                </NewsContent>
-                                                <span className="news-more-link"> Read more</span>
-                                                <span className="arrow-icon" >→</span>
-                                            </div>
-                                        </a>
+                                            </a>
                                         </AnimateUp>
                                         {/* 뉴스 아이템 6 */}
                                         <AnimateUp>
-                                        <a href="/404" >
-                                            <div style={{ marginTop: "0.5em" }}>
-                                                <div className="news-box">
-                                                    <p className="news-text">News</p>
-                                                </div>
-                                                <NewsContent>{langJson[lang]?.SIXTHNEWS}
-                                                </NewsContent>
-                                                <span className="news-more-link"> Read more</span>
-                                                <span className="arrow-icon" >→</span></div>
-                                        </a>
+                                            <a href="/404" >
+                                                <div style={{ marginTop: "0.5em" }}>
+                                                    <div className="news-box">
+                                                        <p className="news-text">News</p>
+                                                    </div>
+                                                    <NewsContent>{langJson[lang]?.SIXTHNEWS}
+                                                    </NewsContent>
+                                                    <span className="news-more-link"> Read more</span>
+                                                    <span className="arrow-icon" >→</span></div>
+                                            </a>
                                         </AnimateUp>
                                     </NewsList>
-                                        <AnimateUp>
-                                    <M4ButtonContainer>
-                                        {/* news1 버튼 */}
-                                        <M4Button href="https://www.youtube.com/watch?v=OLrv8OGTUnQ" target="_blank" rel="noopener noreferrer">
-                                            <img src="/image/newsimage1.png" alt="youtube1 Image" />
-                                        </M4Button>
-                                        {/* news2 버튼 */}
-                                        <M4Button href="https://www.youtube.com/watch?v=REof-nC8Ck8&feature=youtu.be" target="_blank" rel="noopener noreferrer">
-                                            <img src="/image/newsimage2.png" alt="youtube2 Image" />
-                                        </M4Button>
-                                        {/* news3 버튼 */}
-                                        <M4Button href="https://www.youtube.com/watch?v=Lu8uHwNpHEQ" target="_blank" rel="noopener noreferrer">
-                                            <img src="/image/newsimage3.png" alt="youtube3 Image" />
-                                        </M4Button>
-                                    </M4ButtonContainer>
-                                        </AnimateUp>
-                                        <AnimateUp>
-                                    <M5Title>
-                                        <span>성공</span>으로 가는 과정을 계획하는데 <span>함께</span>하겠습니다.
-                                    </M5Title>
-                                        </AnimateUp>
+                                    <AnimateUp>
+                                        <M4ButtonContainer>
+                                            {/* news1 버튼 */}
+                                            <M4Button href="https://www.youtube.com/watch?v=OLrv8OGTUnQ" target="_blank" rel="noopener noreferrer">
+                                                <img src="/image/newsimage1.png" alt="youtube1 Image" />
+                                            </M4Button>
+                                            {/* news2 버튼 */}
+                                            <M4Button href="https://www.youtube.com/watch?v=REof-nC8Ck8&feature=youtu.be" target="_blank" rel="noopener noreferrer">
+                                                <img src="/image/newsimage2.png" alt="youtube2 Image" />
+                                            </M4Button>
+                                            {/* news3 버튼 */}
+                                            <M4Button href="https://www.youtube.com/watch?v=Lu8uHwNpHEQ" target="_blank" rel="noopener noreferrer">
+                                                <img src="/image/newsimage3.png" alt="youtube3 Image" />
+                                            </M4Button>
+                                        </M4ButtonContainer>
+                                    </AnimateUp>
+                                    <AnimateUp>
+                                        <M5Title>
+                                            <span>성공</span>으로 가는 과정을 계획하는데 <span>함께</span>하겠습니다.
+                                        </M5Title>
+                                    </AnimateUp>
                                     <M5SearchContainer>
                                         <AnimateUp>
-                                        <span style={{ marginLeft: "12vw", color: "#FFC200" }}>Search</span>
-                                        <span style={{ color: "white" }}>Payvery.com</span>
+                                            <span style={{ marginLeft: "12vw", color: "#FFC200" }}>Search</span>
+                                            <span style={{ color: "white" }}>Payvery.com</span>
                                         </AnimateUp>
                                         <AnimateUp>
-                                        <p>Creative Leadership of Payvery designs the new future never experienced before.</p>
+                                            <p>Creative Leadership of Payvery designs the new future never experienced before.</p>
                                         </AnimateUp>
                                         <AnimateUp>
-                                        <div className="searchheerim">
-                                            <M5SearchInput
-                                                type="text"
-                                                placeholder="Type here"
-                                                value={searchQuery}
-                                                onChange={handleSearchInputChange} // 검색 입력란 스타일 추가
-                                            />
-                                            <SearchButton className="searchheerim-button" onClick={() => { window.location.href = "/404"; }} style={{
-                                                background: "transparent", // Set the background to transparent
-                                                border: "none", // Remove the border
-                                                borderBottom: "5px solid white",
-                                            }}>
-                                                <img src="/icon/search.png" alt="Search Icon" />
-                                            </SearchButton>
-                                        </div>
+                                            <div className="searchheerim">
+                                                <M5SearchInput
+                                                    type="text"
+                                                    placeholder="Type here"
+                                                    value={searchQuery}
+                                                    onChange={handleSearchInputChange} // 검색 입력란 스타일 추가
+                                                />
+                                                <SearchButton className="searchheerim-button" onClick={() => { window.location.href = "/404"; }} style={{
+                                                    background: "transparent", // Set the background to transparent
+                                                    border: "none", // Remove the border
+                                                    borderBottom: "5px solid white",
+                                                }}>
+                                                    <img src="/icon/search.png" alt="Search Icon" />
+                                                </SearchButton>
+                                            </div>
                                         </AnimateUp>
                                         <AnimateUp>
-                                        <M5SearchTag>
-                                            <button onClick={() => { window.location.reload() }}><Link href="/Payvery">#Payvery</Link></button>
-                                            <button onClick={() => { window.location.reload() }}><Link href="/Purplevery">#Purplevery</Link></button>
-                                            <button onClick={() => { window.location.reload() }}><Link href="/Pg">#Pg</Link></button>
-                                            <button onClick={() => { window.location.reload() }}><Link href="/Payment_gateway">#Payment_gateway</Link></button>
-                                            <button onClick={() => { window.location.reload() }}><Link href="/Customer">#Customer</Link></button>
-                                        </M5SearchTag>
+                                            <M5SearchTag>
+                                                <button onClick={() => { window.location.reload() }}><Link href="/Payvery">#Payvery</Link></button>
+                                                <button onClick={() => { window.location.reload() }}><Link href="/Purplevery">#Purplevery</Link></button>
+                                                <button onClick={() => { window.location.reload() }}><Link href="/Pg">#Pg</Link></button>
+                                                <button onClick={() => { window.location.reload() }}><Link href="/Payment_gateway">#Payment_gateway</Link></button>
+                                                <button onClick={() => { window.location.reload() }}><Link href="/Customer">#Customer</Link></button>
+                                            </M5SearchTag>
                                         </AnimateUp>
                                     </M5SearchContainer>
                                     <div className="bottom">
@@ -887,8 +885,8 @@ const Home = () => {
                                                         {/* 주제와 설명 */}
                                                     </AnimateUp>
                                                     <AnimateUp>
-                                                        <TopicsContainer/>
-                                                        </AnimateUp>
+                                                        <TopicsContainer />
+                                                    </AnimateUp>
                                                 </div>
                                             </Section>
                                             <W2IconContainer>
@@ -921,12 +919,12 @@ const Home = () => {
                                     ) : index === 2 ? (
                                         <div className="section3">
                                             <Section>
-                                            <AnimateUp>
-                                                <div className="title">Our Service</div>
+                                                <AnimateUp>
+                                                    <div className="title">Our Service</div>
                                                 </AnimateUp>
                                                 <AnimateUp>
-                                                <div className="sec3description" style={{ color: "black", margin: "none" }}>{langJson[lang]?.DESCIRPTION}
-                                                </div></AnimateUp>
+                                                    <div className="sec3description" style={{ color: "black", margin: "none" }}>{langJson[lang]?.DESCIRPTION}
+                                                    </div></AnimateUp>
                                                 <AnimateUp>
                                                     <div className="image-container"
                                                         onMouseLeave={handleImageLeave}>
@@ -1146,14 +1144,14 @@ const Home = () => {
                                                                 <img src="/image/newsimage3.png" alt="youtube3 Image" />
                                                             </a>
                                                         </div>
-                                                        </AnimateUp>
+                                                    </AnimateUp>
                                                 </div>
 
                                                 <AnimateUp>
                                                     <div className="sec5title">
                                                         <span class="bold-text">성공</span>으로 가는 과정을 계획하는데 <span class="bold-text">함께</span>하겠습니다.
                                                     </div>
-                                                    </AnimateUp>
+                                                </AnimateUp>
                                                 <div className="searchheerim-container">
                                                     <AnimateUp>
                                                         <span className="search-title">Search

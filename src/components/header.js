@@ -98,9 +98,8 @@ z-index: 9999;
 }
 `
 const TotalButtonContainer = styled.div` /* 더보기 내용 전체 버튼 */
-position: fixed;
-top: 6%;
-left: 5%;
+margin-top: 7vh;
+margin-left: 8vw;
 display: flex;
 `
 const TitleButton = styled.button`
@@ -213,11 +212,77 @@ padding: 7px;
 }
 }
 `
+
+const MTotalButtonContainer = styled.div`
+margin: 0;
+`
+const MDropDownButton = styled.div`
+background-color: transparent;
+cursor: pointer;
+a{
+    color: white;
+}
+:active {
+    display: block;
+}
+`
+const MDropDownContent = styled.div`
+display: none;
+background-color: white;
+a{
+    display: block;
+    color: gray;
+}
+`
 const Header = ({ activeSection, isMoreClicked, handleMoreButtonClick, setIsMoreClicked, closeMore, updateHeaderVisibility }) => {
     const router = useRouter();
     const { lang = 'kr' } = router.query;
     const [isVisible, setIsVisible] = useState(false);
     const [isScrollingDisabled, setScrollingDisabled] = useState(false);
+    const [isMobile, setIsMobile] = useState(false); // State for mobile screen
+    const [loading, setLoading] = useState(true);
+    const [windowWidth, setWindowWidth] = useState(0); // 초기 화면 너비 설정
+
+    useEffect(() => {
+        // 스크립트 로딩 및 언어 확인 이후에 화면 크기 업데이트 리스너 추가
+        if (!loading) {
+            // 함수를 선언하여 화면 크기를 업데이트하는 로직
+            const updateWindowDimensions = () => {
+                setWindowWidth(window.innerWidth);
+            };
+
+            // 초기화 단계에서 한 번 실행하고, 화면 크기가 변경될 때마다 실행
+            updateWindowDimensions();
+            window.addEventListener("resize", updateWindowDimensions);
+        }
+
+        // 이 컴포넌트가 언마운트될 때 이벤트 리스너 정리
+        return () => {
+            window.removeEventListener("resize", updateWindowDimensions);
+        };
+    }, [activeSection, loading, windowWidth]);
+
+    const updateWindowDimensions = () => {
+        setWindowWidth(window.innerWidth);
+    };
+
+    useEffect(() => {
+        setIsVisible(true);
+
+        // Check if the screen is mobile when the component mounts
+        const checkIsMobile = () => {
+            setIsMobile(window.innerWidth <= 600);
+        };
+
+        checkIsMobile(); // Check on component mount
+
+        // Update the mobile state when the window is resized
+        window.addEventListener('resize', checkIsMobile);
+
+        return () => {
+            window.removeEventListener('resize', checkIsMobile); // Remove the event listener on unmount
+        };
+    }, []);
 
 
     useEffect(() => {
@@ -276,84 +341,128 @@ const Header = ({ activeSection, isMoreClicked, handleMoreButtonClick, setIsMore
             {isMoreClicked && (
                 <MoreContainer>
                     <MoreClose onClick={closeMore}>Close X</MoreClose>
-                    <TotalButtonContainer>
-                        <div >
-                            <TitleButton>
-                                <Link href="/IR" >ABOUT US</Link>
-                            </TitleButton>
-                            <SubButton>
-                                <Link href="/about-us/corporate-profile" >Corporate Profile</Link>
-                                <Link href="/about-us/leadership" >Leadership</Link>
-                                <Link href="/about-us/News" >News</Link>
-                                <Link href="/about-us/PR" >PR </Link>
-                                <Link href="/about-us/Recruit" >Recruit</Link>
-                            </SubButton>
-                        </div>
-                        <div >
-                            <TitleButton >
-                                <Link href="/IR" >PROJECTS</Link>
-                            </TitleButton>
-                            <SubButton >
-                                <Link href="/projects/Selected Works">Selected Works</Link>
-                                <Link href="/projects/All" >All</Link>
-                                <Link href="/projects/DESIGN" >DESIGN</Link>
-                                <Link href="/projects/CM" >CM</Link>
-                            </SubButton>
-                        </div>
-                        <div >
-                            <TitleButton>
-                                <Link href="/IR" >EXPERTISE</Link>
-                            </TitleButton>
-                            <SubButton >
-                                <Link href="/EXPERTISE/Services" >Services</Link>
-                                <Link href="/EXPERTISE/Markets" >Markets</Link>
-                                <Link href="/EXPERTISE/Research" >Research & Idea</Link>
-                                <Link href="/EXPERTISE/VR" >VR/AR</Link>
-                            </SubButton>
-                        </div>
+                    {isMobile ? (
                         <div>
-                            <TitleButton>
-                                <Link href="/IR" >IR</Link>
-                            </TitleButton>
-                            <SubButton >
-                                <Link href="/IR/Finance">Finance</Link>
-                                <Link href="/IR/Analyst_Report" >Analyst Report</Link>
-                                <Link href="/IR/IR_Material" >IR Material</Link>
-                            </SubButton>
+                        <MTotalButtonContainer>
+                            <MDropDownButton>
+                                <button>ABOUT US</button>
+                                <MDropDownContent>
+                                    <a href="/about-us/corporate-profile" >Corporate Profile</a>
+                                    <a href="/about-us/leadership" >Leadership</a>
+                                    <a href="/about-us/News" >News</a>
+                                    <a href="/about-us/PR" >PR </a>
+                                    <a href="/about-us/Recruit" >Recruit</a>
+                                </MDropDownContent>
+                            </MDropDownButton>
+                        </MTotalButtonContainer>
+                        <MoreIconButtonContainer>
+                            {/* 인스타그램 버튼 */}
+                            <MoreIconButton>
+                                <Link href="https://www.instagram.com/heerim_architects_official/" target="_blank" rel="noopener noreferrer">
+                                    <img src="/icon/instagram.svg" alt="Instagram Icon" />
+                                </Link>
+                                {/* 유튜브 버튼 */}
+                                <Link style={{ marginLeft: "3vw" }} href="https://www.youtube.com/channel/UCPwQIrf17KFyqvXeq8NVY_Q" target="_blank" rel="noopener noreferrer">
+                                    <img src="/icon/youtube.svg" alt="YouTube Icon" />
+                                </Link>
+                                {/* 핀터레스트 버튼 */}
+                                <Link style={{ marginLeft: "3vw" }} href="https://www.pinterest.co.kr/heerim_architects_official/" target="_blank" rel="noopener noreferrer">
+                                    <img src="/icon/pinterest.svg" alt="Pinterest Icon" />
+                                </Link>
+                            </MoreIconButton>
+                            {/* 디자인 지도 버튼 */}
+                            <LocationButton style={{ marginLeft: "3vw" }} href="https://www.google.com/maps/d/viewer?mid=1ZYdnpbxRgC5-zu5GpoOU8zd_E-v24aXT&ll=13.728397502246512%2C71.13522019999999&z=3" target="_blank" rel="noopener noreferrer">
+                                <img src="/icon/location.svg" alt="Location Icon" />
+                                <a> Design map </a>
+                            </LocationButton>
+                            {/* CM 지도 버튼 */}
+                            <LocationButton style={{ marginLeft: "3vw" }} href="https://www.google.com/maps/d/viewer?mid=1aWEovb5OXGAdqH_D-QojV6l96tLYT2S0&ll=24.118227897040363%2C55.94565490000001&z=3" target="_blank" rel="noopener noreferrer">
+                                <img src="/icon/location.svg" alt="Location Icon" />
+                                <a> CM map </a>
+                            </LocationButton>
+                        </MoreIconButtonContainer>
                         </div>
+                    ):(
                         <div>
-                            <TitleButton>
-                                <Link href="/IR" >CONTACT</Link>
-                            </TitleButton>
+                        <TotalButtonContainer>
+                            <div >
+                                <TitleButton>
+                                    <Link href="/ABOUT US" >ABOUT US</Link>
+                                </TitleButton>
+                                <SubButton>
+                                    <Link href="/about-us/corporate-profile" >Corporate Profile</Link>
+                                    <Link href="/about-us/leadership" >Leadership</Link>
+                                    <Link href="/about-us/News" >News</Link>
+                                    <Link href="/about-us/PR" >PR </Link>
+                                    <Link href="/about-us/Recruit" >Recruit</Link>
+                                </SubButton>
+                            </div>
+                            <div >
+                                <TitleButton >
+                                    <Link href="/PROJECTS" >PROJECTS</Link>
+                                </TitleButton>
+                                <SubButton >
+                                    <Link href="/projects/Selected Works">Selected Works</Link>
+                                    <Link href="/projects/All" >All</Link>
+                                    <Link href="/projects/DESIGN" >DESIGN</Link>
+                                    <Link href="/projects/CM" >CM</Link>
+                                </SubButton>
+                            </div>
+                            <div >
+                                <TitleButton>
+                                    <Link href="/EXPERTISE" >EXPERTISE</Link>
+                                </TitleButton>
+                                <SubButton >
+                                    <Link href="/EXPERTISE/Services" >Services</Link>
+                                    <Link href="/EXPERTISE/Markets" >Markets</Link>
+                                    <Link href="/EXPERTISE/Research" >Research & Idea</Link>
+                                    <Link href="/EXPERTISE/VR" >VR/AR</Link>
+                                </SubButton>
+                            </div>
+                            <div>
+                                <TitleButton>
+                                    <Link href="/IR" >IR</Link>
+                                </TitleButton>
+                                <SubButton >
+                                    <Link href="/IR/Finance">Finance</Link>
+                                    <Link href="/IR/Analyst_Report" >Analyst Report</Link>
+                                    <Link href="/IR/IR_Material" >IR Material</Link>
+                                </SubButton>
+                            </div>
+                            <div>
+                                <TitleButton>
+                                    <Link href="/CONTACT" >CONTACT</Link>
+                                </TitleButton>
+                            </div>
+                        </TotalButtonContainer>
+                        <MoreIconButtonContainer>
+                            {/* 인스타그램 버튼 */}
+                            <MoreIconButton>
+                                <Link href="https://www.instagram.com/heerim_architects_official/" target="_blank" rel="noopener noreferrer">
+                                    <img src="/icon/instagram.svg" alt="Instagram Icon" />
+                                </Link>
+                                {/* 유튜브 버튼 */}
+                                <Link style={{ marginLeft: "3vw" }} href="https://www.youtube.com/channel/UCPwQIrf17KFyqvXeq8NVY_Q" target="_blank" rel="noopener noreferrer">
+                                    <img src="/icon/youtube.svg" alt="YouTube Icon" />
+                                </Link>
+                                {/* 핀터레스트 버튼 */}
+                                <Link style={{ marginLeft: "3vw" }} href="https://www.pinterest.co.kr/heerim_architects_official/" target="_blank" rel="noopener noreferrer">
+                                    <img src="/icon/pinterest.svg" alt="Pinterest Icon" />
+                                </Link>
+                            </MoreIconButton>
+                            {/* 디자인 지도 버튼 */}
+                            <LocationButton style={{ marginLeft: "3vw" }} href="https://www.google.com/maps/d/viewer?mid=1ZYdnpbxRgC5-zu5GpoOU8zd_E-v24aXT&ll=13.728397502246512%2C71.13522019999999&z=3" target="_blank" rel="noopener noreferrer">
+                                <img src="/icon/location.svg" alt="Location Icon" />
+                                <a> Design map </a>
+                            </LocationButton>
+                            {/* CM 지도 버튼 */}
+                            <LocationButton style={{ marginLeft: "3vw" }} href="https://www.google.com/maps/d/viewer?mid=1aWEovb5OXGAdqH_D-QojV6l96tLYT2S0&ll=24.118227897040363%2C55.94565490000001&z=3" target="_blank" rel="noopener noreferrer">
+                                <img src="/icon/location.svg" alt="Location Icon" />
+                                <a> CM map </a>
+                            </LocationButton>
+                        </MoreIconButtonContainer>
                         </div>
-                    </TotalButtonContainer>
-                    {/* 인스타그램 버튼 */}
-                    <MoreIconButtonContainer>
-                        {/* 인스타그램 버튼 */}
-                        <MoreIconButton>
-                            <Link href="https://www.instagram.com/heerim_architects_official/" target="_blank" rel="noopener noreferrer">
-                                <img src="/icon/instagram.svg" alt="Instagram Icon" />
-                            </Link>
-                            {/* 유튜브 버튼 */}
-                            <Link style={{ marginLeft: "3vw" }} href="https://www.youtube.com/channel/UCPwQIrf17KFyqvXeq8NVY_Q" target="_blank" rel="noopener noreferrer">
-                                <img src="/icon/youtube.svg" alt="YouTube Icon" />
-                            </Link>
-                            {/* 핀터레스트 버튼 */}
-                            <Link style={{ marginLeft: "3vw" }} href="https://www.pinterest.co.kr/heerim_architects_official/" target="_blank" rel="noopener noreferrer">
-                                <img src="/icon/pinterest.svg" alt="Pinterest Icon" />
-                            </Link>
-                        </MoreIconButton>
-                        {/* 디자인 지도 버튼 */}
-                        <LocationButton style={{ marginLeft: "3vw" }} href="https://www.google.com/maps/d/viewer?mid=1ZYdnpbxRgC5-zu5GpoOU8zd_E-v24aXT&ll=13.728397502246512%2C71.13522019999999&z=3" target="_blank" rel="noopener noreferrer">
-                            <img src="/icon/location.svg" alt="Location Icon" />
-                            <a> Design map </a>
-                        </LocationButton>
-                        {/* CM 지도 버튼 */}
-                        <LocationButton style={{ marginLeft: "3vw" }} href="https://www.google.com/maps/d/viewer?mid=1aWEovb5OXGAdqH_D-QojV6l96tLYT2S0&ll=24.118227897040363%2C55.94565490000001&z=3" target="_blank" rel="noopener noreferrer">
-                            <img src="/icon/location.svg" alt="Location Icon" />
-                            <a> CM map </a>
-                        </LocationButton>
-                    </MoreIconButtonContainer>
+                        )}
                 </MoreContainer>
             )}
         </Headerwrappers >
