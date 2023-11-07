@@ -75,11 +75,16 @@ body {
 .topics-container {
   display: flex;
   justify-content: space-between;
-  margin-left: 2.4em;
-    opacity: 0;  /* 처음에는 안 보이게 설정 */
-    transform: translateY(60px);  /* 시작 위치 지정 */
-    /* fadein 애니메이션 효과 설정 */
-    transition: opacity 1s ease, transform 2s ease;
+  margin-left: 1em;
+    @media screen and (min-width: 1280px) {
+      margin-left: 12vw;
+      margin-right: 12vw;
+      opacity: 0;  /* 처음에는 안 보이게 설정 */
+      transform: translateY(60px);  /* 시작 위치 지정 */
+      /* fadein 애니메이션 효과 설정 */
+      transition: opacity 1s ease, transform 2s ease;
+      /* 미디어 쿼리를 사용하여 스타일 변경 */
+    }
 }
 
 .topics-container.in-view {
@@ -164,7 +169,7 @@ body {
 }
 
 .sec3description {
-  margin-bottom: 3vh;
+  margin-bottom: 6vh;
   margin-left: 10vw;/*
   opacity: 0;
   /* 처음에는 안 보이게 설정 *//*
@@ -195,6 +200,7 @@ body {
 .image-container {
   cursor: pointer;  /* 포인터 커서로 변경 */
   overflow: hidden;
+  justify-content: center;
   display: flex;
   width: 100%;
   /* 컨테이너의 너비를 화면 너비에 맞춥니다. */
@@ -226,14 +232,14 @@ body {
 }
 
 .image-overlay {
+  position: absolute;
+  bottom: -192%;
+  margin-left: 2em;
   background: transparent;  /* 투명한 배경 */
   color: white;
   max-width: 100%;
   opacity: 1;
   text-align: left;  /* 왼쪽 정렬 */
-  margin-left: 2.2em; /* 여백 추가 */
-  margin-bottom: 2.2em; /* 여백 추가 */
-  z-index: 5;
 
   /* 미디어 쿼리를 사용하여 스타일 변경 */
   @media screen and (max-width: 700px),

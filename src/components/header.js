@@ -79,7 +79,7 @@ left: 0%;
 width: 100%;
 height: 100%;
 background-color: rgb(0, 104, 232);; /* 파란색 배경 추가 */
-z-index: 9999;
+z-index: 1;
 `
 const MoreClose = styled.button` /* more close 버튼 */
 position: fixed;
@@ -155,6 +155,9 @@ bottom: 10%;
 left: 10%;
 display: flex; /* 더보기 아래쪽 아이콘 버튼 스타일*/
 text-align: center;
+@media only screen and (max-width: 400px) {
+    left: 0%;
+}
 `
 const MoreIconButton = styled.a`
 transition: opacity 0.3s ease; /* 호버 시 투명도 전환 애니메이션 */
@@ -332,21 +335,21 @@ const Header = ({ activeSection, isMoreClicked, handleMoreButtonClick, setIsMore
                                 <img src="/icon/instagram.svg" alt="Instagram Icon" />
                             </Link>
                             {/* 유튜브 버튼 */}
-                            <Link style={{ marginLeft: "35px" }} href="https://www.youtube.com/channel/UCPwQIrf17KFyqvXeq8NVY_Q" target="_blank" rel="noopener noreferrer">
+                            <Link style={{ marginLeft: "3vw" }} href="https://www.youtube.com/channel/UCPwQIrf17KFyqvXeq8NVY_Q" target="_blank" rel="noopener noreferrer">
                                 <img src="/icon/youtube.svg" alt="YouTube Icon" />
                             </Link>
                             {/* 핀터레스트 버튼 */}
-                            <Link style={{ marginLeft: "35px" }} href="https://www.pinterest.co.kr/heerim_architects_official/" target="_blank" rel="noopener noreferrer">
+                            <Link style={{ marginLeft: "3vw" }} href="https://www.pinterest.co.kr/heerim_architects_official/" target="_blank" rel="noopener noreferrer">
                                 <img src="/icon/pinterest.svg" alt="Pinterest Icon" />
                             </Link>
                         </MoreIconButton>
                         {/* 디자인 지도 버튼 */}
-                        <LocationButton style={{ marginLeft: "35px" }} href="https://www.google.com/maps/d/viewer?mid=1ZYdnpbxRgC5-zu5GpoOU8zd_E-v24aXT&ll=13.728397502246512%2C71.13522019999999&z=3" target="_blank" rel="noopener noreferrer">
+                        <LocationButton style={{ marginLeft: "3vw" }} href="https://www.google.com/maps/d/viewer?mid=1ZYdnpbxRgC5-zu5GpoOU8zd_E-v24aXT&ll=13.728397502246512%2C71.13522019999999&z=3" target="_blank" rel="noopener noreferrer">
                             <img src="/icon/location.svg" alt="Location Icon" />
                             <a> Design map </a>
                         </LocationButton>
                         {/* CM 지도 버튼 */}
-                        <LocationButton style={{ marginLeft: "10px" }} href="https://www.google.com/maps/d/viewer?mid=1aWEovb5OXGAdqH_D-QojV6l96tLYT2S0&ll=24.118227897040363%2C55.94565490000001&z=3" target="_blank" rel="noopener noreferrer">
+                        <LocationButton style={{ marginLeft: "3vw" }} href="https://www.google.com/maps/d/viewer?mid=1aWEovb5OXGAdqH_D-QojV6l96tLYT2S0&ll=24.118227897040363%2C55.94565490000001&z=3" target="_blank" rel="noopener noreferrer">
                             <img src="/icon/location.svg" alt="Location Icon" />
                             <a> CM map </a>
                         </LocationButton>

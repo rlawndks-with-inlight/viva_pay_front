@@ -121,19 +121,13 @@ margin-top: 2em;
   object-fit: cover; /* 이미지가 잘리지 않고 화면에 맞게 크기 조정 */
     height: 21em;
     width: 98%;
-@media only screen and (min-width: 540px) {
   }
-  }
-  div{
+  div{ /* 4개 이미지 위의 장소, 건물 */
 position: absolute;
 left: 5%;
 margin-top: 14em;
 background: transparent; /* 투명한 배경 */
-z-index: 5;
 color: white;
-@media only screen and (width: 540px), (height: 720px) {
-margin-top: 95px;
-  }
 }
 `
 const Place = styled.p`
@@ -259,7 +253,6 @@ color: white;
 /* 2section sec2 2섹션 스타일  */
 const W2IconContainer = styled.div`
 display: flex;
-
 overflow-x: hidden;
 justify-content: space-between;
 align-items: flex-end;
@@ -284,7 +277,6 @@ border: none;
 cursor: pointer;
 margin-bottom: 4vh;
 margin-left: 20%;
-z-index: 1;
 background-size: cover;
 background-color: transparent;
 @media only screen and (max-width: 1100px), (max-height: 800px) {
@@ -303,7 +295,6 @@ border: none;
 cursor: pointer;
 margin-bottom: 4vh;
 margin-right: 20%;
-z-index: 1;
 background-size: cover;
 background-color: transparent;
 @media only screen and (max-width: 1100px), (max-height: 800px) {
@@ -612,7 +603,7 @@ const Home = () => {
     
     
     const handleScroll = (e) => {
-if (windowWidth > 1300 || windowHeight >= 800) {
+if (windowWidth > 1280 || windowHeight >= 800) {
         // 스크롤 이벤트를 중지합니다.
         e.preventDefault();
 
@@ -719,7 +710,7 @@ if (windowWidth > 1300 || windowHeight >= 800) {
                                         <M2Subtitle> {langJson[lang]?.FOLLOW}</M2Subtitle>
                                         <M2Subtitle> {langJson[lang]?.SUPPORT}</M2Subtitle>
                                         <M2Description>{langJson[lang]?.DESCIRPTION}</M2Description>
-                                        <TopicsContainer />
+                                        <TopicsContainer className={`topics-container ${inViewItems2.includes("") ? "in-view" : ""}`}/>
                                     </M2>
                                     <M2IconContainer>
                                         {/* 이전 버튼 */}
