@@ -213,26 +213,30 @@ padding: 7px;
 }
 `
 
-const MTotalButtonContainer = styled.div`
-margin: 0;
+const MTotalButtonContainer = styled.ul`
+text-decoration: none;
+margin-top : 10em;
 `
-const MDropDownButton = styled.div`
+const MDropDownButton = styled.li`
 background-color: transparent;
 cursor: pointer;
+list-style: none;
 a{
+    text-decoration: none;
     color: white;
 }
-:active {
-    display: block;
-}
 `
-const MDropDownContent = styled.div`
-display: none;
+const MDropDownContent = styled.ul`
+width: 100%;
 background-color: white;
-a{
+list-style: none;
+  display: ${(props) => (props.isVisible ? 'block' : 'none')};
+  margin: 0;
+  a {
+    text-decoration: none;
     display: block;
     color: gray;
-}
+  }
 `
 const Header = ({ activeSection, isMoreClicked, handleMoreButtonClick, setIsMoreClicked, closeMore, updateHeaderVisibility }) => {
     const router = useRouter();
@@ -242,6 +246,11 @@ const Header = ({ activeSection, isMoreClicked, handleMoreButtonClick, setIsMore
     const [isMobile, setIsMobile] = useState(false); // State for mobile screen
     const [loading, setLoading] = useState(true);
     const [windowWidth, setWindowWidth] = useState(0); // 초기 화면 너비 설정
+    const [isDropdownVisible, setDropdownVisible] = useState(false);
+
+    const toggleDropdown = () => {
+        setDropdownVisible(!isDropdownVisible);
+    };
 
     useEffect(() => {
         // 스크립트 로딩 및 언어 확인 이후에 화면 크기 업데이트 리스너 추가
@@ -343,126 +352,163 @@ const Header = ({ activeSection, isMoreClicked, handleMoreButtonClick, setIsMore
                     <MoreClose onClick={closeMore}>Close X</MoreClose>
                     {isMobile ? (
                         <div>
-                        <MTotalButtonContainer>
-                            <MDropDownButton>
-                                <button>ABOUT US</button>
-                                <MDropDownContent>
-                                    <a href="/about-us/corporate-profile" >Corporate Profile</a>
-                                    <a href="/about-us/leadership" >Leadership</a>
-                                    <a href="/about-us/News" >News</a>
-                                    <a href="/about-us/PR" >PR </a>
-                                    <a href="/about-us/Recruit" >Recruit</a>
-                                </MDropDownContent>
-                            </MDropDownButton>
-                        </MTotalButtonContainer>
-                        <MoreIconButtonContainer>
-                            {/* 인스타그램 버튼 */}
-                            <MoreIconButton>
-                                <Link href="https://www.instagram.com/heerim_architects_official/" target="_blank" rel="noopener noreferrer">
-                                    <img src="/icon/instagram.svg" alt="Instagram Icon" />
-                                </Link>
-                                {/* 유튜브 버튼 */}
-                                <Link style={{ marginLeft: "3vw" }} href="https://www.youtube.com/channel/UCPwQIrf17KFyqvXeq8NVY_Q" target="_blank" rel="noopener noreferrer">
-                                    <img src="/icon/youtube.svg" alt="YouTube Icon" />
-                                </Link>
-                                {/* 핀터레스트 버튼 */}
-                                <Link style={{ marginLeft: "3vw" }} href="https://www.pinterest.co.kr/heerim_architects_official/" target="_blank" rel="noopener noreferrer">
-                                    <img src="/icon/pinterest.svg" alt="Pinterest Icon" />
-                                </Link>
-                            </MoreIconButton>
-                            {/* 디자인 지도 버튼 */}
-                            <LocationButton style={{ marginLeft: "3vw" }} href="https://www.google.com/maps/d/viewer?mid=1ZYdnpbxRgC5-zu5GpoOU8zd_E-v24aXT&ll=13.728397502246512%2C71.13522019999999&z=3" target="_blank" rel="noopener noreferrer">
-                                <img src="/icon/location.svg" alt="Location Icon" />
-                                <a> Design map </a>
-                            </LocationButton>
-                            {/* CM 지도 버튼 */}
-                            <LocationButton style={{ marginLeft: "3vw" }} href="https://www.google.com/maps/d/viewer?mid=1aWEovb5OXGAdqH_D-QojV6l96tLYT2S0&ll=24.118227897040363%2C55.94565490000001&z=3" target="_blank" rel="noopener noreferrer">
-                                <img src="/icon/location.svg" alt="Location Icon" />
-                                <a> CM map </a>
-                            </LocationButton>
-                        </MoreIconButtonContainer>
+                            <MTotalButtonContainer>
+                                <MDropDownButton onClick={toggleDropdown}>
+                                    <a>ABOUT US</a>
+                                    <MDropDownContent isVisible={isDropdownVisible}>
+                                        <li>
+                                            <a href="/about-us/corporate-profile" >Corporate Profile</a>
+                                            <a href="/about-us/leadership" >Leadership</a>
+                                            <a href="/about-us/news" >News</a>
+                                            <a href="/about-us/pr" >PR </a>
+                                            <a href="/about-us/recruit" >Recruit</a>
+                                        </li>
+                                    </MDropDownContent>
+                                </MDropDownButton>
+                                <MDropDownButton onClick={toggleDropdown}>
+                                    <a>PROJECTS</a>
+                                    <MDropDownContent isVisible={isDropdownVisible}>
+                                        <li>
+                                            <a href="/projects/selected works">Selected Works</a>
+                                            <a href="/projects/all" >All</a>
+                                            <a href="/projects/design" >DESIGN</a>
+                                            <a href="/projects/cm" >CM</a>
+                                        </li>
+                                    </MDropDownContent>
+                                </MDropDownButton>
+                                <MDropDownButton onClick={toggleDropdown}>
+                                    <a>EXPERTISE</a>
+                                    <MDropDownContent isVisible={isDropdownVisible}>
+                                        <li>
+                                            <a href="/expertise/services" >Services</a>
+                                            <a href="/expertise/markets" >Markets</a>
+                                            <a href="/expertise/research" >Research & Idea</a>
+                                            <a href="/expertise/vr" >VR/AR</a>
+                                        </li>
+                                    </MDropDownContent>
+                                </MDropDownButton>
+                                <MDropDownButton onClick={toggleDropdown}>
+                                    <a>IR</a>
+                                    <MDropDownContent isVisible={isDropdownVisible}>
+                                        <li>
+                                            <a href="/ir/finance">Finance</a>
+                                            <a href="/ir/analyst_report" >Analyst Report</a>
+                                            <a href="/ir/ir_material" >IR Material</a>
+                                        </li>
+                                    </MDropDownContent>
+                                </MDropDownButton>
+                                <MDropDownButton onClick={toggleDropdown}>
+                                    <a href="/contact" >CONTACT</a>
+                                </MDropDownButton>
+                            </MTotalButtonContainer>
+                            <MoreIconButtonContainer>
+                                {/* 인스타그램 버튼 */}
+                                <MoreIconButton>
+                                    <Link href="https://www.instagram.com/heerim_architects_official/" target="_blank" rel="noopener noreferrer">
+                                        <img src="/icon/instagram.svg" alt="Instagram Icon" />
+                                    </Link>
+                                    {/* 유튜브 버튼 */}
+                                    <Link style={{ marginLeft: "3vw" }} href="https://www.youtube.com/channel/UCPwQIrf17KFyqvXeq8NVY_Q" target="_blank" rel="noopener noreferrer">
+                                        <img src="/icon/youtube.svg" alt="YouTube Icon" />
+                                    </Link>
+                                    {/* 핀터레스트 버튼 */}
+                                    <Link style={{ marginLeft: "3vw" }} href="https://www.pinterest.co.kr/heerim_architects_official/" target="_blank" rel="noopener noreferrer">
+                                        <img src="/icon/pinterest.svg" alt="Pinterest Icon" />
+                                    </Link>
+                                </MoreIconButton>
+                                {/* 디자인 지도 버튼 */}
+                                <LocationButton style={{ marginLeft: "3vw" }} href="https://www.google.com/maps/d/viewer?mid=1ZYdnpbxRgC5-zu5GpoOU8zd_E-v24aXT&ll=13.728397502246512%2C71.13522019999999&z=3" target="_blank" rel="noopener noreferrer">
+                                    <img src="/icon/location.svg" alt="Location Icon" />
+                                    <a> Design map </a>
+                                </LocationButton>
+                                {/* CM 지도 버튼 */}
+                                <LocationButton style={{ marginLeft: "3vw" }} href="https://www.google.com/maps/d/viewer?mid=1aWEovb5OXGAdqH_D-QojV6l96tLYT2S0&ll=24.118227897040363%2C55.94565490000001&z=3" target="_blank" rel="noopener noreferrer">
+                                    <img src="/icon/location.svg" alt="Location Icon" />
+                                    <a> CM map </a>
+                                </LocationButton>
+                            </MoreIconButtonContainer>
                         </div>
-                    ):(
+                    ) : (
                         <div>
-                        <TotalButtonContainer>
-                            <div >
-                                <TitleButton>
-                                    <Link href="/ABOUT US" >ABOUT US</Link>
-                                </TitleButton>
-                                <SubButton>
-                                    <Link href="/about-us/corporate-profile" >Corporate Profile</Link>
-                                    <Link href="/about-us/leadership" >Leadership</Link>
-                                    <Link href="/about-us/News" >News</Link>
-                                    <Link href="/about-us/PR" >PR </Link>
-                                    <Link href="/about-us/Recruit" >Recruit</Link>
-                                </SubButton>
-                            </div>
-                            <div >
-                                <TitleButton >
-                                    <Link href="/PROJECTS" >PROJECTS</Link>
-                                </TitleButton>
-                                <SubButton >
-                                    <Link href="/projects/Selected Works">Selected Works</Link>
-                                    <Link href="/projects/All" >All</Link>
-                                    <Link href="/projects/DESIGN" >DESIGN</Link>
-                                    <Link href="/projects/CM" >CM</Link>
-                                </SubButton>
-                            </div>
-                            <div >
-                                <TitleButton>
-                                    <Link href="/EXPERTISE" >EXPERTISE</Link>
-                                </TitleButton>
-                                <SubButton >
-                                    <Link href="/EXPERTISE/Services" >Services</Link>
-                                    <Link href="/EXPERTISE/Markets" >Markets</Link>
-                                    <Link href="/EXPERTISE/Research" >Research & Idea</Link>
-                                    <Link href="/EXPERTISE/VR" >VR/AR</Link>
-                                </SubButton>
-                            </div>
-                            <div>
-                                <TitleButton>
-                                    <Link href="/IR" >IR</Link>
-                                </TitleButton>
-                                <SubButton >
-                                    <Link href="/IR/Finance">Finance</Link>
-                                    <Link href="/IR/Analyst_Report" >Analyst Report</Link>
-                                    <Link href="/IR/IR_Material" >IR Material</Link>
-                                </SubButton>
-                            </div>
-                            <div>
-                                <TitleButton>
-                                    <Link href="/CONTACT" >CONTACT</Link>
-                                </TitleButton>
-                            </div>
-                        </TotalButtonContainer>
-                        <MoreIconButtonContainer>
-                            {/* 인스타그램 버튼 */}
-                            <MoreIconButton>
-                                <Link href="https://www.instagram.com/heerim_architects_official/" target="_blank" rel="noopener noreferrer">
-                                    <img src="/icon/instagram.svg" alt="Instagram Icon" />
-                                </Link>
-                                {/* 유튜브 버튼 */}
-                                <Link style={{ marginLeft: "3vw" }} href="https://www.youtube.com/channel/UCPwQIrf17KFyqvXeq8NVY_Q" target="_blank" rel="noopener noreferrer">
-                                    <img src="/icon/youtube.svg" alt="YouTube Icon" />
-                                </Link>
-                                {/* 핀터레스트 버튼 */}
-                                <Link style={{ marginLeft: "3vw" }} href="https://www.pinterest.co.kr/heerim_architects_official/" target="_blank" rel="noopener noreferrer">
-                                    <img src="/icon/pinterest.svg" alt="Pinterest Icon" />
-                                </Link>
-                            </MoreIconButton>
-                            {/* 디자인 지도 버튼 */}
-                            <LocationButton style={{ marginLeft: "3vw" }} href="https://www.google.com/maps/d/viewer?mid=1ZYdnpbxRgC5-zu5GpoOU8zd_E-v24aXT&ll=13.728397502246512%2C71.13522019999999&z=3" target="_blank" rel="noopener noreferrer">
-                                <img src="/icon/location.svg" alt="Location Icon" />
-                                <a> Design map </a>
-                            </LocationButton>
-                            {/* CM 지도 버튼 */}
-                            <LocationButton style={{ marginLeft: "3vw" }} href="https://www.google.com/maps/d/viewer?mid=1aWEovb5OXGAdqH_D-QojV6l96tLYT2S0&ll=24.118227897040363%2C55.94565490000001&z=3" target="_blank" rel="noopener noreferrer">
-                                <img src="/icon/location.svg" alt="Location Icon" />
-                                <a> CM map </a>
-                            </LocationButton>
-                        </MoreIconButtonContainer>
+                            <TotalButtonContainer>
+                                <div >
+                                    <TitleButton>
+                                        <Link href="/ABOUT US" >ABOUT US</Link>
+                                    </TitleButton>
+                                    <SubButton>
+                                        <Link href="/about-us/corporate-profile" >Corporate Profile</Link>
+                                        <Link href="/about-us/leadership" >Leadership</Link>
+                                        <Link href="/about-us/news" >News</Link>
+                                        <Link href="/about-us/pr" >PR </Link>
+                                        <Link href="/about-us/recruit" >Recruit</Link>
+                                    </SubButton>
+                                </div>
+                                <div >
+                                    <TitleButton >
+                                        <Link href="/projects" >PROJECTS</Link>
+                                    </TitleButton>
+                                    <SubButton >
+                                        <Link href="/projects/selected works">Selected Works</Link>
+                                        <Link href="/projects/all" >All</Link>
+                                        <Link href="/projects/design" >DESIGN</Link>
+                                        <Link href="/projects/cm" >CM</Link>
+                                    </SubButton>
+                                </div>
+                                <div >
+                                    <TitleButton>
+                                        <Link href="/expertise" >EXPERTISE</Link>
+                                    </TitleButton>
+                                    <SubButton >
+                                        <Link href="/expertise/services" >Services</Link>
+                                        <Link href="/expertise/markets" >Markets</Link>
+                                        <Link href="/expertise/research" >Research & Idea</Link>
+                                        <Link href="/expertise/vr" >VR/AR</Link>
+                                    </SubButton>
+                                </div>
+                                <div>
+                                    <TitleButton>
+                                        <Link href="/ir" >IR</Link>
+                                    </TitleButton>
+                                    <SubButton >
+                                        <Link href="/ir/finance">Finance</Link>
+                                        <Link href="/ir/analyst_report" >Analyst Report</Link>
+                                        <Link href="/ir/ir_material" >IR Material</Link>
+                                    </SubButton>
+                                </div>
+                                <div>
+                                    <TitleButton>
+                                        <Link href="/contact" >CONTACT</Link>
+                                    </TitleButton>
+                                </div>
+                            </TotalButtonContainer>
+                            <MoreIconButtonContainer>
+                                {/* 인스타그램 버튼 */}
+                                <MoreIconButton>
+                                    <Link href="https://www.instagram.com/heerim_architects_official/" target="_blank" rel="noopener noreferrer">
+                                        <img src="/icon/instagram.svg" alt="Instagram Icon" />
+                                    </Link>
+                                    {/* 유튜브 버튼 */}
+                                    <Link style={{ marginLeft: "3vw" }} href="https://www.youtube.com/channel/UCPwQIrf17KFyqvXeq8NVY_Q" target="_blank" rel="noopener noreferrer">
+                                        <img src="/icon/youtube.svg" alt="YouTube Icon" />
+                                    </Link>
+                                    {/* 핀터레스트 버튼 */}
+                                    <Link style={{ marginLeft: "3vw" }} href="https://www.pinterest.co.kr/heerim_architects_official/" target="_blank" rel="noopener noreferrer">
+                                        <img src="/icon/pinterest.svg" alt="Pinterest Icon" />
+                                    </Link>
+                                </MoreIconButton>
+                                {/* 디자인 지도 버튼 */}
+                                <LocationButton style={{ marginLeft: "3vw" }} href="https://www.google.com/maps/d/viewer?mid=1ZYdnpbxRgC5-zu5GpoOU8zd_E-v24aXT&ll=13.728397502246512%2C71.13522019999999&z=3" target="_blank" rel="noopener noreferrer">
+                                    <img src="/icon/location.svg" alt="Location Icon" />
+                                    <a> Design map </a>
+                                </LocationButton>
+                                {/* CM 지도 버튼 */}
+                                <LocationButton style={{ marginLeft: "3vw" }} href="https://www.google.com/maps/d/viewer?mid=1aWEovb5OXGAdqH_D-QojV6l96tLYT2S0&ll=24.118227897040363%2C55.94565490000001&z=3" target="_blank" rel="noopener noreferrer">
+                                    <img src="/icon/location.svg" alt="Location Icon" />
+                                    <a> CM map </a>
+                                </LocationButton>
+                            </MoreIconButtonContainer>
                         </div>
-                        )}
+                    )}
                 </MoreContainer>
             )}
         </Headerwrappers >

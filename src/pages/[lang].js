@@ -52,8 +52,9 @@ font-size:3.1em;
 font-weight: bold;
 font-family: 'Playfair Display', serif;
 color: white;
-@media only screen and (max-width: 320px) {
-    font-size: 15vw;
+@media only screen and (max-width: 400px) {
+    margin-left: 1em;
+    font-size: 12vw;
 }
 `
 const M2 = styled.div`
@@ -596,7 +597,9 @@ const Home = () => {
                                         </AnimateUp>
                                     </M1>
                                     <M2>
-                                        <M2YellowBox><p>Who we are</p></M2YellowBox>
+                                        <AnimateRight>
+                                            <M2YellowBox><p>Who we are</p></M2YellowBox>
+                                        </AnimateRight>
                                         <AnimateUp>
                                             <M2Subtitle> {langJson[lang]?.FOLLOW}</M2Subtitle>
                                         </AnimateUp>
