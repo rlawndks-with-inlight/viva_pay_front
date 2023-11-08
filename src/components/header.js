@@ -220,6 +220,7 @@ margin-top : 10em;
 const MDropDownButton = styled.li`
 background-color: transparent;
 cursor: pointer;
+    color: white;
 list-style: none;
 a{
     text-decoration: none;
@@ -246,11 +247,39 @@ const Header = ({ activeSection, isMoreClicked, handleMoreButtonClick, setIsMore
     const [isMobile, setIsMobile] = useState(false); // State for mobile screen
     const [loading, setLoading] = useState(true);
     const [windowWidth, setWindowWidth] = useState(0); // 초기 화면 너비 설정
-    const [isDropdownVisible, setDropdownVisible] = useState(false);
+    const [isIRDropdownVisible, setIRDropdownVisible] = useState(false);
+    const [isExpertiseDropdownVisible, setExpertiseDropdownVisible] = useState(false);
+    const [isProjectDropdownVisible, setProjectDropdownVisible] = useState(false);
+    const [isAboutUsDropdownVisible, setAboutUsDropdownVisible] = useState(false);
 
-    const toggleDropdown = () => {
-        setDropdownVisible(!isDropdownVisible);
+    const toggleIRDropdown = () => {
+        setIRDropdownVisible(!isIRDropdownVisible);
+        setExpertiseDropdownVisible(false);
+        setProjectDropdownVisible(false);
+        setAboutUsDropdownVisible(false);
     };
+
+    const toggleExpertiseDropdown = () => {
+        setExpertiseDropdownVisible(!isExpertiseDropdownVisible);
+        setIRDropdownVisible(false);
+        setProjectDropdownVisible(false);
+        setAboutUsDropdownVisible(false);
+    };
+
+    const toggleProjectDropdown = () => {
+        setProjectDropdownVisible(!isProjectDropdownVisible);
+        setIRDropdownVisible(false);
+        setExpertiseDropdownVisible(false);
+        setAboutUsDropdownVisible(false);
+    };
+
+    const toggleAboutUsDropdown = () => {
+        setAboutUsDropdownVisible(!isAboutUsDropdownVisible);
+        setIRDropdownVisible(false);
+        setExpertiseDropdownVisible(false);
+        setProjectDropdownVisible(false);
+    };
+
 
     useEffect(() => {
         // 스크립트 로딩 및 언어 확인 이후에 화면 크기 업데이트 리스너 추가
@@ -353,51 +382,57 @@ const Header = ({ activeSection, isMoreClicked, handleMoreButtonClick, setIsMore
                     {isMobile ? (
                         <div>
                             <MTotalButtonContainer>
-                                <MDropDownButton onClick={toggleDropdown}>
-                                    <a>ABOUT US</a>
-                                    <MDropDownContent isVisible={isDropdownVisible}>
+                                <MDropDownButton onClick={toggleAboutUsDropdown}>
+                                    <p>ABOUT US</p>
+                                    <MDropDownContent isVisible={isAboutUsDropdownVisible}>
                                         <li>
-                                            <a href="/about-us/corporate-profile" >Corporate Profile</a>
-                                            <a href="/about-us/leadership" >Leadership</a>
-                                            <a href="/about-us/news" >News</a>
-                                            <a href="/about-us/pr" >PR </a>
+                                            <a href="/about-us/corporate profile" onClick={(e) => e.preventDefault()} >Corporate Profile</a>
+                                            <a href="/about-us/leadership">Leadership</a>
+                                            <a href="/about-us/news">News</a>
+                                            <a href="/about-us/pr">PR </a>
                                             <a href="/about-us/recruit" >Recruit</a>
                                         </li>
                                     </MDropDownContent>
                                 </MDropDownButton>
-                                <MDropDownButton onClick={toggleDropdown}>
-                                    <a>PROJECTS</a>
-                                    <MDropDownContent isVisible={isDropdownVisible}>
+                                <MDropDownButton onClick={toggleProjectDropdown}>
+                                    <p>PROJECTS</p>
+                                    <MDropDownContent isVisible={isProjectDropdownVisible}>
                                         <li>
-                                            <a href="/projects/selected works">Selected Works</a>
-                                            <a href="/projects/all" >All</a>
-                                            <a href="/projects/design" >DESIGN</a>
-                                            <a href="/projects/cm" >CM</a>
+                                            <a href="/projects/selected works" onClick={(e) => e.preventDefault()} >Selected Works</a>
+                                        </li>
+                                        <li>
+                                            <a href="/projects/all">All</a>
+                                        </li>
+                                        <li>
+                                            <a href="/projects/design">DESIGN</a>
+                                        </li>
+                                        <li>
+                                            <a href="/projects/cm">CM</a>
                                         </li>
                                     </MDropDownContent>
                                 </MDropDownButton>
-                                <MDropDownButton onClick={toggleDropdown}>
-                                    <a>EXPERTISE</a>
-                                    <MDropDownContent isVisible={isDropdownVisible}>
+                                <MDropDownButton onClick={toggleExpertiseDropdown}>
+                                    <p>EXPERTISE</p>
+                                    <MDropDownContent isVisible={isExpertiseDropdownVisible}>
                                         <li>
-                                            <a href="/expertise/services" >Services</a>
-                                            <a href="/expertise/markets" >Markets</a>
+                                            <a href="/expertise/services" onClick={(e) => e.preventDefault()} >Services</a>
+                                            <a href="/expertise/markets">Markets</a>
                                             <a href="/expertise/research" >Research & Idea</a>
                                             <a href="/expertise/vr" >VR/AR</a>
                                         </li>
                                     </MDropDownContent>
                                 </MDropDownButton>
-                                <MDropDownButton onClick={toggleDropdown}>
-                                    <a>IR</a>
-                                    <MDropDownContent isVisible={isDropdownVisible}>
+                                <MDropDownButton onClick={toggleIRDropdown}>
+                                    <p>IR</p>
+                                    <MDropDownContent isVisible={isIRDropdownVisible}>
                                         <li>
-                                            <a href="/ir/finance">Finance</a>
-                                            <a href="/ir/analyst_report" >Analyst Report</a>
-                                            <a href="/ir/ir_material" >IR Material</a>
+                                            <a href="/ir/finance" onClick={(e) => e.preventDefault()}>Finance</a>
+                                            <a href="/ir/analyst report" >Analyst Report</a>
+                                            <a href="/ir/ir material"  >IR Material</a>
                                         </li>
                                     </MDropDownContent>
                                 </MDropDownButton>
-                                <MDropDownButton onClick={toggleDropdown}>
+                                <MDropDownButton>
                                     <a href="/contact" >CONTACT</a>
                                 </MDropDownButton>
                             </MTotalButtonContainer>
