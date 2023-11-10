@@ -118,7 +118,7 @@ text-align: left; /* 텍스트 중앙 정렬 */
 text-decoration: none;
 color: white; /* 메인 버튼 텍스트 색상을 흰색으로 설정 */
 background-color: transparent; /* 배경을 투명하게 설정 */
-padding: 5em 2em 0 0;  /* 버튼 패딩 조절 */
+padding: 4em 2em 0 0;  /* 버튼 패딩 조절 */
 border: none; /* 버튼 테두리 제거 */
   a{
     color: white;
@@ -363,7 +363,7 @@ const Header = ({ activeSection, isMoreClicked, handleMoreButtonClick, setIsMore
 
         // Check if the screen is mobile when the component mounts
         const checkIsMobile = () => {
-            setIsMobile(window.innerWidth <= 600);
+            setIsMobile(window.innerWidth <= 600 &&window.innerHeight >=430);
         };
 
         checkIsMobile(); // Check on component mount

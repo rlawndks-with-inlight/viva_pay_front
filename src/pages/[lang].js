@@ -111,14 +111,12 @@ cursor: pointer;
     img{
   width: 4em;
   height: 4em;
-
     @media only screen and (max-width: 600px) {
         margin: 0;
         width: 12vw;
         height: 12vw;
     }
-
-    }
+}
 `
 const M3 = styled.div`
 background-color: transparent;
@@ -271,8 +269,6 @@ background-size: cover;
 background-color: ${(props) => props.background};
 background-image:  url(${props => props.image});
 overflow: hidden;
-@media only screen and (max-width: 320px) {
-}
 `
 const W1Title = styled.div`
 margin-top: ${(props) => props.magtop};
@@ -412,6 +408,33 @@ const Home = () => {
     const [hoveredText, setHoveredText] = useState(null);
     const [windowWidth, setWindowWidth] = useState(0); // 초기 화면 너비 설정
     const [windowHeight, setWindowHeight] = useState(0); // 초기 화면 높이 설정
+    const [refSection1, inViewSection1] = useInView({ triggerOnce: true });
+    const [refSection2, inViewSection2] = useInView({ triggerOnce: true });
+    const [refSection3, inViewSection3] = useInView({ triggerOnce: true });
+
+    
+    const handleScroll = (event) => {
+        if (event.deltaY > 0) {
+            // Scrolling down
+            if (activeSection < sections.length - 1) {
+                setActiveSection((prev) => prev + 1);
+            }
+        } else {
+            // Scrolling up
+            if (activeSection > 0) {
+                setActiveSection((prev) => prev - 1);
+            }
+        }
+    };
+
+    // Attach the handleScroll function to the window's wheel event
+    useEffect(() => {
+        window.addEventListener("wheel", handleScroll);
+
+        return () => {
+            window.removeEventListener("wheel", handleScroll);
+        };
+    }, [activeSection]);
 
     const handleImageHover = (imageSrc, text) => {
         setHoveredImage(imageSrc);
@@ -863,7 +886,7 @@ const Home = () => {
                                     ref={(el) => (sectionRefs.current[index] = el)}
                                 >
                                     {index === 0 ? (
-                                        <div className="section1">
+                                        <div className="section1" ref={refSection1}>
                                             <Section height="100vh" image="/image/galaxy.png">
                                                 <AnimateUp>
                                                     <W1Title magtop="30vh" > {langJson[lang]?.FOLLOW}</W1Title>
@@ -872,7 +895,7 @@ const Home = () => {
                                             </Section>
                                         </div>
                                     ) : index === 1 ? (
-                                        <div className="section2">
+                                        <div className="section2" ref={refSection2}>
                                             <Section image="/image/blue.png">
                                                 <div className="yellow">
                                                     <AnimateRight>
@@ -920,7 +943,7 @@ const Home = () => {
                                             </W2IconContainer>
                                         </div>
                                     ) : index === 2 ? (
-                                        <div className="section3">
+                                        <div className="section3" ref={refSection3}>
                                             <Section>
                                                 <AnimateUp>
                                                     <div className="title">Our Service</div>
