@@ -38,6 +38,10 @@ const LogoButton = styled.button`
     width: 10em;
     height: 4em;
 }
+@media only screen and (max-height: 500px) {
+    width: 10em;
+    height: 4em;
+}
 `;
 const HeaderButtons = styled.div` /* 헤더의 오른쪽 스타일 */
 margin-top: 0.5em;
@@ -83,7 +87,7 @@ z-index: 1;
 `
 const MoreClose = styled.button` /* more close 버튼 */
 position: fixed;
-top: 4em; /* 원하는 위치로 조정하세요 */
+top: 2em; /* 원하는 위치로 조정하세요 */
 right: 8em; /* 원하는 위치로 조정하세요 */
 color: white;
 background: transparent; /* 투명 배경 추가 */
@@ -92,9 +96,13 @@ cursor: pointer;
 font-size: 1.5em;
 font-weight: bold;
 z-index: 9999;
-@media only screen and (max-width: 1400px) {
-    top: 2.4em;
-    right: 2em;
+@media only screen and (max-width: 600px) {
+    top: 0.7em;
+    right: 1em;
+}
+@media only screen and (max-height: 500px) {
+    top: 0.7em;
+    right: 1em;
 }
 `
 const TotalButtonContainer = styled.div` /* 더보기 내용 전체 버튼 */
@@ -124,6 +132,9 @@ border: none; /* 버튼 테두리 제거 */
     font-size: 1em;
     padding: 5em 0.4em 0 0; 
 }
+@media only screen and (max-height: 500px) {
+    padding-top: 2em;
+}
 `
 const SubButton = styled.button`
 display: flex;
@@ -147,6 +158,12 @@ text-align: left; /* 텍스트 왼쪽 정렬 */
       text-decoration: underline; /* 호버 시 밑줄 표시 */
     }
   }
+@media only screen and (max-height: 500px) {
+    margin-top: 0.4em;
+    a{
+        margin-bottom: 0.7em;
+    }
+}
 `
 const MoreIconButtonContainer = styled.div`
 position: fixed;
@@ -155,7 +172,10 @@ left: 10%;
 display: flex; /* 더보기 아래쪽 아이콘 버튼 스타일*/
 text-align: center;
 @media only screen and (max-width: 400px) {
-    left: 0%;
+    left: 2%;
+}
+@media only screen and (max-height: 850px) {
+bottom: 2%;
 }
 `
 const MoreIconButton = styled.a`
@@ -172,16 +192,25 @@ text-decoration: none; /*링크 밑줄 제거*/
     img{
     width: 25px;
     height: 25px;
-    &:hover{
-      opacity: 0.7; /* 호버 시 투명도를 0.7로 변경 (1이 원래 투명도) */
+  }
 }
+@media only screen and (max-width: 400px) {
+    img{
+    width: 5vw;
+    height: 5vw;
+  }
+}
+@media only screen and (max-height: 500px) {
+    img{
+    width: 1.5em;
+    height: 1.5em;
   }
 }
 `
 const LocationButton = styled.div`
 display: flex; /* 더보기 아래쪽 map 버튼 스타일*/
 flex-direction: row;
-background-color: rgb(255, 194, 0); /* 회색 배경 추가 */
+background-color: rgb(255, 194, 0); /* 노란색 배경 추가 */
 border-radius: 50px; /* 회색 배경과 함께 버튼에 radius 추가 */
 padding: 10px;
 cursor: pointer;
@@ -205,26 +234,51 @@ padding: 7px;
   }
   a{
     font-size: 12px;
-    color: black;
   }
-  &:hover{
-    opacity: 0.7; /* 호버 시 투명도를 0.7로 변경 (1이 원래 투명도) */
 }
+@media only screen and (max-width: 400px) {
+  img{
+    width: 4vw;
+    height: 4vw;
+  }
+  a{
+    font-size: 4vw;
+  }
+}
+@media only screen and (max-height: 500px) {
+  img{
+    margin-top: 2px;
+    width: 1em;
+    height: 1em;
+  }
+  a{
+    font-size: 1em;
+  }
 }
 `
 
 const MTotalButtonContainer = styled.ul`
 text-decoration: none;
-margin-top : 10em;
+margin-top : 6em;
+padding: 0;
 `
 const MDropDownButton = styled.li`
+border-top: 1px solid white;
 background-color: transparent;
 cursor: pointer;
     color: white;
 list-style: none;
 a{
+    padding-left: 1em;
     text-decoration: none;
     color: white;
+}
+p{ /* aboutus,projects,expertise,ir 디자인 */
+    margin: 0;
+    padding-left: 1em;
+    font-size: 1.3em;
+    padding-top: 0.7em;
+    padding-bottom: 0.7em;
 }
 `
 const MDropDownContent = styled.ul`
@@ -232,11 +286,16 @@ width: 100%;
 background-color: white;
 list-style: none;
   display: ${(props) => (props.isVisible ? 'block' : 'none')};
-  margin: 0;
+  padding: 0;
   a {
-    text-decoration: none;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+    font-size: 1.1em;
     display: block;
     color: gray;
+    &:hover{
+        background-color: rgb(255, 194, 0); /* 노란색 배경 추가 */
+      }
   }
 `
 const Header = ({ activeSection, isMoreClicked, handleMoreButtonClick, setIsMoreClicked, closeMore, updateHeaderVisibility }) => {
@@ -247,39 +306,34 @@ const Header = ({ activeSection, isMoreClicked, handleMoreButtonClick, setIsMore
     const [isMobile, setIsMobile] = useState(false); // State for mobile screen
     const [loading, setLoading] = useState(true);
     const [windowWidth, setWindowWidth] = useState(0); // 초기 화면 너비 설정
-    const [isIRDropdownVisible, setIRDropdownVisible] = useState(false);
-    const [isExpertiseDropdownVisible, setExpertiseDropdownVisible] = useState(false);
-    const [isProjectDropdownVisible, setProjectDropdownVisible] = useState(false);
     const [isAboutUsDropdownVisible, setAboutUsDropdownVisible] = useState(false);
+    const [isProjectDropdownVisible, setProjectDropdownVisible] = useState(false);
+    const [isExpertiseDropdownVisible, setExpertiseDropdownVisible] = useState(false);
+    const [isIRDropdownVisible, setIRDropdownVisible] = useState(false);
 
-    const toggleIRDropdown = () => {
-        setIRDropdownVisible(!isIRDropdownVisible);
-        setExpertiseDropdownVisible(false);
-        setProjectDropdownVisible(false);
+    // Function to toggle dropdown visibility
+    const toggleDropdown = (dropdown) => {
         setAboutUsDropdownVisible(false);
-    };
-
-    const toggleExpertiseDropdown = () => {
-        setExpertiseDropdownVisible(!isExpertiseDropdownVisible);
-        setIRDropdownVisible(false);
         setProjectDropdownVisible(false);
-        setAboutUsDropdownVisible(false);
-    };
-
-    const toggleProjectDropdown = () => {
-        setProjectDropdownVisible(!isProjectDropdownVisible);
-        setIRDropdownVisible(false);
         setExpertiseDropdownVisible(false);
-        setAboutUsDropdownVisible(false);
-    };
-
-    const toggleAboutUsDropdown = () => {
-        setAboutUsDropdownVisible(!isAboutUsDropdownVisible);
         setIRDropdownVisible(false);
-        setExpertiseDropdownVisible(false);
-        setProjectDropdownVisible(false);
+        switch (dropdown) {
+            case 'aboutUs':
+                setAboutUsDropdownVisible(!isAboutUsDropdownVisible);
+                break;
+            case 'projects':
+                setProjectDropdownVisible(!isProjectDropdownVisible);
+                break;
+            case 'expertise':
+                setExpertiseDropdownVisible(!isExpertiseDropdownVisible);
+                break;
+            case 'ir':
+                setIRDropdownVisible(!isIRDropdownVisible);
+                break;
+            default:
+                break;
+        }
     };
-
 
     useEffect(() => {
         // 스크립트 로딩 및 언어 확인 이후에 화면 크기 업데이트 리스너 추가
@@ -381,12 +435,13 @@ const Header = ({ activeSection, isMoreClicked, handleMoreButtonClick, setIsMore
                     <MoreClose onClick={closeMore}>Close X</MoreClose>
                     {isMobile ? (
                         <div>
+                            <div>
                             <MTotalButtonContainer>
-                                <MDropDownButton onClick={toggleAboutUsDropdown}>
-                                    <p>ABOUT US</p>
+                                <MDropDownButton onClick={() => toggleDropdown('aboutUs')}>
+                                    <p>ABOUT US {isAboutUsDropdownVisible ? '▲' : '▼'} </p>
                                     <MDropDownContent isVisible={isAboutUsDropdownVisible}>
                                         <li>
-                                            <a href="/about-us/corporate profile" onClick={(e) => e.preventDefault()} >Corporate Profile</a>
+                                            <a href="/about-us/corporate profile" >Corporate Profile</a>
                                             <a href="/about-us/leadership">Leadership</a>
                                             <a href="/about-us/news">News</a>
                                             <a href="/about-us/pr">PR </a>
@@ -394,48 +449,44 @@ const Header = ({ activeSection, isMoreClicked, handleMoreButtonClick, setIsMore
                                         </li>
                                     </MDropDownContent>
                                 </MDropDownButton>
-                                <MDropDownButton onClick={toggleProjectDropdown}>
-                                    <p>PROJECTS</p>
+                                <MDropDownButton onClick={() => toggleDropdown('projects')}>
+                                    <p>PROJECTS {isProjectDropdownVisible ? '▲' : '▼'} </p>
                                     <MDropDownContent isVisible={isProjectDropdownVisible}>
                                         <li>
-                                            <a href="/projects/selected works" onClick={(e) => e.preventDefault()} >Selected Works</a>
-                                        </li>
-                                        <li>
+                                            <a href="/projects/selected works">Selected Works</a>
                                             <a href="/projects/all">All</a>
-                                        </li>
-                                        <li>
                                             <a href="/projects/design">DESIGN</a>
-                                        </li>
-                                        <li>
                                             <a href="/projects/cm">CM</a>
                                         </li>
                                     </MDropDownContent>
                                 </MDropDownButton>
-                                <MDropDownButton onClick={toggleExpertiseDropdown}>
-                                    <p>EXPERTISE</p>
+                                <MDropDownButton onClick={() => toggleDropdown('expertise')}>
+                                    <p>EXPERTISE {isExpertiseDropdownVisible ? '▲' : '▼'} </p>
                                     <MDropDownContent isVisible={isExpertiseDropdownVisible}>
                                         <li>
-                                            <a href="/expertise/services" onClick={(e) => e.preventDefault()} >Services</a>
+                                            <a href="/expertise/services">Services</a>
                                             <a href="/expertise/markets">Markets</a>
                                             <a href="/expertise/research" >Research & Idea</a>
                                             <a href="/expertise/vr" >VR/AR</a>
                                         </li>
                                     </MDropDownContent>
                                 </MDropDownButton>
-                                <MDropDownButton onClick={toggleIRDropdown}>
-                                    <p>IR</p>
+                                <MDropDownButton onClick={() => toggleDropdown('ir')}>
+                                    <p>IR {isIRDropdownVisible ?'▲' : '▼'} </p>
                                     <MDropDownContent isVisible={isIRDropdownVisible}>
                                         <li>
-                                            <a href="/ir/finance" onClick={(e) => e.preventDefault()}>Finance</a>
+                                            <a href="/ir/finance">Finance</a>
                                             <a href="/ir/analyst report" >Analyst Report</a>
                                             <a href="/ir/ir material"  >IR Material</a>
                                         </li>
                                     </MDropDownContent>
                                 </MDropDownButton>
-                                <MDropDownButton>
-                                    <a href="/contact" >CONTACT</a>
+                                <MDropDownButton style={{paddingTop:"0.8em"}}>
+                                    <a href="/contact" style={{fontSize:"1.3em"}}>CONTACT</a>
                                 </MDropDownButton>
                             </MTotalButtonContainer>
+                            </div>
+                            <div>
                             <MoreIconButtonContainer>
                                 {/* 인스타그램 버튼 */}
                                 <MoreIconButton>
@@ -462,6 +513,7 @@ const Header = ({ activeSection, isMoreClicked, handleMoreButtonClick, setIsMore
                                     <a> CM map </a>
                                 </LocationButton>
                             </MoreIconButtonContainer>
+                            </div>
                         </div>
                     ) : (
                         <div>
