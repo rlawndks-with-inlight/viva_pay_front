@@ -34,7 +34,46 @@ const AnimateRight = ({ children }) => {
         </div>
     );
 };
-
+const WSearchDropdownContainer = styled.ul`
+padding:0;
+margin-left: 12em;
+width: 125px;
+text-decoration: none;
+`
+const WSearchDropdownButton = styled.li`
+border-bottom: 5px solid #FFC200;
+background-color: transparent;
+cursor: pointer;
+    color: white;
+list-style: none;
+a{
+    text-decoration: none;
+}
+p{ /* aboutus,projects,expertise,ir 디자인 */
+    margin: 0;
+    font-size: 1.3em;
+    color: #FFC200;
+    padding-bottom: 0.5em;
+}
+`
+const WSearchDropdownContent = styled.ul`
+background-color: #FFC200;
+list-style: none;
+position: absolute;
+  display: ${(props) => (props.isVisible ? 'block' : 'none')};
+  padding: 0;
+  a {
+    cursor: pointer;
+    padding: 0.5em 0.9em 0.5em 1.35em;
+    font-size: 1.1em;
+    display: block;
+    color: white;
+    font-weight: bold;
+    &:hover{
+        background-color: rgba(255, 255, 255, 0.3); /* 투명도 조절 */
+      }
+  }
+`
 const Mobile = styled.div`
 padding: 0;
 width: 100%;
@@ -202,7 +241,7 @@ const M4Button = styled.a`
 display: inline-block; /* 인라인 블록 요소로 만들어 옆에 다른 요소가 올 수 있도록 합니다. */
 `
 const M5Title = styled.div`
-font-size: 1em;
+font-size: 2em;
 margin-bottom: 0.7em;
 text-align: center;
 color: gray;
@@ -216,44 +255,106 @@ background-color: rgb(0, 104, 232);
 width: 100%;
 padding-top: 3em;
 span{
-    font-size: 2em;
+    font-size: 6vw;
     font-weight: bold;
 }
 p{
-  font-size: 0.8em;
+  font-size: 1.4vw;
   margin-left: 12vw;
   color: #CACACA;
 }
 @media only screen and (max-width: 360px) {
     span{
-        font-size: 9vw;
+        font-size: 1.5em;
     }
 }
+@media only screen and (max-width: 1000px) {
+    p{
+        font-size: 1em;
+    }
+}
+`
+const M5SearchDropdownContainer = styled.ul`
+padding:0;
+margin-left: 12vw;
+width: 130px;
+text-decoration: none;
+`
+const M5SearchDropdownButton = styled.li`
+border-bottom: 5px solid #FFC200;
+background-color: transparent;
+cursor: pointer;
+    color: white;
+list-style: none;
+a{
+    text-decoration: none;
+}
+p{ /* aboutus,projects,expertise,ir 디자인 */
+    margin: 0;
+    font-size: 1.3em;
+    color: #FFC200;
+    padding-bottom: 0.5em;
+}
+`
+const M5SearchDropdownContent = styled.ul`
+background-color: #FFC200;
+list-style: none;
+position: absolute;
+  display: ${(props) => (props.isVisible ? 'block' : 'none')};
+  padding: 0;
+  a {
+    cursor: pointer;
+    padding: 0.5em 0.9em 0.5em 1.35em;
+    font-size: 1.1em;
+    display: block;
+    color: white;
+    font-weight: bold;
+    &:hover{
+        background-color: rgba(255, 255, 255, 0.3); /* 투명도 조절 */
+      }
+  }
 `
 const M5SearchInput = styled.input`
 background: transparent; /* 투명 배경 추가 */
 border: none;
 border-bottom: 0.3em solid white; /* 하단 테두리 추가 (선택 사항) */
-width: 65%; /* 검색창의 가로 너비 조정 */
-height: 1.3em;
+width: 60%; /* 검색창의 가로 너비 조정 */
 font-size: 1.2em; /* 폰트 크기 키우기 */
-margin-top: 2.5em; /* 위쪽 여백 추가 */
-margin-left: 11vw;
 padding-left: 0.7em;
+margin-left: 12vw;
+margin-bottom: 0.8em;
 ::placeholder{
     color: white;
 }
 `
+const M5SearchButton = styled.button`
+font-size: 1.2em;
+margin-bottom: 0.8em;
+cursor: pointer;
+    img{
+        margin-right :0.5em;
+        width: 20px;
+        height: 20px;
+    }
+`
 const M5SearchTag = styled.div`
 padding: 5vw 0 5vw 0;
-margin-left: 10vw;
+margin-left: 11.5vw;
 button{
 border: none; /* 외곽선 없애기 */
 font-size: 0.9em;
 background-color: transparent;
     a{
+        font-size: 1.4vw;
   color: #CACACA;
 text-decoration: none;
+    }
+}
+@media only screen and (max-width: 1000px) {
+    button {
+    a {
+        font-size: 1em;
+    }
     }
 }
 `
@@ -337,9 +438,12 @@ background-color: transparent;
     }
 }
 `
-const SearchButton = styled.button`
+const WSearchButton = styled.button`
+  margin-bottom: 0.85em;
+font-size: 1.2em;
 cursor: pointer;
     img{
+        margin-left: 1em;
         width: 20px;
         height: 20px;
     }
@@ -411,8 +515,19 @@ const Home = () => {
     const [refSection1, inViewSection1] = useInView({ triggerOnce: true });
     const [refSection2, inViewSection2] = useInView({ triggerOnce: true });
     const [refSection3, inViewSection3] = useInView({ triggerOnce: true });
+    const [isSearchDropdownVisible, setIsSearchDropdownVisible] = useState(false);
+    const [selectedOption, setSelectedOption] = useState('All');
 
-    
+    const toggleDropdown = () => {
+        setIsSearchDropdownVisible(!isSearchDropdownVisible);
+    };
+
+    const handleOptionClick = (option) => {
+        setSelectedOption(option);
+        setIsSearchDropdownVisible(false);
+    };
+
+
     const handleScroll = (event) => {
         if (event.deltaY > 0) {
             // Scrolling down
@@ -814,30 +929,44 @@ const Home = () => {
                                     </AnimateUp>
                                     <M5SearchContainer>
                                         <AnimateUp>
-                                            <span style={{ marginLeft: "12vw", color: "#FFC200" }}>Search</span>
+                                            <span style={{ marginLeft: "12vw", color: "#FFC200",  }}>Search</span>
                                             <span style={{ color: "white" }}>Payvery.com</span>
                                         </AnimateUp>
                                         <AnimateUp>
-                                            <p>Creative Leadership of Payvery designs the new future never experienced before.</p>
+                                            <p style={{}}>Creative Leadership of Payvery designs the new future never experienced before.</p>
                                         </AnimateUp>
-                                        <AnimateUp>
-                                            <div className="searchheerim">
-                                                <M5SearchInput
-                                                    type="text"
-                                                    placeholder="Type here"
-                                                    value={searchQuery}
-                                                    onChange={handleSearchInputChange} // 검색 입력란 스타일 추가
-                                                />
-                                                <SearchButton className="searchheerim-button" onClick={() => { window.location.href = "/404"; }} style={{
-                                                    background: "transparent", // Set the background to transparent
-                                                    border: "none", // Remove the border
-                                                    borderBottom: "5px solid white",
-                                                }}>
-                                                    <img src="/icon/search.png" alt="Search Icon" />
-                                                </SearchButton>
-                                            </div>
-                                        </AnimateUp>
-                                        <AnimateUp>
+                                        <div className="searchheerim">
+                                            <AnimateUp>
+                                                <div>
+                                                    <M5SearchDropdownContainer>
+                                                        <M5SearchDropdownButton onClick={toggleDropdown}>
+                                                            <p>{selectedOption} {isSearchDropdownVisible ? '▲' : '▼'} </p>
+                                                        </M5SearchDropdownButton>
+                                                        <M5SearchDropdownContent isVisible={isSearchDropdownVisible}>
+                                                            <li>
+                                                                <a onClick={() => handleOptionClick('All')}>All</a>
+                                                                <a onClick={() => handleOptionClick('Project')}>Project</a>
+                                                                <a onClick={() => handleOptionClick('News')}>News</a>
+                                                                <a onClick={() => handleOptionClick('Leadership')}>Leadership</a>
+                                                            </li>
+                                                        </M5SearchDropdownContent>
+                                                    </M5SearchDropdownContainer>
+                                                    <M5SearchInput
+                                                        type="text"
+                                                        placeholder="Type here"
+                                                        value={searchQuery}
+                                                        onChange={handleSearchInputChange} // 검색 입력란 스타일 추가
+                                                    />
+                                                    <M5SearchButton className="searchheerim-button" onClick={() => { window.location.href = "/404"; }} style={{
+                                                        background: "transparent", // Set the background to transparent
+                                                        border: "none", // Remove the border
+                                                        margin: "none",
+                                                        borderBottom: "5px solid white",
+                                                    }}>
+                                                        <img src="/icon/search.png" alt="Search Icon" />
+                                                    </M5SearchButton>
+                                                </div>
+                                            </AnimateUp>
                                             <M5SearchTag>
                                                 <button onClick={() => { window.location.reload() }}><Link href="/Payvery">#Payvery</Link></button>
                                                 <button onClick={() => { window.location.reload() }}><Link href="/Purplevery">#Purplevery</Link></button>
@@ -845,6 +974,8 @@ const Home = () => {
                                                 <button onClick={() => { window.location.reload() }}><Link href="/Payment_gateway">#Payment_gateway</Link></button>
                                                 <button onClick={() => { window.location.reload() }}><Link href="/Customer">#Customer</Link></button>
                                             </M5SearchTag>
+                                        </div>
+                                        <AnimateUp>
                                         </AnimateUp>
                                     </M5SearchContainer>
                                     <div className="bottom">
@@ -1186,34 +1317,48 @@ const Home = () => {
                                                         </span>
                                                     </AnimateUp>
                                                     <AnimateUp>
-                                                        <p className="searchsub">Creative Leadership of Payvery designs the new future never experienced before.</p></AnimateUp>
-
-                                                    <AnimateUp><div className="searchheerim">
-                                                        <input
-                                                            className="searchheerim-input"
-                                                            type="text"
-                                                            placeholder="Type here"
-                                                            value={searchQuery}
-                                                            onChange={handleSearchInputChange} // 검색 입력란 스타일 추가
-                                                        />
-                                                        <SearchButton className="searchheerim-button" onClick={() => { window.location.href = "/404"; }} style={{
-                                                            background: "transparent", // Set the background to transparent
-                                                            border: "none", // Remove the border
-                                                            color: "white",
-                                                            borderBottom: "5px solid white",
-                                                        }}>
-                                                            Search
-                                                            <img src="/icon/search.png" alt="Search Icon" />
-                                                        </SearchButton>
-                                                    </div>
+                                                        <p className="searchsub">Creative Leadership of Payvery designs the new future never experienced before.</p>
                                                     </AnimateUp>
                                                     <AnimateUp>
+                                                        <div className="searchheerim">
+                                                            <div style={{display:"flex"}}>
+                                                            <WSearchDropdownContainer>
+                                                                <WSearchDropdownButton onClick={toggleDropdown}>
+                                                                    <p>{selectedOption}{isSearchDropdownVisible ? '▲' : '▼'}</p>
+                                                                </WSearchDropdownButton>
+                                                                <WSearchDropdownContent isVisible={isSearchDropdownVisible}>
+                                                                    <li>
+                                                                        <a onClick={() => handleOptionClick('All')}>All</a>
+                                                                        <a onClick={() => handleOptionClick('Project')}>Project</a>
+                                                                        <a onClick={() => handleOptionClick('News')}>News</a>
+                                                                        <a onClick={() => handleOptionClick('Leadership')}>Leadership</a>
+                                                                    </li>
+                                                                </WSearchDropdownContent>
+                                                            </WSearchDropdownContainer>
+                                                            <input
+                                                                className="searchheerim-input"
+                                                                type="text"
+                                                                placeholder="Type here"
+                                                                value={searchQuery}
+                                                                onChange={handleSearchInputChange} // 검색 입력란 스타일 추가
+                                                            />
+                                                            <WSearchButton className="searchheerim-button" onClick={() => { window.location.href = "/404"; }} style={{
+                                                                background: "transparent", // Set the background to transparent
+                                                                border: "none", // Remove the border
+                                                                color: "white",
+                                                                borderBottom: "5px solid white",
+                                                            }}>
+                                                                Search
+                                                                <img src="/icon/search.png" alt="Search Icon" />
+                                                            </WSearchButton>
+                                                            </div>
                                                         <div className="searchtag-keywords">
                                                             <button className="searchtag-button" onClick={() => { window.location.reload() }}><Link href="/Payvery">#Payvery</Link></button>
                                                             <button className="searchtag-button" onClick={() => { window.location.reload() }}><Link href="/Purplevery">#Purplevery</Link></button>
                                                             <button className="searchtag-button" onClick={() => { window.location.reload() }}><Link href="/Pg">#Pg</Link></button>
                                                             <button className="searchtag-button" onClick={() => { window.location.reload() }}><Link href="/Payment_gateway">#Payment_gateway</Link></button>
                                                             <button className="searchtag-button" onClick={() => { window.location.reload() }}><Link href="/Customer">#Customer</Link></button>
+                                                        </div>
                                                         </div>
                                                     </AnimateUp>
                                                 </div>
