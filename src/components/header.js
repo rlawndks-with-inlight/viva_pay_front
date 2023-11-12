@@ -38,7 +38,7 @@ const LogoButton = styled.button`
     width: 10em;
     height: 4em;
 }
-@media only screen and (max-height: 500px) {
+@media only screen and (max-height: 620px) {
     width: 10em;
     height: 4em;
 }
@@ -100,7 +100,7 @@ z-index: 9999;
     top: 0.7em;
     right: 1em;
 }
-@media only screen and (max-height: 500px) {
+@media only screen and (max-height: 620px) {
     top: 0.7em;
     right: 1em;
 }
@@ -132,8 +132,8 @@ border: none; /* 버튼 테두리 제거 */
     font-size: 1em;
     padding: 5em 0.4em 0 0; 
 }
-@media only screen and (max-height: 500px) {
-    padding-top: 2em;
+@media only screen and (max-height: 620px) {
+    padding-top: 1.5em;
 }
 `
 const SubButton = styled.button`
@@ -158,7 +158,7 @@ text-align: left; /* 텍스트 왼쪽 정렬 */
       text-decoration: underline; /* 호버 시 밑줄 표시 */
     }
   }
-@media only screen and (max-height: 500px) {
+@media only screen and (max-height: 620px) {
     margin-top: 0.4em;
     a{
         margin-bottom: 0.7em;
@@ -171,7 +171,7 @@ bottom: 10%;
 left: 10%;
 display: flex; /* 더보기 아래쪽 아이콘 버튼 스타일*/
 text-align: center;
-@media only screen and (max-width: 400px) {
+@media only screen and (max-width: 420px) {
     left: 2%;
 }
 @media only screen and (max-height: 850px) {
@@ -200,7 +200,7 @@ text-decoration: none; /*링크 밑줄 제거*/
     height: 5vw;
   }
 }
-@media only screen and (max-height: 500px) {
+@media only screen and (max-height: 300px){
     img{
     width: 1.5em;
     height: 1.5em;
@@ -242,10 +242,10 @@ padding: 7px;
     height: 4vw;
   }
   a{
-    font-size: 4vw;
+    font-size: 3vw;
   }
 }
-@media only screen and (max-height: 500px) {
+@media only screen and (max-height: 300px) {
   img{
     margin-top: 2px;
     width: 1em;
@@ -261,6 +261,9 @@ const MTotalButtonContainer = styled.ul`
 text-decoration: none;
 margin-top : 6em;
 padding: 0;
+@media only screen and (max-height: 430px) {
+margin-top : 4em;
+}
 `
 const MDropDownButton = styled.li`
 border-top: 1px solid white;
@@ -268,7 +271,9 @@ background-color: transparent;
 cursor: pointer;
     color: white;
 list-style: none;
+padding-top: 0.8em;
 a{
+    font-size: 1.3em;
     padding-left: 1em;
     text-decoration: none;
     color: white;
@@ -276,9 +281,21 @@ a{
 p{ /* aboutus,projects,expertise,ir 디자인 */
     margin: 0;
     padding-left: 1em;
-    font-size: 1.3em;
-    padding-top: 0.7em;
+    font-size: 1.3em;        
+    padding-top: 0;
     padding-bottom: 0.7em;
+}
+@media only screen and (max-height: 430px) {
+padding-top: 0.3em;
+    a{
+        font-size: 0.8em;
+    }
+    p{ /* aboutus,projects,expertise,ir 디자인 */
+        margin: 0;
+        padding-left: 1em;
+        font-size: 0.8em;
+        padding-bottom: 0.3em;
+    }
 }
 `
 const MDropDownContent = styled.ul`
@@ -297,6 +314,18 @@ list-style: none;
         background-color: rgb(255, 194, 0); /* 노란색 배경 추가 */
       }
   }
+@media only screen and (max-height: 430px) {
+    a{
+    padding-top: 0.2em;
+    padding-bottom: 0.2em;
+    font-size: 0.6em;
+    display: block;
+    color: gray;
+    &:hover{
+        background-color: rgb(255, 194, 0); /* 노란색 배경 추가 */
+      }
+    }
+}
 `
 const Header = ({ activeSection, isMoreClicked, handleMoreButtonClick, setIsMoreClicked, closeMore, updateHeaderVisibility }) => {
     const router = useRouter();
@@ -311,7 +340,7 @@ const Header = ({ activeSection, isMoreClicked, handleMoreButtonClick, setIsMore
     const [isExpertiseDropdownVisible, setExpertiseDropdownVisible] = useState(false);
     const [isIRDropdownVisible, setIRDropdownVisible] = useState(false);
 
-    // Function to toggle dropdown visibility
+    // 드롭다운 보이게 하는 기능
     const toggleDropdown = (dropdown) => {
         setAboutUsDropdownVisible(false);
         setProjectDropdownVisible(false);
@@ -361,9 +390,9 @@ const Header = ({ activeSection, isMoreClicked, handleMoreButtonClick, setIsMore
     useEffect(() => {
         setIsVisible(true);
 
-        // Check if the screen is mobile when the component mounts
+        // 모바일 화면 확인
         const checkIsMobile = () => {
-            setIsMobile(window.innerWidth <= 600 &&window.innerHeight >=430);
+            setIsMobile(window.innerWidth <= 600 && window.innerHeight >= 300);
         };
 
         checkIsMobile(); // Check on component mount
@@ -436,83 +465,83 @@ const Header = ({ activeSection, isMoreClicked, handleMoreButtonClick, setIsMore
                     {isMobile ? (
                         <div>
                             <div>
-                            <MTotalButtonContainer>
-                                <MDropDownButton onClick={() => toggleDropdown('aboutUs')}>
-                                    <p>ABOUT US {isAboutUsDropdownVisible ? '▲' : '▼'} </p>
-                                    <MDropDownContent isVisible={isAboutUsDropdownVisible}>
-                                        <li>
-                                            <a href="/about-us/corporate profile" >Corporate Profile</a>
-                                            <a href="/about-us/leadership">Leadership</a>
-                                            <a href="/about-us/news">News</a>
-                                            <a href="/about-us/pr">PR </a>
-                                            <a href="/about-us/recruit" >Recruit</a>
-                                        </li>
-                                    </MDropDownContent>
-                                </MDropDownButton>
-                                <MDropDownButton onClick={() => toggleDropdown('projects')}>
-                                    <p>PROJECTS {isProjectDropdownVisible ? '▲' : '▼'} </p>
-                                    <MDropDownContent isVisible={isProjectDropdownVisible}>
-                                        <li>
-                                            <a href="/projects/selected works">Selected Works</a>
-                                            <a href="/projects/all">All</a>
-                                            <a href="/projects/design">DESIGN</a>
-                                            <a href="/projects/cm">CM</a>
-                                        </li>
-                                    </MDropDownContent>
-                                </MDropDownButton>
-                                <MDropDownButton onClick={() => toggleDropdown('expertise')}>
-                                    <p>EXPERTISE {isExpertiseDropdownVisible ? '▲' : '▼'} </p>
-                                    <MDropDownContent isVisible={isExpertiseDropdownVisible}>
-                                        <li>
-                                            <a href="/expertise/services">Services</a>
-                                            <a href="/expertise/markets">Markets</a>
-                                            <a href="/expertise/research" >Research & Idea</a>
-                                            <a href="/expertise/vr" >VR/AR</a>
-                                        </li>
-                                    </MDropDownContent>
-                                </MDropDownButton>
-                                <MDropDownButton onClick={() => toggleDropdown('ir')}>
-                                    <p>IR {isIRDropdownVisible ?'▲' : '▼'} </p>
-                                    <MDropDownContent isVisible={isIRDropdownVisible}>
-                                        <li>
-                                            <a href="/ir/finance">Finance</a>
-                                            <a href="/ir/analyst report" >Analyst Report</a>
-                                            <a href="/ir/ir material"  >IR Material</a>
-                                        </li>
-                                    </MDropDownContent>
-                                </MDropDownButton>
-                                <MDropDownButton style={{paddingTop:"0.8em"}}>
-                                    <a href="/contact" style={{fontSize:"1.3em"}}>CONTACT</a>
-                                </MDropDownButton>
-                            </MTotalButtonContainer>
+                                <MTotalButtonContainer>
+                                    <MDropDownButton onClick={() => toggleDropdown('aboutUs')}>
+                                        <p>ABOUT US {isAboutUsDropdownVisible ? '▲' : '▼'} </p>
+                                        <MDropDownContent isVisible={isAboutUsDropdownVisible}>
+                                            <li>
+                                                <a href="/about-us/corporate profile" >Corporate Profile</a>
+                                                <a href="/about-us/leadership">Leadership</a>
+                                                <a href="/about-us/news">News</a>
+                                                <a href="/about-us/pr">PR </a>
+                                                <a href="/about-us/recruit" >Recruit</a>
+                                            </li>
+                                        </MDropDownContent>
+                                    </MDropDownButton>
+                                    <MDropDownButton onClick={() => toggleDropdown('projects')}>
+                                        <p>PROJECTS {isProjectDropdownVisible ? '▲' : '▼'} </p>
+                                        <MDropDownContent isVisible={isProjectDropdownVisible}>
+                                            <li>
+                                                <a href="/projects/selected works">Selected Works</a>
+                                                <a href="/projects/all">All</a>
+                                                <a href="/projects/design">DESIGN</a>
+                                                <a href="/projects/cm">CM</a>
+                                            </li>
+                                        </MDropDownContent>
+                                    </MDropDownButton>
+                                    <MDropDownButton onClick={() => toggleDropdown('expertise')}>
+                                        <p>EXPERTISE {isExpertiseDropdownVisible ? '▲' : '▼'} </p>
+                                        <MDropDownContent isVisible={isExpertiseDropdownVisible}>
+                                            <li>
+                                                <a href="/expertise/services">Services</a>
+                                                <a href="/expertise/markets">Markets</a>
+                                                <a href="/expertise/research" >Research & Idea</a>
+                                                <a href="/expertise/vr" >VR/AR</a>
+                                            </li>
+                                        </MDropDownContent>
+                                    </MDropDownButton>
+                                    <MDropDownButton onClick={() => toggleDropdown('ir')}>
+                                        <p>IR {isIRDropdownVisible ? '▲' : '▼'} </p>
+                                        <MDropDownContent isVisible={isIRDropdownVisible}>
+                                            <li>
+                                                <a href="/ir/finance">Finance</a>
+                                                <a href="/ir/analyst report" >Analyst Report</a>
+                                                <a href="/ir/ir material"  >IR Material</a>
+                                            </li>
+                                        </MDropDownContent>
+                                    </MDropDownButton>
+                                    <MDropDownButton >
+                                        <a href="/contact">CONTACT</a>
+                                    </MDropDownButton>
+                                </MTotalButtonContainer>
                             </div>
                             <div>
-                            <MoreIconButtonContainer>
-                                {/* 인스타그램 버튼 */}
-                                <MoreIconButton>
-                                    <Link href="https://www.instagram.com/heerim_architects_official/" target="_blank" rel="noopener noreferrer">
-                                        <img src="/icon/instagram.svg" alt="Instagram Icon" />
-                                    </Link>
-                                    {/* 유튜브 버튼 */}
-                                    <Link style={{ marginLeft: "3vw" }} href="https://www.youtube.com/channel/UCPwQIrf17KFyqvXeq8NVY_Q" target="_blank" rel="noopener noreferrer">
-                                        <img src="/icon/youtube.svg" alt="YouTube Icon" />
-                                    </Link>
-                                    {/* 핀터레스트 버튼 */}
-                                    <Link style={{ marginLeft: "3vw" }} href="https://www.pinterest.co.kr/heerim_architects_official/" target="_blank" rel="noopener noreferrer">
-                                        <img src="/icon/pinterest.svg" alt="Pinterest Icon" />
-                                    </Link>
-                                </MoreIconButton>
-                                {/* 디자인 지도 버튼 */}
-                                <LocationButton style={{ marginLeft: "3vw" }} href="https://www.google.com/maps/d/viewer?mid=1ZYdnpbxRgC5-zu5GpoOU8zd_E-v24aXT&ll=13.728397502246512%2C71.13522019999999&z=3" target="_blank" rel="noopener noreferrer">
-                                    <img src="/icon/location.svg" alt="Location Icon" />
-                                    <a> Design map </a>
-                                </LocationButton>
-                                {/* CM 지도 버튼 */}
-                                <LocationButton style={{ marginLeft: "3vw" }} href="https://www.google.com/maps/d/viewer?mid=1aWEovb5OXGAdqH_D-QojV6l96tLYT2S0&ll=24.118227897040363%2C55.94565490000001&z=3" target="_blank" rel="noopener noreferrer">
-                                    <img src="/icon/location.svg" alt="Location Icon" />
-                                    <a> CM map </a>
-                                </LocationButton>
-                            </MoreIconButtonContainer>
+                                <MoreIconButtonContainer>
+                                    {/* 인스타그램 버튼 */}
+                                    <MoreIconButton>
+                                        <Link href="https://www.instagram.com/heerim_architects_official/" target="_blank" rel="noopener noreferrer">
+                                            <img src="/icon/instagram.svg" alt="Instagram Icon" />
+                                        </Link>
+                                        {/* 유튜브 버튼 */}
+                                        <Link style={{ marginLeft: "3vw" }} href="https://www.youtube.com/channel/UCPwQIrf17KFyqvXeq8NVY_Q" target="_blank" rel="noopener noreferrer">
+                                            <img src="/icon/youtube.svg" alt="YouTube Icon" />
+                                        </Link>
+                                        {/* 핀터레스트 버튼 */}
+                                        <Link style={{ marginLeft: "3vw" }} href="https://www.pinterest.co.kr/heerim_architects_official/" target="_blank" rel="noopener noreferrer">
+                                            <img src="/icon/pinterest.svg" alt="Pinterest Icon" />
+                                        </Link>
+                                    </MoreIconButton>
+                                    {/* 디자인 지도 버튼 */}
+                                    <LocationButton style={{ marginLeft: "3vw" }} href="https://www.google.com/maps/d/viewer?mid=1ZYdnpbxRgC5-zu5GpoOU8zd_E-v24aXT&ll=13.728397502246512%2C71.13522019999999&z=3" target="_blank" rel="noopener noreferrer">
+                                        <img src="/icon/location.svg" alt="Location Icon" />
+                                        <a> Design map </a>
+                                    </LocationButton>
+                                    {/* CM 지도 버튼 */}
+                                    <LocationButton style={{ marginLeft: "3vw" }} href="https://www.google.com/maps/d/viewer?mid=1aWEovb5OXGAdqH_D-QojV6l96tLYT2S0&ll=24.118227897040363%2C55.94565490000001&z=3" target="_blank" rel="noopener noreferrer">
+                                        <img src="/icon/location.svg" alt="Location Icon" />
+                                        <a> CM map </a>
+                                    </LocationButton>
+                                </MoreIconButtonContainer>
                             </div>
                         </div>
                     ) : (

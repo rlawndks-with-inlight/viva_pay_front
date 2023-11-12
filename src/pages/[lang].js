@@ -60,9 +60,9 @@ const WSearchDropdownContent = styled.ul`
 background-color: #FFC200;
 list-style: none;
 position: absolute;
-  display: ${(props) => (props.isVisible ? 'block' : 'none')};
-  padding: 0;
-  a {
+display: ${(props) => (props.isVisible ? 'block' : 'none')};
+padding: 0;
+a {
     cursor: pointer;
     padding: 0.5em 0.9em 0.5em 1.35em;
     font-size: 1.1em;
@@ -71,8 +71,8 @@ position: absolute;
     font-weight: bold;
     &:hover{
         background-color: rgba(255, 255, 255, 0.3); /* 투명도 조절 */
-      }
-  }
+    }
+}
 `
 const Mobile = styled.div`
 padding: 0;
@@ -97,8 +97,8 @@ color: white;
 }
 `
 const M2 = styled.div`
-  background-image: url("/image/blue.png");
-  background-size: cover; 
+background-image: url("/image/blue.png");
+background-size: cover; 
 border: 1px solid transparent;
 `
 const M2YellowBox = styled.div`
@@ -113,9 +113,9 @@ display: flex;
 justify-content: center;
 align-items: center;
 p{
-  color: black; /* 흰색 글자색 설정 */
-  font-size: 0.9em; /* 글자 크기 설정 */
-  font-weight: bold;
+    color: black; /* 흰색 글자색 설정 */
+    font-size: 0.9em; /* 글자 크기 설정 */
+    font-weight: bold;
 }
 `
 const M2Subtitle = styled.div`
@@ -144,12 +144,12 @@ font-weight: bold;
 margin-bottom: 2em;
 cursor: pointer;
 @media only screen and (max-width: 600px) {
-  margin: 0 0 5vh 0;
-  font-size: 2vw;
+    margin: 0 0 5vh 0;
+    font-size: 2vw;
 }
-    img{
-  width: 4em;
-  height: 4em;
+img{
+width: 4em;
+height: 4em;
     @media only screen and (max-width: 600px) {
         margin: 0;
         width: 12vw;
@@ -174,23 +174,23 @@ font-size: 0.8em;
 `
 const M3ImageContainer = styled.div`
 margin-top: 2em;
-  width: 100%; /* 컨테이너의 너비를 화면 너비에 맞춥니다. */
-  object-fit: cover; /* 이미지가 잘리지 않고 화면에 맞게 크기 조정 */
-  a {
-  text-decoration: none;
-  }
-  img{
+width: 100%; /* 컨테이너의 너비를 화면 너비에 맞춥니다. */
+object-fit: cover; /* 이미지가 잘리지 않고 화면에 맞게 크기 조정 */
+a {
+    text-decoration: none;
+}
+img{
     margin-left: 1%;
-  object-fit: cover; /* 이미지가 잘리지 않고 화면에 맞게 크기 조정 */
+    object-fit: cover; /* 이미지가 잘리지 않고 화면에 맞게 크기 조정 */
     height: 21em;
     width: 98%;
-  }
-  div{ /* 4개 이미지 위의 장소, 건물 */
-position: absolute;
-left: 5%;
-margin-top: 14em;
-background: transparent; /* 투명한 배경 */
-color: white;
+}
+div{ /* 4개 이미지 위의 장소, 건물 텍스트 디자인 관리 */
+    position: absolute;
+    left: 5%;
+    margin-top: 14em;
+    background: transparent; /* 투명한 배경 */
+    color: white;
 }
 `
 const Place = styled.p`
@@ -209,8 +209,8 @@ margin-left: 10%;
 margin-right: 10%;
 text-align: left;
 a{
-  background-color: transparent;
-  text-decoration: none;
+    background-color: transparent;
+    text-decoration: none;
 }
 `
 const NewsContent = styled.p`
@@ -218,11 +218,11 @@ color: gray;
 font-size: 0.9em;
 margin-top: 0.4em;
 margin-bottom: 0;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
+overflow: hidden;
+text-overflow: ellipsis;
+display: -webkit-box;
+-webkit-line-clamp: 3;
+-webkit-box-orient: vertical;
 `
 const M4ButtonContainer = styled.div`
 display: flex;
@@ -259,9 +259,9 @@ span{
     font-weight: bold;
 }
 p{
-  font-size: 1.4vw;
-  margin-left: 12vw;
-  color: #CACACA;
+    font-size: 1.4vw;
+    margin-left: 12vw;
+    color: #CACACA;
 }
 @media only screen and (max-width: 360px) {
     span{
@@ -284,12 +284,12 @@ const M5SearchDropdownButton = styled.li`
 border-bottom: 5px solid #FFC200;
 background-color: transparent;
 cursor: pointer;
-    color: white;
+color: white;
 list-style: none;
 a{
     text-decoration: none;
 }
-p{ /* aboutus,projects,expertise,ir 디자인 */
+p{ /* 선택된 드롭다운 디자인 */
     margin: 0;
     font-size: 1.3em;
     color: #FFC200;
@@ -300,9 +300,9 @@ const M5SearchDropdownContent = styled.ul`
 background-color: #FFC200;
 list-style: none;
 position: absolute;
-  display: ${(props) => (props.isVisible ? 'block' : 'none')};
-  padding: 0;
-  a {
+display: ${(props) => (props.isVisible ? 'block' : 'none')};
+padding: 0;
+a {
     cursor: pointer;
     padding: 0.5em 0.9em 0.5em 1.35em;
     font-size: 1.1em;
@@ -311,8 +311,8 @@ position: absolute;
     font-weight: bold;
     &:hover{
         background-color: rgba(255, 255, 255, 0.3); /* 투명도 조절 */
-      }
-  }
+    }
+}
 `
 const M5SearchInput = styled.input`
 background: transparent; /* 투명 배경 추가 */
@@ -331,11 +331,11 @@ const M5SearchButton = styled.button`
 font-size: 1.2em;
 margin-bottom: 0.8em;
 cursor: pointer;
-    img{
-        margin-right :0.5em;
-        width: 20px;
-        height: 20px;
-    }
+img{
+    margin-right :0.5em;
+    width: 20px;
+    height: 20px;
+}
 `
 const M5SearchTag = styled.div`
 padding: 5vw 0 5vw 0;
@@ -346,21 +346,21 @@ font-size: 0.9em;
 background-color: transparent;
     a{
         font-size: 1.4vw;
-  color: #CACACA;
-text-decoration: none;
+        color: #CACACA;
+        text-decoration: none;
     }
 }
 @media only screen and (max-width: 1000px) {
     button {
-    a {
-        font-size: 1em;
-    }
+        a {
+            font-size: 1em;
+        }
     }
 }
 `
 const M5Contact = styled.div`
 display: flex;
-  flex-direction: column;
+flex-direction: column;
 margin-bottom: 2em;
 margin-left: 2vw;
 `
@@ -397,10 +397,10 @@ font-weight: bold;
 margin-top: 1em;
 margin-bottom: 2em;
 cursor: pointer;
-    img{
-  width: 7em;
-  height: 7em;
-    }
+img{
+    width: 7em;
+    height: 7em;
+}
 `
 const PrevButton = styled.button`
 border: none;
@@ -410,13 +410,13 @@ margin-left: 20%;
 background-size: cover;
 background-color: transparent;
 @media only screen and (max-width: 1100px), (max-height: 800px) {
-    margin-left: 5%;
+margin-left: 5%;
 }
 @media only screen and (max-width: 600px), (max-height: 520px) {
-  margin: 0 0 5vh 0;
+margin: 0 0 5vh 0;
     img{
-  width: 30px;
-  height: 45px;
+        width: 30px;
+        height: 45px;
     }
 }
 `
@@ -428,18 +428,18 @@ margin-right: 20%;
 background-size: cover;
 background-color: transparent;
 @media only screen and (max-width: 1100px), (max-height: 800px) {
-    margin-right: 5%;
+margin-right: 5%;
 }
 @media only screen and (max-width: 600px), (max-height: 520px) {
-  margin: 0 0 5vh 0;
+margin: 0 0 5vh 0;
     img{
-  width: 30px;
-  height: 45px;
+        width: 30px;
+        height: 45px;
     }
 }
 `
 const WSearchButton = styled.button`
-  margin-bottom: 0.85em;
+margin-bottom: 0.85em;
 font-size: 1.2em;
 cursor: pointer;
     img{
@@ -451,7 +451,7 @@ cursor: pointer;
 const Topic = ({ title, initialValue, finalValue }) => {
     const [currentValue, setCurrentValue] = useState(initialValue);
     const [inViewRef, inView] = useInView({
-        triggerOnce: false, // 한 번만 트리거
+        triggerOnce: false, // 계속 트리거 ture는 한번만 트리거
     });
 
     useEffect(() => {
@@ -527,7 +527,6 @@ const Home = () => {
         setSelectedOption(option);
         setIsSearchDropdownVisible(false);
     };
-
 
     const handleScroll = (event) => {
         if (event.deltaY > 0) {
@@ -932,7 +931,7 @@ const Home = () => {
                                     </AnimateUp>
                                     <M5SearchContainer>
                                         <AnimateUp>
-                                            <span style={{ marginLeft: "12vw", color: "#FFC200",  }}>Search</span>
+                                            <span style={{ marginLeft: "12vw", color: "#FFC200",}}>Search</span>
                                             <span style={{ color: "white" }}>Payvery.com</span>
                                         </AnimateUp>
                                         <AnimateUp>
@@ -1084,15 +1083,16 @@ const Home = () => {
                                                 </AnimateUp>
                                                 <AnimateUp>
                                                     <div className="sec3description" style={{ color: "black", margin: "none" }}>{langJson[lang]?.DESCIRPTION}
-                                                    </div></AnimateUp>
+                                                    </div>
+                                                    </AnimateUp>
                                                 <AnimateUp>
                                                     <div className="image-container"
                                                         onMouseLeave={handleImageLeave}>
                                                         {hoveredImage ? (
                                                             <div className="hoverimage-container">
-                                                            <a href={hoveredImageLink} onClick={() => { window.location.href = hoveredImageLink; }}>
-                                                                <img className="hoverimage" src={hoveredImage} alt="Hovered Image" />
-                                                            </a>
+                                                                <a href={hoveredImageLink} onClick={() => { window.location.href = hoveredImageLink; }}>
+                                                                    <img className="hoverimage" src={hoveredImage} alt="Hovered Image" />
+                                                                </a>
                                                                 {hoveredText && (
                                                                     <div className="image-text">
                                                                         {hoveredText}
@@ -1105,19 +1105,19 @@ const Home = () => {
                                                                     className="image-button"
                                                                     onMouseEnter={() => handleImageHover("/image/image121.jpg", (
                                                                         <a href="https://www.youtube.com/watch?v=24MZgXC-it0">
-                                                                        <div className="hoverimage-overlay" >
-                                                                            <div className="hoverimage-text">
-                                                                                <p className="hoverplace">Incheon, Korea</p>
-                                                                                <p className="hoverbuilding">{langJson[lang]?.ICN}</p>
-                                                                                <p className="hoverbuilding">{langJson[lang]?.ICNA}</p>
-                                                                                <button className="hoverread-more-button">
-                                                                                    <span className="hoverread-more-text">Read more</span>
-                                                                                    <span className="hoverarrow-icon">→</span>
-                                                                                </button>
+                                                                            <div className="hoverimage-overlay" >
+                                                                                <div className="hoverimage-text">
+                                                                                    <p className="hoverplace">Incheon, Korea</p>
+                                                                                    <p className="hoverbuilding">{langJson[lang]?.ICN}</p>
+                                                                                    <p className="hoverbuilding">{langJson[lang]?.ICNA}</p>
+                                                                                    <button className="hoverread-more-button">
+                                                                                        <span className="hoverread-more-text">Read more</span>
+                                                                                        <span className="hoverarrow-icon">→</span>
+                                                                                    </button>
+                                                                                </div>
                                                                             </div>
-                                                                        </div>
                                                                         </a>
-                                                                    ),"https://www.youtube.com/watch?v=24MZgXC-it0")
+                                                                    ), "https://www.youtube.com/watch?v=24MZgXC-it0")
                                                                     }
                                                                 >
                                                                     <img src="/image/macbook.png" alt="Image 1" />
@@ -1134,19 +1134,19 @@ const Home = () => {
                                                                     href="/404"
                                                                     onMouseEnter={() => handleImageHover("/image/image221.jpg", (
                                                                         <a href="https://www.youtube.com/watch?v=24MZgXC-it0">
-                                                                        <div className="hoverimage-overlay">
-                                                                            <div className="hoverimage-text">
-                                                                                <p className="hoverplace">Seoul, Korea</p>
-                                                                                <p className="hoverbuilding">{langJson[lang]?.YEOUIDO}</p>
-                                                                                <p className="hoverbuilding">{langJson[lang]?.ARTS}</p>
-                                                                                <button className="hoverread-more-button" onClick={() => { window.location.href = "/404"; }}>
-                                                                                    <span className="hoverread-more-text">Read more</span>
-                                                                                    <span className="hoverarrow-icon">→</span>
-                                                                                </button>
+                                                                            <div className="hoverimage-overlay">
+                                                                                <div className="hoverimage-text">
+                                                                                    <p className="hoverplace">Seoul, Korea</p>
+                                                                                    <p className="hoverbuilding">{langJson[lang]?.YEOUIDO}</p>
+                                                                                    <p className="hoverbuilding">{langJson[lang]?.ARTS}</p>
+                                                                                    <button className="hoverread-more-button" onClick={() => { window.location.href = "/404"; }}>
+                                                                                        <span className="hoverread-more-text">Read more</span>
+                                                                                        <span className="hoverarrow-icon">→</span>
+                                                                                    </button>
+                                                                                </div>
                                                                             </div>
-                                                                        </div>
                                                                         </a>
-                                                                    ),"https://www.youtube.com/watch?v=24MZgXC-it0")
+                                                                    ), "https://www.youtube.com/watch?v=24MZgXC-it0")
                                                                     }
                                                                 >
                                                                     <img src="/image/cardreader.png" alt="Image 2" />
@@ -1163,19 +1163,19 @@ const Home = () => {
                                                                     href="/404"
                                                                     onMouseEnter={() => handleImageHover("/image/image321.jpg", (
                                                                         <a href="https://www.youtube.com/watch?v=24MZgXC-it0">
-                                                                        <div className="hoverimage-overlay">
-                                                                            <div className="hoverimage-text">
-                                                                                <p className="hoverplace">Seongnam, Korea</p>
-                                                                                <p className="hoverbuilding">{langJson[lang]?.HYUNDAI}</p>
-                                                                                <p className="hoverbuilding">{langJson[lang]?.CENTER}</p>
-                                                                                <button className="hoverread-more-button" onClick={() => { window.location.href = "/404"; }}>
-                                                                                    <span className="hoverread-more-text">Read more</span>
-                                                                                    <span className="hoverarrow-icon">→</span>
-                                                                                </button>
+                                                                            <div className="hoverimage-overlay">
+                                                                                <div className="hoverimage-text">
+                                                                                    <p className="hoverplace">Seongnam, Korea</p>
+                                                                                    <p className="hoverbuilding">{langJson[lang]?.HYUNDAI}</p>
+                                                                                    <p className="hoverbuilding">{langJson[lang]?.CENTER}</p>
+                                                                                    <button className="hoverread-more-button" onClick={() => { window.location.href = "/404"; }}>
+                                                                                        <span className="hoverread-more-text">Read more</span>
+                                                                                        <span className="hoverarrow-icon">→</span>
+                                                                                    </button>
+                                                                                </div>
                                                                             </div>
-                                                                        </div>
                                                                         </a>
-                                                                    ),"https://www.youtube.com/watch?v=24MZgXC-it0")
+                                                                    ), "https://www.youtube.com/watch?v=24MZgXC-it0")
                                                                     }
                                                                 >
                                                                     <img src="/image/kiosk.png" alt="Image 3" />
@@ -1192,18 +1192,18 @@ const Home = () => {
                                                                     href="/404"
                                                                     onMouseEnter={() => handleImageHover("/image/image421.jpg", (
                                                                         <a href="https://www.youtube.com/watch?v=24MZgXC-it0">
-                                                                        <div className="hoverimage-overlay">
-                                                                            <div className="hoverimage-text">
-                                                                                <p className="hoverplace">Baku, Azerbaijan</p>
-                                                                                <p className="hoverbuilding">{langJson[lang]?.SOCAR}</p>
-                                                                                <button className="hoverread-more-button" onClick={() => { window.location.href = "/404"; }}>
-                                                                                    <span className="hoverread-more-text">Read more</span>
-                                                                                    <span className="hoverarrow-icon">→</span>
-                                                                                </button>
+                                                                            <div className="hoverimage-overlay">
+                                                                                <div className="hoverimage-text">
+                                                                                    <p className="hoverplace">Baku, Azerbaijan</p>
+                                                                                    <p className="hoverbuilding">{langJson[lang]?.SOCAR}</p>
+                                                                                    <button className="hoverread-more-button" onClick={() => { window.location.href = "/404"; }}>
+                                                                                        <span className="hoverread-more-text">Read more</span>
+                                                                                        <span className="hoverarrow-icon">→</span>
+                                                                                    </button>
+                                                                                </div>
                                                                             </div>
-                                                                        </div>
                                                                         </a>
-                                                                    ),"https://www.youtube.com/watch?v=24MZgXC-it0")
+                                                                    ), "https://www.youtube.com/watch?v=24MZgXC-it0")
                                                                     }
                                                                 >
                                                                     <img src="/image/scanner.png" alt="Image 4" />
@@ -1229,7 +1229,7 @@ const Home = () => {
                                                         {/* 첫 번째 행 */}
                                                         <div className="news-row">
                                                             {/* 뉴스 아이템 1 */}
-                                                            <a href="/404" className="news-item">
+                                                            <a href="/news1" className="news-item">
                                                                 <div className="news-box">
                                                                     <p className="news-text">News</p>
                                                                 </div>
@@ -1239,7 +1239,7 @@ const Home = () => {
                                                                 <span className="arrow-icon" style={{ marginLeft: "20px", color: "orange", fontWeight: "bold" }}>→</span>
                                                             </a>
                                                             {/* 뉴스 아이템 2 */}
-                                                            <a href="/404" className="news-item">
+                                                            <a href="/news2" className="news-item">
                                                                 <div className="news-box">
                                                                     <p className="news-text">News</p>
                                                                 </div>
@@ -1249,7 +1249,7 @@ const Home = () => {
                                                                 <span className="arrow-icon" >→</span>
                                                             </a>
                                                             {/* 뉴스 아이템 3 */}
-                                                            <a href="/404" className="news-item">
+                                                            <a href="/news3" className="news-item">
                                                                 <div className="news-box">
                                                                     <p className="news-text">News</p>
                                                                 </div>
@@ -1264,7 +1264,7 @@ const Home = () => {
                                                     <AnimateUp>
                                                         <div className="news-row">
                                                             {/* 뉴스 아이템 4 */}
-                                                            <a href="/404" className="news-item">
+                                                            <a href="/news4" className="news-item">
                                                                 <div className="news-box">
                                                                     <p className="news-text">News</p>
                                                                 </div>
@@ -1274,7 +1274,7 @@ const Home = () => {
                                                                 <span className="arrow-icon">→</span>
                                                             </a>
                                                             {/* 뉴스 아이템 5 */}
-                                                            <a href="/404" className="news-item">
+                                                            <a href="/news5" className="news-item">
                                                                 <div className="news-box">
                                                                     <p className="news-text">News</p>
                                                                 </div>
@@ -1284,7 +1284,7 @@ const Home = () => {
                                                                 <span className="arrow-icon" >→</span>
                                                             </a>
                                                             {/* 뉴스 아이템 6 */}
-                                                            <a href="/404" className="news-item">
+                                                            <a href="/news6" className="news-item">
                                                                 <div className="news-box">
                                                                     <p className="news-text">News</p>
                                                                 </div>
@@ -1296,26 +1296,23 @@ const Home = () => {
                                                         </div>
                                                     </AnimateUp>
                                                 </div>
-                                                <div style={{}}>
-                                                    {/* 뉴스 액자 버튼 */}
-                                                    <AnimateUp>
-                                                        <div className="newsbutton-container">
-                                                            {/* news1 버튼 */}
-                                                            <a className="newsbutton" href="https://www.youtube.com/watch?v=OLrv8OGTUnQ" target="_blank" rel="noopener noreferrer">
-                                                                <img src="/image/newsimage1.png" alt="youtube1 Image" />
-                                                            </a>
-                                                            {/* news2 버튼 */}
-                                                            <a className="newsbutton" style={{ marginLeft: "15px" }} href="https://www.youtube.com/watch?v=REof-nC8Ck8&feature=youtu.be" target="_blank" rel="noopener noreferrer">
-                                                                <img src="/image/newsimage2.png" alt="youtube2 Image" />
-                                                            </a>
-                                                            {/* news3 버튼 */}
-                                                            <a className="newsbutton" style={{ marginLeft: "15px" }} href="https://www.youtube.com/watch?v=Lu8uHwNpHEQ" target="_blank" rel="noopener noreferrer">
-                                                                <img src="/image/newsimage3.png" alt="youtube3 Image" />
-                                                            </a>
-                                                        </div>
-                                                    </AnimateUp>
-                                                </div>
-
+                                                {/* 뉴스 액자 버튼 */}
+                                                <AnimateUp>
+                                                    <div className="newsbutton-container">
+                                                        {/* news1 버튼 */}
+                                                        <a className="newsbutton" href="https://www.youtube.com/watch?v=OLrv8OGTUnQ" target="_blank" rel="noopener noreferrer">
+                                                            <img src="/image/newsimage1.png" alt="youtube1 Image" />
+                                                        </a>
+                                                        {/* news2 버튼 */}
+                                                        <a className="newsbutton" style={{ marginLeft: "15px" }} href="https://www.youtube.com/watch?v=REof-nC8Ck8&feature=youtu.be" target="_blank" rel="noopener noreferrer">
+                                                            <img src="/image/newsimage2.png" alt="youtube2 Image" />
+                                                        </a>
+                                                        {/* news3 버튼 */}
+                                                        <a className="newsbutton" style={{ marginLeft: "15px" }} href="https://www.youtube.com/watch?v=Lu8uHwNpHEQ" target="_blank" rel="noopener noreferrer">
+                                                            <img src="/image/newsimage3.png" alt="youtube3 Image" />
+                                                        </a>
+                                                    </div>
+                                                </AnimateUp>
                                                 <AnimateUp>
                                                     <div className="sec5title">
                                                         <span class="bold-text">성공</span>으로 가는 과정을 계획하는데 <span class="bold-text">함께</span>하겠습니다.
@@ -1333,44 +1330,44 @@ const Home = () => {
                                                     </AnimateUp>
                                                     <AnimateUp>
                                                         <div className="searchheerim">
-                                                            <div style={{display:"flex"}}>
-                                                            <WSearchDropdownContainer>
-                                                                <WSearchDropdownButton onClick={toggleDropdown}>
-                                                                    <p>{selectedOption}{isSearchDropdownVisible ? '▲' : '▼'}</p>
-                                                                </WSearchDropdownButton>
-                                                                <WSearchDropdownContent isVisible={isSearchDropdownVisible}>
-                                                                    <li>
-                                                                        <a onClick={() => handleOptionClick('All')}>All</a>
-                                                                        <a onClick={() => handleOptionClick('Project')}>Project</a>
-                                                                        <a onClick={() => handleOptionClick('News')}>News</a>
-                                                                        <a onClick={() => handleOptionClick('Leadership')}>Leadership</a>
-                                                                    </li>
-                                                                </WSearchDropdownContent>
-                                                            </WSearchDropdownContainer>
-                                                            <input
-                                                                className="searchheerim-input"
-                                                                type="text"
-                                                                placeholder="Type here"
-                                                                value={searchQuery}
-                                                                onChange={handleSearchInputChange} // 검색 입력란 스타일 추가
-                                                            />
-                                                            <WSearchButton className="searchheerim-button" onClick={() => { window.location.href = "/404"; }} style={{
-                                                                background: "transparent", // Set the background to transparent
-                                                                border: "none", // Remove the border
-                                                                color: "white",
-                                                                borderBottom: "5px solid white",
-                                                            }}>
-                                                                Search
-                                                                <img src="/icon/search.png" alt="Search Icon" />
-                                                            </WSearchButton>
+                                                            <div style={{ display: "flex" }}>
+                                                                <WSearchDropdownContainer>
+                                                                    <WSearchDropdownButton onClick={toggleDropdown}>
+                                                                        <p>{selectedOption}{isSearchDropdownVisible ? '▲' : '▼'}</p>
+                                                                    </WSearchDropdownButton>
+                                                                    <WSearchDropdownContent isVisible={isSearchDropdownVisible}>
+                                                                        <li>
+                                                                            <a onClick={() => handleOptionClick('All')}>All</a>
+                                                                            <a onClick={() => handleOptionClick('Project')}>Project</a>
+                                                                            <a onClick={() => handleOptionClick('News')}>News</a>
+                                                                            <a onClick={() => handleOptionClick('Leadership')}>Leadership</a>
+                                                                        </li>
+                                                                    </WSearchDropdownContent>
+                                                                </WSearchDropdownContainer>
+                                                                <input
+                                                                    className="searchheerim-input"
+                                                                    type="text"
+                                                                    placeholder="Type here"
+                                                                    value={searchQuery}
+                                                                    onChange={handleSearchInputChange} // 검색 입력란 스타일 추가
+                                                                />
+                                                                <WSearchButton className="searchheerim-button" onClick={() => { window.location.href = "/404"; }} style={{
+                                                                    background: "transparent",
+                                                                    border: "none",
+                                                                    color: "white",
+                                                                    borderBottom: "5px solid white",
+                                                                }}>
+                                                                    Search
+                                                                    <img src="/icon/search.png" alt="Search Icon" />
+                                                                </WSearchButton>
                                                             </div>
-                                                        <div className="searchtag-keywords">
-                                                            <button className="searchtag-button" onClick={() => { window.location.reload() }}><Link href="/Payvery">#Payvery</Link></button>
-                                                            <button className="searchtag-button" onClick={() => { window.location.reload() }}><Link href="/Purplevery">#Purplevery</Link></button>
-                                                            <button className="searchtag-button" onClick={() => { window.location.reload() }}><Link href="/Pg">#Pg</Link></button>
-                                                            <button className="searchtag-button" onClick={() => { window.location.reload() }}><Link href="/Payment_gateway">#Payment_gateway</Link></button>
-                                                            <button className="searchtag-button" onClick={() => { window.location.reload() }}><Link href="/Customer">#Customer</Link></button>
-                                                        </div>
+                                                            <div className="searchtag-keywords">
+                                                                <button className="searchtag-button" onClick={() => { window.location.reload() }}><Link href="/Payvery">#Payvery</Link></button>
+                                                                <button className="searchtag-button" onClick={() => { window.location.reload() }}><Link href="/Purplevery">#Purplevery</Link></button>
+                                                                <button className="searchtag-button" onClick={() => { window.location.reload() }}><Link href="/Pg">#Pg</Link></button>
+                                                                <button className="searchtag-button" onClick={() => { window.location.reload() }}><Link href="/Payment_gateway">#Payment_gateway</Link></button>
+                                                                <button className="searchtag-button" onClick={() => { window.location.reload() }}><Link href="/Customer">#Customer</Link></button>
+                                                            </div>
                                                         </div>
                                                     </AnimateUp>
                                                 </div>
