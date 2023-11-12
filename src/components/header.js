@@ -15,24 +15,24 @@ justify-content: space-between;
 padding: none;
 margin: none;
 background-color: ${(props) => (props.activeSection === 0 ? 'transparent' : 'rgba(0, 0, 0, 0.2)')};
-@media only screen and (max-width: 1300px), (max-height: 800px) {
+@media only screen and (max-width: 1280px), (max-height: 800px) {
     background-color: rgba(0, 0, 0, 0.2);
 }
 
 `
 const LogoButton = styled.button`
+margin-top: 2em;
   text-align: center;
   text-decoration: none;
   border: none;
   cursor: pointer;
   display: flex;
-  margin-left: 10%;
   flex-direction: column;
   align-items: center;
   z-index: 9999;
-  background: url('/image/Logo.png');
-  width: 17em; 
-  height: 7em;
+  background: url('/image/Logo.svg');
+  width: 19em; 
+  height: 3em;
   background-size: cover;
 @media only screen and (max-width: 500px) {
     width: 10em;
@@ -44,12 +44,10 @@ const LogoButton = styled.button`
 }
 `;
 const HeaderButtons = styled.div` /* 헤더의 오른쪽 스타일 */
-margin-top: 0.5em;
-margin-right: 2em ;
+margin-right: 12vw ;
 display: flex;
 gap: 0.4em;
 font-size: 1.5em;/* 한영 버튼 크기 */
-align-items: center;
 z-index: 3;
   a{ /* 한영 버튼 */
     font-weight: bold;
@@ -66,6 +64,7 @@ z-index: 3;
   }
 @media only screen and (max-width: 500px) {
     top: 1.2%;
+margin-right: 2em ;
     font-size: 4vw;
 }
 `
@@ -88,7 +87,7 @@ z-index: 1;
 const MoreClose = styled.button` /* more close 버튼 */
 position: fixed;
 top: 2em; /* 원하는 위치로 조정하세요 */
-right: 8em; /* 원하는 위치로 조정하세요 */
+right: 12vw; /* 원하는 위치로 조정하세요 */
 color: white;
 background: transparent; /* 투명 배경 추가 */
 border: none;
@@ -441,6 +440,7 @@ const Header = ({ activeSection, isMoreClicked, handleMoreButtonClick, setIsMore
 
     return (
         <Headerwrappers activeSection={activeSection} className={`${isMoreClicked ? 'showMore' : ''}`} >
+            <span style={{height:"250px",padding:"0", margin:"0", marginLeft:"13vw",borderLeft:"10px solid rgb(255, 194, 0)"}}></span>
             <Link href="/" legacyBehavior>
                 <LogoButton onClick={() => { window.location.reload() }}></LogoButton>
             </Link>

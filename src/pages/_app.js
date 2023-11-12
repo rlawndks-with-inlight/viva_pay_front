@@ -9,7 +9,8 @@ const App = (props) => {
   return (
     <>
       <Head>
-        <title>heerim</title>
+        <link rel="icon" href="/icon/favion.svg"></link>
+        <title>Payvery</title>
       </Head>
       {getLayout(<Component {...pageProps} />)}
 

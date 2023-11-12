@@ -382,7 +382,7 @@ overflow: hidden;
 `
 const W1Title = styled.div`
 margin-top: ${(props) => props.magtop};
-margin-left: 9.5vw;
+margin-left: 14vw;
 font-size: 5em;
 font-weight: bold;
 font-family: 'Playfair Display', serif;
