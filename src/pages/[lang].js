@@ -510,6 +510,7 @@ const Home = () => {
     const [searchQuery, setSearchQuery] = useState(""); // 검색어 상태 추가
     const [hoveredImage, setHoveredImage] = useState(null);
     const [hoveredText, setHoveredText] = useState(null);
+    const [hoveredImageLink, setHoveredImageLink] = useState(null);
     const [windowWidth, setWindowWidth] = useState(0); // 초기 화면 너비 설정
     const [windowHeight, setWindowHeight] = useState(0); // 초기 화면 높이 설정
     const [refSection1, inViewSection1] = useInView({ triggerOnce: true });
@@ -551,14 +552,16 @@ const Home = () => {
         };
     }, [activeSection]);
 
-    const handleImageHover = (imageSrc, text) => {
+    const handleImageHover = (imageSrc, text, link) => {
         setHoveredImage(imageSrc);
         setHoveredText(text);
+        setHoveredImageLink(link);
     };
 
     const handleImageLeave = () => {
         setHoveredImage(null);
         setHoveredText(null);
+        setHoveredImageLink(null); // 마우스를 떠날 때 링크 초기화
     };
 
 
@@ -1087,7 +1090,9 @@ const Home = () => {
                                                         onMouseLeave={handleImageLeave}>
                                                         {hoveredImage ? (
                                                             <div className="hoverimage-container">
+                                                            <a href={hoveredImageLink} onClick={() => { window.location.href = hoveredImageLink; }}>
                                                                 <img className="hoverimage" src={hoveredImage} alt="Hovered Image" />
+                                                            </a>
                                                                 {hoveredText && (
                                                                     <div className="image-text">
                                                                         {hoveredText}
@@ -1098,20 +1103,21 @@ const Home = () => {
                                                             <>
                                                                 <a
                                                                     className="image-button"
-                                                                    href="/404"
                                                                     onMouseEnter={() => handleImageHover("/image/image121.jpg", (
-                                                                        <div className="hoverimage-overlay">
+                                                                        <a href="https://www.youtube.com/watch?v=24MZgXC-it0">
+                                                                        <div className="hoverimage-overlay" >
                                                                             <div className="hoverimage-text">
                                                                                 <p className="hoverplace">Incheon, Korea</p>
                                                                                 <p className="hoverbuilding">{langJson[lang]?.ICN}</p>
                                                                                 <p className="hoverbuilding">{langJson[lang]?.ICNA}</p>
-                                                                                <button className="hoverread-more-button" onClick={() => { window.location.href = "/404"; }}>
+                                                                                <button className="hoverread-more-button">
                                                                                     <span className="hoverread-more-text">Read more</span>
                                                                                     <span className="hoverarrow-icon">→</span>
                                                                                 </button>
                                                                             </div>
                                                                         </div>
-                                                                    ))
+                                                                        </a>
+                                                                    ),"https://www.youtube.com/watch?v=24MZgXC-it0")
                                                                     }
                                                                 >
                                                                     <img src="/image/macbook.png" alt="Image 1" />
@@ -1127,6 +1133,7 @@ const Home = () => {
                                                                     className="image-button"
                                                                     href="/404"
                                                                     onMouseEnter={() => handleImageHover("/image/image221.jpg", (
+                                                                        <a href="https://www.youtube.com/watch?v=24MZgXC-it0">
                                                                         <div className="hoverimage-overlay">
                                                                             <div className="hoverimage-text">
                                                                                 <p className="hoverplace">Seoul, Korea</p>
@@ -1138,7 +1145,8 @@ const Home = () => {
                                                                                 </button>
                                                                             </div>
                                                                         </div>
-                                                                    ))
+                                                                        </a>
+                                                                    ),"https://www.youtube.com/watch?v=24MZgXC-it0")
                                                                     }
                                                                 >
                                                                     <img src="/image/cardreader.png" alt="Image 2" />
@@ -1154,6 +1162,7 @@ const Home = () => {
                                                                     className="image-button"
                                                                     href="/404"
                                                                     onMouseEnter={() => handleImageHover("/image/image321.jpg", (
+                                                                        <a href="https://www.youtube.com/watch?v=24MZgXC-it0">
                                                                         <div className="hoverimage-overlay">
                                                                             <div className="hoverimage-text">
                                                                                 <p className="hoverplace">Seongnam, Korea</p>
@@ -1165,7 +1174,8 @@ const Home = () => {
                                                                                 </button>
                                                                             </div>
                                                                         </div>
-                                                                    ))
+                                                                        </a>
+                                                                    ),"https://www.youtube.com/watch?v=24MZgXC-it0")
                                                                     }
                                                                 >
                                                                     <img src="/image/kiosk.png" alt="Image 3" />
@@ -1181,6 +1191,7 @@ const Home = () => {
                                                                     className="image-button"
                                                                     href="/404"
                                                                     onMouseEnter={() => handleImageHover("/image/image421.jpg", (
+                                                                        <a href="https://www.youtube.com/watch?v=24MZgXC-it0">
                                                                         <div className="hoverimage-overlay">
                                                                             <div className="hoverimage-text">
                                                                                 <p className="hoverplace">Baku, Azerbaijan</p>
@@ -1191,7 +1202,8 @@ const Home = () => {
                                                                                 </button>
                                                                             </div>
                                                                         </div>
-                                                                    ))
+                                                                        </a>
+                                                                    ),"https://www.youtube.com/watch?v=24MZgXC-it0")
                                                                     }
                                                                 >
                                                                     <img src="/image/scanner.png" alt="Image 4" />
