@@ -117,6 +117,9 @@ p{
     font-size: 0.9em; /* 글자 크기 설정 */
     font-weight: bold;
 }
+@media screen and (width >= 800px) {
+      margin-left: 12vw;
+    }
 `
 const M2Subtitle = styled.div`
 margin-left: 0.8em;
@@ -124,11 +127,17 @@ font-size: 3em;
 font-weight: bold;
 font-family: 'Playfair Display', serif;
 color: white;
+@media screen and (width >= 800px) {
+      margin-left: 12vw;
+    }
 `
 const M2Description = styled.div`
 margin-left: 1.7em;
 font-size: 1.5em;
 color: white;
+@media screen and (width >= 800px) {
+      margin-left: 12vw;
+    }
 `
 const M2IconContainer = styled.div`
 display: flex;
