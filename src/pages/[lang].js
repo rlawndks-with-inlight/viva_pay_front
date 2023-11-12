@@ -7,7 +7,7 @@ import { useRouter } from "next/router";
 import styled from "styled-components";
 import { useInView } from 'react-intersection-observer'; // react-intersection-observer 라이브러리 사용
 const sections = ["section1", "section2", "section3", "section4", "section5"]; // 섹션 이름
-const totalIcons = 16; // 총 아이콘 개수
+const totalIcons = 6; // 총 아이콘 개수
 const iconsPerPageLarge = 6; // 큰 화면에서 표시할 아이콘 개수
 const iconsPerPageSmall = 4; // 작은 화면에서 표시할 아이콘 개수
 
@@ -583,17 +583,6 @@ const Home = () => {
             3: "/https://www.heerim.com/kr/project/project_list.php?cate=4",
             4: "/https://www.heerim.com/kr/project/project_list.php?cate=5",
             5: "/https://www.heerim.com/kr/project/project_list.php?cate=6",
-            6: "/https://www.heerim.com/kr/project/project_list.php?cate=7",
-            7: "/https://www.heerim.com/kr/project/project_list.php?cate=8",
-            8: "/https://www.heerim.com/kr/project/project_list.php?cate=9",
-            9: "/https://www.heerim.com/kr/project/project_list.php?cate=10",
-            10: "/https://www.heerim.com/kr/project/project_list.php?cate=11",
-            11: "/https://www.heerim.com/kr/project/project_list.php?cate=12",
-            12: "/https://www.heerim.com/kr/project/project_list.php?cate=13",
-            13: "/https://www.heerim.com/kr/project/project_list.php?cate=14",
-            14: "/https://www.heerim.com/kr/project/project_list.php?cate=15",
-            15: "/https://www.heerim.com/kr/project/project_list.php?cate=16",
-            16: "/https://www.heerim.com/kr/project/project_list.php?cate=17",
             // 다른 아이콘들에 대한 링크를 추가하세요
         };
 
@@ -614,17 +603,6 @@ const Home = () => {
             3: "description3",
             4: "description4",
             5: "description5",
-            6: "description6",
-            7: "description7",
-            8: "description8",
-            9: "description9",
-            10: "description10",
-            11: "description11",
-            12: "description12",
-            13: "description13",
-            14: "description14",
-            15: "description15",
-            16: "description16",
             // 다른 아이콘들에 대한 설명을 추가하세요
         };
 
@@ -774,7 +752,7 @@ const Home = () => {
                                                 onClick={() => handleIconClick(iconIndex)}
                                             >
                                                 <img
-                                                    src={`/icon/${iconIndex}.png`}
+                                                    src={`/icon/${iconIndex}.svg`}
                                                     alt={`Icon ${iconIndex}`}
                                                 />
                                                 <div className="section2icon-description">
@@ -1067,7 +1045,7 @@ const Home = () => {
                                                         onClick={() => handleIconClick(iconIndex)}
                                                     >
                                                         <img
-                                                            src={`/icon/${iconIndex}.png`}
+                                                            src={`/icon/${iconIndex}.svg`}
                                                             alt={`Icon ${iconIndex}`}
                                                         />
                                                         <div className="section2icon-description">
