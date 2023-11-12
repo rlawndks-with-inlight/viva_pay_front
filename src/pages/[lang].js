@@ -940,7 +940,7 @@ const Home = () => {
                                     </AnimateUp>
                                     <M5SearchContainer>
                                         <AnimateUp>
-                                            <span style={{ marginLeft: "12vw", color: "#FFC200",}}>Search</span>
+                                            <span style={{ marginLeft: "12vw", color: "#FFC200", }}>Search</span>
                                             <span style={{ color: "white" }}>Payvery.com</span>
                                         </AnimateUp>
                                         <AnimateUp>
@@ -948,43 +948,41 @@ const Home = () => {
                                         </AnimateUp>
                                         <div className="searchheerim">
                                             <AnimateUp>
-                                                <div>
-                                                    <M5SearchDropdownContainer>
-                                                        <M5SearchDropdownButton onClick={toggleDropdown}>
-                                                            <p>{selectedOption} {isSearchDropdownVisible ? '▲' : '▼'} </p>
-                                                        </M5SearchDropdownButton>
-                                                        <M5SearchDropdownContent isVisible={isSearchDropdownVisible}>
-                                                            <li>
-                                                                <a onClick={() => handleOptionClick('All')}>All</a>
-                                                                <a onClick={() => handleOptionClick('Project')}>Project</a>
-                                                                <a onClick={() => handleOptionClick('News')}>News</a>
-                                                                <a onClick={() => handleOptionClick('Leadership')}>Leadership</a>
-                                                            </li>
-                                                        </M5SearchDropdownContent>
-                                                    </M5SearchDropdownContainer>
-                                                    <M5SearchInput
-                                                        type="text"
-                                                        placeholder="Type here"
-                                                        value={searchQuery}
-                                                        onChange={handleSearchInputChange} // 검색 입력란 스타일 추가
-                                                    />
-                                                    <M5SearchButton className="searchheerim-button" onClick={() => { window.location.href = "/404"; }} style={{
-                                                        background: "transparent", // Set the background to transparent
-                                                        border: "none", // Remove the border
-                                                        margin: "none",
-                                                        borderBottom: "5px solid white",
-                                                    }}>
-                                                        <img src="/icon/search.png" alt="Search Icon" />
-                                                    </M5SearchButton>
-                                                </div>
+                                                <M5SearchDropdownContainer>
+                                                    <M5SearchDropdownButton onClick={toggleDropdown}>
+                                                        <p>{selectedOption} {isSearchDropdownVisible ? '▲' : '▼'} </p>
+                                                    </M5SearchDropdownButton>
+                                                    <M5SearchDropdownContent isVisible={isSearchDropdownVisible}>
+                                                        <li>
+                                                            <a onClick={() => handleOptionClick('All')}>All</a>
+                                                            <a onClick={() => handleOptionClick('Project')}>Project</a>
+                                                            <a onClick={() => handleOptionClick('News')}>News</a>
+                                                            <a onClick={() => handleOptionClick('Leadership')}>Leadership</a>
+                                                        </li>
+                                                    </M5SearchDropdownContent>
+                                                </M5SearchDropdownContainer>
+                                                <M5SearchInput
+                                                    type="text"
+                                                    placeholder="Type here"
+                                                    value={searchQuery}
+                                                    onChange={handleSearchInputChange} // 검색 입력란 스타일 추가
+                                                />
+                                                <M5SearchButton className="searchheerim-button" onClick={() => { window.location.href = "/404"; }} style={{
+                                                    background: "transparent", // Set the background to transparent
+                                                    border: "none", // Remove the border
+                                                    margin: "none",
+                                                    borderBottom: "5px solid white",
+                                                }}>
+                                                    <img src="/icon/search.png" alt="Search Icon" />
+                                                </M5SearchButton>
+                                                <M5SearchTag>
+                                                    <button onClick={() => { window.location.reload() }}><Link href="/Payvery">#Payvery</Link></button>
+                                                    <button onClick={() => { window.location.reload() }}><Link href="/Purplevery">#Purplevery</Link></button>
+                                                    <button onClick={() => { window.location.reload() }}><Link href="/Pg">#Pg</Link></button>
+                                                    <button onClick={() => { window.location.reload() }}><Link href="/Payment_gateway">#Payment_gateway</Link></button>
+                                                    <button onClick={() => { window.location.reload() }}><Link href="/Customer">#Customer</Link></button>
+                                                </M5SearchTag>
                                             </AnimateUp>
-                                            <M5SearchTag>
-                                                <button onClick={() => { window.location.reload() }}><Link href="/Payvery">#Payvery</Link></button>
-                                                <button onClick={() => { window.location.reload() }}><Link href="/Purplevery">#Purplevery</Link></button>
-                                                <button onClick={() => { window.location.reload() }}><Link href="/Pg">#Pg</Link></button>
-                                                <button onClick={() => { window.location.reload() }}><Link href="/Payment_gateway">#Payment_gateway</Link></button>
-                                                <button onClick={() => { window.location.reload() }}><Link href="/Customer">#Customer</Link></button>
-                                            </M5SearchTag>
                                         </div>
                                         <AnimateUp>
                                         </AnimateUp>
@@ -1093,7 +1091,7 @@ const Home = () => {
                                                 <AnimateUp>
                                                     <div className="sec3description" style={{ color: "black", margin: "none" }}>{langJson[lang]?.DESCIRPTION}
                                                     </div>
-                                                    </AnimateUp>
+                                                </AnimateUp>
                                                 <AnimateUp>
                                                     <div className="image-container"
                                                         onMouseLeave={handleImageLeave}>
