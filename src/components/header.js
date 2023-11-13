@@ -1,55 +1,67 @@
 // components/Header.js
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
+
 
 const Headerwrappers = styled.header`
 position: fixed;
-top: 0;
+top: ${props => props.showHeader == 1 ? '0' : '-50px'};
+opacity: ${props => props.showHeader == 1 ? '1' : '0'};
+cursor: ${props => props.showHeader == 1 ? '' : 'pointer'};
 left: 0;
 right: 0;
 z-index: 1; 
 display: flex;
-justify-content: space-between;
 padding: none;
 margin: none;
+transition: 0.5s;
 background-color: ${(props) => (props.activeSection === 0 ? 'transparent' : 'rgba(0, 0, 0, 0.2)')};
 @media only screen and (max-width: 1280px), (max-height: 800px) {
+    justify-content: space-between;
     background-color: rgba(0, 0, 0, 0.2);
 }
-
+`
+const BlueStick = styled.span`
+position: absolute;
+left: 11%;
+height: 250px;
+padding:"0";
+border-left: 10px solid rgb(0, 104, 232); 
+/* rgb(0, 104, 232) 파랑색 코드 10px solid rgb(255, 194, 0)*/
+display: ${(props) => (props.activeSection === 0 ? '' : 'none')};
+/* 모바일 화면에서 숨김 */
+  @media only screen and (max-width: 1280px), (max-height: 800px) {
+    display: none;
+  }
 `
 const LogoButton = styled.button`
-margin-top: 2em;
-  text-align: center;
-  text-decoration: none;
+position: absolute;
+top: 30%;
+left: 14.5%;
   border: none;
   cursor: pointer;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
   z-index: 9999;
   background: url('/image/Logo.svg');
   width: 19em; 
   height: 3em;
   background-size: cover;
-@media only screen and (max-width: 500px) {
-    width: 10em;
-    height: 4em;
-}
-@media only screen and (max-height: 620px) {
-    width: 10em;
-    height: 4em;
+@media only screen and (max-width: 600px) {
+top: 45%;
+left: 13%;
+  width: 10.8em; 
+  height: 1.7em;
 }
 `;
 const HeaderButtons = styled.div` /* 헤더의 오른쪽 스타일 */
-margin-right: 12vw ;
 display: flex;
-gap: 0.4em;
+margin-top: 1.1em;
+margin-left: 73%;
 font-size: 1.5em;/* 한영 버튼 크기 */
 z-index: 3;
   a{ /* 한영 버튼 */
+margin-right: 1.2em;
     font-weight: bold;
     text-decoration: none;
     color: gray;
@@ -62,18 +74,36 @@ z-index: 3;
         text-decoration: underline;
       }
   }
-@media only screen and (max-width: 500px) {
-    top: 1.2%;
-margin-right: 2em ;
-    font-size: 4vw;
+@media only screen and (max-width: 1280px) {
+}
+@media only screen and (max-width: 600px) {
+    margin-left: 70%;
+    font-size: 1em;
+    margin-top: 1.5em;
+    a{
+        margin-right: 0.5em;
+    }
 }
 `
 const More = styled.button` /* 더보기 버튼 */
+border: 1px solid transparent;
 background: transparent;
 border: none; 
+padding: 0;
+margin: 0;
 font-size: 1em;
 cursor: pointer;
 color: white;
+  img{
+    width: 35px;
+    height: 35px;
+  }
+@media only screen and (max-width: 600px) {
+  img{
+    width: 22px;
+    height: 22px;
+  }
+}
 `
 const MoreContainer = styled.div` /* more 모달 스타일링 */
 position: fixed;
@@ -86,8 +116,8 @@ z-index: 1;
 `
 const MoreClose = styled.button` /* more close 버튼 */
 position: fixed;
-top: 2em; /* 원하는 위치로 조정하세요 */
-right: 12vw; /* 원하는 위치로 조정하세요 */
+margin-top: 1.1em; /* 원하는 위치로 조정하세요 */
+margin-left: 74.6vw;
 color: white;
 background: transparent; /* 투명 배경 추가 */
 border: none;
@@ -326,7 +356,8 @@ list-style: none;
     }
 }
 `
-const Header = ({ activeSection, isMoreClicked, handleMoreButtonClick, setIsMoreClicked, closeMore, updateHeaderVisibility }) => {
+const Header = (props) => {
+    const { activeSection, isMoreClicked, handleMoreButtonClick, setIsMoreClicked, closeMore, updateHeaderVisibility, showHeader, setShowHeader, scrollY } = props;
     const router = useRouter();
     const { lang = 'kr' } = router.query;
     const [isVisible, setIsVisible] = useState(false);
@@ -404,29 +435,6 @@ const Header = ({ activeSection, isMoreClicked, handleMoreButtonClick, setIsMore
         };
     }, []);
 
-
-    useEffect(() => {
-        setIsVisible(true);
-
-        const handleScroll = () => {
-            if (isMoreClicked && isScrollingDisabled) {
-                // 스크롤을 비활성화합니다.
-                window.scrollTo(0, 0); // 페이지 맨 위로 스크롤합니다.
-            }
-        };
-
-        if (isMoreClicked && isScrollingDisabled) {
-            // 이후 스크롤 이벤트를 모니터링합니다.
-            window.addEventListener('scroll', handleScroll);
-        }
-
-        return () => {
-            // 컴포넌트가 언마운트될 때 이벤트 리스너를 제거합니다.
-            window.removeEventListener('scroll', handleScroll);
-        };
-    }, [isMoreClicked, isScrollingDisabled]);
-
-
     useEffect(() => {
         setIsVisible(true);
     }, []);
@@ -437,25 +445,33 @@ const Header = ({ activeSection, isMoreClicked, handleMoreButtonClick, setIsMore
         setScrollingDisabled(true);
     };
 
-
     return (
-        <Headerwrappers activeSection={activeSection} className={`${isMoreClicked ? 'showMore' : ''}`} >
-            <span style={{height:"250px",padding:"0", margin:"0", marginLeft:"13vw",borderLeft:"10px solid rgb(255, 194, 0)"}}></span>
-            <Link href="/" legacyBehavior>
-                <LogoButton onClick={() => { window.location.reload() }}></LogoButton>
-            </Link>
+        <Headerwrappers activeSection={activeSection} className={`${isMoreClicked ? 'showMore' : ''}`} showHeader={showHeader}
+            onMouseOver={() => {
+                setShowHeader(true)
+            }}
+            onMouseLeave={() => {
+                if (scrollY != 0) {
+                    setShowHeader(false)
+                }
+            }}
+        >
+            {isMobile ? null : <BlueStick activeSection={activeSection} />}
+            <LogoButton activeSection={activeSection} onClick={() => { window.location.reload() }}></LogoButton>
             <HeaderButtons activeSection={activeSection}>
                 {isMoreClicked ? null : ( // 녹색 섹션이 활성화되면 버튼을 숨김
                     <>
-                        <Link href="/en" legacyBehavior >
-                            <a className={lang === "en" ? "active" : ""}>EN</a>
-                        </Link>
-                        <Link href="/kr" legacyBehavior>
-                            <a className={lang === "kr" ? "active" : ""}>KR</a>
-                        </Link>
-                        <More onClick={handleMoreButtonClick}>
-                            <img src="/icon/more.png" alt="More Icon" width="40" height="40" />
-                        </More>
+                            <Link href="/en" legacyBehavior >
+                                <a className={lang === "en" ? "active" : ""}>EN</a>
+                            </Link>
+                            <Link href="/kr" legacyBehavior>
+                                <a className={lang === "kr" ? "active" : ""}>KR</a>
+                            </Link>
+                            <div style={{ marginTop: "" }}>
+                                <More onClick={handleMoreButtonClick}>
+                                    <img src="/icon/more.png" alt="More Icon" />
+                                </More>
+                            </div>
                     </>
                 )}
             </HeaderButtons>

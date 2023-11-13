@@ -1,29 +1,34 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Header from "src/components/header";
+import { useInView } from 'react-intersection-observer';
 import { useRouter } from "next/router";
 
+
 const UserLayout = ({ activeSection, children, updateHeaderVisibility }) => {
-    const [showHeader, setShowHeader] = useState(activeSection === 0);
+    const [showHeader, setShowHeader] = useState(true);
     const [moreButtonClicked, setMoreButtonClicked] = useState(false);
     const [isMoreClicked, setIsMoreClicked] = useState(false);
-
-    const handleMouseMove = (e) => {
-        const mouseY = e.clientY;
-
-        if (!moreButtonClicked) {
-            // 섹션0에서는 항상 보임
-            setShowHeader(activeSection === 0 || (activeSection >= 1 && activeSection <= 4 && mouseY < 0.11 * window.innerHeight));
-        }
-    };
-
+    const scrollRef = useRef(0);
+    const [scrollY, setScrollY] = useState(0);
     useEffect(() => {
-        window.addEventListener("mousemove", handleMouseMove);
+
+        const handleScroll = () => {
+            scrollRef.current = window.scrollY;
+            setScrollY(scrollRef.current)
+            if (scrollRef.current == 0) {
+                setShowHeader(true);
+            } else {
+                setShowHeader(false);
+            }
+        };
+        // 이후 스크롤 이벤트를 모니터링합니다.
+        window.addEventListener('scroll', handleScroll);
 
         return () => {
-            window.removeEventListener("mousemove", handleMouseMove);
+            // 컴포넌트가 언마운트될 때 이벤트 리스너를 제거합니다.
+            window.removeEventListener('scroll', handleScroll);
         };
-    }, [activeSection, moreButtonClicked]);
-
+    }, []);
     const handleMoreButtonClick = () => {
         setMoreButtonClicked(true);
         setIsMoreClicked(true);
@@ -40,14 +45,17 @@ const UserLayout = ({ activeSection, children, updateHeaderVisibility }) => {
 
     return (
         <div className={`user-layout ${showHeader ? 'header-visible' : ''}`}>
-            {showHeader && <Header
+            <Header
+                showHeader={showHeader}
+                scrollY={scrollY}
+                setShowHeader={setShowHeader}
                 activeSection={activeSection}
                 isMoreClicked={isMoreClicked}
                 handleMoreButtonClick={handleMoreButtonClick}
                 setIsMoreClicked={setIsMoreClicked}
                 closeMore={closeMore} // Pass the closeMore function to Header
                 updateHeaderVisibility={updateHeaderVisibility}
-            />}
+            />
             {children}
         </div>
     );

@@ -3,7 +3,7 @@ body {
   margin: 0 !important;
   overflow-x: hidden;
 }
-/* 애니메이션 animation */
+/* 애니메이션 up */
 .animatedup {
   opacity: 0; /* 초기에 숨겨진 상태로 설정 */
   transform: translateY(50px); /* 아래로 이동하는 변환 설정 */
@@ -11,6 +11,18 @@ body {
 }
 
 .animatedup.in-view {
+  opacity: 1; /* 화면에 나타날 때 투명도를 1로 변경 */
+  transform: translateY(0); /* 화면에 나타날 때 변환 초기값으로 복원 */
+}
+
+/* 애니메이션 down */
+.animateddown {
+  opacity: 0; /* 초기에 숨겨진 상태로 설정 */
+  transform: translateY(-50px); /* 아래로 이동하는 변환 설정 */
+  transition: opacity 1s ease, transform 2s ease; 
+}
+
+.animateddown.in-view {
   opacity: 1; /* 화면에 나타날 때 투명도를 1로 변경 */
   transform: translateY(0); /* 화면에 나타날 때 변환 초기값으로 복원 */
 }
@@ -26,8 +38,25 @@ body {
   transform: translateX(0); /* 화면에 나타날 때 변환 초기값으로 복원 */
 }
 
+/* CSS Keyframes를 사용한 글자 위아래 움직임 애니메이션 */
+@keyframes moveUpDown {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px); /* 이 값은 글자가 움직이는 거리를 조절합니다. */
+  }
+}
+
+/* 추가로 필요한 스타일 속성들을 여기에 추가할 수 있습니다. */
+
 /* justify-content: flex-end; */
 /* 2section sec2 2섹션 스타일  */
+.bluebackground {
+  background-size: cover;
+  background-image: url('/image/blue.png');
+  overflow: hidden;
+}
 .yellow-box {
   width: 6.5em;  /* 네모 상자의 너비 설정 */
   height: 1.5em;  /* 네모 상자의 높이 설정 */
@@ -50,6 +79,7 @@ body {
 
 /* 2섹션 Follow 텍스트 스타일 */
 .subtitle {
+  padding: none;
   font-size: 4.7vw;
   font-weight: bold;
   font-family: 'Playfair Display', serif;

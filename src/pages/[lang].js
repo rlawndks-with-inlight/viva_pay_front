@@ -7,7 +7,7 @@ import { useRouter } from "next/router";
 import styled from "styled-components";
 import { useInView } from 'react-intersection-observer'; // react-intersection-observer 라이브러리 사용
 const sections = ["section1", "section2", "section3", "section4", "section5"]; // 섹션 이름
-const totalIcons = 6; // 총 아이콘 개수
+const totalIcons = 9; // 총 아이콘 개수
 const iconsPerPageLarge = 6; // 큰 화면에서 표시할 아이콘 개수
 const iconsPerPageSmall = 4; // 작은 화면에서 표시할 아이콘 개수
 
@@ -376,7 +376,6 @@ margin-left: 2vw;
 const Section = styled.div`
 height: ${(props) => props.height};
 background-size: cover;
-background-color: ${(props) => props.background};
 background-image:  url(${props => props.image});
 overflow: hidden;
 `
@@ -388,6 +387,31 @@ font-weight: bold;
 font-family: 'Playfair Display', serif;
 border: 1px solid transparent;
 color: white;
+`
+const W1ScrollDownYellowStick = styled.span`
+position: absolute;
+top: 70.5vh;
+margin-left: 81vw;
+p{
+    font-weight: bold;
+    margin: 0 0 200px 0;
+   color:white ;
+  writing-mode: vertical-rl; /* 세로로 글자 눕힘 */
+  font-size: 10px; /* 원하는 글자 크기로 조절 */
+  animation: moveUpDown 2.5s infinite; /* 1s 동안 무한 반복되는 애니메이션 */
+  margin: 0; /* 기본 마진을 제거합니다. */
+}
+span{
+    display: block;
+height: 16em;
+width: 10px;
+background-color:  rgb(255, 194, 0);
+}
+/* 파랑색 코드 rgb(0, 104, 232) 노랑색 코드 rgb(255, 194, 0) */
+/* 모바일 화면에서 숨김 */
+  @media only screen and (max-width: 1280px), (max-height: 800px) {
+    display: none;
+  }
 `
 /* 2section sec2 2섹션 스타일  */
 const W2IconContainer = styled.div`
@@ -1010,6 +1034,12 @@ const Home = () => {
                                                     <W1Title magtop="30vh" > {langJson[lang]?.FOLLOW}</W1Title>
                                                     <W1Title > {langJson[lang]?.SUPPORT}</W1Title>
                                                 </AnimateUp>
+                                                <W1ScrollDownYellowStick>
+                                                    <p>S C R O L L D O W N </p>
+                                                <AnimateUp>
+                                                    <span></span>
+                                                </AnimateUp>
+                                                    </W1ScrollDownYellowStick>
                                             </Section>
                                         </div>
                                     ) : index === 1 ? (
@@ -1401,5 +1431,4 @@ const Home = () => {
         </>
     );
 };
-Home.getLayout = (page) => <UserLayout>{page}</UserLayout>;
 export default Home;
