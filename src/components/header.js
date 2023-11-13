@@ -4,7 +4,6 @@ import { useRouter } from 'next/router';
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 
-
 const Headerwrappers = styled.header`
 position: fixed;
 top: ${props => props.showHeader == 1 ? '0' : '-50px'};
@@ -58,7 +57,7 @@ const HeaderButtons = styled.div` /* 헤더의 오른쪽 스타일 */
 display: flex;
 margin-top: 1.1em;
 margin-left: 73%;
-font-size: 1.5em;/* 한영 버튼 크기 */
+font-size: 24px;/* 한영 버튼 크기 */
 z-index: 3;
   a{ /* 한영 버튼 */
 margin-right: 1.2em;
@@ -115,20 +114,15 @@ background-color: rgb(0, 104, 232);; /* 파란색 배경 추가 */
 z-index: 1;
 `
 const MoreClose = styled.button` /* more close 버튼 */
-position: fixed;
-margin-top: 1.1em; /* 원하는 위치로 조정하세요 */
-margin-left: 74.6vw;
+margin-top: 1.1em;
+margin-left: 77%;
 color: white;
 background: transparent; /* 투명 배경 추가 */
 border: none;
 cursor: pointer;
-font-size: 1.5em;
+font-size: 24px;
 font-weight: bold;
 z-index: 9999;
-@media only screen and (max-width: 600px) {
-    top: 0.7em;
-    right: 1em;
-}
 @media only screen and (max-height: 620px) {
     top: 0.7em;
     right: 1em;
@@ -452,6 +446,7 @@ const Header = (props) => {
             }}
             onMouseLeave={() => {
                 if (scrollY != 0) {
+                    
                     setShowHeader(false)
                 }
             }}
