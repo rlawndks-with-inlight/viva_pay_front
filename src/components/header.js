@@ -1,10 +1,67 @@
 // components/Header.js
-import { preventDefault } from '@fullcalendar/common';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React, { useState, useEffect } from 'react';
-import styled from 'styled-components';
+import styled, {css, keyframes} from 'styled-components';
 
+const backgroundDown = keyframes`
+0%, 50%{
+  opacity: 0;
+  transform: translateY(-30px);
+}
+100% {
+  opacity: 1;
+  transform: translateY(0);
+}
+`
+const blinkAnimation = keyframes`
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+`
+const fadeUp = keyframes`
+0%, 50%{
+  opacity: 0;
+  transform: translateY(50px);
+}
+100% {
+  opacity: 1;
+  transform: translateY(0);
+}
+`
+const fadeDown = keyframes`
+0%, 50%{
+  opacity: 0;
+  transform: translateY(-50px);
+}
+100% {
+  opacity: 1;
+  transform: translateY(0);
+}
+`
+const fadeRight = keyframes`
+0%{
+  opacity: 0;
+  transform: translateX(0);
+}
+100% {
+  opacity: 1;
+  transform: translateX(30px);
+}
+`
+const fadeLeft = keyframes`
+0%, 50%{
+  opacity: 0;
+  transform: translateX(30px);
+}
+100% {
+  opacity: 1;
+  transform: translateX(0);
+}
+`
 const Headerwrappers = styled.header`
 position: fixed;
 top: ${props => props.showHeader == 1 ? '0' : '-50px'};
@@ -39,7 +96,7 @@ display: ${(props) => (props.activeSection === 0 ? '' : 'none')};
 const LogoButton = styled.button`
 position: absolute;
 top: 30%;
-left: 14.5%;
+left: ${props => (props.showMore ? '14.4%' : '14.5%')};
   border: none;
   cursor: pointer;
   z-index: 9999;
@@ -47,6 +104,7 @@ left: 14.5%;
   width: 19em; 
   height: 3em;
   background-size: cover;
+  animation: ${props =>props.BlinkAnimation ? css`${blinkAnimation} 1s ` : 'none'};
 @media only screen and (max-width: 700px) {
 top: 45%;
 left: 13%;
@@ -111,11 +169,12 @@ top: 0%;
 left: 0%;
 width: 100%;
 height: 100%;
-background-color: rgb(0, 104, 232);; /* 파란색 배경 추가 */
+  animation: ${props =>props.AnimationEnabled ? css`${backgroundDown} 0.8s `  : 'none'};
+background-color: rgb(0, 104, 232); /* 파란색 배경 추가 */
 z-index: 1;
 `
 const MoreClose = styled.button` /* more close 버튼 */
-margin-top: 0.45em;
+margin-top: 0.36em;
 margin-left: 70%;
 color: white;
 background: transparent; /* 투명 배경 추가 */
@@ -123,6 +182,7 @@ border: none;
 cursor: pointer;
 font-size: 24px;
 font-weight: bold;
+  animation: ${props =>props.AnimationEnabled ? css`${fadeLeft} 2s ` : 'none'};
 z-index: 9999;
 @media only screen and (max-width: 700px) {
     font-size: 1em;
@@ -134,6 +194,7 @@ const TotalButtonContainer = styled.div` /* 더보기 내용 전체 버튼 */
 margin-top: 7vh;
 margin-left: 8vw;
 display: flex;
+  animation: ${props =>props.AnimationEnabled ? css`${fadeDown} 2s `  : 'none'};
 `
 const TitleButton = styled.button`
 display: block; /* 메인 버튼을 블록 레벨 요소로 변경 */
@@ -196,6 +257,7 @@ bottom: 10%;
 left: 10%;
 display: flex; /* 더보기 아래쪽 아이콘 버튼 스타일*/
 text-align: center;
+  animation: ${props =>props.AnimationEnabled ? css`${fadeUp} 2s ` : 'none'};
 @media only screen and (max-width: 420px) {
     left: 2%;
 }
@@ -366,22 +428,37 @@ const Header = (props) => {
     const [isExpertiseDropdownVisible, setExpertiseDropdownVisible] = useState(false);
     const [isIRDropdownVisible, setIRDropdownVisible] = useState(false);
     const [showMore, setShowMore] = useState(false);
+    const [BlinkAnimation,setBlinkAnimation]= useState(false)
+    const [AnimationEnabled, setAnimationEnabled] = useState(false); // 상태 추가
+    const [CloseAnimation, setCloseAnimation] = useState(false); // 상태 추가
 
     // More 버튼 클릭 시
     const handleMoreButtonClick = () => {
         setShowMore(true);
+        setAnimationEnabled(true); // Animation 활성화
+        setBlinkAnimation(true); // 로고 깜빡임 활성화
+        
       
   // body 요소에 스크롤을 숨김
   document.body.style.overflow = 'hidden';
-    };
+  setTimeout(() => {
+    setBlinkAnimation(false); // CloseAnimation을 false로 변경
+  }, 1000); // 1초 후에 CloseAnimation을 false로 변경
+};
     
     // Close 버튼 클릭 시
     const handleCloseButtonClick = () => {
         setShowMore(false);
+        setCloseAnimation(true); // Animation 활성화
+        setBlinkAnimation(true); // 로고 깜빡임 활성화
       
   // body 요소의 스크롤을 다시 보이게 함
   document.body.style.overflow = 'auto';
-    };
+  setTimeout(() => {
+    setBlinkAnimation(false); // CloseAnimation을 false로 변경
+  }, 1000); // 1초 후에 CloseAnimation을 false로 변경
+};
+
     // 드롭다운 보이게 하는 기능
     const toggleDropdown = (dropdown) => {
         setAboutUsDropdownVisible(false);
@@ -463,10 +540,15 @@ const Header = (props) => {
             }}
         >
             {isMobile ? null : <BlueStick activeSection={activeSection} />}
-            <LogoButton activeSection={activeSection} onClick={() => { window.location.reload() }}></LogoButton>
+            <LogoButton 
+            BlinkAnimation={BlinkAnimation}
+            showMore={showMore}
+            activeSection={activeSection}
+            onClick={() => { window.location.reload() }}>
+            </LogoButton>
             <HeaderButtons activeSection={activeSection}>
                 {showMore ? (
-                    <MoreClose onClick={handleCloseButtonClick}>CloseX</MoreClose>
+                    <MoreClose AnimationEnabled={AnimationEnabled} CloseAnimation={CloseAnimation} onClick={handleCloseButtonClick}>CloseX</MoreClose>
                 ) : (
                     <>
                         <Link href="/en" legacyBehavior>
@@ -569,7 +651,7 @@ const Header = (props) => {
                         </div>
                     ) : (
                         <div>
-                            <TotalButtonContainer>
+                            <TotalButtonContainer AnimationEnabled={AnimationEnabled}>
                                 <div >
                                     <TitleButton>
                                         <Link href="/ABOUT US" >ABOUT US</Link>
@@ -620,7 +702,7 @@ const Header = (props) => {
                                     </TitleButton>
                                 </div>
                             </TotalButtonContainer>
-                            <MoreIconButtonContainer>
+                            <MoreIconButtonContainer AnimationEnabled={AnimationEnabled}>
                                 {/* 인스타그램 버튼 */}
                                 <MoreIconButton>
                                     <Link href="https://www.instagram.com/heerim_architects_official/" target="_blank" rel="noopener noreferrer">

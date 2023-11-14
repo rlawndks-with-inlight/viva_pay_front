@@ -47,7 +47,6 @@ body {
     transform: translateY(-10px); /* 이 값은 글자가 움직이는 거리를 조절합니다. */
   }
 }
-
 /* 추가로 필요한 스타일 속성들을 여기에 추가할 수 있습니다. */
 
 /* justify-content: flex-end; */
