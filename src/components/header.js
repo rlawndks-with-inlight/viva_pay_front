@@ -22,7 +22,7 @@ const blinkAnimation = keyframes`
     opacity: 0;
   }
 `
-const fadeUp = keyframes`
+const fadeInUp = keyframes`
 0%, 50%{
   opacity: 0;
   transform: translateY(50px);
@@ -32,7 +32,17 @@ const fadeUp = keyframes`
   transform: translateY(0);
 }
 `
-const fadeDown = keyframes`
+const fadeOutUp = keyframes`
+0%{
+  opacity: 1;
+  transform: translateY(0);
+}
+100% {
+  opacity: 0;
+  transform: translateY(-50px);
+}
+`
+const fadeInDown = keyframes`
 0%, 50%{
   opacity: 0;
   transform: translateY(-50px);
@@ -42,14 +52,24 @@ const fadeDown = keyframes`
   transform: translateY(0);
 }
 `
+const fadeOutDown = keyframes`
+0%{
+  opacity: 1;
+  transform: translateY(0);
+}
+100% {
+  opacity: 0;
+  transform: translateY(50px);
+}
+`
 const fadeRight = keyframes`
 0%{
-  opacity: 0;
+  opacity: 1;
   transform: translateX(0);
 }
 100% {
-  opacity: 1;
-  transform: translateX(30px);
+  opacity: 0;
+  transform: translateX(50px);
 }
 `
 const fadeLeft = keyframes`
@@ -169,7 +189,7 @@ top: 0%;
 left: 0%;
 width: 100%;
 height: 100%;
-  animation: ${props =>props.AnimationEnabled ? css`${backgroundDown} 0.8s `  : 'none'};
+  animation: ${props =>props.AnimationEnabled ? css`${backgroundDown} 0.85s `  :  'none' };
 background-color: rgb(0, 104, 232); /* 파란색 배경 추가 */
 z-index: 1;
 `
@@ -182,7 +202,7 @@ border: none;
 cursor: pointer;
 font-size: 24px;
 font-weight: bold;
-  animation: ${props =>props.AnimationEnabled ? css`${fadeLeft} 2s ` : 'none'};
+  animation: ${props =>props.AnimationEnabled ? css`${fadeLeft} 2s ` : css`${fadeRight} 1s `};
 z-index: 9999;
 @media only screen and (max-width: 700px) {
     font-size: 1em;
@@ -194,7 +214,7 @@ const TotalButtonContainer = styled.div` /* 더보기 내용 전체 버튼 */
 margin-top: 7vh;
 margin-left: 8vw;
 display: flex;
-  animation: ${props =>props.AnimationEnabled ? css`${fadeDown} 2s `  : 'none'};
+  animation: ${props =>props.AnimationEnabled ? css`${fadeInDown} 2s ` : css`${fadeOutUp} 1s `};
 `
 const TitleButton = styled.button`
 display: block; /* 메인 버튼을 블록 레벨 요소로 변경 */
@@ -257,7 +277,7 @@ bottom: 10%;
 left: 10%;
 display: flex; /* 더보기 아래쪽 아이콘 버튼 스타일*/
 text-align: center;
-  animation: ${props =>props.AnimationEnabled ? css`${fadeUp} 2s ` : 'none'};
+  animation: ${props =>props.AnimationEnabled ? css`${fadeInUp} 2s ` : css`${fadeOutDown} 1s ` };
 @media only screen and (max-width: 420px) {
     left: 2%;
 }
@@ -430,32 +450,27 @@ const Header = (props) => {
     const [showMore, setShowMore] = useState(false);
     const [BlinkAnimation,setBlinkAnimation]= useState(false)
     const [AnimationEnabled, setAnimationEnabled] = useState(false); // 상태 추가
-    const [CloseAnimation, setCloseAnimation] = useState(false); // 상태 추가
 
     // More 버튼 클릭 시
     const handleMoreButtonClick = () => {
         setShowMore(true);
         setAnimationEnabled(true); // Animation 활성화
         setBlinkAnimation(true); // 로고 깜빡임 활성화
-        
-      
-  // body 요소에 스크롤을 숨김
-  document.body.style.overflow = 'hidden';
+
+  document.body.style.overflow = 'hidden'; // body 요소에 스크롤을 숨김
   setTimeout(() => {
-    setBlinkAnimation(false); // CloseAnimation을 false로 변경
+    setBlinkAnimation(false); // close할때 애니메이션 작동하도록
   }, 1000); // 1초 후에 CloseAnimation을 false로 변경
 };
-    
     // Close 버튼 클릭 시
     const handleCloseButtonClick = () => {
-        setShowMore(false);
-        setCloseAnimation(true); // Animation 활성화
+        setAnimationEnabled(false); // Animation 활성화
         setBlinkAnimation(true); // 로고 깜빡임 활성화
       
-  // body 요소의 스크롤을 다시 보이게 함
-  document.body.style.overflow = 'auto';
+  document.body.style.overflow = 'auto'; // body 요소의 스크롤을 다시 보이게 함
   setTimeout(() => {
-    setBlinkAnimation(false); // CloseAnimation을 false로 변경
+    setBlinkAnimation(false); // more할때 애니메이션 작동하도록
+    setShowMore(false);
   }, 1000); // 1초 후에 CloseAnimation을 false로 변경
 };
 
@@ -548,7 +563,7 @@ const Header = (props) => {
             </LogoButton>
             <HeaderButtons activeSection={activeSection}>
                 {showMore ? (
-                    <MoreClose AnimationEnabled={AnimationEnabled} CloseAnimation={CloseAnimation} onClick={handleCloseButtonClick}>CloseX</MoreClose>
+                    <MoreClose AnimationEnabled={AnimationEnabled} onClick={handleCloseButtonClick}>CloseX</MoreClose>
                 ) : (
                     <>
                         <Link href="/en" legacyBehavior>
@@ -566,7 +581,7 @@ const Header = (props) => {
                 )}
             </HeaderButtons>
             {showMore && (
-                <MoreContainer>
+                <MoreContainer AnimationEnabled={AnimationEnabled} >
                     {isMobile ? (
                         <div>
                             <div>
