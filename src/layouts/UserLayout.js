@@ -1,13 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Header from "src/components/header";
-import { useInView } from 'react-intersection-observer';
-import { useRouter } from "next/router";
-
 
 const UserLayout = ({ activeSection, children, updateHeaderVisibility }) => {
     const [showHeader, setShowHeader] = useState(true);
-    const [moreButtonClicked, setMoreButtonClicked] = useState(false);
-    const [isMoreClicked, setIsMoreClicked] = useState(false);
     const scrollRef = useRef(0);
     const [scrollY, setScrollY] = useState(0);
     useEffect(() => {
@@ -29,19 +24,6 @@ const UserLayout = ({ activeSection, children, updateHeaderVisibility }) => {
             window.removeEventListener('scroll', handleScroll);
         };
     }, []);
-    const handleMoreButtonClick = () => {
-        setMoreButtonClicked(true);
-        setIsMoreClicked(true);
-    };
-
-    // Function to close the "More" modal
-    const closeMore = () => {
-        setMoreButtonClicked(false);
-        setIsMoreClicked(false);
-        if (typeof updateHeaderVisibility === 'function') {
-            updateHeaderVisibility(activeSection === 0 || (activeSection >= 1 && activeSection <= 4));
-        }
-    };
 
     return (
         <div className={`user-layout ${showHeader ? 'header-visible' : ''}`}>
@@ -50,10 +32,6 @@ const UserLayout = ({ activeSection, children, updateHeaderVisibility }) => {
                 scrollY={scrollY}
                 setShowHeader={setShowHeader}
                 activeSection={activeSection}
-                isMoreClicked={isMoreClicked}
-                handleMoreButtonClick={handleMoreButtonClick}
-                setIsMoreClicked={setIsMoreClicked}
-                closeMore={closeMore} // Pass the closeMore function to Header
                 updateHeaderVisibility={updateHeaderVisibility}
             />
             {children}

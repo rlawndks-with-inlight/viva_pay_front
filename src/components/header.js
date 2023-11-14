@@ -1,4 +1,5 @@
 // components/Header.js
+import { preventDefault } from '@fullcalendar/common';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React, { useState, useEffect } from 'react';
@@ -46,17 +47,17 @@ left: 14.5%;
   width: 19em; 
   height: 3em;
   background-size: cover;
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 700px) {
 top: 45%;
 left: 13%;
   width: 10.8em; 
   height: 1.7em;
 }
-`;
+`
 const HeaderButtons = styled.div` /* 헤더의 오른쪽 스타일 */
 display: flex;
 margin-top: 1.1em;
-margin-left: 73%;
+margin-left: 74%;
 font-size: 24px;/* 한영 버튼 크기 */
 z-index: 3;
   a{ /* 한영 버튼 */
@@ -75,7 +76,7 @@ margin-right: 1.2em;
   }
 @media only screen and (max-width: 1280px) {
 }
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 700px) {
     margin-left: 70%;
     font-size: 1em;
     margin-top: 1.5em;
@@ -97,7 +98,7 @@ color: white;
     width: 35px;
     height: 35px;
   }
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 700px) {
   img{
     width: 22px;
     height: 22px;
@@ -114,8 +115,8 @@ background-color: rgb(0, 104, 232);; /* 파란색 배경 추가 */
 z-index: 1;
 `
 const MoreClose = styled.button` /* more close 버튼 */
-margin-top: 1.1em;
-margin-left: 77%;
+margin-top: 0.45em;
+margin-left: 70%;
 color: white;
 background: transparent; /* 투명 배경 추가 */
 border: none;
@@ -123,9 +124,10 @@ cursor: pointer;
 font-size: 24px;
 font-weight: bold;
 z-index: 9999;
-@media only screen and (max-height: 620px) {
-    top: 0.7em;
-    right: 1em;
+@media only screen and (max-width: 700px) {
+    font-size: 1em;
+margin-top: 0.4em;
+margin-left: 30%;
 }
 `
 const TotalButtonContainer = styled.div` /* 더보기 내용 전체 버튼 */
@@ -351,7 +353,7 @@ list-style: none;
 }
 `
 const Header = (props) => {
-    const { activeSection, isMoreClicked, handleMoreButtonClick, setIsMoreClicked, closeMore, updateHeaderVisibility, showHeader, setShowHeader, scrollY } = props;
+    const { activeSection, showHeader, setShowHeader, scrollY } = props;
     const router = useRouter();
     const { lang = 'kr' } = router.query;
     const [isVisible, setIsVisible] = useState(false);
@@ -363,7 +365,23 @@ const Header = (props) => {
     const [isProjectDropdownVisible, setProjectDropdownVisible] = useState(false);
     const [isExpertiseDropdownVisible, setExpertiseDropdownVisible] = useState(false);
     const [isIRDropdownVisible, setIRDropdownVisible] = useState(false);
+    const [showMore, setShowMore] = useState(false);
 
+    // More 버튼 클릭 시
+    const handleMoreButtonClick = () => {
+        setShowMore(true);
+      
+  // body 요소에 스크롤을 숨김
+  document.body.style.overflow = 'hidden';
+    };
+    
+    // Close 버튼 클릭 시
+    const handleCloseButtonClick = () => {
+        setShowMore(false);
+      
+  // body 요소의 스크롤을 다시 보이게 함
+  document.body.style.overflow = 'auto';
+    };
     // 드롭다운 보이게 하는 기능
     const toggleDropdown = (dropdown) => {
         setAboutUsDropdownVisible(false);
@@ -433,20 +451,13 @@ const Header = (props) => {
         setIsVisible(true);
     }, []);
 
-    // 더보기 모달 표시 함수
-    const showMore = () => {
-        setIsMoreClicked(true);
-        setScrollingDisabled(true);
-    };
-
     return (
-        <Headerwrappers activeSection={activeSection} className={`${isMoreClicked ? 'showMore' : ''}`} showHeader={showHeader}
+        <Headerwrappers activeSection={activeSection} className={`${showMore ? 'showMore' : ''}`} showHeader={showHeader}
             onMouseOver={() => {
                 setShowHeader(true)
             }}
             onMouseLeave={() => {
                 if (scrollY != 0) {
-                    
                     setShowHeader(false)
                 }
             }}
@@ -454,25 +465,26 @@ const Header = (props) => {
             {isMobile ? null : <BlueStick activeSection={activeSection} />}
             <LogoButton activeSection={activeSection} onClick={() => { window.location.reload() }}></LogoButton>
             <HeaderButtons activeSection={activeSection}>
-                {isMoreClicked ? null : ( // 녹색 섹션이 활성화되면 버튼을 숨김
+                {showMore ? (
+                    <MoreClose onClick={handleCloseButtonClick}>CloseX</MoreClose>
+                ) : (
                     <>
-                            <Link href="/en" legacyBehavior >
-                                <a className={lang === "en" ? "active" : ""}>EN</a>
-                            </Link>
-                            <Link href="/kr" legacyBehavior>
-                                <a className={lang === "kr" ? "active" : ""}>KR</a>
-                            </Link>
-                            <div style={{ marginTop: "" }}>
-                                <More onClick={handleMoreButtonClick}>
-                                    <img src="/icon/more.png" alt="More Icon" />
-                                </More>
-                            </div>
+                        <Link href="/en" legacyBehavior>
+                            <a className={lang === 'en' ? 'active' : ''}>EN</a>
+                        </Link>
+                        <Link href="/kr" legacyBehavior>
+                            <a className={lang === 'kr' ? 'active' : ''}>KR</a>
+                        </Link>
+                        <div style={{ marginTop: '' }}>
+                            <More onClick={handleMoreButtonClick}>
+                                <img src="/icon/more.png" alt="More Icon" />
+                            </More>
+                        </div>
                     </>
                 )}
             </HeaderButtons>
-            {isMoreClicked && (
+            {showMore && (
                 <MoreContainer>
-                    <MoreClose onClick={closeMore}>Close X</MoreClose>
                     {isMobile ? (
                         <div>
                             <div>
