@@ -1036,10 +1036,10 @@ const Home = () => {
                                                 </AnimateUp>
                                                 <W1ScrollDownYellowStick>
                                                     <p>S C R O L L D O W N </p>
-                                                <AnimateUp>
-                                                    <span></span>
-                                                </AnimateUp>
-                                                    </W1ScrollDownYellowStick>
+                                                    <AnimateUp>
+                                                        <span></span>
+                                                    </AnimateUp>
+                                                </W1ScrollDownYellowStick>
                                             </Section>
                                         </div>
                                     ) : index === 1 ? (

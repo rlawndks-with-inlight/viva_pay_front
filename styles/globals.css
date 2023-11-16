@@ -54,7 +54,6 @@ body {
 .bluebackground {
   background-size: cover;
   background-image: url('/image/blue.png');
-  overflow: hidden;
 }
 .yellow-box {
   width: 6.5em;  /* 네모 상자의 너비 설정 */
@@ -650,6 +649,16 @@ margin-left: 12em;
 
 /* 수정중 */
 
+
+.headerinner {
+  position:relative;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  height:100%;
+  margin:0px auto;
+  padding: 0 14vw;
+}
 .hoverimage {
   transform: translateX(-5vw);
   /* 시작 위치 지정 */
