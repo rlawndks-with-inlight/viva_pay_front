@@ -649,6 +649,14 @@ margin-left: 12em;
 
 /* 수정중 */
 
+.moreiconbutton {
+  transition: all 0.3s ;
+  list-style: none;
+  text-decoration: none; /*링크 밑줄 제거*/ 
+
+  &:hover {
+  }
+}
 
 .headerinner {
   position:relative;
@@ -658,6 +666,9 @@ margin-left: 12em;
   height:100%;
   margin:0px auto;
   padding: 0 14vw;
+  @media screen and (max-width : 700px) {
+    padding: 0 2%;
+  }
 }
 .hoverimage {
   transform: translateX(-5vw);

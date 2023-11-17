@@ -3,26 +3,78 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React, { useState, useEffect } from 'react';
 import styled, { css, keyframes } from 'styled-components';
-
+const slideInDown = keyframes`
+  0% {
+    height: 0;
+    opacity: 0;
+  }
+  100% {
+    height: var(--max-height); /* 변수로 높이값 지정 */
+    opacity: 1;
+  }
+`
+const slideOutUp = keyframes`
+  0% {
+    display: block;
+    height: var(--max-height); /* 변수로 높이값 지정 */
+    opacity: 1;
+  }
+  100% {
+    height: 0;
+    opacity: 0;
+  }
+`
+const slideInLeft = keyframes`
+0%{
+  transform: translateX(100%);
+}
+100%{
+  transform: translateX(0px);
+}
+`
+const slideOutRight = keyframes`
+0%{
+  transform: translateX(0px);
+}
+100%{
+  transform: translateX(100%);
+}
+`
+const fadeIn = keyframes`
+0%{
+  opacity: 0;
+}
+100%{
+  opacity: 1;
+}
+`
+const fadeOut = keyframes`
+0%, 50%{
+  opacity: 1;
+}
+100%{
+  opacity: 0;
+}
+`
 const skewIn = keyframes`
 0%{
   width: 0%;
   opacity: 0;
   transform: skewX(0deg);
 }
-100%{
+100% {
   width: calc(25%+2px);
   opacity: 1;
   transform: skewX(45deg);
 }
 `
-const skewOut = keyframes` /* 왜 이건 적용 안됨? */
+const skewOut = keyframes`
 0%{
   width: calc(25%+2px);
   opacity: 1;
   transform: skewX(45deg);
 }
-100%{
+100% {
   width: 0%;
   opacity: 0;
   transform: skewX(0deg);
@@ -42,16 +94,6 @@ const rotateRight = keyframes`
 }
 100% {
   transform: rotate(180deg);
-}
-`
-const backgroundDown = keyframes`
-0%, 50%{
-  opacity: 0;
-  transform: translateY(-30px);
-}
-100% {
-  opacity: 1;
-  transform: translateY(0);
 }
 `
 const blinkAnimation = keyframes`
@@ -161,12 +203,10 @@ position: relative;
   width: 19em; 
   height: 3em;
   background-size: cover;
-  animation: ${props => props.BlinkAnimation ? css`${blinkAnimation} 1s ` : 'none'};
+  animation: ${props => props.BlinkAnimation ? css`${blinkAnimation} 0.5s ` : 'none'};
 @media only screen and (max-width: 700px) {
-top: 45%;
-left: 13%;
-  width: 10.8em; 
-  height: 1.7em;
+  width: 10.7em; 
+  height: 1.67em;
 }
 `
 const HeaderButtons = styled.div` /* 헤더의 오른쪽 스타일 */
@@ -181,6 +221,7 @@ margin-right: 1.2em;
     text-decoration: none;
     color: gray;
     cursor: pointer;
+  animation: ${props => props.AnimationEnabled ? 'none' : css`${fadeIn} 0.5s`};
       &:hover{
         text-decoration: underline;
       }
@@ -189,12 +230,7 @@ margin-right: 1.2em;
         text-decoration: underline;
       }
   }
-@media only screen and (max-width: 1280px) {
-}
 @media only screen and (max-width: 700px) {
-    margin-left: 70%;
-    font-size: 1em;
-    margin-top: 1.5em;
     a{
         margin-right: 0.5em;
     }
@@ -225,10 +261,9 @@ div{
 `
 const MoreSection = styled.section`
 span{
-  width: ${props => props.AnimationEnabled ? '' : 'calc(25% + 2px)'};
+  width: calc(25% + 2px);
 	position:absolute; 
-  transform: ${props => props.AnimationEnabled ? 'kewX(45deg)' : ''};
-  animation: ${props => props.AnimationEnabled ? css`${skewOut} 0.5s` : css`${skewIn} 0.5s`};
+  animation: ${props => props.AnimationEnabled ? css`${skewIn} 0.5s` : css`${skewOut} 0.5s`};
 	top:0px;
   background-color: rgb(0, 104, 232); /* 파란색 배경 추가 */
 	height:100vh; 
@@ -255,7 +290,7 @@ strong{
   top: 10%;
   font-size:15px;
   color:#fff;
-  animation: ${props => props.AnimationEnabled ? css`${fadeLeft} 2s` : css`${fadeRight} 0.5s`};
+  animation: ${props => props.AnimationEnabled ? css`${fadeLeft} 1s` : css`${fadeRight} 0.5s`};
   em{
     display: inline-block;
   }
@@ -290,7 +325,7 @@ position: relative;
 margin-top: 7vh;
 margin-left: 8vw;
 display: flex;
-  animation: ${props => props.AnimationEnabled ? css`${fadeInDown} 2s ` : css`${fadeOutUp} 0.6s `};
+  animation: ${props => props.AnimationEnabled ? css`${fadeInDown} 1s ` : css`${fadeOutUp} 0.6s `};
 `
 const TitleButton = styled.button`
 display: block; /* 메인 버튼을 블록 레벨 요소로 변경 */
@@ -353,7 +388,7 @@ bottom: 10%;
 left: 10%;
 display: flex; /* 더보기 아래쪽 아이콘 버튼 스타일*/
 text-align: center;
-  animation: ${props => props.AnimationEnabled ? css`${fadeInUp} 2s ` : css`${fadeOutDown} 0.6s `};
+  animation: ${props => props.AnimationEnabled ? css`${fadeInUp} 1s ` : css`${fadeOutDown} 0.6s `};
 @media only screen and (max-width: 420px) {
     left: 2%;
 }
@@ -361,15 +396,16 @@ text-align: center;
 bottom: 2%;
 }
 `
-const MoreIconButton = styled.a`
-transition: opacity 0.3s ease; /* 호버 시 투명도 전환 애니메이션 */
+const MoreIconButton = styled.li`
+transition: all 0.3s ease; /* 호버 시 투명도 전환 애니메이션 */
+list-style: none;
 text-decoration: none; /*링크 밑줄 제거*/
-  img{
+  img {
     width: 40px;
     height: 40px;
-    &:hover{
-      opacity: 0.7; /* 호버 시 투명도를 0.7로 변경 (1이 원래 투명도) */
-}
+  }
+  &:hover{
+    opacity: 0.5;
   }
 @media only screen and (max-width: 650px) {
     img{
@@ -390,6 +426,13 @@ text-decoration: none; /*링크 밑줄 제거*/
   }
 }
 `
+const IconButton = styled.a`
+  opacity: ${(props) => (props.isHovered ? 1 : 0.5)};
+  transition: opacity 0.3s ease;
+  &:hover {
+    opacity: 1;
+  }
+`;
 const LocationButton = styled.div`
 display: flex; /* 더보기 아래쪽 map 버튼 스타일*/
 flex-direction: row;
@@ -439,7 +482,14 @@ padding: 7px;
   }
 }
 `
-
+const MMoreSection = styled.div`
+position: absolute;
+top:0px;
+height:100vh;
+width: 100%;
+background-color: rgb(0, 104, 232); /* 파란색 배경 추가 */
+animation: ${props => props.AnimationEnabled ? css`${slideInLeft} 0.5s ` : css`${slideOutRight} 0.5s `};
+`
 const MTotalButtonContainer = styled.ul`
 text-decoration: none;
 margin-top : 6em;
@@ -482,11 +532,20 @@ padding-top: 0.3em;
 }
 `
 const MDropDownContent = styled.ul`
+--max-height: 100%;
 width: 100%;
 background-color: white;
 list-style: none;
   display: ${(props) => (props.isVisible ? 'block' : 'none')};
   padding: 0;
+  animation: ${(props) =>
+    props.isVisible
+      ? css`
+          ${slideInDown} 0.3s
+        `
+      : css`
+          ${slideOutUp} 0.3s
+        `};
   a {
     padding-top: 0.5em;
     padding-bottom: 0.5em;
@@ -508,6 +567,97 @@ list-style: none;
         background-color: rgb(255, 194, 0); /* 노란색 배경 추가 */
       }
     }
+}
+`
+const MMoreIconButtonContainer = styled.div`
+position: fixed;
+bottom: 10%;
+left: 10%;
+display: flex; /* 더보기 아래쪽 아이콘 버튼 스타일*/
+text-align: center;
+@media only screen and (max-width: 420px) {
+    left: 2%;
+}
+@media only screen and (max-height: 850px) {
+bottom: 2%;
+}
+`
+const MMoreIconButton = styled.a`
+transition: opacity 0.3s ease; /* 호버 시 투명도 전환 애니메이션 */
+text-decoration: none; /*링크 밑줄 제거*/
+  img{
+    width: 40px;
+    height: 40px;
+    &:hover{
+      opacity: 0.7; /* 호버 시 투명도를 0.7로 변경 (1이 원래 투명도) */
+}
+  }
+@media only screen and (max-width: 650px) {
+    img{
+    width: 25px;
+    height: 25px;
+  }
+}
+@media only screen and (max-width: 400px) {
+    img{
+    width: 5vw;
+    height: 5vw;
+  }
+}
+@media only screen and (max-height: 300px){
+    img{
+    width: 1.5em;
+    height: 1.5em;
+  }
+}
+`
+const MLocationButton = styled.div`
+display: flex; /* 더보기 아래쪽 map 버튼 스타일*/
+flex-direction: row;
+background-color: rgb(255, 194, 0); /* 노란색 배경 추가 */
+border-radius: 50px; /* 회색 배경과 함께 버튼에 radius 추가 */
+padding: 10px;
+cursor: pointer;
+  img{
+    width: 25px;
+    height: 25px;
+  }
+  a{
+    font-size: 20px;
+    margin: 0 10px 0 10px;
+    color: black;
+  }
+  &:hover{
+    opacity: 0.7; /* 호버 시 투명도를 0.7로 변경 (1이 원래 투명도) */
+}
+@media only screen and (max-width: 650px) {
+padding: 7px;
+  img{
+    width: 15px;
+    height: 15px;
+  }
+  a{
+    font-size: 12px;
+  }
+}
+@media only screen and (max-width: 400px) {
+  img{
+    width: 4vw;
+    height: 4vw;
+  }
+  a{
+    font-size: 3vw;
+  }
+}
+@media only screen and (max-height: 300px) {
+  img{
+    margin-top: 2px;
+    width: 1em;
+    height: 1em;
+  }
+  a{
+    font-size: 1em;
+  }
 }
 `
 const Header = (props) => {
@@ -535,7 +685,7 @@ const Header = (props) => {
 
     setTimeout(() => {
       setBlinkAnimation(false); // close할때 애니메이션 작동하도록
-    }, 1000); // 1초 후에 CloseAnimation을 false로 변경
+    }, 400); // 1초 후에 CloseAnimation을 false로 변경
   };
   // Close 버튼 클릭 시
   const handleCloseButtonClick = () => {
@@ -546,7 +696,7 @@ const Header = (props) => {
     setTimeout(() => {
       setShowMore(false);
       setBlinkAnimation(false); // more할때 애니메이션 작동하도록
-    }, 500); // 1초 후에 CloseAnimation을 false로 변경
+    }, 400); // 1초 후에 CloseAnimation을 false로 변경
   };
 
   // 드롭다운 보이게 하는 기능
@@ -648,10 +798,10 @@ const Header = (props) => {
           ) : (
             <>
               <Link href="/en" legacyBehavior>
-                <a className={lang === 'en' ? 'active' : ''}>EN</a>
+                <a activeSection={activeSection} className={lang === 'en' ? 'active' : ''}>EN</a>
               </Link>
               <Link href="/kr" legacyBehavior>
-                <a className={lang === 'kr' ? 'active' : ''}>KR</a>
+                <a activeSection={activeSection}className={lang === 'kr' ? 'active' : ''}>KR</a>
               </Link>
               <More onClick={handleMoreButtonClick}>
                 <div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div>
@@ -663,7 +813,7 @@ const Header = (props) => {
       {showMore && (
         <div>
           {isMobile ? (
-            <div>
+            <MMoreSection  AnimationEnabled={AnimationEnabled}>
               <div>
                 <MTotalButtonContainer>
                   <MDropDownButton onClick={() => toggleDropdown('aboutUs')}>
@@ -716,9 +866,9 @@ const Header = (props) => {
                 </MTotalButtonContainer>
               </div>
               <div>
-                <MoreIconButtonContainer>
+                <MMoreIconButtonContainer>
                   {/* 인스타그램 버튼 */}
-                  <MoreIconButton>
+                  <MMoreIconButton>
                     <Link href="https://www.instagram.com/heerim_architects_official/" target="_blank" rel="noopener noreferrer">
                       <img src="/icon/instagram.svg" alt="Instagram Icon" />
                     </Link>
@@ -730,31 +880,31 @@ const Header = (props) => {
                     <Link style={{ marginLeft: "3vw" }} href="https://www.pinterest.co.kr/heerim_architects_official/" target="_blank" rel="noopener noreferrer">
                       <img src="/icon/pinterest.svg" alt="Pinterest Icon" />
                     </Link>
-                  </MoreIconButton>
+                  </MMoreIconButton>
                   {/* 디자인 지도 버튼 */}
-                  <LocationButton style={{ marginLeft: "3vw" }} href="https://www.google.com/maps/d/viewer?mid=1ZYdnpbxRgC5-zu5GpoOU8zd_E-v24aXT&ll=13.728397502246512%2C71.13522019999999&z=3" target="_blank" rel="noopener noreferrer">
+                  <MLocationButton style={{ marginLeft: "3vw" }} href="https://www.google.com/maps/d/viewer?mid=1ZYdnpbxRgC5-zu5GpoOU8zd_E-v24aXT&ll=13.728397502246512%2C71.13522019999999&z=3" target="_blank" rel="noopener noreferrer">
                     <img src="/icon/location.svg" alt="Location Icon" />
                     <a> Design map </a>
-                  </LocationButton>
+                  </MLocationButton>
                   {/* CM 지도 버튼 */}
-                  <LocationButton style={{ marginLeft: "3vw" }} href="https://www.google.com/maps/d/viewer?mid=1aWEovb5OXGAdqH_D-QojV6l96tLYT2S0&ll=24.118227897040363%2C55.94565490000001&z=3" target="_blank" rel="noopener noreferrer">
+                  <MLocationButton style={{ marginLeft: "3vw" }} href="https://www.google.com/maps/d/viewer?mid=1aWEovb5OXGAdqH_D-QojV6l96tLYT2S0&ll=24.118227897040363%2C55.94565490000001&z=3" target="_blank" rel="noopener noreferrer">
                     <img src="/icon/location.svg" alt="Location Icon" />
                     <a> CM map </a>
-                  </LocationButton>
-                </MoreIconButtonContainer>
+                  </MLocationButton>
+                </MMoreIconButtonContainer>
               </div>
-            </div>
+            </MMoreSection>
           ) : (
-            <MoreSection>
-              <span AnimationEnabled={AnimationEnabled}></span>
-              <span AnimationEnabled={AnimationEnabled}></span>
-              <span AnimationEnabled={AnimationEnabled}></span>
-              <span AnimationEnabled={AnimationEnabled}></span>
-              <span AnimationEnabled={AnimationEnabled}></span>
-              <span AnimationEnabled={AnimationEnabled}></span>
-              <span AnimationEnabled={AnimationEnabled}></span>
-              <span AnimationEnabled={AnimationEnabled}></span>
-              <span AnimationEnabled={AnimationEnabled}></span>
+            <MoreSection AnimationEnabled={AnimationEnabled}>
+              <span ></span>
+              <span></span>
+              <span></span>
+              <span ></span>
+              <span ></span>
+              <span ></span>
+              <span ></span>
+              <span ></span>
+              <span></span>
               <div>
                 <TotalButtonContainer AnimationEnabled={AnimationEnabled}>
                   <div >
@@ -810,17 +960,17 @@ const Header = (props) => {
                 <MoreIconButtonContainer AnimationEnabled={AnimationEnabled}>
                   {/* 인스타그램 버튼 */}
                   <MoreIconButton>
-                    <Link href="https://www.instagram.com/heerim_architects_official/" target="_blank" rel="noopener noreferrer">
+                    <IconButton href="https://www.instagram.com/heerim_architects_official/" target="_blank" rel="noopener noreferrer">
                       <img src="/icon/instagram.svg" alt="Instagram Icon" />
-                    </Link>
+                    </IconButton>
                     {/* 유튜브 버튼 */}
-                    <Link style={{ marginLeft: "3vw" }} href="https://www.youtube.com/channel/UCPwQIrf17KFyqvXeq8NVY_Q" target="_blank" rel="noopener noreferrer">
+                    <IconButton style={{ marginLeft: "3vw" }} href="https://www.youtube.com/channel/UCPwQIrf17KFyqvXeq8NVY_Q" target="_blank" rel="noopener noreferrer">
                       <img src="/icon/youtube.svg" alt="YouTube Icon" />
-                    </Link>
+                    </IconButton>
                     {/* 핀터레스트 버튼 */}
-                    <Link style={{ marginLeft: "3vw" }} href="https://www.pinterest.co.kr/heerim_architects_official/" target="_blank" rel="noopener noreferrer">
+                    <IconButton style={{ marginLeft: "3vw" }} href="https://www.pinterest.co.kr/heerim_architects_official/" target="_blank" rel="noopener noreferrer">
                       <img src="/icon/pinterest.svg" alt="Pinterest Icon" />
-                    </Link>
+                    </IconButton>
                   </MoreIconButton>
                   {/* 디자인 지도 버튼 */}
                   <LocationButton style={{ marginLeft: "3vw" }} href="https://www.google.com/maps/d/viewer?mid=1ZYdnpbxRgC5-zu5GpoOU8zd_E-v24aXT&ll=13.728397502246512%2C71.13522019999999&z=3" target="_blank" rel="noopener noreferrer">
