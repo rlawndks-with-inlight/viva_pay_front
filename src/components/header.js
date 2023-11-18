@@ -320,14 +320,23 @@ margin-left: 3.5em;
   div:nth-child(8) { top: 15px; left: 15px; }
   div:nth-child(9) { top: 20px; left: 20px; }
 `
-const TotalButtonContainer = styled.div` /* 더보기 내용 전체 버튼 */
-position: relative;
-margin-top: 7vh;
-margin-left: 8vw;
+const TotalButtonContainer = styled.ul` /* 더보기 내용 전체 버튼 */
 display: flex;
-  animation: ${props => props.AnimationEnabled ? css`${fadeInDown} 1s ` : css`${fadeOutUp} 0.6s `};
+position: relative;
+padding: 0;
+justify-content: space-evenly;
+animation: ${props => props.AnimationEnabled ? css`${fadeInDown} 1s ` : css`${fadeOutUp} 0.6s `};
+li{
+  list-style: none;
+&:hover{
+  a{
+    transition: all 0.3s ;
+      opacity: 1;
+  }
+}
+}
 `
-const TitleButton = styled.button`
+const TitleButton = styled.a`
 display: block; /* 메인 버튼을 블록 레벨 요소로 변경 */
 font-size: 2.7vw;
 font-weight: bold;
@@ -360,21 +369,35 @@ align-items: flex-start; /* 왼쪽 정렬 */
 border: none;
 padding: 0;
 margin-top: 1em;
-font-size: 1.2em;
+font-size: 1em;
 background: transparent; /* 투명 배경 추가 */
 text-align: left; /* 텍스트 왼쪽 정렬 */
-@media only screen and (max-width: 500px) {
-    font-size: 0.8em;
-}
-  a{
-    text-decoration: none;
-    margin-bottom: 1.5em;
-    color: white; /* 서브 버튼 텍스트 색상 설정 */
-    &:hover{
-      color: white; /* 호버 시 밑줄의 색상을 흰색으로 변경 */
-      text-decoration: underline; /* 호버 시 밑줄 표시 */
+transition: all 0.3s;
+a{
+  position: relative;
+  transition: all 0.3s ;
+  opacity: 0.5;
+  text-decoration: none;
+  margin-bottom: 1.5em;
+  color: white; /* 서브 버튼 텍스트 색상 설정 */
+  ::before{
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    margin-top: 1em;
+    content: "";
+    background-color: white;
+    transform: scaleX(0);
+    transition: transform 0.3s;
+    transform-origin: 100% 0;
+  }
+  :hover {
+    ::before{
+      transform:scaleX(1); 
+      transform-origin: 0 0
     }
   }
+}
 @media only screen and (max-height: 620px) {
     margin-top: 0.4em;
     a{
@@ -397,15 +420,13 @@ bottom: 2%;
 }
 `
 const MoreIconButton = styled.li`
-transition: all 0.3s ease; /* 호버 시 투명도 전환 애니메이션 */
 list-style: none;
 text-decoration: none; /*링크 밑줄 제거*/
-  img {
-    width: 40px;
-    height: 40px;
-  }
   &:hover{
-    opacity: 0.5;
+    img{
+transition: all 0.3s ease; /* 호버 시 투명도 전환 애니메이션 */
+      opacity: 0.5;
+    }
   }
 @media only screen and (max-width: 650px) {
     img{
@@ -427,18 +448,31 @@ text-decoration: none; /*링크 밑줄 제거*/
 }
 `
 const IconButton = styled.a`
-  opacity: ${(props) => (props.isHovered ? 1 : 0.5)};
-  transition: opacity 0.3s ease;
-  &:hover {
-    opacity: 1;
+display: inline-block;
+margin-right: 3vw;
+  position: relative;
+  img {
+    width: 40px;
+    height: 40px;
+  transition: all 0.3s ease;
   }
-`;
+  &:hover {
+    img{
+      opacity: 1;
+    transform: scale(1.05);
+    }
+  } 
+  .cm-magnetic-btn {
+    transition: transform 0.1s ease; /* Apply transition to the transform property */
+  }
+`
 const LocationButton = styled.div`
 display: flex; /* 더보기 아래쪽 map 버튼 스타일*/
 flex-direction: row;
 background-color: rgb(255, 194, 0); /* 노란색 배경 추가 */
 border-radius: 50px; /* 회색 배경과 함께 버튼에 radius 추가 */
 padding: 10px;
+opacity: 0.8;
 cursor: pointer;
   img{
     width: 25px;
@@ -450,7 +484,9 @@ cursor: pointer;
     color: black;
   }
   &:hover{
-    opacity: 0.7; /* 호버 시 투명도를 0.7로 변경 (1이 원래 투명도) */
+transition: all 0.3s ease; /* 호버 시 투명도 전환 애니메이션 */
+    opacity: 1; /* 호버 시 투명도를 0.7로 변경 (1이 원래 투명도) */
+    transform: scale(1.05);
 }
 @media only screen and (max-width: 650px) {
 padding: 7px;
@@ -676,6 +712,38 @@ const Header = (props) => {
   const [showMore, setShowMore] = useState(false);
   const [BlinkAnimation, setBlinkAnimation] = useState(false)
   const [AnimationEnabled, setAnimationEnabled] = useState(false); // 상태 추가
+  
+const applyMagneticEffect = () => {
+  document.querySelectorAll(".cm-magnetic-btn").forEach((el) => {
+    el.addEventListener('mousemove', function (e) {
+      const pos = this.getBoundingClientRect();
+      const mx = e.clientX - pos.left - pos.width / 2;
+      const my = e.clientY - pos.top - pos.height / 2;
+
+      this.style.transform = `translate(${mx * 0.15}px, ${my * 0.3}px) scale(1.05)`;
+    });
+
+    el.addEventListener('mouseleave', function () {
+      this.style.removeProperty('transform');
+    });
+  });
+};
+
+const MagneticButton = ({ href, children }) => {
+  useEffect(() => {
+    applyMagneticEffect();
+
+    return () => {
+      // Clean up event listeners if needed
+    };
+  }, []);
+
+  return (
+    <IconButton className="cm-magnetic-btn" href={href} target="_blank" rel="noopener noreferrer">
+      {children}
+    </IconButton>
+  );
+};
 
   // More 버튼 클릭 시
   const handleMoreButtonClick = () => {
@@ -790,7 +858,9 @@ const Header = (props) => {
         <HeaderButtons activeSection={activeSection}>
           {showMore ? (
             <CloseMoreButton AnimationEnabled={AnimationEnabled}>
-              <strong><em>Close</em></strong>
+              <strong>
+                <em>Close</em>
+              </strong>
               <CloseMore AnimationEnabled={AnimationEnabled} onClick={handleCloseButtonClick}>
                 <div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div>
               </CloseMore>
@@ -896,61 +966,61 @@ const Header = (props) => {
             </MMoreSection>
           ) : (
             <MoreSection AnimationEnabled={AnimationEnabled}>
-              <span ></span>
               <span></span>
               <span></span>
-              <span ></span>
-              <span ></span>
-              <span ></span>
-              <span ></span>
-              <span ></span>
+              <span></span>
+              <span></span>
+              <span></span>
+              <span></span>
+              <span></span>
+              <span></span>
               <span></span>
               <div>
                 <TotalButtonContainer AnimationEnabled={AnimationEnabled}>
-                  <div >
+                  <li>
                     <TitleButton>
-                      <Link href="/ABOUT US" >ABOUT US</Link>
+                      <Link href="/ABOUT US">ABOUT US</Link>
                     </TitleButton>
                     <SubButton>
-                      <Link href="/about-us/corporate-profile" >Corporate Profile</Link>
-                      <Link href="/about-us/leadership" >Leadership</Link>
-                      <Link href="/about-us/news" >News</Link>
-                      <Link href="/about-us/pr" >PR </Link>
-                      <Link href="/about-us/recruit" >Recruit</Link>
+                      <a href="/about-us/corporate-profile">Corporate Profile</a>
+                      <a href="/about-us/leadership" >Leadership</a>
+                      <a href="/about-us/news" >News</a>
+                      <a href="/about-us/pr" >PR </a>
+                      <a href="/about-us/recruit" >Recruit</a>
                     </SubButton>
-                  </div>
-                  <div >
+                  </li>
+                  <li >
                     <TitleButton >
                       <Link href="/projects" >PROJECTS</Link>
                     </TitleButton>
                     <SubButton >
-                      <Link href="/projects/selected works">Selected Works</Link>
-                      <Link href="/projects/all" >All</Link>
-                      <Link href="/projects/design" >DESIGN</Link>
-                      <Link href="/projects/cm" >CM</Link>
+                      <a href="/projects/selected works">Selected Works</a>
+                      <a href="/projects/all" >All</a>
+                      <a href="/projects/design" >DESIGN</a>
+                      <a href="/projects/cm" >CM</a>
                     </SubButton>
-                  </div>
-                  <div >
+                  </li>
+                  <li >
                     <TitleButton>
                       <Link href="/expertise" >EXPERTISE</Link>
                     </TitleButton>
                     <SubButton >
-                      <Link href="/expertise/services" >Services</Link>
-                      <Link href="/expertise/markets" >Markets</Link>
-                      <Link href="/expertise/research" >Research & Idea</Link>
-                      <Link href="/expertise/vr" >VR/AR</Link>
+                      <a href="/expertise/services" >Services</a>
+                      <a href="/expertise/markets" >Markets</a>
+                      <a href="/expertise/research" >Research & Idea</a>
+                      <a href="/expertise/vr" >VR/AR</a>
                     </SubButton>
-                  </div>
-                  <div>
+                  </li>
+                  <li>
                     <TitleButton>
                       <Link href="/ir" >IR</Link>
                     </TitleButton>
                     <SubButton >
-                      <Link href="/ir/finance">Finance</Link>
-                      <Link href="/ir/analyst_report" >Analyst Report</Link>
-                      <Link href="/ir/ir_material" >IR Material</Link>
+                      <a href="/ir/finance">Finance</a>
+                      <a href="/ir/analyst_report" >Analyst Report</a>
+                      <a href="/ir/ir_material" >IR Material</a>
                     </SubButton>
-                  </div>
+                  </li>
                   <div>
                     <TitleButton>
                       <Link href="/contact" >CONTACT</Link>
@@ -960,25 +1030,25 @@ const Header = (props) => {
                 <MoreIconButtonContainer AnimationEnabled={AnimationEnabled}>
                   {/* 인스타그램 버튼 */}
                   <MoreIconButton>
-                    <IconButton href="https://www.instagram.com/heerim_architects_official/" target="_blank" rel="noopener noreferrer">
-                      <img src="/icon/instagram.svg" alt="Instagram Icon" />
-                    </IconButton>
+                    <MagneticButton href="https://www.instagram.com/heerim_architects_official/" target="_blank" rel="noopener noreferrer">
+                      <img src="/icon/instagram.svg" alt="YouTube Icon" />
+                    </MagneticButton>
                     {/* 유튜브 버튼 */}
-                    <IconButton style={{ marginLeft: "3vw" }} href="https://www.youtube.com/channel/UCPwQIrf17KFyqvXeq8NVY_Q" target="_blank" rel="noopener noreferrer">
+                    <MagneticButton style={{ marginLeft: "3vw" }} href="https://www.youtube.com/channel/UCPwQIrf17KFyqvXeq8NVY_Q" target="_blank" rel="noopener noreferrer">
                       <img src="/icon/youtube.svg" alt="YouTube Icon" />
-                    </IconButton>
+                    </MagneticButton>
                     {/* 핀터레스트 버튼 */}
-                    <IconButton style={{ marginLeft: "3vw" }} href="https://www.pinterest.co.kr/heerim_architects_official/" target="_blank" rel="noopener noreferrer">
+                    <MagneticButton style={{ marginLeft: "3vw" }} href="https://www.pinterest.co.kr/heerim_architects_official/" target="_blank" rel="noopener noreferrer">
                       <img src="/icon/pinterest.svg" alt="Pinterest Icon" />
-                    </IconButton>
+                    </MagneticButton>
                   </MoreIconButton>
                   {/* 디자인 지도 버튼 */}
-                  <LocationButton style={{ marginLeft: "3vw" }} href="https://www.google.com/maps/d/viewer?mid=1ZYdnpbxRgC5-zu5GpoOU8zd_E-v24aXT&ll=13.728397502246512%2C71.13522019999999&z=3" target="_blank" rel="noopener noreferrer">
+                  <LocationButton className="cm-magnetic-btn"  style={{ marginLeft: "3vw" }} href="https://www.google.com/maps/d/viewer?mid=1ZYdnpbxRgC5-zu5GpoOU8zd_E-v24aXT&ll=13.728397502246512%2C71.13522019999999&z=3" target="_blank" rel="noopener noreferrer">
                     <img src="/icon/location.svg" alt="Location Icon" />
                     <a> Design map </a>
                   </LocationButton>
                   {/* CM 지도 버튼 */}
-                  <LocationButton style={{ marginLeft: "3vw" }} href="https://www.google.com/maps/d/viewer?mid=1aWEovb5OXGAdqH_D-QojV6l96tLYT2S0&ll=24.118227897040363%2C55.94565490000001&z=3" target="_blank" rel="noopener noreferrer">
+                  <LocationButton className="cm-magnetic-btn" style={{ marginLeft: "3vw" }} href="https://www.google.com/maps/d/viewer?mid=1aWEovb5OXGAdqH_D-QojV6l96tLYT2S0&ll=24.118227897040363%2C55.94565490000001&z=3" target="_blank" rel="noopener noreferrer">
                     <img src="/icon/location.svg" alt="Location Icon" />
                     <a> CM map </a>
                   </LocationButton>
