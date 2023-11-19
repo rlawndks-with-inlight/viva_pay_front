@@ -105,7 +105,7 @@ const blinkAnimation = keyframes`
   }
 `
 const fadeInUp = keyframes`
-0%, 50%{
+0%, 60%{
   opacity: 0;
   transform: translateY(50px);
 }
@@ -125,7 +125,7 @@ const fadeOutUp = keyframes`
 }
 `
 const fadeInDown = keyframes`
-0%, 50%{
+0%, 60%{
   opacity: 0;
   transform: translateY(-50px);
 }
@@ -151,7 +151,7 @@ const fadeRight = keyframes`
 }
 100% {
   opacity: 0;
-  transform: translateX(50px);
+  transform: translateX(40px);
 }
 `
 const fadeLeft = keyframes`
@@ -160,6 +160,7 @@ const fadeLeft = keyframes`
   transform: translateX(30px);
 }
 100% {
+  visibility: visible;
   opacity: 1;
   transform: translateX(0);
 }
@@ -167,15 +168,23 @@ const fadeLeft = keyframes`
 const Headerwrappers = styled.header`
 position: fixed;
 height: 80px;
-top: ${props => props.showHeader == 1 ? '0' : '-50px'};
-opacity: ${props => props.showHeader == 1 ? '1' : '0'};
+top: ${props => props.showHeader == 1 ? '0' : '-80px'};
 cursor: ${props => props.showHeader == 1 ? '' : 'pointer'};
 left: 0;
 right: 0;
 z-index: 1; 
 transition: 0.5s;
 background-color: ${(props) => (props.activeSection === 0 ? 'transparent' : 'rgba(0, 0, 0, 0.2)')};
-@media only screen and (max-width: 1280px), (max-height: 800px) {
+.headeroverarea{
+  display: ${props => props.showHeader == 1 ? '' : 'block' };
+    position: absolute;
+    bottom: -30px;
+    left: 0;
+    right: 0;
+    height: 30px;
+    cursor: pointer;
+}
+@media only screen and (max-width: 1280px), (max-height: 600px) {
     justify-content: space-between;
     background-color: rgba(0, 0, 0, 0.2);
 }
@@ -183,19 +192,20 @@ background-color: ${(props) => (props.activeSection === 0 ? 'transparent' : 'rgb
 const BlueStick = styled.span`
 position: absolute;
 top: 0;
-left: 11%;
+left: 8%;
 height: 250px;
 padding:"0";
 border-left: 10px solid rgb(0, 104, 232); 
 /* rgb(0, 104, 232) 파랑색 코드 10px solid rgb(255, 194, 0)*/
 display: ${(props) => (props.activeSection === 0 ? '' : 'none')};
 /* 모바일 화면에서 숨김 */
-  @media only screen and (max-width: 1280px), (max-height: 800px) {
+  @media only screen and (max-width: 1280px), (max-height: 600px) {
     display: none;
   }
 `
 const LogoButton = styled.div`
-position: relative;
+position: ${(props) => (props.showMore ? 'fixed' : 'relative')};
+top: ${(props) => (props.showMore ? '16px' : '')};
   border: none;
   cursor: pointer;
   z-index: 9999;
@@ -203,8 +213,9 @@ position: relative;
   width: 19em; 
   height: 3em;
   background-size: cover;
-  animation: ${props => props.BlinkAnimation ? css`${blinkAnimation} 0.5s ` : 'none'};
+  animation: ${props => props.BlinkAnimation ? css`${blinkAnimation} 0.6s ` : 'none'};
 @media only screen and (max-width: 700px) {
+top: ${(props) => (props.showMore ? '27px' : '')};
   width: 10.7em; 
   height: 1.67em;
 }
@@ -260,28 +271,61 @@ div{
   div:nth-child(9) { top: 20px; left: 20px; }
 `
 const MoreSection = styled.section`
-span{
+/* 
+position: fixed;
+top: 0;
+width: 100%;
+ */
+position: fixed;
+top: 0;
+width: 100%;
+.menusplit{
   width: calc(25% + 2px);
 	position:absolute; 
-  animation: ${props => props.AnimationEnabled ? css`${skewIn} 0.5s` : css`${skewOut} 0.5s`};
+  animation: ${props => props.AnimationEnabled ? css`${skewIn} 0.7s cubic-bezier(0.86, 0, 0.07, 1)` : css`${skewOut} 0.6s cubic-bezier(0.86, 0, 0.07, 1)`};
 	top:0px;
   background-color: rgb(0, 104, 232); /* 파란색 배경 추가 */
-	height:100vh; 
+	height: calc(100vh + 80px); 
 }
-    span:nth-child(0){left:-100%}
-    span:nth-child(1){left:-75%}
-    span:nth-child(2){left:-50%}
-    span:nth-child(3){left:-25%}
-    span:nth-child(4){left:0%}
-    span:nth-child(5){left:25%}
-    span:nth-child(6){left:50%}
-    span:nth-child(7){left:75%}
-    span:nth-child(8){left:100%}
-    span:nth-child(9){left:125%}
+.menusplit:nth-child(0){left:-100%}
+.menusplit:nth-child(1){left:-75%}
+.menusplit:nth-child(2){left:-50%}
+.menusplit:nth-child(3){left:-25%}
+.menusplit:nth-child(4){left:0%}
+.menusplit:nth-child(5){left:25%}
+.menusplit:nth-child(6){left:50%}
+.menusplit:nth-child(7){left:75%}
+.menusplit:nth-child(8){left:100%}
+.menusplit:nth-child(9){left:125%}
 `
-const CloseMoreButton = styled.button` /* more close 버튼 */
+const MoreMenuInner = styled.article`
+position: relative;
+width: 100%;
+height: 100vh;
+.menuinner{
+position: relative;
+top: 25%;
+padding: 0 5%;
+@media only screen and (max-width: 700px) {
+padding: 0;
+}
+@media only screen and (max-height: 550px) {
+  top: 20%;
+}
+}
+`
+const CloseMoreButton = styled.button` /* moreclose 버튼 */
+/* 
+position: fixed;
+top: 26px;
+right: 10vw;
+ */
+position: fixed;
+top: 26px;
+right: 10vw;
 border: none;
 background-color: transparent;
+cursor: pointer;
 justify-content: center;
 padding: 0;
 margin: 0;
@@ -290,25 +334,44 @@ strong{
   top: 10%;
   font-size:15px;
   color:#fff;
-  animation: ${props => props.AnimationEnabled ? css`${fadeLeft} 1s` : css`${fadeRight} 0.5s`};
   em{
     display: inline-block;
+    opacity: 0;
   }
+  .em1{
+  animation: ${props => props.AnimationEnabled ? css`${fadeLeft} 1s 0.1s forwards` : css`${fadeRight} 0.4s 0.13s backwards`};
+  }
+  .em2{
+  animation: ${props => props.AnimationEnabled ? css`${fadeLeft} 1s 0.18s forwards` : css`${fadeRight} 0.4s 0.12s backwards`};
+  }
+  .em3{
+  animation: ${props => props.AnimationEnabled ? css`${fadeLeft} 1s 0.22s forwards` : css`${fadeRight} 0.4s 0.1s backwards`};
+  }
+  .em4{
+  animation: ${props => props.AnimationEnabled ? css`${fadeLeft} 1s 0.24s forwards` : css`${fadeRight} 0.4s 0.06s backwards`};
+  }
+  .em5{
+  animation: ${props => props.AnimationEnabled ? css`${fadeLeft} 1s 0.25s forwards` : css`${fadeRight} 0.4s backwards`};
+  }
+}
+@media screen and (max-width: 700px)
+{
+    right: 2%;
 }
 `
 const CloseMore = styled.div`
 display: inline-block;
 position: relative;
-cursor: pointer;
 width: 25px;
 height: 25px;
 margin-left: 3.5em;
-  animation: ${props => props.AnimationEnabled ? css`${rotateRight} 0.5s` : css`${rotateLeft} 0.5s`};
+  animation: ${props => props.AnimationEnabled ? css`${rotateRight} 0.4s cubic-bezier(.8, .5, .2, 1.4) 0s` : css`${rotateLeft} 0.4s cubic-bezier(.8, .5, .2, 1.4) 0s`};
   div{
   position: absolute;
   width: 5px;
   height: 5px;
   background: #fff;
+  transition: 0.3s ease 0s;
   }
   div:nth-child(1) { top: 0; left: 0; }
   div:nth-child(2) { top: 5px; left: 5px; }
@@ -322,44 +385,49 @@ margin-left: 3.5em;
 `
 const TotalButtonContainer = styled.ul` /* 더보기 내용 전체 버튼 */
 display: flex;
-position: relative;
 padding: 0;
+margin: 0;
 justify-content: space-evenly;
 animation: ${props => props.AnimationEnabled ? css`${fadeInDown} 1s ` : css`${fadeOutUp} 0.6s `};
-li{
+.char{
+  display: inline-block;
+  position: relative;
+  visibility: hidden;
+  overflow: hidden;
+  color: white;
+  text-decoration: none;
+  ::before, ::after{
+    position: absolute;
+    top: 0;
+    left: 0;
+    content: attr(data-char);
+    visibility: visible;
+    transition: all 0.6s cubic-bezier(0.37, 0.03, 0.09, 0.98);
+    transition-delay: calc( 0.05s * var(--char-index));
+  }
+  ::after{
+    transform: translateY(100%);
+  }
+}
+  li{
+h2{
+  margin: 0;
+}
   list-style: none;
 &:hover{
   a{
-    transition: all 0.3s ;
+    transition: all 0.6s ;
       opacity: 1;
+  span{
+  ::before{
+    transform: translateY(-100%);
+  }
+  ::after{
+    transform: translateY(0);
+  }
+  }
   }
 }
-}
-`
-const TitleButton = styled.a`
-display: block; /* 메인 버튼을 블록 레벨 요소로 변경 */
-font-size: 2.7vw;
-font-weight: bold;
-text-align: left; /* 텍스트 중앙 정렬 */
-text-decoration: none;
-color: white; /* 메인 버튼 텍스트 색상을 흰색으로 설정 */
-background-color: transparent; /* 배경을 투명하게 설정 */
-padding: 4em 2em 0 0;  /* 버튼 패딩 조절 */
-border: none; /* 버튼 테두리 제거 */
-  a{
-    color: white;
-    text-decoration: none;
-  }
-@media only screen and (max-width: 1400px) {
-    font-size: 3vw;
-    padding: 5em 1em 0 0;  /* 버튼 패딩 조절 */
-}
-@media only screen and (max-width: 500px) {
-    font-size: 1em;
-    padding: 5em 0.4em 0 0; 
-}
-@media only screen and (max-height: 620px) {
-    padding-top: 1.5em;
 }
 `
 const SubButton = styled.button`
@@ -384,7 +452,7 @@ a{
     position: absolute;
     width: 100%;
     height: 2px;
-    margin-top: 1em;
+    margin-top: 1.3em;
     content: "";
     background-color: white;
     transform: scaleX(0);
@@ -398,7 +466,7 @@ a{
     }
   }
 }
-@media only screen and (max-height: 620px) {
+@media only screen and (max-height: 550px) {
     margin-top: 0.4em;
     a{
         margin-bottom: 0.7em;
@@ -407,16 +475,18 @@ a{
 `
 const MoreIconButtonContainer = styled.div`
 position: fixed;
-bottom: 10%;
 left: 10%;
 display: flex; /* 더보기 아래쪽 아이콘 버튼 스타일*/
-text-align: center;
+align-items: center;
   animation: ${props => props.AnimationEnabled ? css`${fadeInUp} 1s ` : css`${fadeOutDown} 0.6s `};
 @media only screen and (max-width: 420px) {
     left: 2%;
 }
 @media only screen and (max-height: 850px) {
-bottom: 2%;
+bottom: 80px;
+}
+@media only screen and (max-height: 400px) {
+bottom: 5%;
 }
 `
 const MoreIconButton = styled.li`
@@ -428,33 +498,15 @@ transition: all 0.3s ease; /* 호버 시 투명도 전환 애니메이션 */
       opacity: 0.5;
     }
   }
-@media only screen and (max-width: 650px) {
-    img{
-    width: 25px;
-    height: 25px;
-  }
-}
-@media only screen and (max-width: 400px) {
-    img{
-    width: 5vw;
-    height: 5vw;
-  }
-}
-@media only screen and (max-height: 300px){
-    img{
-    width: 1.5em;
-    height: 1.5em;
-  }
-}
 `
 const IconButton = styled.a`
 display: inline-block;
 margin-right: 3vw;
+  transition: all 0.3s ease;
   position: relative;
   img {
     width: 40px;
     height: 40px;
-  transition: all 0.3s ease;
   }
   &:hover {
     img{
@@ -463,12 +515,18 @@ margin-right: 3vw;
     }
   } 
   .cm-magnetic-btn {
-    transition: transform 0.1s ease; /* Apply transition to the transform property */
+    transition: transform 0.1s ease;
   }
+@media only screen and (max-width: 650px),(max-height: 400px) {
+  img{
+    width: 25px;
+    height: 25px;
+}
+}
 `
 const LocationButton = styled.div`
 display: flex; /* 더보기 아래쪽 map 버튼 스타일*/
-flex-direction: row;
+align-items: center;
 background-color: rgb(255, 194, 0); /* 노란색 배경 추가 */
 border-radius: 50px; /* 회색 배경과 함께 버튼에 radius 추가 */
 padding: 10px;
@@ -489,27 +547,19 @@ transition: all 0.3s ease; /* 호버 시 투명도 전환 애니메이션 */
     transform: scale(1.05);
 }
 @media only screen and (max-width: 650px) {
-padding: 7px;
+padding: 5px 10px;
   img{
     width: 15px;
     height: 15px;
   }
   a{
     font-size: 12px;
+    padding: 0;
   }
 }
-@media only screen and (max-width: 400px) {
+@media only screen and (max-height: 400px) {
+padding: 5px 10px;
   img{
-    width: 4vw;
-    height: 4vw;
-  }
-  a{
-    font-size: 3vw;
-  }
-}
-@media only screen and (max-height: 300px) {
-  img{
-    margin-top: 2px;
     width: 1em;
     height: 1em;
   }
@@ -520,7 +570,7 @@ padding: 7px;
 `
 const MMoreSection = styled.div`
 position: absolute;
-top:0px;
+top: 0;
 height:100vh;
 width: 100%;
 background-color: rgb(0, 104, 232); /* 파란색 배경 추가 */
@@ -712,38 +762,50 @@ const Header = (props) => {
   const [showMore, setShowMore] = useState(false);
   const [BlinkAnimation, setBlinkAnimation] = useState(false)
   const [AnimationEnabled, setAnimationEnabled] = useState(false); // 상태 추가
-  
-const applyMagneticEffect = () => {
-  document.querySelectorAll(".cm-magnetic-btn").forEach((el) => {
-    el.addEventListener('mousemove', function (e) {
-      const pos = this.getBoundingClientRect();
-      const mx = e.clientX - pos.left - pos.width / 2;
-      const my = e.clientY - pos.top - pos.height / 2;
 
-      this.style.transform = `translate(${mx * 0.15}px, ${my * 0.3}px) scale(1.05)`;
-    });
-
-    el.addEventListener('mouseleave', function () {
-      this.style.removeProperty('transform');
-    });
-  });
-};
-
-const MagneticButton = ({ href, children }) => {
-  useEffect(() => {
-    applyMagneticEffect();
-
-    return () => {
-      // Clean up event listeners if needed
+  const CharComponent = ({ char, charIndex }) => {
+    const style = {
+      '--char-index': charIndex,
     };
-  }, []);
 
-  return (
-    <IconButton className="cm-magnetic-btn" href={href} target="_blank" rel="noopener noreferrer">
-      {children}
-    </IconButton>
-  );
-};
+    return (
+      <span className="char" data-char={char} style={style}>
+        {char}
+      </span>
+    );
+  };
+
+  const applyMagneticEffect = () => {
+    document.querySelectorAll(".cm-magnetic-btn").forEach((el) => {
+      el.addEventListener('mousemove', function (e) {
+        const pos = this.getBoundingClientRect();
+        const mx = e.clientX - pos.left - pos.width / 2;
+        const my = e.clientY - pos.top - pos.height / 2;
+
+        this.style.transform = `translate(${mx * 0.15}px, ${my * 0.3}px) scale(1.05)`;
+      });
+
+      el.addEventListener('mouseleave', function () {
+        this.style.removeProperty('transform');
+      });
+    });
+  };
+
+  const MagneticButton = ({ href, children }) => {
+    useEffect(() => {
+      applyMagneticEffect();
+
+      return () => {
+        // Clean up event listeners if needed
+      };
+    }, []);
+
+    return (
+      <IconButton className="cm-magnetic-btn" href={href} target="_blank" rel="noopener noreferrer">
+        {children}
+      </IconButton>
+    );
+  };
 
   // More 버튼 클릭 시
   const handleMoreButtonClick = () => {
@@ -847,22 +909,43 @@ const MagneticButton = ({ href, children }) => {
         }
       }}
     >
+      <div class="headeroverarea" showHeader={showHeader}
+       onMouseOver={() => {
+        setShowHeader(true)
+      }}
+      onMouseLeave={() => {
+        if (scrollY != 0) {
+          setShowHeader(false)
+        }
+      }}></div>
       {isMobile ? null : <BlueStick activeSection={activeSection} />}
       <div className="headerinner">
         <LogoButton
-          BlinkAnimation={BlinkAnimation}
+                  BlinkAnimation={BlinkAnimation}
           showMore={showMore}
           activeSection={activeSection}
           onClick={() => { window.location.reload() }}>
         </LogoButton>
         <HeaderButtons activeSection={activeSection}>
           {showMore ? (
-            <CloseMoreButton AnimationEnabled={AnimationEnabled}>
+            <CloseMoreButton AnimationEnabled={AnimationEnabled} onClick={handleCloseButtonClick}>
               <strong>
-                <em>Close</em>
+                <em class="em1">C</em>
+                <em class="em2">l</em>
+                <em class="em3">o</em>
+                <em class="em4">s</em>
+                <em class="em5">e</em>
               </strong>
-              <CloseMore AnimationEnabled={AnimationEnabled} onClick={handleCloseButtonClick}>
-                <div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div>
+              <CloseMore AnimationEnabled={AnimationEnabled}>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
               </CloseMore>
             </CloseMoreButton>
           ) : (
@@ -871,19 +954,27 @@ const MagneticButton = ({ href, children }) => {
                 <a activeSection={activeSection} className={lang === 'en' ? 'active' : ''}>EN</a>
               </Link>
               <Link href="/kr" legacyBehavior>
-                <a activeSection={activeSection}className={lang === 'kr' ? 'active' : ''}>KR</a>
+                <a activeSection={activeSection} className={lang === 'kr' ? 'active' : ''}>KR</a>
               </Link>
               <More onClick={handleMoreButtonClick}>
-                <div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
               </More>
             </>
           )}
         </HeaderButtons>
-      </div>
-      {showMore && (
+        </div>
+            {showMore && (
         <div>
           {isMobile ? (
-            <MMoreSection  AnimationEnabled={AnimationEnabled}>
+            <MMoreSection AnimationEnabled={AnimationEnabled}>
               <div>
                 <MTotalButtonContainer>
                   <MDropDownButton onClick={() => toggleDropdown('aboutUs')}>
@@ -966,94 +1057,134 @@ const MagneticButton = ({ href, children }) => {
             </MMoreSection>
           ) : (
             <MoreSection AnimationEnabled={AnimationEnabled}>
-              <span></span>
-              <span></span>
-              <span></span>
-              <span></span>
-              <span></span>
-              <span></span>
-              <span></span>
-              <span></span>
-              <span></span>
-              <div>
-                <TotalButtonContainer AnimationEnabled={AnimationEnabled}>
-                  <li>
-                    <TitleButton>
-                      <Link href="/ABOUT US">ABOUT US</Link>
-                    </TitleButton>
-                    <SubButton>
-                      <a href="/about-us/corporate-profile">Corporate Profile</a>
-                      <a href="/about-us/leadership" >Leadership</a>
-                      <a href="/about-us/news" >News</a>
-                      <a href="/about-us/pr" >PR </a>
-                      <a href="/about-us/recruit" >Recruit</a>
-                    </SubButton>
-                  </li>
-                  <li >
-                    <TitleButton >
-                      <Link href="/projects" >PROJECTS</Link>
-                    </TitleButton>
-                    <SubButton >
-                      <a href="/projects/selected works">Selected Works</a>
-                      <a href="/projects/all" >All</a>
-                      <a href="/projects/design" >DESIGN</a>
-                      <a href="/projects/cm" >CM</a>
-                    </SubButton>
-                  </li>
-                  <li >
-                    <TitleButton>
-                      <Link href="/expertise" >EXPERTISE</Link>
-                    </TitleButton>
-                    <SubButton >
-                      <a href="/expertise/services" >Services</a>
-                      <a href="/expertise/markets" >Markets</a>
-                      <a href="/expertise/research" >Research & Idea</a>
-                      <a href="/expertise/vr" >VR/AR</a>
-                    </SubButton>
-                  </li>
-                  <li>
-                    <TitleButton>
-                      <Link href="/ir" >IR</Link>
-                    </TitleButton>
-                    <SubButton >
-                      <a href="/ir/finance">Finance</a>
-                      <a href="/ir/analyst_report" >Analyst Report</a>
-                      <a href="/ir/ir_material" >IR Material</a>
-                    </SubButton>
-                  </li>
-                  <div>
-                    <TitleButton>
-                      <Link href="/contact" >CONTACT</Link>
-                    </TitleButton>
-                  </div>
-                </TotalButtonContainer>
-                <MoreIconButtonContainer AnimationEnabled={AnimationEnabled}>
-                  {/* 인스타그램 버튼 */}
-                  <MoreIconButton>
-                    <MagneticButton href="https://www.instagram.com/heerim_architects_official/" target="_blank" rel="noopener noreferrer">
-                      <img src="/icon/instagram.svg" alt="YouTube Icon" />
-                    </MagneticButton>
-                    {/* 유튜브 버튼 */}
-                    <MagneticButton style={{ marginLeft: "3vw" }} href="https://www.youtube.com/channel/UCPwQIrf17KFyqvXeq8NVY_Q" target="_blank" rel="noopener noreferrer">
-                      <img src="/icon/youtube.svg" alt="YouTube Icon" />
-                    </MagneticButton>
-                    {/* 핀터레스트 버튼 */}
-                    <MagneticButton style={{ marginLeft: "3vw" }} href="https://www.pinterest.co.kr/heerim_architects_official/" target="_blank" rel="noopener noreferrer">
-                      <img src="/icon/pinterest.svg" alt="Pinterest Icon" />
-                    </MagneticButton>
-                  </MoreIconButton>
-                  {/* 디자인 지도 버튼 */}
-                  <LocationButton className="cm-magnetic-btn"  style={{ marginLeft: "3vw" }} href="https://www.google.com/maps/d/viewer?mid=1ZYdnpbxRgC5-zu5GpoOU8zd_E-v24aXT&ll=13.728397502246512%2C71.13522019999999&z=3" target="_blank" rel="noopener noreferrer">
-                    <img src="/icon/location.svg" alt="Location Icon" />
-                    <a> Design map </a>
-                  </LocationButton>
-                  {/* CM 지도 버튼 */}
-                  <LocationButton className="cm-magnetic-btn" style={{ marginLeft: "3vw" }} href="https://www.google.com/maps/d/viewer?mid=1aWEovb5OXGAdqH_D-QojV6l96tLYT2S0&ll=24.118227897040363%2C55.94565490000001&z=3" target="_blank" rel="noopener noreferrer">
-                    <img src="/icon/location.svg" alt="Location Icon" />
-                    <a> CM map </a>
-                  </LocationButton>
-                </MoreIconButtonContainer>
-              </div>
+              <span class="menusplit"></span>
+              <span class="menusplit"></span>
+              <span class="menusplit"></span>
+              <span class="menusplit"></span>
+              <span class="menusplit"></span>
+              <span class="menusplit"></span>
+              <span class="menusplit"></span>
+              <span class="menusplit"></span>
+              <span class="menusplit"></span>
+              <MoreMenuInner>
+                <div class="menuinner">
+                  <TotalButtonContainer AnimationEnabled={AnimationEnabled}>
+                    <li>
+                      <h2>
+                        <a href="/ABOUT US">
+                          <CharComponent char="A" charIndex={0}>A</CharComponent>
+                          <CharComponent char="B" charIndex={1}>B</CharComponent>
+                          <CharComponent char="O" charIndex={2}>O</CharComponent>
+                          <CharComponent char="U" charIndex={3}>U</CharComponent>
+                          <CharComponent char="T" charIndex={4}>T</CharComponent>
+                          <CharComponent char="U" charIndex={5}>U</CharComponent>
+                          <CharComponent char="S" charIndex={6}>S</CharComponent>
+                        </a>
+                      </h2>
+                      <SubButton>
+                        <a href="/about-us/corporate-profile">Corporate Profile</a>
+                        <a href="/about-us/leadership" >Leadership</a>
+                        <a href="/about-us/news" >News</a>
+                        <a href="/about-us/pr" >PR </a>
+                        <a href="/about-us/recruit" >Recruit</a>
+                      </SubButton>
+                    </li>
+                    <li >
+                      <h2 >
+                        <a href="/projects" >
+                          <CharComponent char="P" charIndex={0}>P</CharComponent>
+                          <CharComponent char="R" charIndex={1}>R</CharComponent>
+                          <CharComponent char="O" charIndex={2}>O</CharComponent>
+                          <CharComponent char="J" charIndex={3}>J</CharComponent>
+                          <CharComponent char="E" charIndex={4}>E</CharComponent>
+                          <CharComponent char="C" charIndex={5}>C</CharComponent>
+                          <CharComponent char="T" charIndex={6}>T</CharComponent>
+                          <CharComponent char="S" charIndex={7}>S</CharComponent>
+                        </a>
+                      </h2>
+                      <SubButton >
+                        <a href="/projects/selected works">Selected Works</a>
+                        <a href="/projects/all" >All</a>
+                        <a href="/projects/design" >DESIGN</a>
+                        <a href="/projects/cm" >CM</a>
+                      </SubButton>
+                    </li>
+                    <li >
+                      <h2>
+                        <a href="/expertise" >
+                          <CharComponent char="E" charIndex={0}>E</CharComponent>
+                          <CharComponent char="X" charIndex={1}>X</CharComponent>
+                          <CharComponent char="P" charIndex={2}>P</CharComponent>
+                          <CharComponent char="E" charIndex={3}>E</CharComponent>
+                          <CharComponent char="R" charIndex={4}>R</CharComponent>
+                          <CharComponent char="T" charIndex={5}>T</CharComponent>
+                          <CharComponent char="I" charIndex={6}>I</CharComponent>
+                          <CharComponent char="S" charIndex={7}>S</CharComponent>
+                          <CharComponent char="E" charIndex={8}>E</CharComponent>
+                        </a>
+                      </h2>
+                      <SubButton >
+                        <a href="/expertise/services" >Services</a>
+                        <a href="/expertise/markets" >Markets</a>
+                        <a href="/expertise/research" >Research & Idea</a>
+                        <a href="/expertise/vr" >VR/AR</a>
+                      </SubButton>
+                    </li>
+                    <li>
+                      <h2>
+                        <a href="/ir" >
+                          <CharComponent char="I" charIndex={0}>I</CharComponent>
+                          <CharComponent char="R" charIndex={1}>R</CharComponent>
+                        </a>
+                      </h2>
+                      <SubButton >
+                        <a href="/ir/finance">Finance</a>
+                        <a href="/ir/analyst_report" >Analyst Report</a>
+                        <a href="/ir/ir_material" >IR Material</a>
+                      </SubButton>
+                    </li>
+                    <li>
+                      <h2>
+                        <a href="/contact" >
+                          <CharComponent char="C" charIndex={0}>C</CharComponent>
+                          <CharComponent char="O" charIndex={1}>O</CharComponent>
+                          <CharComponent char="N" charIndex={2}>N</CharComponent>
+                          <CharComponent char="T" charIndex={3}>T</CharComponent>
+                          <CharComponent char="A" charIndex={4}>A</CharComponent>
+                          <CharComponent char="C" charIndex={5}>C</CharComponent>
+                          <CharComponent char="T" charIndex={6}>T</CharComponent>
+                        </a>
+                      </h2>
+                    </li>
+                  </TotalButtonContainer>
+                  <MoreIconButtonContainer AnimationEnabled={AnimationEnabled}>
+                    {/* 인스타그램 버튼 */}
+                    <MoreIconButton>
+                      <MagneticButton href="https://www.instagram.com/heerim_architects_official/" target="_blank" rel="noopener noreferrer">
+                        <img src="/icon/instagram.svg" alt="YouTube Icon" />
+                      </MagneticButton>
+                      {/* 유튜브 버튼 */}
+                      <MagneticButton style={{ marginLeft: "3vw" }} href="https://www.youtube.com/channel/UCPwQIrf17KFyqvXeq8NVY_Q" target="_blank" rel="noopener noreferrer">
+                        <img src="/icon/youtube.svg" alt="YouTube Icon" />
+                      </MagneticButton>
+                      {/* 핀터레스트 버튼 */}
+                      <MagneticButton style={{ marginLeft: "3vw" }} href="https://www.pinterest.co.kr/heerim_architects_official/" target="_blank" rel="noopener noreferrer">
+                        <img src="/icon/pinterest.svg" alt="Pinterest Icon" />
+                      </MagneticButton>
+                    </MoreIconButton>
+                    {/* 디자인 지도 버튼 */}
+                    <LocationButton className="cm-magnetic-btn" style={{ marginLeft: "3vw" }} href="https://www.google.com/maps/d/viewer?mid=1ZYdnpbxRgC5-zu5GpoOU8zd_E-v24aXT&ll=13.728397502246512%2C71.13522019999999&z=3" target="_blank" rel="noopener noreferrer">
+                      <img src="/icon/location.svg" alt="Location Icon" />
+                      <a> Design map </a>
+                    </LocationButton>
+                    {/* CM 지도 버튼 */}
+                    <LocationButton className="cm-magnetic-btn" style={{ marginLeft: "3vw" }} href="https://www.google.com/maps/d/viewer?mid=1aWEovb5OXGAdqH_D-QojV6l96tLYT2S0&ll=24.118227897040363%2C55.94565490000001&z=3" target="_blank" rel="noopener noreferrer">
+                      <img src="/icon/location.svg" alt="Location Icon" />
+                      <a> CM map </a>
+                    </LocationButton>
+                  </MoreIconButtonContainer>
+                </div>
+              </MoreMenuInner>
             </MoreSection>
           )}
         </div>

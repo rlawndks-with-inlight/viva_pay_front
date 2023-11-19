@@ -6,7 +6,6 @@ const UserLayout = ({ activeSection, children, updateHeaderVisibility }) => {
     const scrollRef = useRef(0);
     const [scrollY, setScrollY] = useState(0);
     useEffect(() => {
-
         const handleScroll = () => {
             scrollRef.current = window.scrollY;
             setScrollY(scrollRef.current)

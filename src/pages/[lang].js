@@ -409,7 +409,7 @@ background-color:  rgb(255, 194, 0);
 }
 /* 파랑색 코드 rgb(0, 104, 232) 노랑색 코드 rgb(255, 194, 0) */
 /* 모바일 화면에서 숨김 */
-  @media only screen and (max-width: 1280px), (max-height: 800px) {
+  @media only screen and (max-width: 730px), (max-height: 600px) {
     display: none;
   }
 `
