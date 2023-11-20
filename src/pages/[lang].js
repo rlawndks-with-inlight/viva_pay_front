@@ -1,12 +1,12 @@
 // pages/home.js
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef} from "react";
 import Link from 'next/link';
 import UserLayout from 'src/layouts/UserLayout';
 import langJson from 'src/data/lang.json'
 import { useRouter } from "next/router";
 import styled from "styled-components";
 import { useInView } from 'react-intersection-observer'; // react-intersection-observer 라이브러리 사용
-const sections = ["section1", "section2", "section3", "section4", "section5"]; // 섹션 이름
+const sections = ["section1", "section2", "section3", "section4"]; // 섹션 이름
 const totalIcons = 9; // 총 아이콘 개수
 const iconsPerPageLarge = 6; // 큰 화면에서 표시할 아이콘 개수
 const iconsPerPageSmall = 4; // 작은 화면에서 표시할 아이콘 개수
@@ -538,7 +538,6 @@ const Home = () => {
     const { lang = 'kr' } = router.query;
     const [activeSection, setActiveSection] = useState(0); // 활성 섹션 인덱스
     const [iconIndexes, setIconIndexes] = useState(Array.from({ length: iconsPerPageLarge }, (_, i) => i)); // 표시되는 아이콘 인덱스 배열
-    const sectionRefs = useRef([]);
     const [loading, setLoading] = useState(true);
     const [searchQuery, setSearchQuery] = useState(""); // 검색어 상태 추가
     const [hoveredImage, setHoveredImage] = useState(null);
@@ -546,11 +545,47 @@ const Home = () => {
     const [hoveredImageLink, setHoveredImageLink] = useState(null);
     const [windowWidth, setWindowWidth] = useState(0); // 초기 화면 너비 설정
     const [windowHeight, setWindowHeight] = useState(0); // 초기 화면 높이 설정
-    const [refSection1, inViewSection1] = useInView({ triggerOnce: true });
-    const [refSection2, inViewSection2] = useInView({ triggerOnce: true });
-    const [refSection3, inViewSection3] = useInView({ triggerOnce: true });
     const [isSearchDropdownVisible, setIsSearchDropdownVisible] = useState(false);
     const [selectedOption, setSelectedOption] = useState('All');
+    const sectionRefs = useRef([]); // 섹션의 ref를 추적
+
+    useEffect(() => {
+        const handleScroll = (e) => {
+          // 스크롤 이벤트를 중지합니다.
+          e.preventDefault();
+    
+          // 현재 화면의 중앙 위치를 계산합니다.
+          const screenHeight = window.innerHeight;
+          const screenCenter = screenHeight / 2;
+    
+          // 마우스 휠 방향에 따라 이동할 섹션을 결정합니다.
+          let newActiveSection = activeSection;
+          if (e.deltaY > 0 && activeSection < sections.length - 1) {
+            newActiveSection = activeSection + 1;
+          } else if (e.deltaY < 0 && activeSection > 0) {
+            newActiveSection = activeSection - 1;
+          }
+    
+          // 새로운 활성 섹션을 설정합니다.
+          setActiveSection(newActiveSection);
+    
+          // 화면을 스크롤하여 새로운 섹션의 가운데로 이동합니다.
+          const element = sectionRefs.current[newActiveSection];
+          if (element) {
+            const sectionTop = element.offsetTop;
+            const sectionHeight = element.clientHeight;
+            const scrollToY = sectionTop + sectionHeight / 2 - screenCenter;
+            window.scrollTo({ top: scrollToY, behavior: "smooth" });
+        }
+    };
+
+    // 스크롤 이벤트를 추가합니다.
+    window.addEventListener("wheel", handleScroll, { passive: false });
+    return () => {
+        window.removeEventListener("wheel", handleScroll);
+      };
+    }, [activeSection]);
+
 
     const toggleDropdown = () => {
         setIsSearchDropdownVisible(!isSearchDropdownVisible);
@@ -560,29 +595,6 @@ const Home = () => {
         setSelectedOption(option);
         setIsSearchDropdownVisible(false);
     };
-
-    const handleScroll = (event) => {
-        if (event.deltaY > 0) {
-            // Scrolling down
-            if (activeSection < sections.length - 1) {
-                setActiveSection((prev) => prev + 1);
-            }
-        } else {
-            // Scrolling up
-            if (activeSection > 0) {
-                setActiveSection((prev) => prev - 1);
-            }
-        }
-    };
-
-    // Attach the handleScroll function to the window's wheel event
-    useEffect(() => {
-        window.addEventListener("wheel", handleScroll);
-
-        return () => {
-            window.removeEventListener("wheel", handleScroll);
-        };
-    }, [activeSection]);
 
     const handleImageHover = (imageSrc, text, link) => {
         setHoveredImage(imageSrc);
@@ -642,7 +654,7 @@ const Home = () => {
             setWindowHeight(window.innerHeight);
 
             // 화면 너비가 800 이하인 경우 아이콘 개수를 작게 설정, 그렇지 않으면 크게 설정
-            if (window.innerWidth <= 800 || window.innerHeight <= 800) {
+            if (window.innerWidth <= 800 || window.innerHeight <= 600) {
                 setIconIndexes(Array.from({ length: iconsPerPageSmall }, (_, i) => i));
             } else {
                 setIconIndexes(Array.from({ length: iconsPerPageLarge }, (_, i) => i));
@@ -1020,15 +1032,16 @@ const Home = () => {
                                         </M5Contact>
                                     </div>
                                 </Mobile>
-                            ) : (sections.map((section, index) => (
+                            ) : (sections.map((sectionId, index) => (
                                 <div
-                                    key={section}
-                                    id={section}
+                                    key={sectionId}
+                                    id={sectionId}
                                     className={`section ${index === activeSection ? "active-section" : ""}`}
-                                    ref={(el) => (sectionRefs.current[index] = el)}
+                                    ref={(ref) => (sectionRefs.current[index] = ref)}
                                 >
                                     {index === 0 ? (
-                                        <div className="section1" ref={refSection1}>
+                                        <section className="wheelcontainer"
+                                        data-scroll-index="1" id="wheelIndex1">
                                             <Section height="100vh" image="/image/galaxy.png">
                                                 <AnimateUp>
                                                     <W1Title magtop="30vh" > {langJson[lang]?.FOLLOW}</W1Title>
@@ -1041,9 +1054,10 @@ const Home = () => {
                                                     </AnimateUp>
                                                 </W1ScrollDownYellowStick>
                                             </Section>
-                                        </div>
+                                        </section>
                                     ) : index === 1 ? (
-                                        <div className="section2" ref={refSection2}>
+                                        <section className="wheelcontainer"
+                                        data-scroll-index="2" id="wheelIndex2">
                                             <Section image="/image/blue.png">
                                                 <div className="yellow">
                                                     <AnimateRight>
@@ -1089,9 +1103,10 @@ const Home = () => {
                                                     <img src="/icon/next.png" alt="Next icon" />
                                                 </NextButton>
                                             </W2IconContainer>
-                                        </div>
+                                        </section>
                                     ) : index === 2 ? (
-                                        <div className="section3" ref={refSection3}>
+                                        <section className="wheelcontainer"
+                                        data-scroll-index="3" id="wheelIndex3">
                                             <Section>
                                                 <AnimateUp>
                                                     <div className="title">Our Service</div>
@@ -1234,9 +1249,9 @@ const Home = () => {
                                                     </div>
                                                 </AnimateUp>
                                             </Section>
-                                        </div>
+                                        </section>
                                     ) : index === 3 ? (
-                                        <div className="section4">
+                                        <section className="wheeldestroycontainer">
                                             <Section >
                                                 {/* 뉴스 아이템 리스트 */}
                                                 <div className="news-list">
@@ -1417,7 +1432,7 @@ const Home = () => {
                                                     </div>
                                                 </div>
                                             </Section>
-                                        </div>
+                                        </section>
                                     ) : (
                                         <div>{ }</div>
                                     )}
