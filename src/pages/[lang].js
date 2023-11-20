@@ -1,5 +1,5 @@
 // pages/home.js
-import React, { useEffect, useState, useRef} from "react";
+import React, { useEffect, useState, useRef } from "react";
 import Link from 'next/link';
 import UserLayout from 'src/layouts/UserLayout';
 import langJson from 'src/data/lang.json'
@@ -140,6 +140,7 @@ color: white;
     }
 `
 const M2IconContainer = styled.div`
+margin-top: 1em;
 display: flex;
 justify-content: space-between;
 align-items: center;
@@ -150,7 +151,6 @@ border: none;
 background-color: transparent;
 font-size: 0.9em;
 font-weight: bold;
-margin-bottom: 2em;
 cursor: pointer;
 @media only screen and (max-width: 600px) {
     margin: 0 0 5vh 0;
@@ -373,11 +373,12 @@ flex-direction: column;
 margin-bottom: 2em;
 margin-left: 2vw;
 `
-const Section = styled.div`
+const Section = styled.section`
+position: relative;
+overflow: hidden;
 height: ${(props) => props.height};
 background-size: cover;
 background-image:  url(${props => props.image});
-overflow: hidden;
 `
 const W1Title = styled.div`
 margin-top: ${(props) => props.magtop};
@@ -390,11 +391,11 @@ color: white;
 `
 const W1ScrollDownYellowStick = styled.span`
 position: absolute;
-top: 70.5vh;
-margin-left: 81vw;
+bottom: -100px;
+right: 10%;
+text-align: center;
 p{
-    font-weight: bold;
-    margin: 0 0 200px 0;
+font-weight: bold;
    color:white ;
   writing-mode: vertical-rl; /* 세로로 글자 눕힘 */
   font-size: 10px; /* 원하는 글자 크기로 조절 */
@@ -403,7 +404,7 @@ p{
 }
 span{
     display: block;
-height: 16em;
+height: 14em;
 width: 10px;
 background-color:  rgb(255, 194, 0);
 }
@@ -414,11 +415,11 @@ background-color:  rgb(255, 194, 0);
   }
 `
 /* 2section sec2 2섹션 스타일  */
-const W2IconContainer = styled.div`
+const W2IconContainer = styled.section`
 display: flex;
 overflow-x: hidden;
 justify-content: space-between;
-align-items: flex-end;
+height: 140px;
 width: 100%;
 background-color: white;
 `
@@ -431,21 +432,20 @@ margin-top: 1em;
 margin-bottom: 2em;
 cursor: pointer;
 img{
-    width: 7em;
-    height: 7em;
+    width: 5em;
+    height: 5em;
 }
 `
 const PrevButton = styled.button`
 border: none;
 cursor: pointer;
-margin-bottom: 4vh;
 margin-left: 20%;
 background-size: cover;
 background-color: transparent;
 @media only screen and (max-width: 1100px), (max-height: 800px) {
 margin-left: 5%;
 }
-@media only screen and (max-width: 600px), (max-height: 520px) {
+@media only screen and (max-width: 600px) {
 margin: 0 0 5vh 0;
     img{
         width: 30px;
@@ -456,14 +456,13 @@ margin: 0 0 5vh 0;
 const NextButton = styled.button`
 border: none;
 cursor: pointer;
-margin-bottom: 4vh;
 margin-right: 20%;
 background-size: cover;
 background-color: transparent;
 @media only screen and (max-width: 1100px), (max-height: 800px) {
 margin-right: 5%;
 }
-@media only screen and (max-width: 600px), (max-height: 520px) {
+@media only screen and (max-width: 600px) {
 margin: 0 0 5vh 0;
     img{
         width: 30px;
@@ -551,39 +550,57 @@ const Home = () => {
 
     useEffect(() => {
         const handleScroll = (e) => {
-          // 스크롤 이벤트를 중지합니다.
-          e.preventDefault();
-    
-          // 현재 화면의 중앙 위치를 계산합니다.
-          const screenHeight = window.innerHeight;
-          const screenCenter = screenHeight / 2;
-    
-          // 마우스 휠 방향에 따라 이동할 섹션을 결정합니다.
-          let newActiveSection = activeSection;
-          if (e.deltaY > 0 && activeSection < sections.length - 1) {
-            newActiveSection = activeSection + 1;
-          } else if (e.deltaY < 0 && activeSection > 0) {
-            newActiveSection = activeSection - 1;
-          }
-    
-          // 새로운 활성 섹션을 설정합니다.
-          setActiveSection(newActiveSection);
-    
-          // 화면을 스크롤하여 새로운 섹션의 가운데로 이동합니다.
-          const element = sectionRefs.current[newActiveSection];
-          if (element) {
-            const sectionTop = element.offsetTop;
-            const sectionHeight = element.clientHeight;
-            const scrollToY = sectionTop + sectionHeight / 2 - screenCenter;
-            window.scrollTo({ top: scrollToY, behavior: "smooth" });
-        }
-    };
+            // 스크롤 이벤트를 중지합니다.
+            e.preventDefault();
 
-    // 스크롤 이벤트를 추가합니다.
-    window.addEventListener("wheel", handleScroll, { passive: false });
-    return () => {
-        window.removeEventListener("wheel", handleScroll);
-      };
+            // 현재 화면의 중앙 위치를 계산합니다.
+            const screenHeight = window.innerHeight;
+            const screenCenter = screenHeight / 2;
+
+            // 마우스 휠 방향에 따라 이동할 섹션을 결정합니다.
+            let newActiveSection = activeSection;
+            if (e.deltaY > 0 && activeSection < sections.length - 1) {
+                newActiveSection = activeSection + 1;
+            } else if (e.deltaY < 0 && activeSection > 0) {
+                newActiveSection = activeSection - 1;
+            }
+
+            // 새로운 활성 섹션을 설정합니다.
+            setActiveSection(newActiveSection);
+
+            // 화면을 스크롤하여 새로운 섹션의 가운데로 이동합니다.
+            const element = sectionRefs.current[newActiveSection];
+            if (element) {
+                const sectionTop = element.offsetTop;
+                const sectionHeight = element.clientHeight;
+                const scrollToY = sectionTop + sectionHeight / 2 - screenCenter;
+                window.scrollTo({ top: scrollToY, behavior: "smooth" });
+            }
+        };
+
+        const handleResize = () => {
+            const isMobile = typeof window !== "undefined" ? window.innerWidth <= 1280 || window.innerHeight <= 550 : false;
+
+            if (!isMobile) {
+                // 모바일이 아닌 경우에는 스크롤 이벤트 리스너를 추가합니다.
+                window.addEventListener("wheel", handleScroll, { passive: false });
+            } else {
+                // 모바일인 경우에는 스크롤 이벤트 리스너를 제거합니다.
+                window.removeEventListener("wheel", handleScroll);
+            }
+        };
+
+        // 초기 화면 사이즈에 따라 스크롤 이벤트를 설정합니다.
+        handleResize();
+
+        // 윈도우 크기 변경 이벤트를 감지하여 적절한 이벤트 리스너를 추가 또는 제거합니다.
+        window.addEventListener("resize", handleResize);
+
+        return () => {
+            // 컴포넌트가 unmount될 때 이벤트 리스너를 제거합니다.
+            window.removeEventListener("resize", handleResize);
+            window.removeEventListener("wheel", handleScroll);
+        };
     }, [activeSection]);
 
 
@@ -744,7 +761,7 @@ const Home = () => {
         // closeSearch();
     };
 
-    const isMobile = typeof window !== "undefined" ? window.innerWidth <= 1280 : false;
+    const isMobile = typeof window !== "undefined" ? window.innerWidth <= 1280 || window.innerHeight <= 550 : false;
     return (
         <>
             {!loading && (
@@ -1040,8 +1057,7 @@ const Home = () => {
                                     ref={(ref) => (sectionRefs.current[index] = ref)}
                                 >
                                     {index === 0 ? (
-                                        <section className="wheelcontainer"
-                                        data-scroll-index="1" id="wheelIndex1">
+                                        <section className="">
                                             <Section height="100vh" image="/image/galaxy.png">
                                                 <AnimateUp>
                                                     <W1Title magtop="30vh" > {langJson[lang]?.FOLLOW}</W1Title>
@@ -1056,25 +1072,28 @@ const Home = () => {
                                             </Section>
                                         </section>
                                     ) : index === 1 ? (
-                                        <section className="wheelcontainer"
-                                        data-scroll-index="2" id="wheelIndex2">
-                                            <Section image="/image/blue.png">
-                                                <div className="yellow">
-                                                    <AnimateRight>
-                                                        {/* 노란색 배경에 녹색 박스 모양의 텍스트 박스와 소제목, 설명 */}
-                                                        <div className="yellow-box">
-                                                            <p className="yellow-box-text">Who we are</p>
+                                        <section className="" style={{ display: "block" }}>
+                                            <Section height="calc(100vh - 130px)" image="/image/blue.png">
+                                                <div className="blue">
+                                                    <div className="blueinner">
+                                                        <div className="sec2txt">
+                                                            <AnimateRight>
+                                                                {/* 노란색 배경에 녹색 박스 모양의 텍스트 박스와 소제목, 설명 */}
+                                                                <div className="yellow-box">
+                                                                    <p className="yellow-box-text">Who we are</p>
+                                                                </div>
+                                                            </AnimateRight>
+                                                            <AnimateUp>
+                                                                <div className="subtitle"> {langJson[lang]?.FOLLOW}</div>
+                                                                <div className="subtitle"> {langJson[lang]?.SUPPORT}</div>
+                                                                <div className="description" style={{ marginTop: '2vw' }}>{langJson[lang]?.DESCIRPTION}</div>
+                                                                {/* 주제와 설명 */}
+                                                            </AnimateUp>
                                                         </div>
-                                                    </AnimateRight>
-                                                    <AnimateUp>
-                                                        <div className="subtitle"> {langJson[lang]?.FOLLOW}</div>
-                                                        <div className="subtitle"> {langJson[lang]?.SUPPORT}</div>
-                                                        <div className="description" style={{ marginTop: '2vw' }}>{langJson[lang]?.DESCIRPTION}</div>
-                                                        {/* 주제와 설명 */}
-                                                    </AnimateUp>
-                                                    <AnimateUp>
-                                                        <TopicsContainer />
-                                                    </AnimateUp>
+                                                        <AnimateUp>
+                                                            <TopicsContainer />
+                                                        </AnimateUp>
+                                                    </div>
                                                 </div>
                                             </Section>
                                             <W2IconContainer>
@@ -1105,16 +1124,19 @@ const Home = () => {
                                             </W2IconContainer>
                                         </section>
                                     ) : index === 2 ? (
-                                        <section className="wheelcontainer"
-                                        data-scroll-index="3" id="wheelIndex3">
-                                            <Section>
-                                                <AnimateUp>
-                                                    <div className="title">Our Service</div>
-                                                </AnimateUp>
-                                                <AnimateUp>
-                                                    <div className="sec3description" style={{ color: "black", margin: "none" }}>{langJson[lang]?.DESCIRPTION}
+                                        <section className="">
+                                            <Section height="100%">
+                                                <div className="sec3txt">
+                                                    <div>
+                                                        <AnimateUp>
+                                                            <div className="title">Our Service</div>
+                                                        </AnimateUp>
+                                                        <AnimateUp>
+                                                            <div className="sec3description" style={{ color: "black", margin: "none" }}>{langJson[lang]?.DESCIRPTION}
+                                                            </div>
+                                                        </AnimateUp>
                                                     </div>
-                                                </AnimateUp>
+                                                </div>
                                                 <AnimateUp>
                                                     <div className="image-container"
                                                         onMouseLeave={handleImageLeave}>
@@ -1251,7 +1273,7 @@ const Home = () => {
                                             </Section>
                                         </section>
                                     ) : index === 3 ? (
-                                        <section className="wheeldestroycontainer">
+                                        <section className="">
                                             <Section >
                                                 {/* 뉴스 아이템 리스트 */}
                                                 <div className="news-list">
