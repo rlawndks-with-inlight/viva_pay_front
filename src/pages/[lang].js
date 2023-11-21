@@ -374,6 +374,7 @@ margin-bottom: 2em;
 margin-left: 2vw;
 `
 const Section = styled.section`
+width: 100%;
 position: relative;
 overflow: hidden;
 height: ${(props) => props.height};
@@ -470,6 +471,19 @@ margin: 0 0 5vh 0;
     }
 }
 `
+const W3HoverImageOverlay = styled.div`
+position: absolute;
+bottom: -100%;
+background: yellow;  /* 노란색 배경 */
+color: black;
+text-align: left;  /* 왼쪽 정렬 */
+padding: 2.2rem;  /* 여백 추가 */
+display: -webkit-box;
+-webkit-box-orient: vertical;
+/* fadein 애니메이션 효과 설정 */
+opacity: 0;  /* 처음에는 안 보이게 설정 */
+transition: opacity 2s ease, bottom 2.2s cubic-bezier(0.8, 0, 0.1, 1);
+`
 const WSearchButton = styled.button`
 margin-bottom: 0.85em;
 font-size: 1.2em;
@@ -547,6 +561,66 @@ const Home = () => {
     const [isSearchDropdownVisible, setIsSearchDropdownVisible] = useState(false);
     const [selectedOption, setSelectedOption] = useState('All');
     const sectionRefs = useRef([]); // 섹션의 ref를 추적
+    const [hoverIndex, setHoverIndex] = useState(false);
+
+    const handleItemOver = (index) => {
+        setHoverIndex(index);
+    };
+    const accordionImages = [
+        {
+            outerBackground: '/image/macbook.png',
+            innerBackground: '/image/hover1.png',
+            innerWidth: '100%',
+            innerLeft: '0%',
+        },
+        {
+            outerBackground: '/image/cardreader.png',
+            innerBackground: '/image/hover2.png',
+            innerWidth: '100%',
+            innerLeft: '-100%',
+        },
+        {
+            outerBackground: '/image/kiosk.png',
+            innerBackground: '/image/hover3.png',
+            innerWidth: '100%',
+            innerLeft: '-200%',
+        },
+        {
+            outerBackground: '/image/scanner.png',
+            innerBackground: '/image/hover4.png',
+            innerWidth: '100%',
+            innerLeft: '-300%',
+        },
+    ];
+
+    const accordionOverImages = [
+        {
+            backgroundUrl: '/image/macbook.png',
+            category: 'Incheon, Korea',
+            title: 'Incheon International Airport Passenger Terminal 2',
+            link: 'https://heerim.com/en/project/project_view.php?idx=5',
+        },
+        {
+            backgroundUrl: '/image/cardreader.png',
+            category: 'Bunso, Ghana',
+            title: 'University of Environment and Sustainable Development, Bunso Campus',
+            link: 'https://heerim.com/en/project/project_view.php?idx=692',
+        },
+        {
+            backgroundUrl: '/image/kiosk.png',
+            category: 'Mongomeyen, Equatorial Guinea',
+            title: 'Mongomeyen International Airport Passenger Terminal',
+            link: 'https://heerim.com/en/project/project_view.php?idx=522',
+        },
+        {
+            backgroundUrl: '/image/scanner.png',
+            category: 'Baku, Azerbaijan',
+            title: 'SOCAR Tower',
+            link: 'https://heerim.com/en/project/project_view.php?idx=222',
+        },
+    ];
+
+
 
     useEffect(() => {
         const handleScroll = (e) => {
@@ -1138,6 +1212,60 @@ const Home = () => {
                                                     </div>
                                                 </div>
                                                 <AnimateUp>
+                                                    <div className="main-project-list-container">
+                                                    <section className="accordion-wrapper" style={{ height: "100%" }}>
+                                                        <article className="accordion-bg-list-container">
+                                                            <ul className="accordion-bg-list clearfix">
+                                                                {accordionImages.map((image, index) => (
+                                                                    <li
+                                                                        key={index}
+                                                                        className={`accordion-bg-item accordion-bg-item0${index + 1} ${hoverIndex === index ? 'active' : ''}`}
+                                                                        style={{
+                                                                            position: "absolute",
+                                                                            top: 0,
+                                                                            transform: 'translate(0px, 0px)',
+                                                                            opacity: 1,
+                                                                            width: hoverIndex === index ? '100%' : '25%',
+                                                                            height: '100%',
+                                                                            left: hoverIndex === index ? '0' : `${index * 25}%`,
+                                                                            transition: hoverIndex === index ? 'all 1s ease-in-out' : 'all 0s',
+                                                                        }}
+                                                                        onMouseEnter={() => handleItemOver(index)}
+                                                                        onMouseLeave={() => handleItemOver(false)}>
+                                                                        <div className="accordion-outer" style={{
+                                                                            position: 'absolute',
+                                                                            top: '0px',
+                                                                            left: '0px',
+                                                                            width: '100%',
+                                                                            height: '100%',
+                                                                            zIndex: hoverIndex === index ? '0' : '1',
+                                                                            background: `url(${image.outerBackground}) no-repeat 50% 50%`,
+                                                                            backgroundSize: 'cover',
+                                                                            opacity: hoverIndex === index ? '0' : '1',
+                                                                            transition: 'opacity 0.2s ease, transform 0.2s ease',
+                                                                            transform: hoverIndex === index ? 'scale(1.05) rotate(0.002deg)' : '',
+                                                                        }}>
+                                                                        </div>
+                                                                        <div className="accordion-inner" style={{
+                                                                            display: 'block',
+                                                                            position: 'relative',
+                                                                            width: '100%',
+                                                                            height: '100%',
+                                                                            margin: '0',
+                                                                            opacity: 1,
+                                                                            background: `url(${image.innerBackground}) no-repeat 50% 50%`,
+                                                                            backgroundSize: 'cover',
+                                                                            transition: hoverIndex === index ? 'transform 5s ease-in-out' : '',
+                                                                            transform: hoverIndex === index ? 'scale(1.1) rotate(0.002deg)' : '',
+                                                                        }}>
+                                                                        </div>
+                                                                    </li>
+                                                                ))}
+                                                            </ul>
+                                                        </article>
+                                                    </section>
+                                                    </div>
+
                                                     <div className="image-container"
                                                         onMouseLeave={handleImageLeave}>
                                                         {hoveredImage ? (
@@ -1155,7 +1283,7 @@ const Home = () => {
                                                             <>
                                                                 <a
                                                                     className="image-button"
-                                                                    onMouseEnter={() => handleImageHover("/image/image121.jpg", (
+                                                                    onMouseEnter={() => handleImageHover("/image/hover1.png", (
                                                                         <a href="https://www.youtube.com/watch?v=24MZgXC-it0">
                                                                             <div className="hoverimage-overlay" >
                                                                                 <div className="hoverimage-text">
@@ -1184,7 +1312,7 @@ const Home = () => {
                                                                 <a
                                                                     className="image-button"
                                                                     href="/404"
-                                                                    onMouseEnter={() => handleImageHover("/image/image221.jpg", (
+                                                                    onMouseEnter={() => handleImageHover("/image/hover2.png", (
                                                                         <a href="https://www.youtube.com/watch?v=24MZgXC-it0">
                                                                             <div className="hoverimage-overlay">
                                                                                 <div className="hoverimage-text">
@@ -1213,7 +1341,7 @@ const Home = () => {
                                                                 <a
                                                                     className="image-button"
                                                                     href="/404"
-                                                                    onMouseEnter={() => handleImageHover("/image/image321.jpg", (
+                                                                    onMouseEnter={() => handleImageHover("/image/hover3.png", (
                                                                         <a href="https://www.youtube.com/watch?v=24MZgXC-it0">
                                                                             <div className="hoverimage-overlay">
                                                                                 <div className="hoverimage-text">
@@ -1242,7 +1370,7 @@ const Home = () => {
                                                                 <a
                                                                     className="image-button"
                                                                     href="/404"
-                                                                    onMouseEnter={() => handleImageHover("/image/image421.jpg", (
+                                                                    onMouseEnter={() => handleImageHover("/image/hover4.png", (
                                                                         <a href="https://www.youtube.com/watch?v=24MZgXC-it0">
                                                                             <div className="hoverimage-overlay">
                                                                                 <div className="hoverimage-text">
