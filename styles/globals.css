@@ -12,7 +12,7 @@
   }
 }
 body {
-  font-size: 16px;
+  font-size: 14px;
   margin: 0 !important;
   overflow-x: hidden;
 }
@@ -172,18 +172,23 @@ body {
 
 /* 3section sec3 */
 
+.sec3txt {
+  height: 15vh;
+  margin-left: 10vw;
+  vertical-align: middle;
+  @media screen and (min-width: 1765px) {
+    visibility: hidden;
+  }
+}
+
 /*3섹션 타이틀 스타일*/
 .title {
-  margin-top: 6vh;
-  margin-left: 10vw;
   font-weight: bold;
-  font-size: 3.333vw;
+  font-size: 3vw;
   font-family: 'Playfair Display', serif;
 }
 
 .sec3description {
-  margin-bottom: 6vh;
-  margin-left: 10vw;
 }
 
 /* 3섹션 이미지 컨테이너 스타일 */
@@ -665,10 +670,11 @@ margin-left: 12em;
 /* 수정중 */
 .main-project-list-container {
   position: relative;
-  top: auto;
-  left: auto;
-  right: auto;
-  padding-top: 41.6666%;
+  display: block;
+  top: 0;
+  left: 0;
+  right: 0;
+  padding-top: 85vh;
 }
 .accordion-wrapper {
   display: block;
@@ -678,13 +684,207 @@ margin-left: 12em;
   left: 0;
   right: 0;
   height: 100%;
-  article{
-    display: block;
-  }
+}
+.accordion-bg-list-container {
+  display: block;
+  height: 100%;
 }
 .accordion-bg-list {
+  position: relative;
   list-style: none;
   height: 100%;
+  margin: 0;
+  padding: 0;
+}
+.accordion-bg-item {
+  position: absolute;
+  top: 0px;
+  width: 25%;
+  height: 100%;
+  overflow: hidden;
+}
+.accordion-bg-list .accordion-bg-item .accordion-inner {
+  display: block;
+  position: relative;
+  width: 100vw;
+  height: 100%;
+  margin: 0;
+  background-size: cover !important;
+}
+.accordion-bg-list .accordion-bg-item .accordion-outer {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+}
+
+
+
+
+/* 일단 만들어둔 이미지 오버레이 위 텍스트 */
+.accordion-over-container {
+  display: block;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  bottom: 0px;
+  right: 0px;
+  z-index: 2;
+}
+.accordion-over-container :hover{
+  .accordion-off-tit-box {
+    opacity: 0;
+    transform: translate(0px, 100%);
+    transition: all 0.3s ease-in-out;
+  }
+}
+.accordion-over-list {
+  list-style: none;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  bottom: 0px;
+  right: 0px;
+  padding: 0;
+  margin: 0;
+}
+.accordion-over-item {
+  background: none !important;
+  float: left;
+  position: relative;
+  width: 25%;
+  height: 100%;
+}
+.accordion-over-item:before {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  content: "";
+}
+.accordion-inner-con {
+  position: relative;
+  display: block;
+  height: 100%;
+  a{
+    text-decoration: none;
+  }
+}
+.accordion-off-tit-box {
+  visibility: inherit;
+  position: absolute;
+  bottom: 3em;
+  left: 3.33em;
+  right: 3.33em;
+  color: #fff;
+}
+/* 
+.accordion-over-item :hover{
+  .accordion-detail-con {
+    opacity: 1;
+    translate: (0px, 0px);
+    transition: all 1s cubic-bezier(0.86, 0, 0.07, 1);
+  }
+}
+  */
+.project-category {
+  display: block;
+  font-size: 1em;
+  letter-spacing: -0.15px;
+  margin-bottom: 0.2em;
+}
+.project-tit {
+  display: block;
+  font-size: 1.8em;
+  letter-spacing: -0.3px;
+  font-weight: 700;
+  margin: 0;
+  padding: 0;
+}
+.accordion-detail-con {
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+  width: 100%;
+  height: 240px;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-content: center;
+  justify-content: center;
+  background: #ffe345;
+  padding: 0 3.33em;
+  box-sizing: border-box;
+}
+.accordion-detail-txt {
+  color: #252525;
+}
+.read-more-btn {
+  display: inline-block;
+  position: relative;
+  line-height: 30px;
+  font-size: 1.333em;
+  letter-spacing: -0.15px;
+  color: #ff8500;
+  :hover {
+    em{
+      letter-spacing: 1em;
+    }
+  }
+  em{
+    position: relative;
+    transition: all 0.7s;
+  }
+  i {
+    position: relative;
+    top: 3px;
+    margin-left: 1em;
+    font-size: 1.23em;
+    transition: all 0.7s;
+  }
+}
+.read-more-btn:before {
+  position: absolute;
+  top: 50%;
+  left: 0px;
+  width: 40px;
+  height: 40px;
+  transform: translate(-50%, -50%);
+  background-color: #fff2e5;
+  content: "";
+  border-radius: 50%;
+  opacity: 0;
+  transition: all 0.7s;
+}
+.read-more-btn:hover:before {
+  opacity: 0.5;
+}
+
+.read-more-btn em,
+.read-more-btn i {
+  position: relative;
+  transition: all 0.7s;
+}
+
+.read-more-btn i {
+  margin-left: 1em;
+  font-size: 1.4em;
+}
+
+.read-more-btn:hover:before {
+  left: 93%;
+}
+
+.read-more-btn:hover i {
+  transform: translateX(12px);
+  letter-spacing: -0.15px;
+}
+
+.read-more-btn:hover em {
+  letter-spacing: 1px;
 }
 .hoverimage {
   width: 25%;

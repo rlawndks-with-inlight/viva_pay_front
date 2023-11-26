@@ -562,32 +562,56 @@ const Home = () => {
     const [selectedOption, setSelectedOption] = useState('All');
     const sectionRefs = useRef([]); // 섹션의 ref를 추적
     const [hoverIndex, setHoverIndex] = useState(false);
+    const [hoverTxtIndex, sethoverTxtIndex] = useState(false);
+
+    const handleTxtOver = (index) => {
+        sethoverTxtIndex(index);
+    };
+    const accordionItems = [
+        {
+            category: 'Incheon, Korea',
+            title: 'Incheon International Airport Passenger Terminal 2',
+        },
+        {
+            category: 'Seoul, Korea',
+            title: 'Hotel Naru Seoul MGallery Ambassador & Riverview Naru House',
+        },
+        {
+            category: 'Gwacheon, Korea',
+            title: 'KOTITI New Head Office Gwacheon',
+        },
+        {
+            category: 'Baku, Azerbaijan',
+            title: 'SOCAR Tower',
+        },
+        // Add other accordion items similarly...
+    ];
 
     const handleItemOver = (index) => {
         setHoverIndex(index);
     };
     const accordionImages = [
         {
-            outerBackground: '/image/macbook.png',
-            innerBackground: '/image/hover1.png',
+            outerBackground: '/image/outer1.png',
+            innerBackground: '/image/inner1.png',
             innerWidth: '100%',
             innerLeft: '0%',
         },
         {
-            outerBackground: '/image/cardreader.png',
-            innerBackground: '/image/hover2.png',
+            outerBackground: '/image/outer2.png',
+            innerBackground: '/image/inner2.png',
             innerWidth: '100%',
             innerLeft: '-100%',
         },
         {
-            outerBackground: '/image/kiosk.png',
-            innerBackground: '/image/hover3.png',
+            outerBackground: '/image/outer3.png',
+            innerBackground: '/image/inner3.png',
             innerWidth: '100%',
             innerLeft: '-200%',
         },
         {
-            outerBackground: '/image/scanner.png',
-            innerBackground: '/image/hover4.png',
+            outerBackground: '/image/outer4.png',
+            innerBackground: '/image/inner4.png',
             innerWidth: '100%',
             innerLeft: '-300%',
         },
@@ -1199,7 +1223,7 @@ const Home = () => {
                                         </section>
                                     ) : index === 2 ? (
                                         <section className="">
-                                            <Section height="100%">
+                                            <Section height="vh">
                                                 <div className="sec3txt">
                                                     <div>
                                                         <AnimateUp>
@@ -1213,189 +1237,77 @@ const Home = () => {
                                                 </div>
                                                 <AnimateUp>
                                                     <div className="main-project-list-container">
-                                                    <section className="accordion-wrapper" style={{ height: "100%" }}>
-                                                        <article className="accordion-bg-list-container">
-                                                            <ul className="accordion-bg-list clearfix">
-                                                                {accordionImages.map((image, index) => (
-                                                                    <li
-                                                                        key={index}
-                                                                        className={`accordion-bg-item accordion-bg-item0${index + 1} ${hoverIndex === index ? 'active' : ''}`}
-                                                                        style={{
-                                                                            position: "absolute",
-                                                                            top: 0,
-                                                                            transform: 'translate(0px, 0px)',
-                                                                            opacity: 1,
-                                                                            width: hoverIndex === index ? '100%' : '25%',
-                                                                            height: '100%',
-                                                                            left: hoverIndex === index ? '0' : `${index * 25}%`,
-                                                                            transition: hoverIndex === index ? 'all 1s ease-in-out' : 'all 0s',
-                                                                        }}
-                                                                        onMouseEnter={() => handleItemOver(index)}
-                                                                        onMouseLeave={() => handleItemOver(false)}>
-                                                                        <div className="accordion-outer" style={{
-                                                                            position: 'absolute',
-                                                                            top: '0px',
-                                                                            left: '0px',
-                                                                            width: '100%',
-                                                                            height: '100%',
-                                                                            zIndex: hoverIndex === index ? '0' : '1',
-                                                                            background: `url(${image.outerBackground}) no-repeat 50% 50%`,
-                                                                            backgroundSize: 'cover',
-                                                                            opacity: hoverIndex === index ? '0' : '1',
-                                                                            transition: 'opacity 0.2s ease, transform 0.2s ease',
-                                                                            transform: hoverIndex === index ? 'scale(1.05) rotate(0.002deg)' : '',
-                                                                        }}>
-                                                                        </div>
-                                                                        <div className="accordion-inner" style={{
-                                                                            display: 'block',
-                                                                            position: 'relative',
-                                                                            width: '100%',
-                                                                            height: '100%',
-                                                                            margin: '0',
-                                                                            opacity: 1,
-                                                                            background: `url(${image.innerBackground}) no-repeat 50% 50%`,
-                                                                            backgroundSize: 'cover',
-                                                                            transition: hoverIndex === index ? 'transform 5s ease-in-out' : '',
-                                                                            transform: hoverIndex === index ? 'scale(1.1) rotate(0.002deg)' : '',
-                                                                        }}>
-                                                                        </div>
-                                                                    </li>
-                                                                ))}
-                                                            </ul>
-                                                        </article>
-                                                    </section>
-                                                    </div>
-
-                                                    <div className="image-container"
-                                                        onMouseLeave={handleImageLeave}>
-                                                        {hoveredImage ? (
-                                                            <div className="hoverimage-container">
-                                                                <a href={hoveredImageLink} onClick={() => { window.location.href = hoveredImageLink; }}>
-                                                                    <img className="hoverimage" src={hoveredImage} alt="Hovered Image" />
-                                                                </a>
-                                                                {hoveredText && (
-                                                                    <div className="image-text">
-                                                                        {hoveredText}
-                                                                    </div>
-                                                                )}
-                                                            </div>
-                                                        ) : (
-                                                            <>
-                                                                <a
-                                                                    className="image-button"
-                                                                    onMouseEnter={() => handleImageHover("/image/hover1.png", (
-                                                                        <a href="https://www.youtube.com/watch?v=24MZgXC-it0">
-                                                                            <div className="hoverimage-overlay" >
-                                                                                <div className="hoverimage-text">
-                                                                                    <p className="hoverplace">Incheon, Korea</p>
-                                                                                    <p className="hoverbuilding">{langJson[lang]?.ICN}</p>
-                                                                                    <p className="hoverbuilding">{langJson[lang]?.ICNA}</p>
-                                                                                    <button className="hoverread-more-button">
-                                                                                        <span className="hoverread-more-text">Read more</span>
-                                                                                        <span className="hoverarrow-icon">→</span>
-                                                                                    </button>
-                                                                                </div>
+                                                        <section className="accordion-wrapper">
+                                                            <article className="accordion-bg-list-container">
+                                                                <ul className="accordion-bg-list clearfix">
+                                                                    {accordionImages.map((image, index) => (
+                                                                        <li
+                                                                            key={index}
+                                                                            className={`accordion-bg-item accordion-bg-item0${index + 1} ${hoverIndex === index ? 'active' : ''}`}
+                                                                            style={{
+                                                                                transform: 'translate 0px, 0px',
+                                                                                opacity: 1,
+                                                                                zIndex: hoverIndex === index ? '1' : '0', /*  */
+                                                                                width: hoverIndex === index ? '100%' : '25%', /*'25%',*/
+                                                                                left: hoverIndex === index ? '0' : `${index * 25}%`, /* `${index * 25}%`,*/
+                                                                                transition: hoverIndex === index ? 'all 1s cubic-bezier(0.86, 0.5, 0.07, 1)' : 'all 0s',
+                                                                            }}
+                                                                            onMouseEnter={() => handleItemOver(index)}
+                                                                            onMouseLeave={() => handleItemOver(false)}>
+                                                                            <div className="accordion-outer" style={{
+                                                                                zIndex: hoverIndex === index ? '0' : '1', /*  */
+                                                                                background: `url(${image.outerBackground}) no-repeat 50% 50%`,
+                                                                                backgroundSize: 'cover',
+                                                                            }}>
                                                                             </div>
-                                                                        </a>
-                                                                    ), "https://www.youtube.com/watch?v=24MZgXC-it0")
-                                                                    }
-                                                                >
-                                                                    <img src="/image/macbook.png" alt="Image 1" />
-                                                                    <div className="image-overlay">
-                                                                        <div className="image-text">
-                                                                            <p className="place">Incheon, Korea</p>
-                                                                            <p className="building">{langJson[lang]?.ICN}</p>
-                                                                            <p className="building">{langJson[lang]?.ICNA}</p>
-                                                                        </div>
-                                                                    </div>
-                                                                </a>
-                                                                <a
-                                                                    className="image-button"
-                                                                    href="/404"
-                                                                    onMouseEnter={() => handleImageHover("/image/hover2.png", (
-                                                                        <a href="https://www.youtube.com/watch?v=24MZgXC-it0">
-                                                                            <div className="hoverimage-overlay">
-                                                                                <div className="hoverimage-text">
-                                                                                    <p className="hoverplace">Seoul, Korea</p>
-                                                                                    <p className="hoverbuilding">{langJson[lang]?.YEOUIDO}</p>
-                                                                                    <p className="hoverbuilding">{langJson[lang]?.ARTS}</p>
-                                                                                    <button className="hoverread-more-button" onClick={() => { window.location.href = "/404"; }}>
-                                                                                        <span className="hoverread-more-text">Read more</span>
-                                                                                        <span className="hoverarrow-icon">→</span>
-                                                                                    </button>
-                                                                                </div>
+                                                                            <div className="accordion-inner" style={{
+                                                                                left: hoverIndex === index ? '0px' : image.innerLeft,
+                                                                                background: `url(${image.innerBackground}) no-repeat 50% 50%`,
+                                                                                transition: hoverIndex === index ? 'transform 5s ease-in-out' : '',
+                                                                                transform: hoverIndex === index ? 'scale(1.1) rotate(0.002deg)' : '',
+                                                                            }}>
                                                                             </div>
-                                                                        </a>
-                                                                    ), "https://www.youtube.com/watch?v=24MZgXC-it0")
-                                                                    }
-                                                                >
-                                                                    <img src="/image/cardreader.png" alt="Image 2" />
-                                                                    <div className="image-overlay">
-                                                                        <div className="image-text">
-                                                                            <p className="place">Seoul, Korea</p>
-                                                                            <p className="building">{langJson[lang]?.YEOUIDO}</p>
-                                                                            <p className="building">{langJson[lang]?.ARTS}</p>
-                                                                        </div>
-                                                                    </div>
-                                                                </a>
-                                                                <a
-                                                                    className="image-button"
-                                                                    href="/404"
-                                                                    onMouseEnter={() => handleImageHover("/image/hover3.png", (
-                                                                        <a href="https://www.youtube.com/watch?v=24MZgXC-it0">
-                                                                            <div className="hoverimage-overlay">
-                                                                                <div className="hoverimage-text">
-                                                                                    <p className="hoverplace">Seongnam, Korea</p>
-                                                                                    <p className="hoverbuilding">{langJson[lang]?.HYUNDAI}</p>
-                                                                                    <p className="hoverbuilding">{langJson[lang]?.CENTER}</p>
-                                                                                    <button className="hoverread-more-button" onClick={() => { window.location.href = "/404"; }}>
-                                                                                        <span className="hoverread-more-text">Read more</span>
-                                                                                        <span className="hoverarrow-icon">→</span>
-                                                                                    </button>
+                                                                        </li>
+                                                                    ))}
+                                                                </ul>
+                                                            </article>
+                                                            <article className="accordion-over-container">
+                                                                <ul className="accordion-over-list">
+                                                                    {accordionItems.map((item, index) => (
+                                                                        <li
+                                                                            key={index}
+                                                                            className="accordion-over-item"
+                                                                            style={{
+                                                                            }}
+                                                                            onMouseEnter={() => handleTxtOver(index)}
+                                                                            onMouseLeave={() => handleTxtOver(false)}
+                                                                        >
+                                                                            <a className="accordion-inner-con" href="/404">
+                                                                                <div className="accordion-off-tit-box">
+                                                                                    <span className="project-category">{item.category}</span>
+                                                                                    <strong className="project-tit">{item.title}</strong>
                                                                                 </div>
-                                                                            </div>
-                                                                        </a>
-                                                                    ), "https://www.youtube.com/watch?v=24MZgXC-it0")
-                                                                    }
-                                                                >
-                                                                    <img src="/image/kiosk.png" alt="Image 3" />
-                                                                    <div className="image-overlay">
-                                                                        <div className="image-text">
-                                                                            <p className="place">Seongnam, Korea</p>
-                                                                            <p className="building">{langJson[lang]?.HYUNDAI}</p>
-                                                                            <p className="building">{langJson[lang]?.CENTER}</p>
-                                                                        </div>
-                                                                    </div>
-                                                                </a>
-                                                                <a
-                                                                    className="image-button"
-                                                                    href="/404"
-                                                                    onMouseEnter={() => handleImageHover("/image/hover4.png", (
-                                                                        <a href="https://www.youtube.com/watch?v=24MZgXC-it0">
-                                                                            <div className="hoverimage-overlay">
-                                                                                <div className="hoverimage-text">
-                                                                                    <p className="hoverplace">Baku, Azerbaijan</p>
-                                                                                    <p className="hoverbuilding">{langJson[lang]?.SOCAR}</p>
-                                                                                    <button className="hoverread-more-button" onClick={() => { window.location.href = "/404"; }}>
-                                                                                        <span className="hoverread-more-text">Read more</span>
-                                                                                        <span className="hoverarrow-icon">→</span>
-                                                                                    </button>
-                                                                                </div>
-                                                                            </div>
-                                                                        </a>
-                                                                    ), "https://www.youtube.com/watch?v=24MZgXC-it0")
-                                                                    }
-                                                                >
-                                                                    <img src="/image/scanner.png" alt="Image 4" />
-                                                                    <div className="image-overlay">
-                                                                        <div className="image-text">
-                                                                            <p className="place">Baku, Azerbaijan</p>
-                                                                            <p className="building">{langJson[lang]?.SOCAR}</p>
-                                                                        </div>
-                                                                    </div>
-                                                                </a>
-                                                            </>
-                                                        )}
+                                                                                    <aside className="accordion-detail-con"
+                                                                                    style={{
+                                                                                        opacity: hoverTxtIndex === index ? '1' : '0',
+                                                                                        transform: hoverTxtIndex === index ? '' : 'translate(0px, 100%)',
+                                                                                        transition: hoverTxtIndex === index ? 'all 1.8s cubic-bezier(0.95, 0, 0.02, 1)' : ''
+                                                                                    }}>
+                                                                                        <p className="accordion-detail-txt">
+                                                                                            <span className="project-category">{item.category}</span>
+                                                                                            <strong className="project-tit">{item.title}</strong>
+                                                                                        </p>
+                                                                                        <span className="read-more-btn">
+                                                                                            <em>Read more</em>
+                                                                                            <i className="xi-long-arrow-right">→</i>
+                                                                                        </span>
+                                                                                    </aside>
+                                                                            </a>
+                                                                        </li>
+                                                                    ))}
+                                                                </ul>
+                                                            </article>
+                                                        </section>
                                                     </div>
                                                 </AnimateUp>
                                             </Section>
