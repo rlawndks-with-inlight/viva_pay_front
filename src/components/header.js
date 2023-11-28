@@ -586,11 +586,12 @@ margin-top : 4em;
 }
 `
 const MDropDownButton = styled.li`
-border-top: 1px solid white;
+border-top: 1px solid rgba(255,255,255,0.2);
 background-color: transparent;
 cursor: pointer;
     color: white;
 list-style: none;
+  overflow: hidden;
 padding-top: 0.8em;
 a{
     font-size: 1.3em;
@@ -619,20 +620,13 @@ padding-top: 0.3em;
 }
 `
 const MDropDownContent = styled.ul`
---max-height: 100%;
 width: 100%;
 background-color: white;
 list-style: none;
-  display: ${(props) => (props.isVisible ? 'block' : 'none')};
+opacity: ${(props) => (props.isVisible ? '1' : '0')};
+  max-height: ${(props) => (props.isVisible ? '185px' : '0')}; /* 110px : 0 에서 애니메이션 문제없음 */
   padding: 0;
-  animation: ${(props) =>
-    props.isVisible
-      ? css`
-          ${slideInDown} 0.3s
-        `
-      : css`
-          ${slideOutUp} 0.3s
-        `};
+  transition: ${(props) => (props.isVisible ? 'max-height 0.5s' : 'max-height 0.5s, opacity 4s')};
   a {
     padding-top: 0.5em;
     padding-bottom: 0.5em;
@@ -640,7 +634,8 @@ list-style: none;
     display: block;
     color: gray;
     &:hover{
-        background-color: rgb(255, 194, 0); /* 노란색 배경 추가 */
+      color: black;
+        background-color: rgba(255, 194, 0, 0.5); /* 노란색 배경 추가 */
       }
   }
 @media only screen and (max-height: 430px) {
