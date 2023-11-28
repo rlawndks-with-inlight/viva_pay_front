@@ -6,7 +6,7 @@ import langJson from 'src/data/lang.json'
 import { useRouter } from "next/router";
 import styled from "styled-components";
 import { useInView } from 'react-intersection-observer'; // react-intersection-observer 라이브러리 사용
-const sections = ["section1", "section2", "section3", "section4"]; // 섹션 이름
+const sections = ["section1", "section2", "section3", "section4", "section5"]; // 섹션 이름
 const totalIcons = 9; // 총 아이콘 개수
 const iconsPerPageLarge = 6; // 큰 화면에서 표시할 아이콘 개수
 const iconsPerPageSmall = 4; // 작은 화면에서 표시할 아이콘 개수
@@ -36,15 +36,16 @@ const AnimateRight = ({ children }) => {
 };
 const WSearchDropdownContainer = styled.ul`
 padding:0;
-margin-left: 12em;
+border: 0;
+margin: 0;
 width: 125px;
 text-decoration: none;
 `
 const WSearchDropdownButton = styled.li`
-border-bottom: 5px solid #FFC200;
+border: none;
 background-color: transparent;
 cursor: pointer;
-    color: white;
+color: white;
 list-style: none;
 a{
     text-decoration: none;
@@ -53,20 +54,23 @@ p{ /* aboutus,projects,expertise,ir 디자인 */
     margin: 0;
     font-size: 1.3em;
     color: #FFC200;
-    padding-bottom: 0.5em;
 }
 `
 const WSearchDropdownContent = styled.ul`
 background-color: #FFC200;
 list-style: none;
 position: absolute;
+top: 100%;
+left: 0%;
+right: 0;
 display: ${(props) => (props.isVisible ? 'block' : 'none')};
 padding: 0;
-a {
+li {
+    position: relative;
+    display: block;
     cursor: pointer;
     padding: 0.5em 0.9em 0.5em 1.35em;
     font-size: 1.1em;
-    display: block;
     color: white;
     font-weight: bold;
     &:hover{
@@ -269,7 +273,6 @@ span{
 }
 p{
     font-size: 1.4vw;
-    margin-left: 12vw;
     color: #CACACA;
 }
 @media only screen and (max-width: 360px) {
@@ -285,12 +288,12 @@ p{
 `
 const M5SearchDropdownContainer = styled.ul`
 padding:0;
-margin-left: 12vw;
+margin: 0;
 width: 130px;
 text-decoration: none;
 `
 const M5SearchDropdownButton = styled.li`
-border-bottom: 5px solid #FFC200;
+border: none;
 background-color: transparent;
 cursor: pointer;
 color: white;
@@ -309,13 +312,19 @@ const M5SearchDropdownContent = styled.ul`
 background-color: #FFC200;
 list-style: none;
 position: absolute;
+top: 100%;
+left: 0%;
+right: 0;
 display: ${(props) => (props.isVisible ? 'block' : 'none')};
 padding: 0;
-a {
-    cursor: pointer;
-    padding: 0.5em 0.9em 0.5em 1.35em;
-    font-size: 1.1em;
+li {
+    position: relative;
     display: block;
+    height: 2em;
+    padding: 0 3%;
+    line-height: 1.8em;
+    font-size: 1.3em;
+    cursor: pointer;
     color: white;
     font-weight: bold;
     &:hover{
@@ -326,30 +335,35 @@ a {
 const M5SearchInput = styled.input`
 background: transparent; /* 투명 배경 추가 */
 border: none;
-border-bottom: 0.3em solid white; /* 하단 테두리 추가 (선택 사항) */
-width: 60%; /* 검색창의 가로 너비 조정 */
+width: 75%; /* 검색창의 가로 너비 조정 */
 font-size: 1.2em; /* 폰트 크기 키우기 */
 padding-left: 0.7em;
-margin-left: 12vw;
-margin-bottom: 0.8em;
+margin-bottom: 0.2em;
 ::placeholder{
     color: white;
 }
 `
 const M5SearchButton = styled.button`
-font-size: 1.2em;
-margin-bottom: 0.8em;
+display: inline-block;
+width: 10vw;
+font-size: 1.3em;
+margin-bottom: 0.2em;
+border-left: 0.5px solid white;
+border-right: none;
+border-bottom: none;
+border-top: none;
 cursor: pointer;
+text-align: center;
+padding: 0;
 img{
-    margin-right :0.5em;
     width: 20px;
     height: 20px;
 }
 `
 const M5SearchTag = styled.div`
 padding: 5vw 0 5vw 0;
-margin-left: 11.5vw;
 button{
+    padding: 0 12px 0 0;
 border: none; /* 외곽선 없애기 */
 font-size: 0.9em;
 background-color: transparent;
@@ -485,7 +499,9 @@ opacity: 0;  /* 처음에는 안 보이게 설정 */
 transition: opacity 2s ease, bottom 2.2s cubic-bezier(0.8, 0, 0.1, 1);
 `
 const WSearchButton = styled.button`
-margin-bottom: 0.85em;
+border: none;
+background: transparent;
+color: white;
 font-size: 1.2em;
 cursor: pointer;
     img{
@@ -553,9 +569,6 @@ const Home = () => {
     const [iconIndexes, setIconIndexes] = useState(Array.from({ length: iconsPerPageLarge }, (_, i) => i)); // 표시되는 아이콘 인덱스 배열
     const [loading, setLoading] = useState(true);
     const [searchQuery, setSearchQuery] = useState(""); // 검색어 상태 추가
-    const [hoveredImage, setHoveredImage] = useState(null);
-    const [hoveredText, setHoveredText] = useState(null);
-    const [hoveredImageLink, setHoveredImageLink] = useState(null);
     const [windowWidth, setWindowWidth] = useState(0); // 초기 화면 너비 설정
     const [windowHeight, setWindowHeight] = useState(0); // 초기 화면 높이 설정
     const [isSearchDropdownVisible, setIsSearchDropdownVisible] = useState(false);
@@ -563,10 +576,24 @@ const Home = () => {
     const sectionRefs = useRef([]); // 섹션의 ref를 추적
     const [hoverIndex, setHoverIndex] = useState(false);
     const [hoverTxtIndex, sethoverTxtIndex] = useState(false);
+    const [activeIndex, setActiveIndex] = useState(null);
+    const [isAnimating, setIsAnimating] = useState(false);
 
-    const handleTxtOver = (index) => {
+    const handleItemEnter = (index) => {
+        setActiveIndex(index);
+        setHoverIndex(index);
         sethoverTxtIndex(index);
     };
+
+    useEffect(() => {
+        if (activeIndex !== null && !isAnimating) {
+            setIsAnimating(true);
+            setTimeout(() => {
+                setIsAnimating(false);
+            }, 1000);
+        }
+    }, [activeIndex, isAnimating]);
+
     const accordionItems = [
         {
             category: 'Incheon, Korea',
@@ -932,7 +959,7 @@ const Home = () => {
                                                         <Place>Incheon, Korea</Place>
                                                         <Building>{langJson[lang]?.MICN}</Building>
                                                     </div>
-                                                    <img src="/image/macbook.png" alt="Image 1" />
+                                                    <img src="/image/outer1.png" alt="outer1" />
                                                 </a>
                                                 <a
                                                     href="/404">
@@ -940,7 +967,7 @@ const Home = () => {
                                                         <Place>Seoul, Korea</Place>
                                                         <Building>{langJson[lang]?.MYEOUIDO}</Building>
                                                     </div>
-                                                    <img src="/image/cardreader.png" alt="Image 2" />
+                                                    <img src="/image/outer2.png" alt="outer2" />
                                                 </a>
                                                 <a
                                                     href="/404">
@@ -948,7 +975,7 @@ const Home = () => {
                                                         <Place>Seongnam, Korea</Place>
                                                         <Building>{langJson[lang]?.MHYUNDAI}</Building>
                                                     </div>
-                                                    <img src="/image/kiosk.png" alt="Image 3" />
+                                                    <img src="/image/outer3.png" alt="outer3" />
                                                 </a>
                                                 <a
                                                     href="/404">
@@ -956,7 +983,7 @@ const Home = () => {
                                                         <Place >Baku, Azerbaijan</Place>
                                                         <Building>{langJson[lang]?.SOCAR}</Building>
                                                     </div>
-                                                    <img src="/image/scanner.png" alt="Image 4" />
+                                                    <img src="/image/outer4.png" alt="outer4" />
                                                 </a>
                                             </M3ImageContainer>
                                         </AnimateUp>
@@ -1068,53 +1095,54 @@ const Home = () => {
                                         </M5Title>
                                     </AnimateUp>
                                     <M5SearchContainer>
-                                        <AnimateUp>
-                                            <span style={{ marginLeft: "12vw", color: "#FFC200", }}>Search</span>
-                                            <span style={{ color: "white" }}>Payvery.com</span>
-                                        </AnimateUp>
-                                        <AnimateUp>
-                                            <p style={{}}>Creative Leadership of Payvery designs the new future never experienced before.</p>
-                                        </AnimateUp>
-                                        <div className="searchheerim">
+                                        <div className="searchwraparea">
                                             <AnimateUp>
-                                                <M5SearchDropdownContainer>
-                                                    <M5SearchDropdownButton onClick={toggleDropdown}>
-                                                        <p>{selectedOption} {isSearchDropdownVisible ? '▲' : '▼'} </p>
-                                                    </M5SearchDropdownButton>
-                                                    <M5SearchDropdownContent isVisible={isSearchDropdownVisible}>
-                                                        <li>
-                                                            <a onClick={() => handleOptionClick('All')}>All</a>
-                                                            <a onClick={() => handleOptionClick('Project')}>Project</a>
-                                                            <a onClick={() => handleOptionClick('News')}>News</a>
-                                                            <a onClick={() => handleOptionClick('Leadership')}>Leadership</a>
-                                                        </li>
-                                                    </M5SearchDropdownContent>
-                                                </M5SearchDropdownContainer>
-                                                <M5SearchInput
-                                                    type="text"
-                                                    placeholder="Type here"
-                                                    value={searchQuery}
-                                                    onChange={handleSearchInputChange} // 검색 입력란 스타일 추가
-                                                />
-                                                <M5SearchButton className="searchheerim-button" onClick={() => { window.location.href = "/404"; }} style={{
-                                                    background: "transparent", // Set the background to transparent
-                                                    border: "none", // Remove the border
-                                                    margin: "none",
-                                                    borderBottom: "5px solid white",
-                                                }}>
-                                                    <img src="/icon/search.png" alt="Search Icon" />
-                                                </M5SearchButton>
-                                                <M5SearchTag>
-                                                    <button onClick={() => { window.location.reload() }}><Link href="/Payvery">#Payvery</Link></button>
-                                                    <button onClick={() => { window.location.reload() }}><Link href="/Purplevery">#Purplevery</Link></button>
-                                                    <button onClick={() => { window.location.reload() }}><Link href="/Pg">#Pg</Link></button>
-                                                    <button onClick={() => { window.location.reload() }}><Link href="/Payment_gateway">#Payment_gateway</Link></button>
-                                                    <button onClick={() => { window.location.reload() }}><Link href="/Customer">#Customer</Link></button>
-                                                </M5SearchTag>
+                                                <span style={{ color: "#FFC200", }}>Search</span>
+                                                <span style={{ color: "white" }}>Payvery.com</span>
+                                            </AnimateUp>
+                                            <AnimateUp>
+                                                <p style={{}}>Creative Leadership of Payvery designs the new future never experienced before.</p>
+                                            </AnimateUp>
+                                            <div className="searchheerim">
+                                                <AnimateUp>
+                                                    <div style={{ position: "relative", display: "block", width: "150px", borderBottom: "5px solid #FFC200" }}>
+                                                        <M5SearchDropdownContainer>
+                                                            <M5SearchDropdownButton onClick={toggleDropdown}>
+                                                                <p>{selectedOption} {isSearchDropdownVisible ? '▲' : '▼'} </p>
+                                                            </M5SearchDropdownButton>
+                                                            <M5SearchDropdownContent isVisible={isSearchDropdownVisible}>
+                                                                <li onClick={() => handleOptionClick('All')}>All</li>
+                                                                <li onClick={() => handleOptionClick('Project')}>Project</li>
+                                                                <li onClick={() => handleOptionClick('News')}>News</li>
+                                                                <li onClick={() => handleOptionClick('Leadership')}>Leadership</li>
+                                                            </M5SearchDropdownContent>
+                                                        </M5SearchDropdownContainer>
+                                                    </div>
+                                                    <div style={{ display: "flex", marginTop: "5%", borderBottom: "5px solid white", justifyContent: "space-between" }}>
+                                                        <M5SearchInput
+                                                            type="text"
+                                                            placeholder="Type here"
+                                                            value={searchQuery}
+                                                            onChange={handleSearchInputChange} // 검색 입력란 스타일 추가
+                                                        />
+                                                        <M5SearchButton className="searchheerim-button" onClick={() => { window.location.href = "/404"; }} style={{
+                                                            background: "transparent",
+                                                        }}>
+                                                            <img src="/icon/search.png" alt="Search Icon" />
+                                                        </M5SearchButton>
+                                                    </div>
+                                                    <M5SearchTag>
+                                                        <button onClick={() => { window.location.reload() }}><Link href="/Payvery">#Payvery</Link></button>
+                                                        <button onClick={() => { window.location.reload() }}><Link href="/Purplevery">#Purplevery</Link></button>
+                                                        <button onClick={() => { window.location.reload() }}><Link href="/Pg">#Pg</Link></button>
+                                                        <button onClick={() => { window.location.reload() }}><Link href="/Payment_gateway">#Payment_gateway</Link></button>
+                                                        <button onClick={() => { window.location.reload() }}><Link href="/Customer">#Customer</Link></button>
+                                                    </M5SearchTag>
+                                                </AnimateUp>
+                                            </div>
+                                            <AnimateUp>
                                             </AnimateUp>
                                         </div>
-                                        <AnimateUp>
-                                        </AnimateUp>
                                     </M5SearchContainer>
                                     <div className="bottom">
                                         <M5Contact>
@@ -1247,21 +1275,20 @@ const Home = () => {
                                                                             style={{
                                                                                 transform: 'translate 0px, 0px',
                                                                                 opacity: 1,
-                                                                                zIndex: hoverIndex === index ? '1' : '0', /*  */
                                                                                 width: hoverIndex === index ? '100%' : '25%', /*'25%',*/
-                                                                                left: hoverIndex === index ? '0' : `${index * 25}%`, /* `${index * 25}%`,*/
-                                                                                transition: hoverIndex === index ? 'all 1s cubic-bezier(0.86, 0.5, 0.07, 1)' : 'all 0s',
+                                                                                zIndex: hoverIndex === index ? '1' : '0', /*  */
+                                                                                left: hoverIndex === index ? '' : `${index * 25}%`, /* `${index * 25}%`,*/
+                                                                                transition: hoverIndex === index ? 'width 1s cubic-bezier(0.86, 0.5, 0.07, 1)' : 'all 0s',
                                                                             }}
                                                                             onMouseEnter={() => handleItemOver(index)}
-                                                                            onMouseLeave={() => handleItemOver(false)}>
+                                                                            onMouseLeave={() => handleItemOver(null)}>
                                                                             <div className="accordion-outer" style={{
-                                                                                zIndex: hoverIndex === index ? '0' : '1', /*  */
                                                                                 background: `url(${image.outerBackground}) no-repeat 50% 50%`,
                                                                                 backgroundSize: 'cover',
                                                                             }}>
                                                                             </div>
                                                                             <div className="accordion-inner" style={{
-                                                                                left: hoverIndex === index ? '0px' : image.innerLeft,
+                                                                                left: hoverIndex === index ? '0' : image.innerLeft,
                                                                                 background: `url(${image.innerBackground}) no-repeat 50% 50%`,
                                                                                 transition: hoverIndex === index ? 'transform 5s ease-in-out' : '',
                                                                                 transform: hoverIndex === index ? 'scale(1.1) rotate(0.002deg)' : '',
@@ -1271,37 +1298,37 @@ const Home = () => {
                                                                     ))}
                                                                 </ul>
                                                             </article>
-                                                            <article className="accordion-over-container">
+                                                            <article className={`accordion-over-container ${activeIndex !== null ? 'active' : ''}`}>
                                                                 <ul className="accordion-over-list">
                                                                     {accordionItems.map((item, index) => (
                                                                         <li
                                                                             key={index}
-                                                                            className="accordion-over-item"
+                                                                            className={`accordion-over-item ${activeIndex === index ? 'active' : ''}`}
                                                                             style={{
                                                                             }}
-                                                                            onMouseEnter={() => handleTxtOver(index)}
-                                                                            onMouseLeave={() => handleTxtOver(false)}
+                                                                            onMouseEnter={() => handleItemEnter(index)}
+                                                                            onMouseLeave={() => handleItemEnter(false)}
                                                                         >
                                                                             <a className="accordion-inner-con" href="/404">
                                                                                 <div className="accordion-off-tit-box">
                                                                                     <span className="project-category">{item.category}</span>
                                                                                     <strong className="project-tit">{item.title}</strong>
                                                                                 </div>
-                                                                                    <aside className="accordion-detail-con"
+                                                                                <aside className="accordion-detail-con"
                                                                                     style={{
                                                                                         opacity: hoverTxtIndex === index ? '1' : '0',
                                                                                         transform: hoverTxtIndex === index ? '' : 'translate(0px, 100%)',
                                                                                         transition: hoverTxtIndex === index ? 'all 1.8s cubic-bezier(0.95, 0, 0.02, 1)' : ''
                                                                                     }}>
-                                                                                        <p className="accordion-detail-txt">
-                                                                                            <span className="project-category">{item.category}</span>
-                                                                                            <strong className="project-tit">{item.title}</strong>
-                                                                                        </p>
-                                                                                        <span className="read-more-btn">
-                                                                                            <em>Read more</em>
-                                                                                            <i className="xi-long-arrow-right">→</i>
-                                                                                        </span>
-                                                                                    </aside>
+                                                                                    <p className="accordion-detail-txt">
+                                                                                        <span className="project-category">{item.category}</span>
+                                                                                        <strong className="project-tit">{item.title}</strong>
+                                                                                    </p>
+                                                                                    <span className="read-more-btn">
+                                                                                        <em>Read more</em>
+                                                                                        <i className="xi-long-arrow-right">→</i>
+                                                                                    </span>
+                                                                                </aside>
                                                                             </a>
                                                                         </li>
                                                                     ))}
@@ -1314,80 +1341,82 @@ const Home = () => {
                                         </section>
                                     ) : index === 3 ? (
                                         <section className="">
-                                            <Section >
-                                                {/* 뉴스 아이템 리스트 */}
-                                                <div className="news-list">
-                                                    <AnimateUp>
-                                                        {/* 첫 번째 행 */}
-                                                        <div className="news-row">
-                                                            {/* 뉴스 아이템 1 */}
-                                                            <a href="/news1" className="news-item">
-                                                                <div className="news-box">
-                                                                    <p className="news-text">News</p>
-                                                                </div>
-                                                                <p className="news-title">{langJson[lang]?.FIRSTNEWS}
-                                                                </p>
-                                                                <span className="news-more-link"> Read more</span>
-                                                                <span className="arrow-icon" style={{ marginLeft: "20px", color: "orange", fontWeight: "bold" }}>→</span>
-                                                            </a>
-                                                            {/* 뉴스 아이템 2 */}
-                                                            <a href="/news2" className="news-item">
-                                                                <div className="news-box">
-                                                                    <p className="news-text">News</p>
-                                                                </div>
-                                                                <p className="news-title">{langJson[lang]?.SECONDNEWS}
-                                                                </p>
-                                                                <span className="news-more-link"> Read more</span>
-                                                                <span className="arrow-icon" >→</span>
-                                                            </a>
-                                                            {/* 뉴스 아이템 3 */}
-                                                            <a href="/news3" className="news-item">
-                                                                <div className="news-box">
-                                                                    <p className="news-text">News</p>
-                                                                </div>
-                                                                <p className="news-title">{langJson[lang]?.THIRDNEWS}
-                                                                </p>
-                                                                <span className="news-more-link"> Read more</span>
-                                                                <span className="arrow-icon" >→</span>
-                                                            </a>
-                                                        </div>
-                                                    </AnimateUp>
-                                                    {/* 두 번째 행 */}
-                                                    <AnimateUp>
-                                                        <div className="news-row">
-                                                            {/* 뉴스 아이템 4 */}
-                                                            <a href="/news4" className="news-item">
-                                                                <div className="news-box">
-                                                                    <p className="news-text">News</p>
-                                                                </div>
-                                                                <p className="news-title">{langJson[lang]?.FOURTHNEWS}
-                                                                </p>
-                                                                <span className="news-more-link"> Read more</span>
-                                                                <span className="arrow-icon">→</span>
-                                                            </a>
-                                                            {/* 뉴스 아이템 5 */}
-                                                            <a href="/news5" className="news-item">
-                                                                <div className="news-box">
-                                                                    <p className="news-text">News</p>
-                                                                </div>
-                                                                <p className="news-title">{langJson[lang]?.FIFTHNEWS}
-                                                                </p>
-                                                                <span className="news-more-link"> Read more</span>
-                                                                <span className="arrow-icon" >→</span>
-                                                            </a>
-                                                            {/* 뉴스 아이템 6 */}
-                                                            <a href="/news6" className="news-item">
-                                                                <div className="news-box">
-                                                                    <p className="news-text">News</p>
-                                                                </div>
-                                                                <p className="news-title">{langJson[lang]?.SIXTHNEWS}
-                                                                </p>
-                                                                <span className="news-more-link"> Read more</span>
-                                                                <span className="arrow-icon" >→</span>
-                                                            </a>
-                                                        </div>
-                                                    </AnimateUp>
-                                                </div>
+                                            <Section height="100vh">
+                                                <section className="newslistwrap">
+                                                    {/* 뉴스 아이템 리스트 */}
+                                                    <div className="news-list">
+                                                        <AnimateUp>
+                                                            {/* 첫 번째 행 */}
+                                                            <div className="news-row">
+                                                                {/* 뉴스 아이템 1 */}
+                                                                <a href="/news1" className="news-item">
+                                                                    <div className="news-box">
+                                                                        <p className="news-text">News</p>
+                                                                    </div>
+                                                                    <p className="news-title">{langJson[lang]?.FIRSTNEWS}
+                                                                    </p>
+                                                                    <span className="news-more-link"> Read more</span>
+                                                                    <span className="arrow-icon" style={{ marginLeft: "20px", color: "orange", fontWeight: "bold" }}>→</span>
+                                                                </a>
+                                                                {/* 뉴스 아이템 2 */}
+                                                                <a href="/news2" className="news-item">
+                                                                    <div className="news-box">
+                                                                        <p className="news-text">News</p>
+                                                                    </div>
+                                                                    <p className="news-title">{langJson[lang]?.SECONDNEWS}
+                                                                    </p>
+                                                                    <span className="news-more-link"> Read more</span>
+                                                                    <span className="arrow-icon" >→</span>
+                                                                </a>
+                                                                {/* 뉴스 아이템 3 */}
+                                                                <a href="/news3" className="news-item">
+                                                                    <div className="news-box">
+                                                                        <p className="news-text">News</p>
+                                                                    </div>
+                                                                    <p className="news-title">{langJson[lang]?.THIRDNEWS}
+                                                                    </p>
+                                                                    <span className="news-more-link"> Read more</span>
+                                                                    <span className="arrow-icon" >→</span>
+                                                                </a>
+                                                            </div>
+                                                        </AnimateUp>
+                                                        {/* 두 번째 행 */}
+                                                        <AnimateUp>
+                                                            <div className="news-row">
+                                                                {/* 뉴스 아이템 4 */}
+                                                                <a href="/news4" className="news-item">
+                                                                    <div className="news-box">
+                                                                        <p className="news-text">News</p>
+                                                                    </div>
+                                                                    <p className="news-title">{langJson[lang]?.FOURTHNEWS}
+                                                                    </p>
+                                                                    <span className="news-more-link"> Read more</span>
+                                                                    <span className="arrow-icon">→</span>
+                                                                </a>
+                                                                {/* 뉴스 아이템 5 */}
+                                                                <a href="/news5" className="news-item">
+                                                                    <div className="news-box">
+                                                                        <p className="news-text">News</p>
+                                                                    </div>
+                                                                    <p className="news-title">{langJson[lang]?.FIFTHNEWS}
+                                                                    </p>
+                                                                    <span className="news-more-link"> Read more</span>
+                                                                    <span className="arrow-icon" >→</span>
+                                                                </a>
+                                                                {/* 뉴스 아이템 6 */}
+                                                                <a href="/news6" className="news-item">
+                                                                    <div className="news-box">
+                                                                        <p className="news-text">News</p>
+                                                                    </div>
+                                                                    <p className="news-title">{langJson[lang]?.SIXTHNEWS}
+                                                                    </p>
+                                                                    <span className="news-more-link"> Read more</span>
+                                                                    <span className="arrow-icon" >→</span>
+                                                                </a>
+                                                            </div>
+                                                        </AnimateUp>
+                                                    </div>
+                                                </section>
                                                 {/* 뉴스 액자 버튼 */}
                                                 <AnimateUp>
                                                     <div className="newsbutton-container">
@@ -1405,63 +1434,69 @@ const Home = () => {
                                                         </a>
                                                     </div>
                                                 </AnimateUp>
+                                            </Section>
+                                        </section>
+                                    ) : (
+                                        <section>
+                                            <Section>
                                                 <AnimateUp>
                                                     <div className="sec5title">
                                                         <span class="bold-text">성공</span>으로 가는 과정을 계획하는데 <span class="bold-text">함께</span>하겠습니다.
                                                     </div>
                                                 </AnimateUp>
                                                 <div className="searchheerim-container">
-                                                    <AnimateUp>
-                                                        <span className="search-title">Search
-                                                        </span>
-                                                        <span className="search-title2 " style={{ marginLeft: "10px" }}>Payvery.com
-                                                        </span>
-                                                    </AnimateUp>
-                                                    <AnimateUp>
-                                                        <p className="searchsub">Creative Leadership of Payvery designs the new future never experienced before.</p>
-                                                    </AnimateUp>
-                                                    <AnimateUp>
-                                                        <div className="searchheerim">
-                                                            <div style={{ display: "flex" }}>
-                                                                <WSearchDropdownContainer>
-                                                                    <WSearchDropdownButton onClick={toggleDropdown}>
-                                                                        <p>{selectedOption}{isSearchDropdownVisible ? '▲' : '▼'}</p>
-                                                                    </WSearchDropdownButton>
-                                                                    <WSearchDropdownContent isVisible={isSearchDropdownVisible}>
-                                                                        <li>
-                                                                            <a onClick={() => handleOptionClick('All')}>All</a>
-                                                                            <a onClick={() => handleOptionClick('Project')}>Project</a>
-                                                                            <a onClick={() => handleOptionClick('News')}>News</a>
-                                                                            <a onClick={() => handleOptionClick('Leadership')}>Leadership</a>
-                                                                        </li>
-                                                                    </WSearchDropdownContent>
-                                                                </WSearchDropdownContainer>
-                                                                <input
-                                                                    className="searchheerim-input"
-                                                                    type="text"
-                                                                    placeholder="Type here"
-                                                                    value={searchQuery}
-                                                                    onChange={handleSearchInputChange} // 검색 입력란 스타일 추가
-                                                                />
-                                                                <WSearchButton className="searchheerim-button" onClick={() => { window.location.href = "/404"; }} style={{
-                                                                    background: "transparent",
-                                                                    border: "none",
-                                                                    color: "white",
-                                                                    borderBottom: "5px solid white",
-                                                                }}>
-                                                                    Search
-                                                                    <img src="/icon/search.png" alt="Search Icon" />
-                                                                </WSearchButton>
+                                                    <div style={{ padding: "0 12vw 0 12vw" }}>
+                                                        <AnimateUp>
+                                                            <span className="search-title">Search
+                                                            </span>
+                                                            <span className="search-title2 " style={{ marginLeft: "10px" }}>Payvery.com
+                                                            </span>
+                                                        </AnimateUp>
+                                                        <AnimateUp>
+                                                            <p className="searchsub">Creative Leadership of Payvery designs the new future never experienced before.</p>
+                                                        </AnimateUp>
+                                                        <AnimateUp>
+                                                            <div className="searchheerim">
+                                                                <form style={{display:"flex", alignItems:"center", margin:"3em 0 5em"}}>
+                                                                    <div className="customselect" style={{ position: "relative", display: "block", width: "150px", lineHeight:"30px", borderBottom: "5px solid #FFC200" }}>
+                                                                        <WSearchDropdownContainer>
+                                                                            <WSearchDropdownButton onClick={toggleDropdown}>
+                                                                                <p>{selectedOption}{isSearchDropdownVisible ? '▲' : '▼'}</p>
+                                                                            </WSearchDropdownButton>
+                                                                            <WSearchDropdownContent isVisible={isSearchDropdownVisible}>
+                                                                                <li onClick={() => handleOptionClick('All')}>All</li>
+                                                                                <li onClick={() => handleOptionClick('Project')}>Project</li>
+                                                                                <li onClick={() => handleOptionClick('News')}>News</li>
+                                                                                <li onClick={() => handleOptionClick('Leadership')}>Leadership</li>
+                                                                            </WSearchDropdownContent>
+                                                                        </WSearchDropdownContainer>
+                                                                    </div>
+                                                                    <div style={{display: "flex", width:"75%", height:"30px", borderBottom: "5px solid white"}}>
+                                                                    <input
+                                                                        className="searchheerim-input"
+                                                                        type="text"
+                                                                        placeholder="Type here"
+                                                                        value={searchQuery}
+                                                                        onChange={handleSearchInputChange} // 검색 입력란 스타일 추가
+                                                                    />
+                                                                    </div>
+                                                                    <div style={{ display: "block", height:"30px", borderBottom: "5px solid white"}}>
+                                                                    <WSearchButton className="searchheerim-button" onClick={() => { window.location.href = "/404"; }}>
+                                                                        Search
+                                                                        <img src="/icon/search.png" alt="Search Icon" />
+                                                                    </WSearchButton>
+                                                                    </div>
+                                                                </form>
+                                                                <div className="searchtag-keywords">
+                                                                    <button className="searchtag-button" onClick={() => { window.location.reload() }}><Link href="/Payvery">#Payvery</Link></button>
+                                                                    <button className="searchtag-button" onClick={() => { window.location.reload() }}><Link href="/Purplevery">#Purplevery</Link></button>
+                                                                    <button className="searchtag-button" onClick={() => { window.location.reload() }}><Link href="/Pg">#Pg</Link></button>
+                                                                    <button className="searchtag-button" onClick={() => { window.location.reload() }}><Link href="/Payment_gateway">#Payment_gateway</Link></button>
+                                                                    <button className="searchtag-button" onClick={() => { window.location.reload() }}><Link href="/Customer">#Customer</Link></button>
+                                                                </div>
                                                             </div>
-                                                            <div className="searchtag-keywords">
-                                                                <button className="searchtag-button" onClick={() => { window.location.reload() }}><Link href="/Payvery">#Payvery</Link></button>
-                                                                <button className="searchtag-button" onClick={() => { window.location.reload() }}><Link href="/Purplevery">#Purplevery</Link></button>
-                                                                <button className="searchtag-button" onClick={() => { window.location.reload() }}><Link href="/Pg">#Pg</Link></button>
-                                                                <button className="searchtag-button" onClick={() => { window.location.reload() }}><Link href="/Payment_gateway">#Payment_gateway</Link></button>
-                                                                <button className="searchtag-button" onClick={() => { window.location.reload() }}><Link href="/Customer">#Customer</Link></button>
-                                                            </div>
-                                                        </div>
-                                                    </AnimateUp>
+                                                        </AnimateUp>
+                                                    </div>
                                                 </div>
                                                 <div className="bottom">
                                                     <div className="seoulhqsupport">
@@ -1495,8 +1530,6 @@ const Home = () => {
                                                 </div>
                                             </Section>
                                         </section>
-                                    ) : (
-                                        <div>{ }</div>
                                     )}
                                 </div>
                             ))

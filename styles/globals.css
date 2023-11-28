@@ -309,6 +309,13 @@ body {
 }
 
 /* 4section sec4 */
+.newslistwrap {
+  padding: 12vh 5% 0;
+    /* 미디어 쿼리를 사용하여 스타일 변경 */
+    @media screen and (max-height: 750px) {
+      padding: 0;
+    }
+}
 .news-list {
   margin-top: 2vh;
 }
@@ -484,7 +491,9 @@ body {
 .bold-text {
   font-weight: bold;
 }
-
+.searchwraparea {
+  padding: 0 12vw 0 12vw;
+}
 .searchheerim-container {
   background-color: rgb(0, 104, 232);
   width: 100vw;
@@ -492,7 +501,6 @@ body {
 }
 
 .search-title {
-  margin-left: 2.6em;
   font-size: 4.6em;
   font-weight: bold;
   color: #FFC200;
@@ -524,7 +532,6 @@ body {
 }
 
 .searchsub {
-  margin-left: 11em;
   font-size: 1.1em;
   color: #CACACA;
 
@@ -544,10 +551,8 @@ body {
 .searchheerim-input {
   background: transparent;/* 투명 배경 추가 */
   border: none;
-  border-bottom: 0.3em solid white;/* 하단 테두리 추가 (선택 사항) */
-  width: 60%;/* 검색창의 가로 너비 조정 */
+  width: 75%;/* 검색창의 가로 너비 조정 */
   font-size: 1.2em;/* 폰트 크기 키우기 */
-  margin-bottom: 0.85em;
   padding-left: 1.2em;
 
   /* 미디어 쿼리를 사용하여 스타일 변경 */
@@ -562,7 +567,7 @@ body {
 }
 
 .searchtag-keywords {
-  padding: 10vh 0 12vh 12em;
+  padding: 0 0 100px 0;
 
   /* 미디어 쿼리를 사용하여 스타일 변경 */
   @media screen and (max-width: 1250px) {
@@ -574,10 +579,11 @@ body {
 /*검색태그 키워드 버튼*/
 .searchtag-button {
   border: none;  /* 외곽선 없애기 */
-  font-size: 1em;
+  font-size: 1.2em;
   background-color: transparent;
   border-radius: 50px;  /* 50px 반지름으로 둥글게 */
-  margin: 0 0.5em 0 0;  /* 버튼 간격 설정 */
+  margin: 0 1.5em 0 0;  /* 버튼 간격 설정 */
+  padding: 0;
 }
 
 .searchtag-button a {
@@ -717,8 +723,15 @@ margin-left: 12em;
   left: 0px;
   width: 100%;
   height: 100%;
+  z-index: 1;
+  transition: all 0.2s ease;
 }
 
+.accordion-bg-list .accordion-bg-item.active .accordion-outer {
+  opacity: 0;
+  z-index: 0;
+  transform: scale(1.05) rotate(0.002deg);
+}
 
 
 
@@ -736,7 +749,7 @@ margin-left: 12em;
   .accordion-off-tit-box {
     opacity: 0;
     transform: translate(0px, 100%);
-    transition: all 0.3s ease-in-out;
+    transition: all 0.25s ease-in-out;
   }
 }
 .accordion-over-list {
@@ -776,19 +789,10 @@ margin-left: 12em;
   visibility: inherit;
   position: absolute;
   bottom: 3em;
-  left: 3.33em;
-  right: 3.33em;
+  left: 2.5em;
+  right: 2.5em;
   color: #fff;
 }
-/* 
-.accordion-over-item :hover{
-  .accordion-detail-con {
-    opacity: 1;
-    translate: (0px, 0px);
-    transition: all 1s cubic-bezier(0.86, 0, 0.07, 1);
-  }
-}
-  */
 .project-category {
   display: block;
   font-size: 1em;
@@ -816,7 +820,7 @@ margin-left: 12em;
   align-content: center;
   justify-content: center;
   background: #ffe345;
-  padding: 0 3.33em;
+  padding: 0 2.5em;
   box-sizing: border-box;
 }
 .accordion-detail-txt {
@@ -885,19 +889,4 @@ margin-left: 12em;
 
 .read-more-btn:hover em {
   letter-spacing: 1px;
-}
-.hoverimage {
-  width: 25%;
-  transform: scale(1);
-  /* 시작 위치 지정 */
-  /* fadein, 이동, 확대 애니메이션 효과 설정 */
-  transition: width 1.5s cubic-bezier(0.86, 0, 0.07, 1), transform 5s;
-  /* 왼쪽에서 오른쪽으로 이동함 */
-  /* transition: transform 5s ease;  5초 확대 */
-}
-.hoverimage:hover {
-  width: 100%;
-  transform: scale(1.1);
-  /* X축 이동을 0으로 변경하여 원래 위치로 이동 */
-  /* transform: scale(1.1);  확대 */
 }
