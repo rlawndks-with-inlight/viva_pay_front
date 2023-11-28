@@ -570,7 +570,7 @@ padding: 5px 10px;
 }
 `
 const MMoreSection = styled.div`
-position: absolute;
+position: fixed;
 top: 0;
 height:100vh;
 width: 100%;
@@ -581,7 +581,7 @@ const MTotalButtonContainer = styled.ul`
 text-decoration: none;
 margin-top : 6em;
 padding: 0;
-@media only screen and (max-height: 430px) {
+@media only screen and (max-height: 550px) {
 margin-top : 4em;
 }
 `
@@ -606,7 +606,7 @@ p{ /* aboutus,projects,expertise,ir 디자인 */
     padding-top: 0;
     padding-bottom: 0.7em;
 }
-@media only screen and (max-height: 430px) {
+@media only screen and (max-height: 550px) {
 padding-top: 0.3em;
     a{
         font-size: 0.8em;
@@ -638,7 +638,7 @@ opacity: ${(props) => (props.isVisible ? '1' : '0')};
         background-color: rgba(255, 194, 0, 0.5); /* 노란색 배경 추가 */
       }
   }
-@media only screen and (max-height: 430px) {
+@media only screen and (max-height: 550px) {
     a{
     padding-top: 0.2em;
     padding-bottom: 0.2em;
