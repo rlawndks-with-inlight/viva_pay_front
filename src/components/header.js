@@ -177,7 +177,7 @@ z-index: 1;
 transition: 0.5s;
 background-color: ${(props) => (props.activeSection === 0 ? 'transparent' : 'rgba(0, 0, 0, 0.2)')};
 .headeroverarea{
-  display: ${props => props.showHeader == 1 ? '' : 'block' };
+  display: ${props => props.showHeader == 1 ? '' : 'block'};
     position: absolute;
     bottom: -30px;
     left: 0;
@@ -389,7 +389,13 @@ display: flex;
 padding: 0;
 margin: 0;
 justify-content: space-evenly;
+font-size: 2em;
 animation: ${props => props.AnimationEnabled ? css`${fadeInDown} 1s ` : css`${fadeOutUp} 0.6s `};
+@media only screen and (max-width: 1280px),(max-height: 760px) {
+font-size: 1.5em;
+}@media only screen and (max-width: 960px),(max-height: 600px) {
+font-size: 1em;
+}
 .char{
   display: inline-block;
   position: relative;
@@ -475,16 +481,14 @@ a{
 }
 `
 const MoreIconButtonContainer = styled.div`
+display: flex; /* 더보기 아래쪽 아이콘 버튼 스타일*/
 position: fixed;
 left: 10%;
-display: flex; /* 더보기 아래쪽 아이콘 버튼 스타일*/
+bottom: 80px;
 align-items: center;
   animation: ${props => props.AnimationEnabled ? css`${fadeInUp} 1s ` : css`${fadeOutDown} 0.6s `};
 @media only screen and (max-width: 420px) {
     left: 2%;
-}
-@media only screen and (max-height: 850px) {
-bottom: 80px;
 }
 @media only screen and (max-height: 400px) {
 bottom: 5%;
@@ -906,18 +910,18 @@ const Header = (props) => {
       }}
     >
       <div class="headeroverarea" showHeader={showHeader}
-       onMouseOver={() => {
-        setShowHeader(true)
-      }}
-      onMouseLeave={() => {
-        if (scrollY != 0) {
-          setShowHeader(false)
-        }
-      }}></div>
+        onMouseOver={() => {
+          setShowHeader(true)
+        }}
+        onMouseLeave={() => {
+          if (scrollY != 0) {
+            setShowHeader(false)
+          }
+        }}></div>
       {isMobile ? null : <BlueStick activeSection={activeSection} />}
       <div className="headerinner">
         <LogoButton
-                  BlinkAnimation={BlinkAnimation}
+          BlinkAnimation={BlinkAnimation}
           showMore={showMore}
           activeSection={activeSection}
           onClick={() => { window.location.reload() }}>
@@ -966,8 +970,8 @@ const Header = (props) => {
             </>
           )}
         </HeaderButtons>
-        </div>
-            {showMore && (
+      </div>
+      {showMore && (
         <div>
           {isMobile ? (
             <MMoreSection AnimationEnabled={AnimationEnabled}>
@@ -1066,7 +1070,7 @@ const Header = (props) => {
                 <div class="menuinner">
                   <TotalButtonContainer AnimationEnabled={AnimationEnabled}>
                     <li>
-                      <h2>
+                      <h2 style={{ /* 1.5em이 기본 사이즈 */ }}>
                         <a href="/ABOUT US">
                           <CharComponent char="A" charIndex={0}>A</CharComponent>
                           <CharComponent char="B" charIndex={1}>B</CharComponent>
