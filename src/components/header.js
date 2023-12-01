@@ -210,7 +210,7 @@ top: ${(props) => (props.showMore ? '16px' : '')};
   border: none;
   cursor: pointer;
   z-index: 9999;
-  background: url('/image/Logo.svg');
+  background: url('/image/logo.svg');
   width: 19em; 
   height: 3em;
   background-size: cover;
