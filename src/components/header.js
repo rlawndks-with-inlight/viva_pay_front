@@ -194,11 +194,12 @@ const BlueStick = styled.span`
 position: absolute;
 top: 0;
 left: 8%;
-height: 250px;
+height: ${(props) => (props.showHeader == 1 ? '250px' : 'none')};
 padding:"0";
 border-left: 10px solid rgb(0, 104, 232); 
-/* rgb(0, 104, 232) 파랑색 코드 10px solid rgb(255, 194, 0)*/
 display: ${(props) => (props.activeSection === 0 ? '' : 'none')};
+/* rgb(0, 104, 232) 파랑색 코드 10px solid rgb(255, 194, 0)*/
+transition: 0.5s;
 /* 모바일 화면에서 숨김 */
   @media only screen and (max-width: 1280px), (max-height: 600px) {
     display: none;
@@ -206,7 +207,7 @@ display: ${(props) => (props.activeSection === 0 ? '' : 'none')};
 `
 const LogoButton = styled.div`
 position: ${(props) => (props.showMore ? 'fixed' : 'relative')};
-top: ${(props) => (props.showMore ? '16px' : '')};
+top: ${(props) => (props.showMore ? '19px' : '')};
   border: none;
   cursor: pointer;
   z-index: 9999;
@@ -216,9 +217,9 @@ top: ${(props) => (props.showMore ? '16px' : '')};
   background-size: cover;
   animation: ${props => props.BlinkAnimation ? css`${blinkAnimation} 0.6s ` : 'none'};
 @media only screen and (max-width: 700px) {
-top: ${(props) => (props.showMore ? '27px' : '')};
-  width: 10.7em; 
-  height: 1.67em;
+top: ${(props) => (props.showMore ? '29px' : '')};
+  width: 140px; 
+  height: 21.625px;
 }
 `
 const HeaderButtons = styled.div` /* 헤더의 오른쪽 스타일 */
@@ -628,9 +629,9 @@ width: 100%;
 background-color: white;
 list-style: none;
 opacity: ${(props) => (props.isVisible ? '1' : '0')};
-  max-height: ${(props) => (props.isVisible ? '185px' : '0')}; /* 110px : 0 에서 애니메이션 문제없음 */
+  max-height: ${(props) => (props.isVisible ? '110px' : '0')}; /* 110px : 0 에서 애니메이션 문제없음 185px이 모든걸 보여줌 */
   padding: 0;
-  transition: ${(props) => (props.isVisible ? 'max-height 0.5s' : 'max-height 0.5s, opacity 4s')};
+  transition: ${(props) => (props.isVisible ? 'max-height 0.4s' : 'max-height 0.5s, opacity 4s')};
   a {
     padding-top: 0.5em;
     padding-bottom: 0.5em;
@@ -917,9 +918,10 @@ const Header = (props) => {
           if (scrollY != 0) {
             setShowHeader(false)
           }
-        }}></div>
-      {isMobile ? null : <BlueStick activeSection={activeSection} />}
+        }}>
+        </div>
       <div className="headerinner">
+      {isMobile ? null : <BlueStick activeSection={activeSection} showHeader={showHeader} />}
         <LogoButton
           BlinkAnimation={BlinkAnimation}
           showMore={showMore}

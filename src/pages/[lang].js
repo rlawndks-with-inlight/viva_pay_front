@@ -1192,7 +1192,7 @@ const Home = () => {
                                                 <W1ScrollDownYellowStick>
                                                     <p>S C R O L L D O W N </p>
                                                     <AnimateUp>
-                                                        <span></span>
+                                                        <span></span>{/* 노란 막대 */}
                                                     </AnimateUp>
                                                 </W1ScrollDownYellowStick>
                                             </Section>
