@@ -393,18 +393,21 @@ justify-content: space-evenly;
 font-size: 2em;
 animation: ${props => props.AnimationEnabled ? css`${fadeInDown} 1s ` : css`${fadeOutUp} 0.6s `};
 @media only screen and (max-width: 1280px),(max-height: 760px) {
-font-size: 1.5em;
-}@media only screen and (max-width: 960px),(max-height: 600px) {
-font-size: 1em;
+  font-size: 1.5em;
+}
+@media only screen and (max-width: 960px),(max-height: 600px) {
+  font-size: 1em;
 }
 .char{
   display: inline-block;
   position: relative;
+  pointer-events: none;
   visibility: hidden;
   overflow: hidden;
   color: white;
   text-decoration: none;
   ::before, ::after{
+    pointer-events: none;
     user-select: none;
     position: absolute;
     top: 0;
@@ -521,9 +524,6 @@ margin-right: 3vw;
     transform: scale(1.05);
     }
   } 
-  .cm-magnetic-btn {
-    transition: transform 0.1s ease;
-  }
 @media only screen and (max-width: 650px),(max-height: 400px) {
   img{
     width: 25px;
@@ -753,7 +753,6 @@ const Header = (props) => {
   const router = useRouter();
   const { lang = 'kr' } = router.query;
   const [isVisible, setIsVisible] = useState(false);
-  const [isScrollingDisabled, setScrollingDisabled] = useState(false);
   const [isMobile, setIsMobile] = useState(false); // State for mobile screen
   const [loading, setLoading] = useState(true);
   const [windowWidth, setWindowWidth] = useState(0); // 초기 화면 너비 설정
@@ -791,18 +790,6 @@ const Header = (props) => {
     }
   }, [showMore]);
 
-  const CharComponent = ({ char, charIndex }) => {
-    const style = {
-      '--char-index': charIndex,
-    };
-
-    return (
-      <span className="char" data-char={char} style={style}>
-        {char}
-      </span>
-    );
-  };
-
   const applyMagneticEffect = () => {
     document.querySelectorAll(".cm-magnetic-btn").forEach((el) => {
       el.addEventListener('mousemove', function (e) {
@@ -824,7 +811,6 @@ const Header = (props) => {
       applyMagneticEffect();
 
       return () => {
-        // Clean up event listeners if needed
       };
     }, []);
 
@@ -1101,13 +1087,13 @@ const Header = (props) => {
                     <li>
                       <h2 style={{ /* 1.5em이 기본 사이즈 */ }}>
                         <a href="/ABOUT US">
-                          <CharComponent char="A" charIndex={0}>A</CharComponent>
-                          <CharComponent char="B" charIndex={1}>B</CharComponent>
-                          <CharComponent char="O" charIndex={2}>O</CharComponent>
-                          <CharComponent char="U" charIndex={3}>U</CharComponent>
-                          <CharComponent char="T" charIndex={4}>T</CharComponent>
-                          <CharComponent char="U" charIndex={5}>U</CharComponent>
-                          <CharComponent char="S" charIndex={6}>S</CharComponent>
+                          <span className="char" data-char="A" style={{ '--char-index': 0 }}>A</span>
+                          <span className="char" data-char="B" style={{ '--char-index': 1 }}>B</span>
+                          <span className="char" data-char="O" style={{ '--char-index': 2 }}>O</span>
+                          <span className="char" data-char="U" style={{ '--char-index': 3 }}>U</span>
+                          <span className="char" data-char="T" style={{ '--char-index': 4 }}>T</span>
+                          <span className="char" data-char="U" style={{ '--char-index': 5 }}>U</span>
+                          <span className="char" data-char="S" style={{ '--char-index': 6 }}>S</span>
                         </a>
                       </h2>
                       <SubButton>
@@ -1121,14 +1107,14 @@ const Header = (props) => {
                     <li >
                       <h2 >
                         <a href="/projects" >
-                          <CharComponent char="P" charIndex={0}>P</CharComponent>
-                          <CharComponent char="R" charIndex={1}>R</CharComponent>
-                          <CharComponent char="O" charIndex={2}>O</CharComponent>
-                          <CharComponent char="J" charIndex={3}>J</CharComponent>
-                          <CharComponent char="E" charIndex={4}>E</CharComponent>
-                          <CharComponent char="C" charIndex={5}>C</CharComponent>
-                          <CharComponent char="T" charIndex={6}>T</CharComponent>
-                          <CharComponent char="S" charIndex={7}>S</CharComponent>
+                          <span className="char"  data-char="P" style={{ '--char-index': 0 }}>P</span>
+                          <span className="char"  data-char="R" style={{ '--char-index': 1 }}>R</span>
+                          <span className="char"  data-char="O" style={{ '--char-index': 2 }}>O</span>
+                          <span className="char"  data-char="J" style={{ '--char-index': 3 }}>J</span>
+                          <span className="char"  data-char="E" style={{ '--char-index': 4 }}>E</span>
+                          <span className="char"  data-char="C" style={{ '--char-index': 5 }}>C</span>
+                          <span className="char"  data-char="T" style={{ '--char-index': 6 }}>T</span>
+                          <span className="char"  data-char="S" style={{ '--char-index': 7 }}>S</span>
                         </a>
                       </h2>
                       <SubButton >
@@ -1141,15 +1127,15 @@ const Header = (props) => {
                     <li >
                       <h2>
                         <a href="/expertise" >
-                          <CharComponent char="E" charIndex={0}>E</CharComponent>
-                          <CharComponent char="X" charIndex={1}>X</CharComponent>
-                          <CharComponent char="P" charIndex={2}>P</CharComponent>
-                          <CharComponent char="E" charIndex={3}>E</CharComponent>
-                          <CharComponent char="R" charIndex={4}>R</CharComponent>
-                          <CharComponent char="T" charIndex={5}>T</CharComponent>
-                          <CharComponent char="I" charIndex={6}>I</CharComponent>
-                          <CharComponent char="S" charIndex={7}>S</CharComponent>
-                          <CharComponent char="E" charIndex={8}>E</CharComponent>
+                          <span className="char" data-char="E" style={{ '--char-index': 0 }}>E</span>
+                          <span className="char" data-char="X" style={{ '--char-index': 1 }}>X</span>
+                          <span className="char" data-char="P" style={{ '--char-index': 2 }}>P</span>
+                          <span className="char" data-char="E" style={{ '--char-index': 3 }}>E</span>
+                          <span className="char" data-char="R" style={{ '--char-index': 4 }}>R</span>
+                          <span className="char" data-char="T" style={{ '--char-index': 5 }}>T</span>
+                          <span className="char" data-char="I" style={{ '--char-index': 6 }}>I</span>
+                          <span className="char" data-char="S" style={{ '--char-index': 7 }}>S</span>
+                          <span className="char" data-char="E" style={{ '--char-index': 8 }}>E</span>
                         </a>
                       </h2>
                       <SubButton >
@@ -1162,8 +1148,8 @@ const Header = (props) => {
                     <li>
                       <h2>
                         <a href="/ir" >
-                          <CharComponent char="I" charIndex={0}>I</CharComponent>
-                          <CharComponent char="R" charIndex={1}>R</CharComponent>
+                          <span className="char"  data-char="I" style={{ '--char-index': 0 }}>I</span>
+                          <span className="char" data-char="R" style={{ '--char-index': 1 }}>R</span>
                         </a>
                       </h2>
                       <SubButton >
@@ -1175,13 +1161,13 @@ const Header = (props) => {
                     <li>
                       <h2>
                         <a href="/contact" >
-                          <CharComponent char="C" charIndex={0}>C</CharComponent>
-                          <CharComponent char="O" charIndex={1}>O</CharComponent>
-                          <CharComponent char="N" charIndex={2}>N</CharComponent>
-                          <CharComponent char="T" charIndex={3}>T</CharComponent>
-                          <CharComponent char="A" charIndex={4}>A</CharComponent>
-                          <CharComponent char="C" charIndex={5}>C</CharComponent>
-                          <CharComponent char="T" charIndex={6}>T</CharComponent>
+                          <span className="char" data-char="C"  style={{ '--char-index': 0 }}>C</span>
+                          <span className="char" data-char="O"  style={{ '--char-index': 1 }}>O</span>
+                          <span className="char" data-char="N"  style={{ '--char-index': 2 }}>N</span>
+                          <span className="char" data-char="T"  style={{ '--char-index': 3 }}>T</span>
+                          <span className="char" data-char="A"  style={{ '--char-index': 4 }}>A</span>
+                          <span className="char" data-char="C"  style={{ '--char-index': 5 }}>C</span>
+                          <span className="char" data-char="T"  style={{ '--char-index': 6 }}>T</span>
                         </a>
                       </h2>
                     </li>
@@ -1189,15 +1175,15 @@ const Header = (props) => {
                   <MoreIconButtonContainer AnimationEnabled={AnimationEnabled}>
                     {/* 인스타그램 버튼 */}
                     <MoreIconButton>
-                      <MagneticButton href="https://www.instagram.com/heerim_architects_official/" target="_blank" rel="noopener noreferrer">
+                      <MagneticButton className="cm-magnetic-btn" href="https://www.instagram.com/heerim_architects_official/" target="_blank" rel="noopener noreferrer">
                         <img src="/icon/instagram.svg" alt="YouTube Icon" />
                       </MagneticButton>
                       {/* 유튜브 버튼 */}
-                      <MagneticButton style={{ marginLeft: "3vw" }} href="https://www.youtube.com/channel/UCPwQIrf17KFyqvXeq8NVY_Q" target="_blank" rel="noopener noreferrer">
+                      <MagneticButton className="cm-magnetic-btn" href="https://www.youtube.com/channel/UCPwQIrf17KFyqvXeq8NVY_Q" target="_blank" rel="noopener noreferrer">
                         <img src="/icon/youtube.svg" alt="YouTube Icon" />
                       </MagneticButton>
                       {/* 핀터레스트 버튼 */}
-                      <MagneticButton style={{ marginLeft: "3vw" }} href="https://www.pinterest.co.kr/heerim_architects_official/" target="_blank" rel="noopener noreferrer">
+                      <MagneticButton className="cm-magnetic-btn" href="https://www.pinterest.co.kr/heerim_architects_official/" target="_blank" rel="noopener noreferrer">
                         <img src="/icon/pinterest.svg" alt="Pinterest Icon" />
                       </MagneticButton>
                     </MoreIconButton>

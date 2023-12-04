@@ -658,6 +658,7 @@ const Home = () => {
             link: 'https://heerim.com/en/project/project_view.php?idx=222',
         },
     ];
+    
     const handleScroll = (event) => {
         event.preventDefault(); // Prevent default scrolling behavior
         
