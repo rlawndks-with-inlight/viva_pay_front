@@ -173,9 +173,9 @@ body {
 /* 3section sec3 */
 
 .sec3txt {
+  display: table;
   height: 15vh;
   margin-left: 10vw;
-  vertical-align: middle;
   @media screen and (min-width: 1765px) {
     visibility: hidden;
   }

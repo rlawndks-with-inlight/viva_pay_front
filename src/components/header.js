@@ -405,6 +405,7 @@ font-size: 1em;
   color: white;
   text-decoration: none;
   ::before, ::after{
+    user-select: none;
     position: absolute;
     top: 0;
     left: 0;
@@ -763,6 +764,32 @@ const Header = (props) => {
   const [showMore, setShowMore] = useState(false);
   const [BlinkAnimation, setBlinkAnimation] = useState(false)
   const [AnimationEnabled, setAnimationEnabled] = useState(false); // 상태 추가
+
+  useEffect(() => {
+    const handleScroll = (e) => {
+      if (showMore) {
+		e.preventDefault();
+		e.stopPropagation();
+      }
+    };
+    
+    if (showMore) {
+      const originalStyle = window.getComputedStyle(document.body).cssText; // 현재 body의 스타일 저장
+      document.body.style.cssText = `
+        position: fixed; 
+        top: -${window.scrollY}px;
+        overflow-y: scroll;
+        width: 100%;`;
+      window.addEventListener('wheel', handleScroll, { passive: false }); // wheel 이벤트 추가
+
+      return () => {
+        const scrollY = document.body.style.top;
+        document.body.style.cssText = originalStyle; // 이전에 저장한 body 스타일로 복원
+        window.scrollTo(0, parseInt(scrollY || '0', 10) * -1);
+        window.removeEventListener('wheel', handleScroll); // 컴포넌트 언마운트 시 이벤트 제거
+      };
+    }
+  }, [showMore]);
 
   const CharComponent = ({ char, charIndex }) => {
     const style = {

@@ -485,19 +485,6 @@ margin: 0 0 5vh 0;
     }
 }
 `
-const W3HoverImageOverlay = styled.div`
-position: absolute;
-bottom: -100%;
-background: yellow;  /* 노란색 배경 */
-color: black;
-text-align: left;  /* 왼쪽 정렬 */
-padding: 2.2rem;  /* 여백 추가 */
-display: -webkit-box;
--webkit-box-orient: vertical;
-/* fadein 애니메이션 효과 설정 */
-opacity: 0;  /* 처음에는 안 보이게 설정 */
-transition: opacity 2s ease, bottom 2.2s cubic-bezier(0.8, 0, 0.1, 1);
-`
 const WSearchButton = styled.button`
 border: none;
 background: transparent;
@@ -562,7 +549,7 @@ const TopicsContainer = () => {
 };
 
 const Home = () => {
-
+    
     const router = useRouter();
     const { lang = 'kr' } = router.query;
     const [activeSection, setActiveSection] = useState(0); // 활성 섹션 인덱스
@@ -578,6 +565,7 @@ const Home = () => {
     const [hoverTxtIndex, sethoverTxtIndex] = useState(false);
     const [activeIndex, setActiveIndex] = useState(null);
     const [isAnimating, setIsAnimating] = useState(false);
+    const [scrolling, setScrolling] = useState(false);
 
     const handleItemEnter = (index) => {
         setActiveIndex(index);
@@ -670,38 +658,36 @@ const Home = () => {
             link: 'https://heerim.com/en/project/project_view.php?idx=222',
         },
     ];
-
-
-
+    const handleScroll = (event) => {
+        event.preventDefault(); // Prevent default scrolling behavior
+        
+        if (!scrolling) {
+            setScrolling(true);
+            
+            const deltaY = event.deltaY;
+            let nextSection = activeSection;
+            
+            // Determine the direction of scroll
+            if (deltaY > 0 && nextSection < sections.length - 1) {
+                nextSection++;
+            } else if (deltaY < 0 && nextSection > 0) {
+                nextSection--;
+            }
+            
+            // Scroll to the next section smoothly
+            if (nextSection !== activeSection) {
+                // You might need to adjust this scroll behavior based on your requirements
+                sectionRefs.current[nextSection].scrollIntoView({ behavior: "smooth" });
+                setActiveSection(nextSection);
+            }
+            
+            setTimeout(() => {
+                setScrolling(false);
+            }, 700); // Adjust the time as needed to prevent rapid scrolls
+        }
+    };
+    
     useEffect(() => {
-        const handleScroll = (e) => {
-            // 스크롤 이벤트를 중지합니다.
-            e.preventDefault();
-
-            // 현재 화면의 중앙 위치를 계산합니다.
-            const screenHeight = window.innerHeight;
-            const screenCenter = screenHeight / 2;
-
-            // 마우스 휠 방향에 따라 이동할 섹션을 결정합니다.
-            let newActiveSection = activeSection;
-            if (e.deltaY > 0 && activeSection < sections.length - 1) {
-                newActiveSection = activeSection + 1;
-            } else if (e.deltaY < 0 && activeSection > 0) {
-                newActiveSection = activeSection - 1;
-            }
-
-            // 새로운 활성 섹션을 설정합니다.
-            setActiveSection(newActiveSection);
-
-            // 화면을 스크롤하여 새로운 섹션의 가운데로 이동합니다.
-            const element = sectionRefs.current[newActiveSection];
-            if (element) {
-                const sectionTop = element.offsetTop;
-                const sectionHeight = element.clientHeight;
-                const scrollToY = sectionTop + sectionHeight / 2 - screenCenter;
-                window.scrollTo({ top: scrollToY, behavior: "smooth" });
-            }
-        };
 
         const handleResize = () => {
             const isMobile = typeof window !== "undefined" ? window.innerWidth <= 1280 || window.innerHeight <= 550 : false;
@@ -714,19 +700,19 @@ const Home = () => {
                 window.removeEventListener("wheel", handleScroll);
             }
         };
-
-        // 초기 화면 사이즈에 따라 스크롤 이벤트를 설정합니다.
+    
+        // Add event listeners for resize and scroll
         handleResize();
-
-        // 윈도우 크기 변경 이벤트를 감지하여 적절한 이벤트 리스너를 추가 또는 제거합니다.
         window.addEventListener("resize", handleResize);
-
+        window.addEventListener("wheel", handleScroll, { passive: false });
+    
         return () => {
-            // 컴포넌트가 unmount될 때 이벤트 리스너를 제거합니다.
+            // Remove event listeners when component unmounts
             window.removeEventListener("resize", handleResize);
             window.removeEventListener("wheel", handleScroll);
         };
-    }, [activeSection]);
+    }, [activeSection, scrolling]);
+    
 
 
     const toggleDropdown = () => {
@@ -737,19 +723,6 @@ const Home = () => {
         setSelectedOption(option);
         setIsSearchDropdownVisible(false);
     };
-
-    const handleImageHover = (imageSrc, text, link) => {
-        setHoveredImage(imageSrc);
-        setHoveredText(text);
-        setHoveredImageLink(link);
-    };
-
-    const handleImageLeave = () => {
-        setHoveredImage(null);
-        setHoveredText(null);
-        setHoveredImageLink(null); // 마우스를 떠날 때 링크 초기화
-    };
-
 
     // 클릭된 아이콘에 대한 처리
     const handleIconClick = (iconIndex) => {
@@ -1175,15 +1148,15 @@ const Home = () => {
                                         </M5Contact>
                                     </div>
                                 </Mobile>
-                            ) : (sections.map((sectionId, index) => (
+                            ) : (sections.map((section, index) => (
                                 <div
-                                    key={sectionId}
-                                    id={sectionId}
+                                    key={section}
+                                    id={section}
                                     className={`section ${index === activeSection ? "active-section" : ""}`}
-                                    ref={(ref) => (sectionRefs.current[index] = ref)}
+                                    ref={el => (sectionRefs.current[index] = el)}
                                 >
                                     {index === 0 ? (
-                                        <section className="">
+                                        <section class="wheelcontainer"  data-scroll-index="1" id="wheelIndex1">
                                             <Section height="100vh" image="/image/galaxy.png">
                                                 <AnimateUp>
                                                     <W1Title magtop="30vh" > {langJson[lang]?.FOLLOW}</W1Title>
@@ -1198,7 +1171,7 @@ const Home = () => {
                                             </Section>
                                         </section>
                                     ) : index === 1 ? (
-                                        <section className="" style={{ display: "block" }}>
+                                        <section class="wheelcontainer" style={{ display: "block" }} data-scroll-index="2" id="wheelIndex2">
                                             <Section height="calc(100vh - 130px)" image="/image/blue.png">
                                                 <div className="blue">
                                                     <div className="blueinner">
@@ -1250,10 +1223,10 @@ const Home = () => {
                                             </W2IconContainer>
                                         </section>
                                     ) : index === 2 ? (
-                                        <section className="">
+                                        <section class="wheelcontainer"  data-scroll-index="3" id="wheelIndex3">
                                             <Section height="vh">
                                                 <div className="sec3txt">
-                                                    <div>
+                                                    <div style={{display:"table-cell", verticalAlign:"middle"}}>
                                                         <AnimateUp>
                                                             <div className="title">Our Service</div>
                                                         </AnimateUp>
@@ -1340,7 +1313,7 @@ const Home = () => {
                                             </Section>
                                         </section>
                                     ) : index === 3 ? (
-                                        <section className="">
+                                        <section class="wheelcontainer"  data-scroll-index="4" id="wheelIndex4">
                                             <Section height="100vh">
                                                 <section className="newslistwrap">
                                                     {/* 뉴스 아이템 리스트 */}
@@ -1437,7 +1410,7 @@ const Home = () => {
                                             </Section>
                                         </section>
                                     ) : (
-                                        <section>
+                                        <section class="wheelcontainer" data-scroll-index="5" id="wheelIndex5">
                                             <Section>
                                                 <AnimateUp>
                                                     <div className="sec5title">
