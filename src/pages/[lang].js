@@ -206,18 +206,18 @@ div{ /* 4개 이미지 위의 장소, 건물 텍스트 디자인 관리 */
     color: white;
 }
 `
-const Place = styled.p`
+const M3Place = styled.p`
 margin: 0;
 padding: 0;
 font-size: 1em;
 `
-const Building = styled.p`
+const M3Building = styled.p`
 margin: 0;
 padding: 0;
 font-size: 1.5em;
 font-weight: bold;
 `
-const NewsList = styled.div`
+const M4NewsList = styled.div`
 margin-left: 10%;
 margin-right: 10%;
 text-align: left;
@@ -226,7 +226,7 @@ a{
     text-decoration: none;
 }
 `
-const NewsContent = styled.p`
+const M4NewsContent = styled.p`
 color: gray;
 font-size: 0.9em;
 margin-top: 0.4em;
@@ -451,7 +451,7 @@ img{
     height: 5em;
 }
 `
-const PrevButton = styled.button`
+const PrevButton = styled.button` /* 모바일, 웹 공용 버튼 */
 border: none;
 cursor: pointer;
 margin-left: 20%;
@@ -468,7 +468,7 @@ margin: 0 0 5vh 0;
     }
 }
 `
-const NextButton = styled.button`
+const NextButton = styled.button` /* 모바일, 웹 공용 버튼 */
 border: none;
 cursor: pointer;
 margin-right: 20%;
@@ -632,33 +632,6 @@ const Home = () => {
         },
     ];
 
-    const accordionOverImages = [
-        {
-            backgroundUrl: '/image/macbook.png',
-            category: 'Incheon, Korea',
-            title: 'Incheon International Airport Passenger Terminal 2',
-            link: 'https://heerim.com/en/project/project_view.php?idx=5',
-        },
-        {
-            backgroundUrl: '/image/cardreader.png',
-            category: 'Bunso, Ghana',
-            title: 'University of Environment and Sustainable Development, Bunso Campus',
-            link: 'https://heerim.com/en/project/project_view.php?idx=692',
-        },
-        {
-            backgroundUrl: '/image/kiosk.png',
-            category: 'Mongomeyen, Equatorial Guinea',
-            title: 'Mongomeyen International Airport Passenger Terminal',
-            link: 'https://heerim.com/en/project/project_view.php?idx=522',
-        },
-        {
-            backgroundUrl: '/image/scanner.png',
-            category: 'Baku, Azerbaijan',
-            title: 'SOCAR Tower',
-            link: 'https://heerim.com/en/project/project_view.php?idx=222',
-        },
-    ];
-    
     const handleScroll = (event) => {
         event.preventDefault(); // Prevent default scrolling behavior
         
@@ -684,7 +657,7 @@ const Home = () => {
             
             setTimeout(() => {
                 setScrolling(false);
-            }, 700); // Adjust the time as needed to prevent rapid scrolls
+            }, 1000); // Adjust the time as needed to prevent rapid scrolls
         }
     };
     
@@ -713,8 +686,6 @@ const Home = () => {
             window.removeEventListener("wheel", handleScroll);
         };
     }, [activeSection, scrolling]);
-    
-
 
     const toggleDropdown = () => {
         setIsSearchDropdownVisible(!isSearchDropdownVisible);
@@ -930,39 +901,39 @@ const Home = () => {
                                                 <a
                                                     href="/404">
                                                     <div>
-                                                        <Place>Incheon, Korea</Place>
-                                                        <Building>{langJson[lang]?.MICN}</Building>
+                                                        <M3Place>Incheon, Korea</M3Place>
+                                                        <M3Building>{langJson[lang]?.MICN}</M3Building>
                                                     </div>
                                                     <img src="/image/outer1.png" alt="outer1" />
                                                 </a>
                                                 <a
                                                     href="/404">
                                                     <div >
-                                                        <Place>Seoul, Korea</Place>
-                                                        <Building>{langJson[lang]?.MYEOUIDO}</Building>
+                                                        <M3Place>Seoul, Korea</M3Place>
+                                                        <M3Building>{langJson[lang]?.MYEOUIDO}</M3Building>
                                                     </div>
                                                     <img src="/image/outer2.png" alt="outer2" />
                                                 </a>
                                                 <a
                                                     href="/404">
                                                     <div>
-                                                        <Place>Seongnam, Korea</Place>
-                                                        <Building>{langJson[lang]?.MHYUNDAI}</Building>
+                                                        <M3Place>Seongnam, Korea</M3Place>
+                                                        <M3Building>{langJson[lang]?.MHYUNDAI}</M3Building>
                                                     </div>
                                                     <img src="/image/outer3.png" alt="outer3" />
                                                 </a>
                                                 <a
                                                     href="/404">
                                                     <div>
-                                                        <Place >Baku, Azerbaijan</Place>
-                                                        <Building>{langJson[lang]?.SOCAR}</Building>
+                                                        <M3Place >Baku, Azerbaijan</M3Place>
+                                                        <M3Building>{langJson[lang]?.SOCAR}</M3Building>
                                                     </div>
                                                     <img src="/image/outer4.png" alt="outer4" />
                                                 </a>
                                             </M3ImageContainer>
                                         </AnimateUp>
                                     </M3>
-                                    <NewsList>
+                                    <M4NewsList>
                                         {/* 뉴스 아이템 1 */}
                                         <AnimateUp>
                                             <a href="/404">
@@ -970,8 +941,8 @@ const Home = () => {
                                                     <div className="news-box">
                                                         <p className="news-text">News</p>
                                                     </div>
-                                                    <NewsContent>{langJson[lang]?.FIRSTNEWS}
-                                                    </NewsContent>
+                                                    <M4NewsContent>{langJson[lang]?.FIRSTNEWS}
+                                                    </M4NewsContent>
                                                     <span className="news-more-link"> Read more</span>
                                                     <span className="arrow-icon" >→</span>
                                                 </div>
@@ -984,8 +955,8 @@ const Home = () => {
                                                     <div className="news-box">
                                                         <p className="news-text">News</p>
                                                     </div>
-                                                    <NewsContent>{langJson[lang]?.SECONDNEWS}
-                                                    </NewsContent>
+                                                    <M4NewsContent>{langJson[lang]?.SECONDNEWS}
+                                                    </M4NewsContent>
                                                     <span className="news-more-link"> Read more</span>
                                                     <span className="arrow-icon" >→</span>
                                                 </div>
@@ -998,8 +969,8 @@ const Home = () => {
                                                     <div className="news-box">
                                                         <p className="news-text">News</p>
                                                     </div>
-                                                    <NewsContent>{langJson[lang]?.THIRDNEWS}
-                                                    </NewsContent>
+                                                    <M4NewsContent>{langJson[lang]?.THIRDNEWS}
+                                                    </M4NewsContent>
                                                     <span className="news-more-link"> Read more</span>
                                                     <span className="arrow-icon" >→</span>
                                                 </div>
@@ -1012,8 +983,8 @@ const Home = () => {
                                                     <div className="news-box">
                                                         <p className="news-text">News</p>
                                                     </div>
-                                                    <NewsContent>{langJson[lang]?.FOURTHNEWS}
-                                                    </NewsContent>
+                                                    <M4NewsContent>{langJson[lang]?.FOURTHNEWS}
+                                                    </M4NewsContent>
                                                     <span className="news-more-link"> Read more</span>
                                                     <span className="arrow-icon">→</span>
                                                 </div>
@@ -1026,8 +997,8 @@ const Home = () => {
                                                     <div className="news-box">
                                                         <p className="news-text">News</p>
                                                     </div>
-                                                    <NewsContent>{langJson[lang]?.FIFTHNEWS}
-                                                    </NewsContent>
+                                                    <M4NewsContent>{langJson[lang]?.FIFTHNEWS}
+                                                    </M4NewsContent>
                                                     <span className="news-more-link"> Read more</span>
                                                     <span className="arrow-icon" >→</span>
                                                 </div>
@@ -1040,13 +1011,13 @@ const Home = () => {
                                                     <div className="news-box">
                                                         <p className="news-text">News</p>
                                                     </div>
-                                                    <NewsContent>{langJson[lang]?.SIXTHNEWS}
-                                                    </NewsContent>
+                                                    <M4NewsContent>{langJson[lang]?.SIXTHNEWS}
+                                                    </M4NewsContent>
                                                     <span className="news-more-link"> Read more</span>
                                                     <span className="arrow-icon" >→</span></div>
                                             </a>
                                         </AnimateUp>
-                                    </NewsList>
+                                    </M4NewsList>
                                     <AnimateUp>
                                         <M4ButtonContainer>
                                             {/* news1 버튼 */}

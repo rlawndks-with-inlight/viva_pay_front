@@ -4,27 +4,6 @@ import { useRouter } from 'next/router';
 import React, { useState, useEffect } from 'react';
 import styled, { css, keyframes } from 'styled-components';
 
-const slideInDown = keyframes`
-  0% {
-    height: 0;
-    opacity: 0;
-  }
-  100% {
-    height: var(--max-height); /* 변수로 높이값 지정 */
-    opacity: 1;
-  }
-`
-const slideOutUp = keyframes`
-  0% {
-    display: block;
-    height: var(--max-height); /* 변수로 높이값 지정 */
-    opacity: 1;
-  }
-  100% {
-    height: 0;
-    opacity: 0;
-  }
-`
 const slideInLeft = keyframes`
 0%{
   transform: translateX(100%);
@@ -47,14 +26,6 @@ const fadeIn = keyframes`
 }
 100%{
   opacity: 1;
-}
-`
-const fadeOut = keyframes`
-0%, 50%{
-  opacity: 1;
-}
-100%{
-  opacity: 0;
 }
 `
 const skewIn = keyframes`
@@ -97,7 +68,7 @@ const rotateRight = keyframes`
   transform: rotate(180deg);
 }
 `
-const blinkAnimation = keyframes`
+const blinkAnimation = keyframes` // 로고 버튼의 깜빡임 애니메이션
   0%, 100% {
     opacity: 1;
   }
@@ -273,11 +244,6 @@ div{
   div:nth-child(9) { top: 20px; left: 20px; }
 `
 const MoreSection = styled.section`
-/* 
-position: fixed;
-top: 0;
-width: 100%;
- */
 position: fixed;
 top: 0;
 width: 100%;
@@ -317,11 +283,6 @@ padding: 0;
 }
 `
 const CloseMoreButton = styled.button` /* moreclose 버튼 */
-/* 
-position: fixed;
-top: 26px;
-right: 10vw;
- */
 position: fixed;
 top: 26px;
 right: 10vw;
@@ -356,8 +317,7 @@ strong{
   animation: ${props => props.AnimationEnabled ? css`${fadeLeft} 1s 0.25s forwards` : css`${fadeRight} 0.4s backwards`};
   }
 }
-@media screen and (max-width: 700px)
-{
+@media screen and (max-width: 700px){
     right: 2%;
 }
 `
@@ -753,7 +713,7 @@ const Header = (props) => {
   const router = useRouter();
   const { lang = 'kr' } = router.query;
   const [isVisible, setIsVisible] = useState(false);
-  const [isMobile, setIsMobile] = useState(false); // State for mobile screen
+  const [isMobile, setIsMobile] = useState(false); // 모바일 화면 상태
   const [loading, setLoading] = useState(true);
   const [windowWidth, setWindowWidth] = useState(0); // 초기 화면 너비 설정
   const [isAboutUsDropdownVisible, setAboutUsDropdownVisible] = useState(false);
@@ -763,7 +723,7 @@ const Header = (props) => {
   const [showMore, setShowMore] = useState(false);
   const [BlinkAnimation, setBlinkAnimation] = useState(false)
   const [AnimationEnabled, setAnimationEnabled] = useState(false); // 상태 추가
-
+/* 이걸 쓰면 더보기 창에서 바디의 스크롤이 움직이진 않지만 더보기를 나올때 순간 스크롤이 없어졌다 생김
   useEffect(() => {
     const handleScroll = (e) => {
       if (showMore) {
@@ -775,7 +735,7 @@ const Header = (props) => {
     if (showMore) {
       const originalStyle = window.getComputedStyle(document.body).cssText; // 현재 body의 스타일 저장
       document.body.style.cssText = `
-        position: fixed; 
+        position: fixed; // 이걸 없애면 그 스크롤이 순간 사라지는것도 없어지는데 고정도 안되서 의미가 없어짐
         top: -${window.scrollY}px;
         overflow-y: scroll;
         width: 100%;`;
@@ -789,7 +749,9 @@ const Header = (props) => {
       };
     }
   }, [showMore]);
+  */
 
+  // 호버시 마우스 추적
   const applyMagneticEffect = () => {
     document.querySelectorAll(".cm-magnetic-btn").forEach((el) => {
       el.addEventListener('mousemove', function (e) {
@@ -898,13 +860,13 @@ const Header = (props) => {
       setIsMobile(window.innerWidth <= 600 && window.innerHeight >= 300);
     };
 
-    checkIsMobile(); // Check on component mount
+    checkIsMobile(); // 컴포넌트 마운트 확인
 
-    // Update the mobile state when the window is resized
+    // 화면 크기에 따라 모바일 화면 확인
     window.addEventListener('resize', checkIsMobile);
 
     return () => {
-      window.removeEventListener('resize', checkIsMobile); // Remove the event listener on unmount
+      window.removeEventListener('resize', checkIsMobile); // 이벤트 리스너 제거
     };
   }, []);
 
