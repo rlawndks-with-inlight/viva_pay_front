@@ -2,7 +2,8 @@
 import React, { useEffect, useState, useRef } from "react";
 import Link from 'next/link';
 import UserLayout from 'src/layouts/UserLayout';
-import langJson from 'src/data/lang.json'
+import NewsItem from 'src/components/NewsItem';
+import langJson from 'src/data/lang.json';
 import { useRouter } from "next/router";
 import styled from "styled-components";
 import { useInView } from 'react-intersection-observer'; // react-intersection-observer 라이브러리 사용
@@ -549,7 +550,6 @@ const TopicsContainer = () => {
 };
 
 const Home = () => {
-    
     const router = useRouter();
     const { lang = 'kr' } = router.query;
     const [activeSection, setActiveSection] = useState(0); // 활성 섹션 인덱스
@@ -1289,78 +1289,30 @@ const Home = () => {
                                             <Section height="100vh">
                                                 <section className="newslistwrap">
                                                     {/* 뉴스 아이템 리스트 */}
-                                                    <div className="news-list">
-                                                        <AnimateUp>
-                                                            {/* 첫 번째 행 */}
-                                                            <div className="news-row">
-                                                                {/* 뉴스 아이템 1 */}
-                                                                <a href="/news1" className="news-item">
-                                                                    <div className="news-box">
-                                                                        <p className="news-text">News</p>
-                                                                    </div>
-                                                                    <p className="news-title">{langJson[lang]?.FIRSTNEWS}
-                                                                    </p>
-                                                                    <span className="news-more-link"> Read more</span>
-                                                                    <span className="arrow-icon" style={{ marginLeft: "20px", color: "orange", fontWeight: "bold" }}>→</span>
-                                                                </a>
-                                                                {/* 뉴스 아이템 2 */}
-                                                                <a href="/news2" className="news-item">
-                                                                    <div className="news-box">
-                                                                        <p className="news-text">News</p>
-                                                                    </div>
-                                                                    <p className="news-title">{langJson[lang]?.SECONDNEWS}
-                                                                    </p>
-                                                                    <span className="news-more-link"> Read more</span>
-                                                                    <span className="arrow-icon" >→</span>
-                                                                </a>
-                                                                {/* 뉴스 아이템 3 */}
-                                                                <a href="/news3" className="news-item">
-                                                                    <div className="news-box">
-                                                                        <p className="news-text">News</p>
-                                                                    </div>
-                                                                    <p className="news-title">{langJson[lang]?.THIRDNEWS}
-                                                                    </p>
-                                                                    <span className="news-more-link"> Read more</span>
-                                                                    <span className="arrow-icon" >→</span>
-                                                                </a>
-                                                            </div>
-                                                        </AnimateUp>
-                                                        {/* 두 번째 행 */}
-                                                        <AnimateUp>
-                                                            <div className="news-row">
-                                                                {/* 뉴스 아이템 4 */}
-                                                                <a href="/news4" className="news-item">
-                                                                    <div className="news-box">
-                                                                        <p className="news-text">News</p>
-                                                                    </div>
-                                                                    <p className="news-title">{langJson[lang]?.FOURTHNEWS}
-                                                                    </p>
-                                                                    <span className="news-more-link"> Read more</span>
-                                                                    <span className="arrow-icon">→</span>
-                                                                </a>
-                                                                {/* 뉴스 아이템 5 */}
-                                                                <a href="/news5" className="news-item">
-                                                                    <div className="news-box">
-                                                                        <p className="news-text">News</p>
-                                                                    </div>
-                                                                    <p className="news-title">{langJson[lang]?.FIFTHNEWS}
-                                                                    </p>
-                                                                    <span className="news-more-link"> Read more</span>
-                                                                    <span className="arrow-icon" >→</span>
-                                                                </a>
-                                                                {/* 뉴스 아이템 6 */}
-                                                                <a href="/news6" className="news-item">
-                                                                    <div className="news-box">
-                                                                        <p className="news-text">News</p>
-                                                                    </div>
-                                                                    <p className="news-title">{langJson[lang]?.SIXTHNEWS}
-                                                                    </p>
-                                                                    <span className="news-more-link"> Read more</span>
-                                                                    <span className="arrow-icon" >→</span>
-                                                                </a>
-                                                            </div>
-                                                        </AnimateUp>
-                                                    </div>
+    <div className="news-list">
+      <AnimateUp>
+        {/* 첫 번째 행 */}
+        <div className="news-row">
+          {[0, 1, 2].map((item, index) => (
+            <NewsItem
+              key={index}
+              newsNumber={item}
+            />
+          ))}
+        </div>
+      </AnimateUp>
+      {/* 두 번째 행 */}
+      <AnimateUp>
+        <div className="news-row">
+          {[3, 4, 5].map((item, index) => (
+            <NewsItem
+              key={index}
+              newsNumber={item}
+            />
+          ))}
+        </div>
+      </AnimateUp>
+    </div>
                                                 </section>
                                                 {/* 뉴스 액자 버튼 */}
                                                 <AnimateUp>
