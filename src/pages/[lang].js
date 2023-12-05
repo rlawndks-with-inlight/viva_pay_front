@@ -90,12 +90,12 @@ border: 1px solid transparent;
 `
 const M1Title = styled.div`
 margin-top: 30vh;
-margin-left: 1.5em;
+margin-left: 14vw;
 font-size:3.1em;
 font-weight: bold;
 font-family: 'Playfair Display', serif;
 color: white;
-@media only screen and (max-width: 400px) {
+@media only screen and (max-width: 430px) {
     margin-left: 1em;
     font-size: 12vw;
 }
@@ -741,7 +741,7 @@ const Home = () => {
             setWindowHeight(window.innerHeight);
 
             // 화면 너비가 800 이하인 경우 아이콘 개수를 작게 설정, 그렇지 않으면 크게 설정
-            if (window.innerWidth <= 800 || window.innerHeight <= 600) {
+            if (window.innerWidth <= 800) {
                 setIconIndexes(Array.from({ length: iconsPerPageSmall }, (_, i) => i));
             } else {
                 setIconIndexes(Array.from({ length: iconsPerPageLarge }, (_, i) => i));
@@ -1157,7 +1157,7 @@ const Home = () => {
                                                             <AnimateUp>
                                                                 <div className="subtitle"> {langJson[lang]?.FOLLOW}</div>
                                                                 <div className="subtitle"> {langJson[lang]?.SUPPORT}</div>
-                                                                <div className="description" style={{ marginTop: '2vw' }}>{langJson[lang]?.DESCIRPTION}</div>
+                                                                <div className="description">{langJson[lang]?.DESCIRPTION}</div>
                                                                 {/* 주제와 설명 */}
                                                             </AnimateUp>
                                                         </div>
