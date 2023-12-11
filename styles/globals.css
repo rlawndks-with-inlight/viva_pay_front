@@ -60,8 +60,24 @@ body {
     transform: translateY(-10px); /* 이 값은 글자가 움직이는 거리를 조절합니다. */
   }
 }
+@keyframes zoomInOut {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+.zoomInOut {
+  animation: zoomInOut 10s infinite linear;
+}
 /* 추가로 필요한 스타일 속성들을 여기에 추가할 수 있습니다. */
 
+/* 1section sec1 1섹션 스타일 */
+.wheelcontainer {
+  height: 100vh;
+}
 /* justify-content: flex-end; */
 /* 2section sec2 2섹션 스타일  */
 .blue {
@@ -322,7 +338,7 @@ body {
 .newsbutton-container {
   justify-content: space-evenly;
   margin: 0 auto;  /* 가운데 정렬을 위해 텍스트 정렬을 사용합니다. */
-  border: solid gray 1px;
+  border: none; /* solid gray 1px; */
   border-radius: 20px;
   padding-top: 10px;
   padding-bottom: 10px;  /* 버튼과 내용 사이의 간격을 조절합니다. */
@@ -359,14 +375,11 @@ body {
 
 /* 5section */
 .sec5title {
-  font-size: 3.9em;
-  margin-bottom: 0.1em;
+  font-size: 2em;
+  margin-bottom: 0.7em;
   text-align: center;
   color: gray;
 
-  @media only screen and (max-width: 800px) {
-    font-size: 4.15vw;
-  }
   @media only screen and (max-height: 600px) {
     font-size: 2vw;
   }

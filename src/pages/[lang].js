@@ -5,7 +5,7 @@ import UserLayout from 'src/layouts/UserLayout';
 import NewsItem from 'src/components/NewsItem';
 import langJson from 'src/data/lang.json';
 import { useRouter } from "next/router";
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import { useInView } from 'react-intersection-observer'; // react-intersection-observer 라이브러리 사용
 const sections = ["section1", "section2", "section3", "section4", "section5"]; // 섹션 이름
 const totalIcons = 9; // 총 아이콘 개수
@@ -396,7 +396,8 @@ height: ${(props) => props.height};
 background-size: cover;
 background-image:  url(${props => props.image});
 `
-const W1Title = styled.div`
+const W1Title = styled.span`
+display: block;
 margin-top: ${(props) => props.magtop};
 margin-left: 14vw;
 font-size: 5em;
@@ -551,7 +552,7 @@ const TopicsContainer = () => {
 
 const Home = () => {
     const router = useRouter();
-    const { lang = 'kr' } = router.query;
+    const { lang = 'en' } = router.query;
     const [activeSection, setActiveSection] = useState(0); // 활성 섹션 인덱스
     const [iconIndexes, setIconIndexes] = useState(Array.from({ length: iconsPerPageLarge }, (_, i) => i)); // 표시되는 아이콘 인덱스 배열
     const [loading, setLoading] = useState(true);
@@ -648,12 +649,11 @@ const Home = () => {
                 nextSection--;
             }
             
-            // Scroll to the next section smoothly
-            if (nextSection !== activeSection) {
-                // You might need to adjust this scroll behavior based on your requirements
-                sectionRefs.current[nextSection].scrollIntoView({ behavior: "smooth" });
-                setActiveSection(nextSection);
-            }
+         // Scroll to the next section smoothly if the section reference exists
+         if (nextSection !== activeSection && sectionRefs.current[nextSection]) {
+            sectionRefs.current[nextSection].scrollIntoView({ behavior: "smooth" });
+            setActiveSection(nextSection);
+        }
             
             setTimeout(() => {
                 setScrolling(false);
@@ -675,10 +675,14 @@ const Home = () => {
             }
         };
     
-        // Add event listeners for resize and scroll
-        handleResize();
-        window.addEventListener("resize", handleResize);
+    // Add event listeners for resize and scroll
+    handleResize();
+    window.addEventListener("resize", handleResize);
+
+    // 모바일이 아닌 경우에만 기본 스크롤을 유지하기 위해 조건 추가
+    if (!(window.innerWidth <= 1280 || window.innerHeight <= 550)) {
         window.addEventListener("wheel", handleScroll, { passive: false });
+    }
     
         return () => {
             // Remove event listeners when component unmounts
@@ -1129,7 +1133,7 @@ const Home = () => {
                                 >
                                     {index === 0 ? (
                                         <section class="wheelcontainer"  data-scroll-index="1" id="wheelIndex1">
-                                            <Section height="100vh" image="/image/galaxy.png">
+                                            <Section height="100vh">
                                                 <AnimateUp>
                                                     <W1Title magtop="30vh" > {langJson[lang]?.FOLLOW}</W1Title>
                                                     <W1Title > {langJson[lang]?.SUPPORT}</W1Title>
@@ -1140,10 +1144,11 @@ const Home = () => {
                                                         <span></span>{/* 노란 막대 */}
                                                     </AnimateUp>
                                                 </W1ScrollDownYellowStick>
+                                                <img  className="zoomInOut" style={{ position:"absolute", top:"0", width:"100%", height:"100vh", zIndex:"-1", }} src="/image/galaxy.png"/>
                                             </Section>
                                         </section>
                                     ) : index === 1 ? (
-                                        <section class="wheelcontainer" style={{ display: "block" }} data-scroll-index="2" id="wheelIndex2">
+                                        <section class="" style={{ display: "block" }} data-scroll-index="2" id="wheelIndex2">
                                             <Section height="calc(100vh - 130px)" image="/image/blue.png">
                                                 <div className="blue">
                                                     <div className="blueinner">
@@ -1195,7 +1200,7 @@ const Home = () => {
                                             </W2IconContainer>
                                         </section>
                                     ) : index === 2 ? (
-                                        <section class="wheelcontainer"  data-scroll-index="3" id="wheelIndex3">
+                                        <section class=""  data-scroll-index="3" id="wheelIndex3">
                                             <Section height="vh">
                                                 <div className="sec3txt">
                                                     <div style={{display:"table-cell", verticalAlign:"middle"}}>
@@ -1285,7 +1290,7 @@ const Home = () => {
                                             </Section>
                                         </section>
                                     ) : index === 3 ? (
-                                        <section class="wheelcontainer"  data-scroll-index="4" id="wheelIndex4">
+                                        <section class=""  data-scroll-index="4" id="wheelIndex4">
                                             <Section height="100vh">
                                                 <section className="newslistwrap">
                                                     {/* 뉴스 아이템 리스트 */}
@@ -1334,7 +1339,7 @@ const Home = () => {
                                             </Section>
                                         </section>
                                     ) : (
-                                        <section class="wheelcontainer" data-scroll-index="5" id="wheelIndex5">
+                                        <section class="" data-scroll-index="5" id="wheelIndex5">
                                             <Section>
                                                 <AnimateUp>
                                                     <div className="sec5title">
