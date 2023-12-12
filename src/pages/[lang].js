@@ -43,6 +43,8 @@ width: 125px;
 text-decoration: none;
 `
 const WSearchDropdownButton = styled.li`
+display: flex;
+justify-content: space-between;
 border: none;
 background-color: transparent;
 cursor: pointer;
@@ -294,6 +296,8 @@ width: 130px;
 text-decoration: none;
 `
 const M5SearchDropdownButton = styled.li`
+display: flex;
+justify-content: space-between;
 border: none;
 background-color: transparent;
 cursor: pointer;
@@ -489,12 +493,16 @@ margin: 0 0 5vh 0;
 `
 const WSearchButton = styled.button`
 border: none;
+border-left: 1px solid white;
+padding: 0 0 0 1.5vw;
 background: transparent;
 color: white;
 font-size: 1.2em;
+font-weight: lighter;
 cursor: pointer;
+
     img{
-        margin-left: 1em;
+        margin-left: 4vw;
         width: 20px;
         height: 20px;
     }
@@ -1054,10 +1062,10 @@ const Home = () => {
                                             </AnimateUp>
                                             <div className="searchheerim">
                                                 <AnimateUp>
-                                                    <div style={{ position: "relative", display: "block", width: "150px", borderBottom: "5px solid #FFC200" }}>
+                                                    <div style={{ position: "relative", display: "block", width: "135px", borderBottom: "5px solid #FFC200" }}>
                                                         <M5SearchDropdownContainer>
                                                             <M5SearchDropdownButton onClick={toggleDropdown}>
-                                                                <p>{selectedOption} {isSearchDropdownVisible ? '▲' : '▼'} </p>
+                                                                <p>{selectedOption}</p> <p>{isSearchDropdownVisible ? '▲' : '▼'} </p>
                                                             </M5SearchDropdownButton>
                                                             <M5SearchDropdownContent isVisible={isSearchDropdownVisible}>
                                                                 <li onClick={() => handleOptionClick('All')}>All</li>
@@ -1227,8 +1235,8 @@ const Home = () => {
                                                                                 opacity: 1,
                                                                                 width: hoverIndex === index ? '100%' : '25%', /*'25%',*/
                                                                                 zIndex: hoverIndex === index ? '1' : '0', /*  */
-                                                                                left: hoverIndex === index ? '' : `${index * 25}%`, /* `${index * 25}%`,*/
-                                                                                transition: hoverIndex === index ? 'width 1s cubic-bezier(0.86, 0.5, 0.07, 1)' : 'all 0s',
+                                                                                left: hoverIndex === index ? '0' : `${index * 25}%`, /* `${index * 25}%`,*/
+                                                                                transition: hoverIndex === index ? 'width 1.1s cubic-bezier(0.86, 0.5, 0.07, 1), left 1.1s cubic-bezier(0.86, 0.5, 0.07, 1)' : 'all 0s',/* cubic-bezier(0.86, 0.5, 0.07, 1) */
                                                                             }}
                                                                             onMouseEnter={() => handleItemOver(index)}
                                                                             onMouseLeave={() => handleItemOver(null)}>
@@ -1268,7 +1276,7 @@ const Home = () => {
                                                                                     style={{
                                                                                         opacity: hoverTxtIndex === index ? '1' : '0',
                                                                                         transform: hoverTxtIndex === index ? '' : 'translate(0px, 100%)',
-                                                                                        transition: hoverTxtIndex === index ? 'all 1.8s cubic-bezier(0.95, 0, 0.02, 1)' : ''
+                                                                                        transition: hoverTxtIndex === index ? 'all 2s cubic-bezier(0.95, 0, 0.02, 1)' : ''
                                                                                     }}>
                                                                                     <p className="accordion-detail-txt">
                                                                                         <span className="project-category">{item.category}</span>
@@ -1348,22 +1356,24 @@ const Home = () => {
                                                 </AnimateUp>
                                                 <div className="searchheerim-container">
                                                     <div style={{ padding: "0 12vw 0 12vw" }}>
-                                                        <AnimateUp>
+                                                        <div style={{height:"98px"}}>
+                                                        <AnimateUp >
                                                             <span className="search-title">Search
                                                             </span>
-                                                            <span className="search-title2 " style={{ marginLeft: "10px" }}>Payvery.com
+                                                            <span className="search-title2 " style={{ marginLeft: "0.25em" }}>Payvery.com
                                                             </span>
                                                         </AnimateUp>
+                                                        </div>
                                                         <AnimateUp>
                                                             <p className="searchsub">Creative Leadership of Payvery designs the new future never experienced before.</p>
                                                         </AnimateUp>
                                                         <AnimateUp>
                                                             <div className="searchheerim">
-                                                                <form style={{display:"flex", alignItems:"center", margin:"3em 0 5em"}}>
-                                                                    <div className="customselect" style={{ position: "relative", display: "block", width: "150px", lineHeight:"30px", borderBottom: "5px solid #FFC200" }}>
+                                                                <form style={{display:"flex", alignItems:"center", margin:"3vh 0 8vh"}}>
+                                                                    <div className="customselect" style={{ justifyContent:"space-between", position: "relative", display: "flex", width: "130px", lineHeight:"40px", borderBottom: "7px solid #FFC200" }}>
                                                                         <WSearchDropdownContainer>
                                                                             <WSearchDropdownButton onClick={toggleDropdown}>
-                                                                                <p>{selectedOption}{isSearchDropdownVisible ? '▲' : '▼'}</p>
+                                                                                <p>{selectedOption}</p><p>{isSearchDropdownVisible ? '▲' : '▼'}</p>
                                                                             </WSearchDropdownButton>
                                                                             <WSearchDropdownContent isVisible={isSearchDropdownVisible}>
                                                                                 <li onClick={() => handleOptionClick('All')}>All</li>
@@ -1373,7 +1383,7 @@ const Home = () => {
                                                                             </WSearchDropdownContent>
                                                                         </WSearchDropdownContainer>
                                                                     </div>
-                                                                    <div style={{display: "flex", width:"75%", height:"30px", borderBottom: "5px solid white"}}>
+                                                                    <div style={{display: "flex", width:"65%", height:"40px", borderBottom: "7px solid white",}}>
                                                                     <input
                                                                         className="searchheerim-input"
                                                                         type="text"
@@ -1382,7 +1392,7 @@ const Home = () => {
                                                                         onChange={handleSearchInputChange} // 검색 입력란 스타일 추가
                                                                     />
                                                                     </div>
-                                                                    <div style={{ display: "block", height:"30px", borderBottom: "5px solid white"}}>
+                                                                    <div style={{ display: "flex", height:"40px", borderBottom: "7px solid white", alignItems:"center"}}>
                                                                     <WSearchButton className="searchheerim-button" onClick={() => { window.location.href = "/404"; }}>
                                                                         Search
                                                                         <img src="/icon/search.png" alt="Search Icon" />
@@ -1405,10 +1415,10 @@ const Home = () => {
                                                         <div className="hq">
                                                             <div className="address">
                                                                 <div className="hq1">
-                                                                    <img src="/icon/location.png" alt="Location Icon" /> Add
+                                                                    <img src="/icon/location.png" alt="Location Icon" /> Add.
                                                                 </div>
                                                                 <div className="hq1">
-                                                                    <img src="/icon/mobile.png" alt="Mobile Icon" /> Tel
+                                                                    <img src="/icon/mobile.png" alt="Mobile Icon" /> Tel.
                                                                 </div>
                                                             </div>
                                                             <div className="address">
@@ -1419,9 +1429,9 @@ const Home = () => {
                                                         <div className="sup">
                                                             <div className="address">
                                                                 <div className="hq3">
-                                                                    <img src="/icon/email.png" alt="Email Icon" /> E-mail</div>
+                                                                    <img src="/icon/email.png" alt="Email Icon" /> E-mail.</div>
                                                                 <div className="hq3">
-                                                                    <img src="/icon/fax.png" alt="FAX Icon" /> FAX</div>
+                                                                    <img src="/icon/fax.png" alt="FAX Icon" /> FAX.</div>
                                                             </div>
                                                             <div className="address">
                                                                 <div className="hq4">purplevery222@gmail.com</div>
