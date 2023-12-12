@@ -225,23 +225,24 @@ display: inline-block;
 position: relative;
 cursor: pointer;
 width: 25px;
-height: 25px;  
+height: 25px;
+padding: 10px;
 div{
   position: absolute;
   width: 5px;
   height: 5px;
   background: #fff;
   }
-  div:nth-child(1) { top: 0; left: 0; 
+  div:nth-child(1) { top: 10px; left: 10px; 
   background-color: rgb(255, 194, 0);}
-  div:nth-child(2) { top: 0; left: 10px; }
-  div:nth-child(3) { top: 0; left: 20px; }
-  div:nth-child(4) { top: 10px; left: 0; }
-  div:nth-child(5) { top: 10px; left: 10px; }
-  div:nth-child(6) { top: 10px; left: 20px; }
-  div:nth-child(7) { top: 20px; left: 0; }
-  div:nth-child(8) { top: 20px; left: 10px; }
-  div:nth-child(9) { top: 20px; left: 20px; }
+  div:nth-child(2) { top: 10px; left: 20px; }
+  div:nth-child(3) { top: 10px; left: 30px; }
+  div:nth-child(4) { top: 20px; left: 10px; }
+  div:nth-child(5) { top: 20px; left: 20px; }
+  div:nth-child(6) { top: 20px; left: 30px; }
+  div:nth-child(7) { top: 30px; left: 10px; }
+  div:nth-child(8) { top: 30px; left: 20px; }
+  div:nth-child(9) { top: 30px; left: 30px; }
 `
 const MoreSection = styled.section`
 position: fixed;
@@ -289,8 +290,8 @@ right: 10vw;
 border: none;
 background-color: transparent;
 cursor: pointer;
-justify-content: center;
-padding: 0;
+align-items: center;
+padding: 0 10px 10px 0;
 margin: 0;
 strong{
   position:absolute;
@@ -927,11 +928,11 @@ const Header = (props) => {
             </CloseMoreButton>
           ) : (
             <>
+            <Link href="/kr" legacyBehavior>
+              <a activeSection={activeSection} className={lang === 'kr' ? 'active' : ''}>KR</a>
+            </Link>
               <Link href="/en" legacyBehavior>
                 <a activeSection={activeSection} className={lang === 'en' ? 'active' : ''}>EN</a>
-              </Link>
-              <Link href="/kr" legacyBehavior>
-                <a activeSection={activeSection} className={lang === 'kr' ? 'active' : ''}>KR</a>
               </Link>
               <More onClick={handleMoreButtonClick}>
                 <div></div>
