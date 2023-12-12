@@ -1356,21 +1356,19 @@ const Home = () => {
                                                 </AnimateUp>
                                                 <div className="searchheerim-container">
                                                     <div style={{ padding: "0 12vw 0 12vw" }}>
-                                                        <div style={{height:"98px"}}>
                                                         <AnimateUp >
                                                             <span className="search-title">Search
                                                             </span>
                                                             <span className="search-title2 " style={{ marginLeft: "0.25em" }}>Payvery.com
                                                             </span>
                                                         </AnimateUp>
-                                                        </div>
                                                         <AnimateUp>
                                                             <p className="searchsub">Creative Leadership of Payvery designs the new future never experienced before.</p>
                                                         </AnimateUp>
                                                         <AnimateUp>
                                                             <div className="searchheerim">
                                                                 <form style={{display:"flex", alignItems:"center", margin:"3vh 0 8vh"}}>
-                                                                    <div className="customselect" style={{ justifyContent:"space-between", position: "relative", display: "flex", width: "130px", lineHeight:"40px", borderBottom: "7px solid #FFC200" }}>
+                                                                    <div className="customselect" style={{ justifyContent:"space-between", position: "relative", display: "flex", width: "130px", lineHeight:"50px", borderBottom: "7px solid #FFC200" }}>
                                                                         <WSearchDropdownContainer>
                                                                             <WSearchDropdownButton onClick={toggleDropdown}>
                                                                                 <p>{selectedOption}</p><p>{isSearchDropdownVisible ? '▲' : '▼'}</p>
@@ -1383,7 +1381,7 @@ const Home = () => {
                                                                             </WSearchDropdownContent>
                                                                         </WSearchDropdownContainer>
                                                                     </div>
-                                                                    <div style={{display: "flex", width:"65%", height:"40px", borderBottom: "7px solid white",}}>
+                                                                    <div style={{display: "flex", width:"65%", height:"50px", borderBottom: "7px solid white",}}>
                                                                     <input
                                                                         className="searchheerim-input"
                                                                         type="text"
@@ -1392,7 +1390,7 @@ const Home = () => {
                                                                         onChange={handleSearchInputChange} // 검색 입력란 스타일 추가
                                                                     />
                                                                     </div>
-                                                                    <div style={{ display: "flex", height:"40px", borderBottom: "7px solid white", alignItems:"center"}}>
+                                                                    <div style={{ display: "flex", height:"50px", borderBottom: "7px solid white", alignItems:"center"}}>
                                                                     <WSearchButton className="searchheerim-button" onClick={() => { window.location.href = "/404"; }}>
                                                                         Search
                                                                         <img src="/icon/search.png" alt="Search Icon" />

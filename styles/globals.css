@@ -1,4 +1,6 @@
-  @import url('https://fonts.googleapis.com/css2?family=Archivo+Narrow&family=Arimo&family=Oswald&family=Pragati+Narrow&display=swap');
+@import url(https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@2.0/nanumsquare.css);
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&family=Playfair+Display&display=swap');
+
 .headerinner {
   position:relative;
   display:flex;
@@ -13,6 +15,7 @@
 }
 body {
   font-size: 14px;
+  font-family: 'Noto Sans KR', sans-serif;
   margin: 0 !important;
   overflow-x: hidden;
 }
@@ -286,6 +289,7 @@ body {
 
 .news-title {
   font-size: 1em;
+  font-family: 'NanumSquare', sans-serif; /* 나눔스퀘어 글꼴 */
   color: gray;
 
   /* 미디어 쿼리를 사용하여 스타일 변경 */
@@ -375,7 +379,7 @@ body {
 
 /* 5section */
 .sec5title {
-  font-size: 2em;
+  font-size: 2.5em;
   font-family: 'Noto Sans KR', sans-serif;
   margin-bottom: 3.5vh;
   text-align: center;
@@ -403,7 +407,8 @@ body {
   font-size: 4.8em;
   font-weight: bold;
   color: #FFC200;
-  font-family: 'Archivo Narrow', sans-serif;
+  font-family: 'Noto Sans KR', sans-serif;
+
 /* 
 font-family: 'Archivo Narrow', sans-serif;
 font-family: 'Oswald', sans-serif;
@@ -425,8 +430,9 @@ font-family: 'Pragati Narrow', sans-serif;
 .search-title2 {
   font-size: 4.8em;
   font-weight: bold;
-  color: white;
-  font-family: 'Archivo Narrow', sans-serif;
+  color: white;  
+  font-family: 'Noto Sans KR', sans-serif;
+
   /* 
   font-family: 'Archivo Narrow', sans-serif;
   font-family: 'Oswald', sans-serif;
@@ -446,6 +452,8 @@ font-family: 'Pragati Narrow', sans-serif;
   margin: 0 0 7.2vh 0;
   font-size: 1.1em;
   color: #CACACA;
+  font-family: 'Noto Sans KR', sans-serif;
+
   /* 미디어 쿼리를 사용하여 스타일 변경 */
   @media screen and (max-width: 1000px) {
     font-size: 5.8vw;
@@ -479,6 +487,7 @@ font-family: 'Pragati Narrow', sans-serif;
 
 .searchtag-keywords {
   padding: 0 0 8vh 0;
+  font-family: 'Noto Sans KR', sans-serif;
 
   /* 미디어 쿼리를 사용하여 스타일 변경 */
   @media screen and (max-width: 1250px) {
