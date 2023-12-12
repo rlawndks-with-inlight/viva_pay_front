@@ -1236,7 +1236,7 @@ const Home = () => {
                                                                                 width: hoverIndex === index ? '100%' : '25%', /*'25%',*/
                                                                                 zIndex: hoverIndex === index ? '1' : '0', /*  */
                                                                                 left: hoverIndex === index ? '0' : `${index * 25}%`, /* `${index * 25}%`,*/
-                                                                                transition: hoverIndex === index ? 'width 1.1s cubic-bezier(0.86, 0.5, 0.07, 1), left 1.1s cubic-bezier(0.86, 0.5, 0.07, 1)' : 'all 0s',/* cubic-bezier(0.86, 0.5, 0.07, 1) */
+                                                                                transition: hoverIndex === index ? 'width 0.7s linear, left 0.7s linear' : 'all 0s',/* 1.1s cubic-bezier(0.86, 0.5, 0.07, 1) */
                                                                             }}
                                                                             onMouseEnter={() => handleItemOver(index)}
                                                                             onMouseLeave={() => handleItemOver(null)}>

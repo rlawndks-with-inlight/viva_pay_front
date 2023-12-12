@@ -711,7 +711,7 @@ padding: 7px;
 const Header = (props) => {
   const { activeSection, showHeader, setShowHeader, scrollY } = props;
   const router = useRouter();
-  const { lang = 'kr' } = router.query;
+  const { lang = 'en' } = router.query;
   const [isVisible, setIsVisible] = useState(false);
   const [isMobile, setIsMobile] = useState(false); // 모바일 화면 상태
   const [loading, setLoading] = useState(true);
