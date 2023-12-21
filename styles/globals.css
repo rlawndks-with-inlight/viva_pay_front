@@ -184,15 +184,6 @@ body {
   }
 }
 
-.section2-icon .section2icon-description {
-  transition: color 0.5s ease;
-  /* 색상 변화 시간과 속도 설정 */
-}
-
-.section2-icon:hover .section2icon-description {
-  color: rgb(0, 104, 232);
-}
-
 /* 3section sec3 */
 
 .sec3txt {
@@ -239,14 +230,7 @@ body {
   margin: 0 1em 2em 1em;
   cursor: pointer;
 
-  /* 미디어 쿼리를 사용하여 스타일 변경 */
-  @media screen and (max-height: 600px) {
-    margin: 0 0 10px 0;
-  }
-}
 
-.news-item:hover .news-more-link {
-  letter-spacing: 0.2em;  /* 마우스 호버 시 letter-spacing를 증가시킵니다. */
 }
 
 .news-item:hover .news-title {
@@ -254,6 +238,19 @@ body {
   color: rgb(0, 104, 232);  /* 호버 시 텍스트 색상을 파랑색으로 변경 */
 }
 
+.news-item:hover .newsreadmore em {
+  letter-spacing: 1px;
+}
+
+.news-item:hover .newsreadmore i {
+  transform: translateX(12px);
+  letter-spacing: -0.15px;
+}
+
+.news-item:hover .newsreadmore:before {
+  opacity: 0.5;
+  left: 92%;
+}
 /* 뉴스 박스 스타일 */
 .news-box {
   width: 3.5em;  /* 네모 상자의 너비 설정 */
@@ -306,37 +303,53 @@ body {
   }
 }
 
-/* read more link 스타일 */
-.news-more-link {
-  font-size: 1.13em;
-  color: #FFC217;
-  transition: letter-spacing 0.5s ease;  /* 호버 시 letter-spacing에 효과를 추가합니다. */
-
-  /* 미디어 쿼리를 사용하여 스타일 변경 */
-  @media screen and (max-width: 500px) {
-    font-size: 2vw;
+.newsreadmore {
+  display: inline-block;
+  position: relative;
+  line-height: 30px;
+  font-size: 1.25em;
+  letter-spacing: -0.15px;
+  color: rgb(255, 194, 0);
+  :hover {
+    em{
+      letter-spacing: 1em;
+    }
   }
-  /* 미디어 쿼리를 사용하여 스타일 변경 */
-  @media screen and (max-width: 600px) {
-    font-size: 0.7em;
+  em{
+    position: relative;
+    transition: all 0.7s;
+  }
+  i {
+    position: relative;
+    top: 3px;
+    margin-left: 1em;
+    font-size: 1.13em;
+    transition: all 0.7s;
   }
 }
 
-/* 4섹션 "read more" 화살표 아이콘 스타일 */
-.arrow-icon {
-  font-size: 24px;  /* 아이콘 크기 설정 */
-  margin-left: 0.7em;
-  color: #FFC217;
-  font-weight: bold;
+.newsreadmore:before {
+  position: absolute;
+  top: 50%;
+  left: 0px;
+  width: 35px;
+  height: 35px;
+  transform: translate(-50%, -50%);
+  background-color: rgb(255, 242, 200);
+  content: "";
+  border-radius: 50%;
+  opacity: 0;
+  transition: all 0.7s;
+}
+.newsreadmore:hover:before {
+  opacity: 0.5;
+}
 
-  /* 미디어 쿼리를 사용하여 스타일 변경 */
-  @media screen and (max-width: 500px) {
-    font-size: 2vw;
-  }
-  /* 미디어 쿼리를 사용하여 스타일 변경 */
-  @media screen and (max-width: 600px) {
-    font-size: 0.7em;
-  }
+.newsreadmore em,
+.newsreadmore i {
+  font-style: normal;
+  position: relative;
+  transition: all 0.7s;
 }
 
 .newsbutton-container {
@@ -470,6 +483,7 @@ font-family: 'Pragati Narrow', sans-serif;
 .searchheerim-input {
   background: transparent;/* 투명 배경 추가 */
   border: none;
+  color: white;
   width: 75%;/* 검색창의 가로 너비 조정 */
   font-size: 1.2em;/* 폰트 크기 키우기 */
   padding-left: 1.2em;
@@ -815,4 +829,10 @@ font-family: 'Pragati Narrow', sans-serif;
 
 .read-more-btn:hover em {
   letter-spacing: 1px;
+}
+
+
+.newsreadmore i {
+  margin-left: 1em;
+  font-size: 1.3em;
 }

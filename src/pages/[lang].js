@@ -2,10 +2,12 @@
 import React, { useEffect, useState, useRef } from "react";
 import Link from 'next/link';
 import UserLayout from 'src/layouts/UserLayout';
+import IconSlide from "src/components/IconSlide";
 import NewsItem from 'src/components/NewsItem';
+import MobileNewsItem from "src/components/MobileNewsItem";
 import langJson from 'src/data/lang.json';
 import { useRouter } from "next/router";
-import styled, { keyframes } from "styled-components";
+import styled from "styled-components";
 import { useInView } from 'react-intersection-observer'; // react-intersection-observer 라이브러리 사용
 const sections = ["section1", "section2", "section3", "section4", "section5"]; // 섹션 이름
 const totalIcons = 9; // 총 아이콘 개수
@@ -39,6 +41,7 @@ const WSearchDropdownContainer = styled.ul`
 padding:0;
 border: 0;
 margin: 0;
+z-index: 9999;
 width: 125px;
 text-decoration: none;
 `
@@ -72,8 +75,9 @@ li {
     position: relative;
     display: block;
     cursor: pointer;
-    padding: 0.5em 0.9em 0.5em 1.35em;
+    padding: 0 0.9em 0 1.35em;
     font-size: 1.1em;
+    line-height: 40px;
     color: white;
     font-weight: bold;
     &:hover{
@@ -229,24 +233,13 @@ a{
     text-decoration: none;
 }
 `
-const M4NewsContent = styled.p`
-color: gray;
-font-size: 0.9em;
-margin-top: 0.4em;
-margin-bottom: 0;
-overflow: hidden;
-text-overflow: ellipsis;
-display: -webkit-box;
--webkit-line-clamp: 3;
--webkit-box-orient: vertical;
-`
 const M4ButtonContainer = styled.div`
 display: flex;
 white-space: nowrap; /* 텍스트 줄 바꿈 방지 */
 width: 100%; /* 100% 너비로 설정 또는 원하는 너비로 설정 */
 overflow-x: scroll;
 ::-webkit-scrollbar-thumb {
-    background-color: blue;
+    background-color: rgb(0,104,232); /* rgb(255, 194, 0); 노란색 */
 }
 ::-webkit-scrollbar {
     width: 100%;
@@ -339,6 +332,7 @@ li {
 `
 const M5SearchInput = styled.input`
 background: transparent; /* 투명 배경 추가 */
+color: white;
 border: none;
 width: 75%; /* 검색창의 가로 너비 조정 */
 font-size: 1.2em; /* 폰트 크기 키우기 */
@@ -564,7 +558,6 @@ const Home = () => {
     const [activeSection, setActiveSection] = useState(0); // 활성 섹션 인덱스
     const [iconIndexes, setIconIndexes] = useState(Array.from({ length: iconsPerPageLarge }, (_, i) => i)); // 표시되는 아이콘 인덱스 배열
     const [loading, setLoading] = useState(true);
-    const [searchQuery, setSearchQuery] = useState(""); // 검색어 상태 추가
     const [windowWidth, setWindowWidth] = useState(0); // 초기 화면 너비 설정
     const [windowHeight, setWindowHeight] = useState(0); // 초기 화면 높이 설정
     const [isSearchDropdownVisible, setIsSearchDropdownVisible] = useState(false);
@@ -575,6 +568,8 @@ const Home = () => {
     const [activeIndex, setActiveIndex] = useState(null);
     const [isAnimating, setIsAnimating] = useState(false);
     const [scrolling, setScrolling] = useState(false);
+    const [searchQuery, setSearchQuery] = useState(""); // 검색어 상태 추가
+    const [searchResult, setSearchResult] = useState('');
 
     const handleItemEnter = (index) => {
         setActiveIndex(index);
@@ -830,18 +825,37 @@ const Home = () => {
         setIconIndexes(newIconIndexes);
     };
 
-    // 검색어 입력 핸들러
-    const handleSearchInputChange = (e) => {
-        setSearchQuery(e.target.value);
+    const handleSearchInputChange = (event) => { // 검색어 입력 창
+      setSearchQuery(event.target.value);
+    };
+  
+    const handleSearch = () => {
+      // 여기에서 검색 로직을 구현하고, 검색 결과를 검사하여 결과가 없으면 새 창을 띄웁니다.
+      // 예를 들어, 간단한 검색 로직을 시뮬레이션하여 검색 결과가 없다고 가정합니다.
+      const searchResult = simulateSearch(searchQuery); // 검색 결과를 시뮬레이션하는 함수
+  
+      if (!searchResult) {
+        // 검색 결과가 없을 때 새 창을 띄웁니다.
+      const errorMessage = `'${searchQuery}'를 찾을 수 없습니다.`;
+      openNewTab(errorMessage);
+      } else {
+        // 검색 결과가 있을 경우에 대한 로직을 여기에 추가할 수 있습니다.
+        setSearchResult(searchResult);
+      }
+    };
+  
+    // 시뮬레이션용 검색 함수
+    const simulateSearch = (query) => {
+      // 여기에 실제 검색 로직을 구현합니다. (예: 데이터베이스에서 검색)
+      // 이 함수는 단순히 시뮬레이션을 위한 예시입니다.
+      return null; // 검색 결과가 없다고 가정
     };
 
-    // 검색 실행 함수
-    const handleSearch = () => {
-        // 여기에서 검색을 실행하거나 필요한 로직을 추가하세요.
-        console.log("Searching for:", searchQuery);
-        // 검색 이후에는 검색 창을 닫을 수 있도록
-        // closeSearch();
-    };
+    // 새로운 탭 출현 함수
+  const openNewTab = (message) => {
+    const newWindow = window.open('', '_blank');
+    newWindow.document.write(message); // 새 탭에 메시지를 표시합니다.
+  };
 
     const isMobile = typeof window !== "undefined" ? window.innerWidth <= 1280 || window.innerHeight <= 550 : false;
     return (
@@ -877,7 +891,7 @@ const Home = () => {
                                     </M2>
                                     <M2IconContainer>
                                         {/* 이전 버튼 */}
-                                        <PrevButton className="prev-button" onClick={showPreviousIcons}>
+                                        <PrevButton onClick={showPreviousIcons}>
                                             <img src="/icon/prev.png" alt="Prev icon" />
                                         </PrevButton>
                                         {/* 아이콘 내용 */}
@@ -897,7 +911,7 @@ const Home = () => {
                                             </M2IconButton>
                                         ))}
                                         {/* 다음 버튼 */}
-                                        <NextButton className="next-button" onClick={showNextIcons}>
+                                        <NextButton onClick={showNextIcons}>
                                             <img src="/icon/next.png" alt="Next icon" />
                                         </NextButton>
                                     </M2IconContainer>
@@ -946,89 +960,16 @@ const Home = () => {
                                         </AnimateUp>
                                     </M3>
                                     <M4NewsList>
-                                        {/* 뉴스 아이템 1 */}
-                                        <AnimateUp>
-                                            <a href="/404">
-                                                <div style={{ marginTop: "0.5em" }}>
-                                                    <div className="news-box">
-                                                        <p className="news-text">News</p>
-                                                    </div>
-                                                    <M4NewsContent>{langJson[lang]?.FIRSTNEWS}
-                                                    </M4NewsContent>
-                                                    <span className="news-more-link"> Read more</span>
-                                                    <span className="arrow-icon" >→</span>
-                                                </div>
-                                            </a>
-                                        </AnimateUp>
-                                        {/* 뉴스 아이템 2 */}
-                                        <AnimateUp>
-                                            <a href="/404"  >
-                                                <div style={{ marginTop: "0.5em" }}>
-                                                    <div className="news-box">
-                                                        <p className="news-text">News</p>
-                                                    </div>
-                                                    <M4NewsContent>{langJson[lang]?.SECONDNEWS}
-                                                    </M4NewsContent>
-                                                    <span className="news-more-link"> Read more</span>
-                                                    <span className="arrow-icon" >→</span>
-                                                </div>
-                                            </a>
-                                        </AnimateUp>
-                                        {/* 뉴스 아이템 3 */}
-                                        <AnimateUp>
-                                            <a href="/404"  >
-                                                <div style={{ marginTop: "0.5em" }}>
-                                                    <div className="news-box">
-                                                        <p className="news-text">News</p>
-                                                    </div>
-                                                    <M4NewsContent>{langJson[lang]?.THIRDNEWS}
-                                                    </M4NewsContent>
-                                                    <span className="news-more-link"> Read more</span>
-                                                    <span className="arrow-icon" >→</span>
-                                                </div>
-                                            </a>
-                                        </AnimateUp>
-                                        {/* 뉴스 아이템 4 */}
-                                        <AnimateUp>
-                                            <a href="/404" >
-                                                <div style={{ marginTop: "0.5em" }}>
-                                                    <div className="news-box">
-                                                        <p className="news-text">News</p>
-                                                    </div>
-                                                    <M4NewsContent>{langJson[lang]?.FOURTHNEWS}
-                                                    </M4NewsContent>
-                                                    <span className="news-more-link"> Read more</span>
-                                                    <span className="arrow-icon">→</span>
-                                                </div>
-                                            </a>
-                                        </AnimateUp>
-                                        {/* 뉴스 아이템 5 */}
-                                        <AnimateUp>
-                                            <a href="/404">
-                                                <div style={{ marginTop: "0.5em" }}>
-                                                    <div className="news-box">
-                                                        <p className="news-text">News</p>
-                                                    </div>
-                                                    <M4NewsContent>{langJson[lang]?.FIFTHNEWS}
-                                                    </M4NewsContent>
-                                                    <span className="news-more-link"> Read more</span>
-                                                    <span className="arrow-icon" >→</span>
-                                                </div>
-                                            </a>
-                                        </AnimateUp>
-                                        {/* 뉴스 아이템 6 */}
-                                        <AnimateUp>
-                                            <a href="/404" >
-                                                <div style={{ marginTop: "0.5em" }}>
-                                                    <div className="news-box">
-                                                        <p className="news-text">News</p>
-                                                    </div>
-                                                    <M4NewsContent>{langJson[lang]?.SIXTHNEWS}
-                                                    </M4NewsContent>
-                                                    <span className="news-more-link"> Read more</span>
-                                                    <span className="arrow-icon" >→</span></div>
-                                            </a>
-                                        </AnimateUp>
+      <AnimateUp>
+          {[0, 1, 2, 3, 4, 5].map((item, index) => (
+            <div>
+            <MobileNewsItem
+              key={index}
+              newsNumber={item}
+            />
+            </div>
+          ))}
+      </AnimateUp>
                                     </M4NewsList>
                                     <AnimateUp>
                                         <M4ButtonContainer>
@@ -1075,14 +1016,14 @@ const Home = () => {
                                                             </M5SearchDropdownContent>
                                                         </M5SearchDropdownContainer>
                                                     </div>
-                                                    <div style={{ display: "flex", marginTop: "5%", borderBottom: "5px solid white", justifyContent: "space-between" }}>
+                                                    <div style={{ display: "flex", marginTop: "2%", borderBottom: "5px solid white", justifyContent: "space-between" }}>
                                                         <M5SearchInput
                                                             type="text"
                                                             placeholder="Type here"
                                                             value={searchQuery}
                                                             onChange={handleSearchInputChange} // 검색 입력란 스타일 추가
                                                         />
-                                                        <M5SearchButton className="searchheerim-button" onClick={() => { window.location.href = "/404"; }} style={{
+                                                        <M5SearchButton className="searchheerim-button" onClick={handleSearch} style={{
                                                             background: "transparent",
                                                         }}>
                                                             <img src="/icon/search.png" alt="Search Icon" />
@@ -1182,10 +1123,11 @@ const Home = () => {
                                             </Section>
                                             <W2IconContainer>
                                                 {/* 이전 버튼 */}
-                                                <PrevButton className="prev-button" onClick={showPreviousIcons}>
+                                                <PrevButton onClick={showPreviousIcons}>
                                                     <img src="/icon/prev.png" alt="Prev icon" />
                                                 </PrevButton>
-                                                {/* 아이콘 내용 */}
+                                                {/*
+                                                */}
                                                 {iconIndexes.map((iconIndex) => (
                                                     <W2IconButton
                                                         key={`icon-${iconIndex}`}
@@ -1196,13 +1138,18 @@ const Home = () => {
                                                             alt={`Icon ${iconIndex}`}
                                                         />
                                                         <div className="section2icon-description">
-                                                            {/* 아이콘에 대한 설명 */}
                                                             {getIconDescription(iconIndex)}
                                                         </div>
                                                     </W2IconButton>
                                                 ))}
+                                                {/*  
+                        <IconSlide
+                            iconIndexes={iconIndexes}
+                            handleIconClick={handleIconClick}
+                            getIconDescription={getIconDescription}/>
+                        */}
                                                 {/* 다음 버튼 */}
-                                                <NextButton className="next-button" onClick={showNextIcons}>
+                                                <NextButton onClick={showNextIcons}>
                                                     <img src="/icon/next.png" alt="Next icon" />
                                                 </NextButton>
                                             </W2IconContainer>
@@ -1391,7 +1338,7 @@ const Home = () => {
                                                                     />
                                                                     </div>
                                                                     <div style={{ display: "flex", height:"50px", borderBottom: "7px solid white", alignItems:"center"}}>
-                                                                    <WSearchButton className="searchheerim-button" onClick={() => { window.location.href = "/404"; }}>
+                                                                    <WSearchButton className="searchheerim-button" onClick={handleSearch}>
                                                                         Search
                                                                         <img src="/icon/search.png" alt="Search Icon" />
                                                                     </WSearchButton>
