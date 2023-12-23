@@ -1,4 +1,4 @@
-// IconSlide.js
+// IconSlide.js 수정중인 코드
 import React from 'react';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';

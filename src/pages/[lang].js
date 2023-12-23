@@ -3,8 +3,12 @@ import React, { useEffect, useState, useRef } from "react";
 import Link from 'next/link';
 import UserLayout from 'src/layouts/UserLayout';
 import IconSlide from "src/components/IconSlide";
+import HQ from "src/components/HQ";
+import Accordion from "src/components/Accordion";
+import MobileAccordion from "src/components/MobileAccordion";
 import NewsItem from 'src/components/NewsItem';
 import MobileNewsItem from "src/components/MobileNewsItem";
+import NewsButton from "src/components/NewsButton";
 import langJson from 'src/data/lang.json';
 import { useRouter } from "next/router";
 import styled from "styled-components";
@@ -212,17 +216,6 @@ div{ /* 4개 이미지 위의 장소, 건물 텍스트 디자인 관리 */
     background: transparent; /* 투명한 배경 */
     color: white;
 }
-`
-const M3Place = styled.p`
-margin: 0;
-padding: 0;
-font-size: 1em;
-`
-const M3Building = styled.p`
-margin: 0;
-padding: 0;
-font-size: 1.5em;
-font-weight: bold;
 `
 const M4NewsList = styled.div`
 margin-left: 10%;
@@ -924,38 +917,7 @@ const Home = () => {
                                         </AnimateUp>
                                         <AnimateUp>
                                             <M3ImageContainer>
-                                                <a
-                                                    href="/404">
-                                                    <div>
-                                                        <M3Place>Incheon, Korea</M3Place>
-                                                        <M3Building>{langJson[lang]?.MICN}</M3Building>
-                                                    </div>
-                                                    <img src="/image/outer1.png" alt="outer1" />
-                                                </a>
-                                                <a
-                                                    href="/404">
-                                                    <div >
-                                                        <M3Place>Seoul, Korea</M3Place>
-                                                        <M3Building>{langJson[lang]?.MYEOUIDO}</M3Building>
-                                                    </div>
-                                                    <img src="/image/outer2.png" alt="outer2" />
-                                                </a>
-                                                <a
-                                                    href="/404">
-                                                    <div>
-                                                        <M3Place>Seongnam, Korea</M3Place>
-                                                        <M3Building>{langJson[lang]?.MHYUNDAI}</M3Building>
-                                                    </div>
-                                                    <img src="/image/outer3.png" alt="outer3" />
-                                                </a>
-                                                <a
-                                                    href="/404">
-                                                    <div>
-                                                        <M3Place >Baku, Azerbaijan</M3Place>
-                                                        <M3Building>{langJson[lang]?.SOCAR}</M3Building>
-                                                    </div>
-                                                    <img src="/image/outer4.png" alt="outer4" />
-                                                </a>
+      <MobileAccordion langJson={langJson} />
                                             </M3ImageContainer>
                                         </AnimateUp>
                                     </M3>
@@ -1044,32 +1006,7 @@ const Home = () => {
                                     </M5SearchContainer>
                                     <div className="bottom">
                                         <M5Contact>
-                                            <div className="hq">
-                                                <div className="address">
-                                                    <div className="hq1">
-                                                        <img src="/icon/location.png" alt="Location Icon" /> Add
-                                                    </div>
-                                                    <div className="hq1">
-                                                        <img src="/icon/mobile.png" alt="Mobile Icon" /> Tel
-                                                    </div>
-                                                </div>
-                                                <div className="address">
-                                                    <div className="hq2">{langJson[lang]?.ADDRESS}</div>
-                                                    <div className="hq2">070-8080-3499</div>
-                                                </div>
-                                            </div>
-                                            <div className="sup">
-                                                <div className="address">
-                                                    <div className="hq3">
-                                                        <img src="/icon/email.png" alt="Email Icon" /> E-mail</div>
-                                                    <div className="hq3">
-                                                        <img src="/icon/fax.png" alt="FAX Icon" /> FAX</div>
-                                                </div>
-                                                <div className="address">
-                                                    <div className="hq4">purplevery222@gmail.com</div>
-                                                    <div className="hq4">0504-144-9419</div>
-                                                </div>
-                                            </div>
+      <HQ langJson={langJson} />
                                         </M5Contact>
                                     </div>
                                 </Mobile>
@@ -1169,78 +1106,15 @@ const Home = () => {
                                                     </div>
                                                 </div>
                                                 <AnimateUp>
-                                                    <div className="main-project-list-container">
-                                                        <section className="accordion-wrapper">
-                                                            <article className="accordion-bg-list-container">
-                                                                <ul className="accordion-bg-list clearfix">
-                                                                    {accordionImages.map((image, index) => (
-                                                                        <li
-                                                                            key={index}
-                                                                            className={`accordion-bg-item accordion-bg-item0${index + 1} ${hoverIndex === index ? 'active' : ''}`}
-                                                                            style={{
-                                                                                transform: 'translate 0px, 0px',
-                                                                                opacity: 1,
-                                                                                width: hoverIndex === index ? '100%' : '25%', /*'25%',*/
-                                                                                zIndex: hoverIndex === index ? '1' : '0', /*  */
-                                                                                left: hoverIndex === index ? '0' : `${index * 25}%`, /* `${index * 25}%`,*/
-                                                                                transition: hoverIndex === index ? 'width 0.7s linear, left 0.7s linear' : 'all 0s',/* 1.1s cubic-bezier(0.86, 0.5, 0.07, 1) */
-                                                                            }}
-                                                                            onMouseEnter={() => handleItemOver(index)}
-                                                                            onMouseLeave={() => handleItemOver(null)}>
-                                                                            <div className="accordion-outer" style={{
-                                                                                background: `url(${image.outerBackground}) no-repeat 50% 50%`,
-                                                                                backgroundSize: 'cover',
-                                                                            }}>
-                                                                            </div>
-                                                                            <div className="accordion-inner" style={{
-                                                                                left: hoverIndex === index ? '0' : image.innerLeft,
-                                                                                background: `url(${image.innerBackground}) no-repeat 50% 50%`,
-                                                                                transition: hoverIndex === index ? 'transform 5s ease-in-out' : '',
-                                                                                transform: hoverIndex === index ? 'scale(1.1) rotate(0.002deg)' : '',
-                                                                            }}>
-                                                                            </div>
-                                                                        </li>
-                                                                    ))}
-                                                                </ul>
-                                                            </article>
-                                                            <article className={`accordion-over-container ${activeIndex !== null ? 'active' : ''}`}>
-                                                                <ul className="accordion-over-list">
-                                                                    {accordionItems.map((item, index) => (
-                                                                        <li
-                                                                            key={index}
-                                                                            className={`accordion-over-item ${activeIndex === index ? 'active' : ''}`}
-                                                                            style={{
-                                                                            }}
-                                                                            onMouseEnter={() => handleItemEnter(index)}
-                                                                            onMouseLeave={() => handleItemEnter(false)}
-                                                                        >
-                                                                            <a className="accordion-inner-con" href="/404">
-                                                                                <div className="accordion-off-tit-box">
-                                                                                    <span className="project-category">{item.category}</span>
-                                                                                    <strong className="project-tit">{item.title}</strong>
-                                                                                </div>
-                                                                                <aside className="accordion-detail-con"
-                                                                                    style={{
-                                                                                        opacity: hoverTxtIndex === index ? '1' : '0',
-                                                                                        transform: hoverTxtIndex === index ? '' : 'translate(0px, 100%)',
-                                                                                        transition: hoverTxtIndex === index ? 'all 2s cubic-bezier(0.95, 0, 0.02, 1)' : ''
-                                                                                    }}>
-                                                                                    <p className="accordion-detail-txt">
-                                                                                        <span className="project-category">{item.category}</span>
-                                                                                        <strong className="project-tit">{item.title}</strong>
-                                                                                    </p>
-                                                                                    <span className="read-more-btn">
-                                                                                        <em>Read more</em>
-                                                                                        <i className="xi-long-arrow-right">→</i>
-                                                                                    </span>
-                                                                                </aside>
-                                                                            </a>
-                                                                        </li>
-                                                                    ))}
-                                                                </ul>
-                                                            </article>
-                                                        </section>
-                                                    </div>
+      <Accordion
+        accordionImages={accordionImages}
+        hoverIndex={hoverIndex}
+        handleItemOver={handleItemOver}
+        handleItemEnter={handleItemEnter}
+        activeIndex={activeIndex}
+        hoverTxtIndex={hoverTxtIndex}
+        accordionItems={accordionItems}
+      />
                                                 </AnimateUp>
                                             </Section>
                                         </section>
@@ -1276,20 +1150,7 @@ const Home = () => {
                                                 </section>
                                                 {/* 뉴스 액자 버튼 */}
                                                 <AnimateUp>
-                                                    <div className="newsbutton-container">
-                                                        {/* news1 버튼 */}
-                                                        <a className="newsbutton" href="https://www.youtube.com/watch?v=OLrv8OGTUnQ" target="_blank" rel="noopener noreferrer">
-                                                            <img src="/image/newsimage1.png" alt="youtube1 Image" />
-                                                        </a>
-                                                        {/* news2 버튼 */}
-                                                        <a className="newsbutton" style={{ marginLeft: "15px" }} href="https://www.youtube.com/watch?v=REof-nC8Ck8&feature=youtu.be" target="_blank" rel="noopener noreferrer">
-                                                            <img src="/image/newsimage2.png" alt="youtube2 Image" />
-                                                        </a>
-                                                        {/* news3 버튼 */}
-                                                        <a className="newsbutton" style={{ marginLeft: "15px" }} href="https://www.youtube.com/watch?v=Lu8uHwNpHEQ" target="_blank" rel="noopener noreferrer">
-                                                            <img src="/image/newsimage3.png" alt="youtube3 Image" />
-                                                        </a>
-                                                    </div>
+      <NewsButton />
                                                 </AnimateUp>
                                             </Section>
                                         </section>
@@ -1357,32 +1218,7 @@ const Home = () => {
                                                 </div>
                                                 <div className="bottom">
                                                     <div className="seoulhqsupport">
-                                                        <div className="hq">
-                                                            <div className="address">
-                                                                <div className="hq1">
-                                                                    <img src="/icon/location.png" alt="Location Icon" /> Add.
-                                                                </div>
-                                                                <div className="hq1">
-                                                                    <img src="/icon/mobile.png" alt="Mobile Icon" /> Tel.
-                                                                </div>
-                                                            </div>
-                                                            <div className="address">
-                                                                <div className="hq2">{langJson[lang]?.ADDRESS}</div>
-                                                                <div className="hq2">070-8080-3499</div>
-                                                            </div>
-                                                        </div>
-                                                        <div className="sup">
-                                                            <div className="address">
-                                                                <div className="hq3">
-                                                                    <img src="/icon/email.png" alt="Email Icon" /> E-mail.</div>
-                                                                <div className="hq3">
-                                                                    <img src="/icon/fax.png" alt="FAX Icon" /> FAX.</div>
-                                                            </div>
-                                                            <div className="address">
-                                                                <div className="hq4">purplevery222@gmail.com</div>
-                                                                <div className="hq4">0504-144-9419</div>
-                                                            </div>
-                                                        </div>
+      <HQ langJson={langJson} />
                                                     </div>
                                                 </div>
                                             </Section>
