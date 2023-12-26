@@ -25,30 +25,25 @@ body {
   transform: translateY(50px); /* 아래로 이동하는 변환 설정 */
   transition: opacity 1s ease, transform 2s ease; 
 }
-
 .animatedup.in-view {
   opacity: 1; /* 화면에 나타날 때 투명도를 1로 변경 */
   transform: translateY(0); /* 화면에 나타날 때 변환 초기값으로 복원 */
 }
-
 /* 애니메이션 down */
 .animateddown {
   opacity: 0; /* 초기에 숨겨진 상태로 설정 */
   transform: translateY(-50px); /* 아래로 이동하는 변환 설정 */
   transition: opacity 1s ease, transform 2s ease; 
 }
-
 .animateddown.in-view {
   opacity: 1; /* 화면에 나타날 때 투명도를 1로 변경 */
   transform: translateY(0); /* 화면에 나타날 때 변환 초기값으로 복원 */
 }
-
 .animatedright {
   opacity: 0; /* 초기에 숨겨진 상태로 설정 */
   transform: translateX(-60px);
   transition: opacity 1s ease, transform 2s ease; 
 }
-
 .animatedright.in-view {
   opacity: 1; /* 화면에 나타날 때 투명도를 1로 변경 */
   transform: translateX(0); /* 화면에 나타날 때 변환 초기값으로 복원 */
@@ -75,13 +70,10 @@ body {
 .zoomInOut {
   animation: zoomInOut 10s infinite linear;
 }
-/* 추가로 필요한 스타일 속성들을 여기에 추가할 수 있습니다. */
-
 /* 1section sec1 1섹션 스타일 */
 .wheelcontainer {
   height: 100vh;
 }
-/* justify-content: flex-end; */
 /* 2section sec2 2섹션 스타일  */
 .blue {
   position: relative;
@@ -108,14 +100,12 @@ body {
     margin-top: 22vh;
   }
 }
-
 /* yellow 노란박스 텍스트 스타일 */
 .yellow-box-text {
   color: black;  /* 검정색 글자색 설정 */
   font-size: 1em;  /* 글자 크기 설정 */
   font-weight: bold;
 }
-
 /* 2섹션 Follow 텍스트 스타일 */
 .subtitle {
   padding: none;
@@ -128,7 +118,6 @@ body {
     font-size: 3.5em;
   }
 }
-
 /* 2섹션 innovation 텍스트 스타일 */
 .description {
   font-size: 1.333vw;
@@ -139,7 +128,6 @@ body {
     margin-top: 0.5em;
   }
 }
-
 /* 2섹션 history box 텍스트 스타일 */
 .topics-container {
   display: flex;
@@ -150,63 +138,50 @@ body {
       margin-right: 12vw;
     }
 }
-
 /* 2섹션 historyof 글 텍스트 스타일 */
 .topic-title,
 .topic-number {
   margin: 0 3vh 0 0;
 
-  /* 미디어 쿼리를 사용하여 스타일 변경 */
   @media screen and (max-width: 800px) {
     margin-right: 0.2em;
   }
 }
-
 .topic-title {
   margin-top: 8vh;
   color: rgb(255, 194, 0);
 
-  /* 미디어 쿼리를 사용하여 스타일 변경 */
   @media screen and (max-width: 900px) {
+    margin-top: 3vh;
     font-size: 0.8em;
   }
 }
-
 .topic-number {
   color: white;
   font-weight: bold;
   font-size: 5.2em;
   margin-bottom: 0.3em;
 
-  /* 미디어 쿼리를 사용하여 스타일 변경 */
   @media screen and (max-width: 1400px) {
     font-size: 5.5vw;
   }
 }
-
 /* 3section sec3 */
-
 .sec3txt {
   display: table;
   height: 15vh;
   margin-left: 10vw;
 }
-
 /*3섹션 타이틀 스타일*/
 .title {
   font-weight: bold;
   font-size: 3vw;
   font-family: 'Playfair Display', serif;
 }
-
-.sec3description {
-
-}
-
 /* 4section sec4 */
 .newslistwrap {
   padding: 12vh 5% 0;
-    /* 미디어 쿼리를 사용하여 스타일 변경 */
+
     @media screen and (max-height: 750px) {
       padding: 0;
     }
@@ -214,14 +189,12 @@ body {
 .news-list {
   margin-top: 2vh;
 }
-
 .news-row {
   display: flex;
   text-align: left;
   justify-content: space-around;
   margin: 0 5em 0 5.2em;
 }
-
 /* 뉴스 아이템들 스타일 */
 .news-item {
   background-color: transparent;
@@ -229,24 +202,18 @@ body {
   width: 33%;
   margin: 0 1em 2em 1em;
   cursor: pointer;
-
-
 }
-
 .news-item:hover .news-title {
   transition: color 0.2s ease;
   color: rgb(0, 104, 232);  /* 호버 시 텍스트 색상을 파랑색으로 변경 */
 }
-
 .news-item:hover .newsreadmore em {
   letter-spacing: 1px;
 }
-
 .news-item:hover .newsreadmore i {
   transform: translateX(12px);
   letter-spacing: -0.15px;
 }
-
 .news-item:hover .newsreadmore:before {
   opacity: 0.5;
   left: 92%;
@@ -261,35 +228,29 @@ body {
   justify-content: center;
   align-items: center;
 
-  /* 미디어 쿼리를 사용하여 스타일 변경 */
   @media screen and (max-width: 500px) {
     width: 11vw;    /* 네모 상자의 너비 설정 */
     height: 5vw;    /* 네모 상자의 높이 설정 */
   }
-  /* 미디어 쿼리를 사용하여 스타일 변경 */
   @media screen and (max-width: 600px) {
     width: 8.7vw;    /* 네모 상자의 너비 설정 */
     height: 3.7vw;    /* 네모 상자의 높이 설정 */
   }
 }
-
 /* 뉴스 스타일 */
 .news-text {
   color: white;  /* 흰색 글자색 설정 */
   font-size: 1em;  /* 글자 크기 설정 */
 
-  /* 미디어 쿼리를 사용하여 스타일 변경 */
   @media screen and (max-width: 600px) {
     font-size: 2.6vw;
   }
 }
-
 .news-title {
   font-size: 1em;
   font-family: 'NanumSquare', sans-serif; /* 나눔스퀘어 글꼴 */
   color: gray;
 
-  /* 미디어 쿼리를 사용하여 스타일 변경 */
   @media screen and (max-width: 1000px) {
     overflow: hidden;
     text-overflow: ellipsis;
@@ -297,12 +258,10 @@ body {
     -webkit-line-clamp: 9;
     -webkit-box-orient: vertical;
   }
-  /* 미디어 쿼리를 사용하여 스타일 변경 */
   @media screen and (max-height: 650px) {
     margin: 3px 0 0 0;
   }
 }
-
 .newsreadmore {
   display: inline-block;
   position: relative;
@@ -327,7 +286,6 @@ body {
     transition: all 0.7s;
   }
 }
-
 .newsreadmore:before {
   position: absolute;
   top: 50%;
@@ -344,14 +302,12 @@ body {
 .newsreadmore:hover:before {
   opacity: 0.5;
 }
-
 .newsreadmore em,
 .newsreadmore i {
   font-style: normal;
   position: relative;
   transition: all 0.7s;
 }
-
 .newsbutton-container {
   justify-content: space-evenly;
   margin: 0 auto;  /* 가운데 정렬을 위해 텍스트 정렬을 사용합니다. */
@@ -366,30 +322,24 @@ body {
     margin-bottom: 5em;    /* 버튼과 내용 사이의 간격을 조절합니다. */
   }
 }
-
 .newsbutton {
   display: flex;
   max-width: 100%;
   padding: none;
   transition: transform 0.3s ease;  /* 마우스 호버 시 경계에 커지는효과를 추가합니다. */
 }
-
 .newsbutton:hover {
   transform: scale(1.1);
 }
-
 .newsbutton img {
   max-width: 100%;
  border-radius: 20px;
 
-  /* 미디어 쿼리를 사용하여 스타일 변경 */
   @media screen and (max-height: 450px) {
     width: 15em;
     height: 8em;
   }
-
 }
-
 /* 5section */
 .sec5title {
   font-size: 2.5em;
@@ -398,9 +348,7 @@ body {
   text-align: center;
   color: gray;
   letter-spacing: -0.07em;
-
 }
-
 .bold-text {
   font-weight: bold;
 }
@@ -415,44 +363,27 @@ body {
     padding-top: 4vh;
   }
 }
-
 .search-title {
   font-size: 4.8em;
   font-weight: bold;
   color: #FFC200;
   font-family: 'Noto Sans KR', sans-serif;
 
-/* 
-font-family: 'Archivo Narrow', sans-serif;
-font-family: 'Oswald', sans-serif;
-font-family: 'Pragati Narrow', sans-serif;
-*/
-
-  /* 미디어 쿼리를 사용하여 스타일 변경 */
   @media screen and (max-width: 1250px) {
     font-size: 4em;
     margin-left: 15vw;
   } /* 쓸모없는 코드? */
 
-  /* 미디어 쿼리를 사용하여 스타일 변경 */
   @media screen and (max-width: 1000px) {
     font-size: 5vw;
   }
 }
-
 .search-title2 {
   font-size: 4.8em;
   font-weight: bold;
   color: white;  
   font-family: 'Noto Sans KR', sans-serif;
 
-  /* 
-  font-family: 'Archivo Narrow', sans-serif;
-  font-family: 'Oswald', sans-serif;
-  font-family: 'Pragati Narrow', sans-serif;
-  */
-
-  /* 미디어 쿼리를 사용하여 스타일 변경 */
   @media screen and (max-width: 1250px) {
     font-size: 4em;
   } /* 쓸모없는 코드? */
@@ -460,14 +391,12 @@ font-family: 'Pragati Narrow', sans-serif;
     font-size: 5.8vw;
   }
 }
-
 .searchsub {
   margin: 0 0 7.2vh 0;
   font-size: 1.1em;
   color: #CACACA;
   font-family: 'Noto Sans KR', sans-serif;
 
-  /* 미디어 쿼리를 사용하여 스타일 변경 */
   @media screen and (max-width: 1000px) {
     font-size: 5.8vw;
   }
@@ -476,9 +405,6 @@ font-family: 'Pragati Narrow', sans-serif;
     margin-left: 15vw;
   }
 }
-.searchheerim {
-}
-
 /* 검색 입력란 스타일링 */
 .searchheerim-input {
   background: transparent;/* 투명 배경 추가 */
@@ -488,28 +414,23 @@ font-family: 'Pragati Narrow', sans-serif;
   font-size: 1.2em;/* 폰트 크기 키우기 */
   padding-left: 1.2em;
 
-  /* 미디어 쿼리를 사용하여 스타일 변경 */
   @media screen and (max-width: 1250px) {
     width: 50vw; /* 검색창의 가로 너비 조정 */
     margin-left: 15vw;
   }
 }
-
 .searchheerim-input::placeholder {
   color: white;
 }
-
 .searchtag-keywords {
   padding: 0 0 8vh 0;
   font-family: 'Noto Sans KR', sans-serif;
 
-  /* 미디어 쿼리를 사용하여 스타일 변경 */
   @media screen and (max-width: 1250px) {
     font-size: 1.5vw;
     padding: 1vw 0 2vw 14.5vw;
   }
 }
-
 /*검색태그 키워드 버튼*/
 .searchtag-button {
   border: none;  /* 외곽선 없애기 */
@@ -520,7 +441,6 @@ font-family: 'Pragati Narrow', sans-serif;
   margin: 0 1.5em 0 0;  /* 버튼 간격 설정 */
   padding: 0;
 }
-
 .searchtag-button a {
   color: #CACACA;
   text-decoration: none;
@@ -531,18 +451,15 @@ font-family: 'Pragati Narrow', sans-serif;
     color: white;
   }
 }
-
 .bottom {
   position: relative;
   margin-top: 6vh;
 }
-
 .seoulhqsupport {
   display: flex;
   padding: 0px 0 0 12vw;
   margin-top: 8vh;
   margin-bottom: 10vh;
-  /* 미디어 쿼리를 사용하여 스타일 변경 */
   @media screen and (max-width: 1250px) {
     flex-direction: column;
     margin-bottom: 2em;
@@ -553,16 +470,13 @@ font-family: 'Pragati Narrow', sans-serif;
     font-size: 3vw;
   }
 }
-
 /* hq스타일 */
 .hq {
   display: flex;
 }
-
 .sup {
   display: flex;
 }
-
 /* address 스타일 */
 .address {
   flex-direction: column;  /* 서브 버튼을 세로로 정렬 */
@@ -574,39 +488,32 @@ font-family: 'Pragati Narrow', sans-serif;
     font-size: 3.25vw;
   }
 }
-
 /*  hq1 스타일 수정 */
 .hq1 {
   margin-bottom: 0.5em;
 }
-
 .hq1 img {
   width: 0.75em;
   height: 1.1em;
 }
-
 /*  hq2 스타일 수정 */
 .hq2 {
   margin-bottom: 0.5em;
   margin-left: 2em;
 }
-
 /*  hq3 스타일 수정 */
 .hq3 {
   margin-bottom: 0.5em;
   margin-left: 1.5vw;
 
-  /* 미디어 쿼리를 사용하여 스타일 변경 */
   @media screen and (max-width: 1280px) {
     margin-left: 0;
   }
 }
-
 .hq3 img {
   width: 1em;
   height: 0.75em;
 }
-
 /*  hq4 스타일 수정 */
 .hq4 {
   margin-bottom: 0.5em;
@@ -672,7 +579,6 @@ font-family: 'Pragati Narrow', sans-serif;
   z-index: 0;
   transform: scale(1.05) rotate(0.002deg);
 }
-
 
 
 /* 일단 만들어둔 이미지 오버레이 위 텍스트 */
@@ -806,32 +712,25 @@ font-family: 'Pragati Narrow', sans-serif;
 .read-more-btn:hover:before {
   opacity: 0.5;
 }
-
 .read-more-btn em,
 .read-more-btn i {
   position: relative;
   transition: all 0.7s;
 }
-
 .read-more-btn i {
   margin-left: 1em;
   font-size: 1.4em;
 }
-
 .read-more-btn:hover:before {
   left: 93%;
 }
-
 .read-more-btn:hover i {
   transform: translateX(12px);
   letter-spacing: -0.15px;
 }
-
 .read-more-btn:hover em {
   letter-spacing: 1px;
 }
-
-
 .newsreadmore i {
   margin-left: 1em;
   font-size: 1.3em;

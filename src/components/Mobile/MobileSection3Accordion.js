@@ -14,8 +14,8 @@ font-size: 1.5em;
 font-weight: bold;
 `
 const MobileAccordion = ({ langJson }) => {
-    const router = useRouter();
-    const { lang = 'en' } = router.query;
+  const router = useRouter();
+  const { lang = 'en' } = router.query;
 
   return (
     <>

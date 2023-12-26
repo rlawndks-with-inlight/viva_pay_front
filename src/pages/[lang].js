@@ -1,22 +1,22 @@
 // pages/home.js
 import React, { useEffect, useState, useRef } from "react";
-import Link from 'next/link';
-import UserLayout from 'src/layouts/UserLayout';
-import IconSlide from "src/components/IconSlide";
-import HQ from "src/components/HQ";
-import Accordion from "src/components/Accordion";
-import MobileAccordion from "src/components/MobileAccordion";
-import NewsItem from 'src/components/NewsItem';
-import MobileNewsItem from "src/components/MobileNewsItem";
-import NewsButton from "src/components/NewsButton";
-import langJson from 'src/data/lang.json';
 import { useRouter } from "next/router";
+import UserLayout from 'src/layouts/UserLayout';
+import langJson from 'src/data/lang.json';
+import IconSlide from "src/components/Section2IconSlide";
+import { Section3Title } from "src/components/Section3";
+import Accordion from "src/components/Section3Accordion";
+import { NewsItem, NewsButton } from "/src/components/Section4";
+import { Search, Section5Title } from "src/components/Section5";
+import HQ from "src/components/HQ";
+import { Section2Content } from "src/components/Mobile/MobileSection2Content";
+import { MobileIconSlide } from "src/components/Mobile/MobileSection2IconSlide";
+import MobileAccordion from "src/components/Mobile/MobileSection3Accordion";
+import { MobileNewsItem, MobileNewsButton } from "src/components/Mobile/MobileSection4";
+import { MobileSearch } from "/src/components/Mobile/MobileSection5";
 import styled from "styled-components";
 import { useInView } from 'react-intersection-observer'; // react-intersection-observer 라이브러리 사용
 const sections = ["section1", "section2", "section3", "section4", "section5"]; // 섹션 이름
-const totalIcons = 9; // 총 아이콘 개수
-const iconsPerPageLarge = 6; // 큰 화면에서 표시할 아이콘 개수
-const iconsPerPageSmall = 4; // 작은 화면에서 표시할 아이콘 개수
 
 const AnimateUp = ({ children }) => {
     const [ref, inView] = useInView({
@@ -41,54 +41,6 @@ const AnimateRight = ({ children }) => {
         </div>
     );
 };
-const WSearchDropdownContainer = styled.ul`
-padding:0;
-border: 0;
-margin: 0;
-z-index: 9999;
-width: 125px;
-text-decoration: none;
-`
-const WSearchDropdownButton = styled.li`
-display: flex;
-justify-content: space-between;
-border: none;
-background-color: transparent;
-cursor: pointer;
-color: white;
-list-style: none;
-a{
-    text-decoration: none;
-}
-p{ /* aboutus,projects,expertise,ir 디자인 */
-    margin: 0;
-    font-size: 1.3em;
-    color: #FFC200;
-}
-`
-const WSearchDropdownContent = styled.ul`
-background-color: #FFC200;
-list-style: none;
-position: absolute;
-top: 100%;
-left: 0%;
-right: 0;
-display: ${(props) => (props.isVisible ? 'block' : 'none')};
-padding: 0;
-li {
-    position: relative;
-    display: block;
-    cursor: pointer;
-    padding: 0 0.9em 0 1.35em;
-    font-size: 1.1em;
-    line-height: 40px;
-    color: white;
-    font-weight: bold;
-    &:hover{
-        background-color: rgba(255, 255, 255, 0.3); /* 투명도 조절 */
-    }
-}
-`
 const Mobile = styled.div`
 padding: 0;
 width: 100%;
@@ -136,54 +88,6 @@ p{
       margin-left: 12vw;
     }
 `
-const M2Subtitle = styled.div`
-margin-left: 0.8em;
-font-size: 3em;
-font-weight: bold;
-font-family: 'Playfair Display', serif;
-color: white;
-@media screen and (width >= 800px) {
-      margin-left: 12vw;
-    }
-`
-const M2Description = styled.div`
-margin-left: 1.7em;
-font-size: 1.5em;
-color: white;
-@media screen and (width >= 800px) {
-      margin-left: 12vw;
-    }
-`
-const M2IconContainer = styled.div`
-margin-top: 1em;
-display: flex;
-justify-content: space-between;
-align-items: center;
-background-color: white;
-`
-const M2IconButton = styled.button`
-border: none;
-background-color: transparent;
-font-size: 0.9em;
-font-weight: bold;
-cursor: pointer;
-@media only screen and (max-width: 600px) {
-    margin: 0 0 5vh 0;
-    font-size: 2vw;
-}
-img{
-width: 4em;
-height: 4em;
-    @media only screen and (max-width: 600px) {
-        margin: 0;
-        width: 12vw;
-        height: 12vw;
-    }
-}
-`
-const M3 = styled.div`
-background-color: transparent;
-`
 const M3Title = styled.div`
 margin-top: 0.5em;
 margin-left: 0.9em;
@@ -226,22 +130,6 @@ a{
     text-decoration: none;
 }
 `
-const M4ButtonContainer = styled.div`
-display: flex;
-white-space: nowrap; /* 텍스트 줄 바꿈 방지 */
-width: 100%; /* 100% 너비로 설정 또는 원하는 너비로 설정 */
-overflow-x: scroll;
-::-webkit-scrollbar-thumb {
-    background-color: rgb(0,104,232); /* rgb(255, 194, 0); 노란색 */
-}
-::-webkit-scrollbar {
-    width: 100%;
-    height: 13px;
-}
-`
-const M4Button = styled.a`
-display: inline-block; /* 인라인 블록 요소로 만들어 옆에 다른 요소가 올 수 있도록 합니다. */
-`
 const M5Title = styled.div`
 font-size: 2em;
 margin-bottom: 0.7em;
@@ -272,104 +160,6 @@ p{
 @media only screen and (max-width: 1000px) {
     p{
         font-size: 1em;
-    }
-}
-`
-const M5SearchDropdownContainer = styled.ul`
-padding:0;
-margin: 0;
-width: 130px;
-text-decoration: none;
-`
-const M5SearchDropdownButton = styled.li`
-display: flex;
-justify-content: space-between;
-border: none;
-background-color: transparent;
-cursor: pointer;
-color: white;
-list-style: none;
-a{
-    text-decoration: none;
-}
-p{ /* 선택된 드롭다운 디자인 */
-    margin: 0;
-    font-size: 1.3em;
-    color: #FFC200;
-    padding-bottom: 0.5em;
-}
-`
-const M5SearchDropdownContent = styled.ul`
-background-color: #FFC200;
-list-style: none;
-position: absolute;
-top: 100%;
-left: 0%;
-right: 0;
-display: ${(props) => (props.isVisible ? 'block' : 'none')};
-padding: 0;
-li {
-    position: relative;
-    display: block;
-    height: 2em;
-    padding: 0 3%;
-    line-height: 1.8em;
-    font-size: 1.3em;
-    cursor: pointer;
-    color: white;
-    font-weight: bold;
-    &:hover{
-        background-color: rgba(255, 255, 255, 0.3); /* 투명도 조절 */
-    }
-}
-`
-const M5SearchInput = styled.input`
-background: transparent; /* 투명 배경 추가 */
-color: white;
-border: none;
-width: 75%; /* 검색창의 가로 너비 조정 */
-font-size: 1.2em; /* 폰트 크기 키우기 */
-padding-left: 0.7em;
-margin-bottom: 0.2em;
-::placeholder{
-    color: white;
-}
-`
-const M5SearchButton = styled.button`
-display: inline-block;
-width: 10vw;
-font-size: 1.3em;
-margin-bottom: 0.2em;
-border-left: 0.5px solid white;
-border-right: none;
-border-bottom: none;
-border-top: none;
-cursor: pointer;
-text-align: center;
-padding: 0;
-img{
-    width: 20px;
-    height: 20px;
-}
-`
-const M5SearchTag = styled.div`
-padding: 5vw 0 5vw 0;
-button{
-    padding: 0 12px 0 0;
-border: none; /* 외곽선 없애기 */
-font-size: 0.9em;
-background-color: transparent;
-    a{
-        font-size: 1.4vw;
-        color: #CACACA;
-        text-decoration: none;
-    }
-}
-@media only screen and (max-width: 1000px) {
-    button {
-        a {
-            font-size: 1em;
-        }
     }
 }
 `
@@ -404,14 +194,14 @@ right: 10%;
 text-align: center;
 p{
 font-weight: bold;
-   color:white ;
-  writing-mode: vertical-rl; /* 세로로 글자 눕힘 */
+color:white ;
+writing-mode: vertical-rl; /* 세로로 글자 눕힘 */
   font-size: 10px; /* 원하는 글자 크기로 조절 */
   animation: moveUpDown 2.5s infinite; /* 1s 동안 무한 반복되는 애니메이션 */
   margin: 0; /* 기본 마진을 제거합니다. */
 }
 span{
-    display: block;
+display: block;
 height: 14em;
 width: 10px;
 background-color:  rgb(255, 194, 0);
@@ -421,78 +211,6 @@ background-color:  rgb(255, 194, 0);
   @media only screen and (max-width: 730px), (max-height: 600px) {
     display: none;
   }
-`
-/* 2section sec2 2섹션 스타일  */
-const W2IconContainer = styled.section`
-display: flex;
-overflow-x: hidden;
-justify-content: space-between;
-height: 140px;
-width: 100%;
-background-color: white;
-`
-const W2IconButton = styled.button`
-border: none;
-background-color: transparent;
-font-size: 0.9em;
-font-weight: bold;
-margin-top: 1em;
-margin-bottom: 2em;
-cursor: pointer;
-img{
-    width: 5em;
-    height: 5em;
-}
-`
-const PrevButton = styled.button` /* 모바일, 웹 공용 버튼 */
-border: none;
-cursor: pointer;
-margin-left: 20%;
-background-size: cover;
-background-color: transparent;
-@media only screen and (max-width: 1100px), (max-height: 800px) {
-margin-left: 5%;
-}
-@media only screen and (max-width: 600px) {
-margin: 0 0 5vh 0;
-    img{
-        width: 30px;
-        height: 45px;
-    }
-}
-`
-const NextButton = styled.button` /* 모바일, 웹 공용 버튼 */
-border: none;
-cursor: pointer;
-margin-right: 20%;
-background-size: cover;
-background-color: transparent;
-@media only screen and (max-width: 1100px), (max-height: 800px) {
-margin-right: 5%;
-}
-@media only screen and (max-width: 600px) {
-margin: 0 0 5vh 0;
-    img{
-        width: 30px;
-        height: 45px;
-    }
-}
-`
-const WSearchButton = styled.button`
-border: none;
-border-left: 1px solid white;
-padding: 0 0 0 1.5vw;
-background: transparent;
-color: white;
-font-size: 1.2em;
-font-weight: lighter;
-cursor: pointer;
-
-    img{
-        margin-left: 4vw;
-        width: 20px;
-        height: 20px;
-    }
 `
 const Topic = ({ title, initialValue, finalValue }) => {
     const [currentValue, setCurrentValue] = useState(initialValue);
@@ -508,7 +226,6 @@ const Topic = ({ title, initialValue, finalValue }) => {
                 animationInterval = setInterval(() => {
                     const newValue = currentValue + animationStep;
                     setCurrentValue(Math.min(newValue, finalValue));
-
                     if (newValue >= finalValue) {
                         clearInterval(animationInterval); // 애니메이션 멈춤
                     }
@@ -549,20 +266,15 @@ const Home = () => {
     const router = useRouter();
     const { lang = 'en' } = router.query;
     const [activeSection, setActiveSection] = useState(0); // 활성 섹션 인덱스
-    const [iconIndexes, setIconIndexes] = useState(Array.from({ length: iconsPerPageLarge }, (_, i) => i)); // 표시되는 아이콘 인덱스 배열
     const [loading, setLoading] = useState(true);
     const [windowWidth, setWindowWidth] = useState(0); // 초기 화면 너비 설정
     const [windowHeight, setWindowHeight] = useState(0); // 초기 화면 높이 설정
-    const [isSearchDropdownVisible, setIsSearchDropdownVisible] = useState(false);
-    const [selectedOption, setSelectedOption] = useState('All');
     const sectionRefs = useRef([]); // 섹션의 ref를 추적
     const [hoverIndex, setHoverIndex] = useState(false);
     const [hoverTxtIndex, sethoverTxtIndex] = useState(false);
     const [activeIndex, setActiveIndex] = useState(null);
     const [isAnimating, setIsAnimating] = useState(false);
     const [scrolling, setScrolling] = useState(false);
-    const [searchQuery, setSearchQuery] = useState(""); // 검색어 상태 추가
-    const [searchResult, setSearchResult] = useState('');
 
     const handleItemEnter = (index) => {
         setActiveIndex(index);
@@ -582,21 +294,17 @@ const Home = () => {
     const accordionItems = [
         {
             category: 'Incheon, Korea',
-            title: 'Incheon International Airport Passenger Terminal 2',
-        },
-        {
+            title: [langJson[lang]?.ICN],
+        }, {
             category: 'Seoul, Korea',
-            title: 'Hotel Naru Seoul MGallery Ambassador & Riverview Naru House',
-        },
-        {
+            title: [langJson[lang]?.YEOUIDO],
+        }, {
             category: 'Gwacheon, Korea',
-            title: 'KOTITI New Head Office Gwacheon',
-        },
-        {
+            title: [langJson[lang]?.HYUNDAI],
+        }, {
             category: 'Baku, Azerbaijan',
-            title: 'SOCAR Tower',
+            title: [langJson[lang]?.SOCAR],
         },
-        // Add other accordion items similarly...
     ];
 
     const handleItemOver = (index) => {
@@ -606,62 +314,42 @@ const Home = () => {
         {
             outerBackground: '/image/outer1.png',
             innerBackground: '/image/inner1.png',
-            innerWidth: '100%',
-            innerLeft: '0%',
-        },
-        {
+        }, {
             outerBackground: '/image/outer2.png',
             innerBackground: '/image/inner2.png',
-            innerWidth: '100%',
-            innerLeft: '-100%',
-        },
-        {
+        }, {
             outerBackground: '/image/outer3.png',
             innerBackground: '/image/inner3.png',
-            innerWidth: '100%',
-            innerLeft: '-200%',
-        },
-        {
+        }, {
             outerBackground: '/image/outer4.png',
             innerBackground: '/image/inner4.png',
-            innerWidth: '100%',
-            innerLeft: '-300%',
         },
     ];
 
     const handleScroll = (event) => {
-        event.preventDefault(); // Prevent default scrolling behavior
-        
+        event.preventDefault();
         if (!scrolling) {
             setScrolling(true);
-            
             const deltaY = event.deltaY;
             let nextSection = activeSection;
-            
-            // Determine the direction of scroll
             if (deltaY > 0 && nextSection < sections.length - 1) {
                 nextSection++;
             } else if (deltaY < 0 && nextSection > 0) {
                 nextSection--;
             }
-            
-         // Scroll to the next section smoothly if the section reference exists
-         if (nextSection !== activeSection && sectionRefs.current[nextSection]) {
-            sectionRefs.current[nextSection].scrollIntoView({ behavior: "smooth" });
-            setActiveSection(nextSection);
-        }
-            
+            if (nextSection !== activeSection && sectionRefs.current[nextSection]) {
+                sectionRefs.current[nextSection].scrollIntoView({ behavior: "smooth" });
+                setActiveSection(nextSection);
+            }
             setTimeout(() => {
                 setScrolling(false);
-            }, 1000); // Adjust the time as needed to prevent rapid scrolls
+            }, 1000);
         }
     };
-    
-    useEffect(() => {
 
+    useEffect(() => {
         const handleResize = () => {
             const isMobile = typeof window !== "undefined" ? window.innerWidth <= 1280 || window.innerHeight <= 550 : false;
-
             if (!isMobile) {
                 // 모바일이 아닌 경우에는 스크롤 이벤트 리스너를 추가합니다.
                 window.addEventListener("wheel", handleScroll, { passive: false });
@@ -670,97 +358,21 @@ const Home = () => {
                 window.removeEventListener("wheel", handleScroll);
             }
         };
-    
-    // Add event listeners for resize and scroll
-    handleResize();
-    window.addEventListener("resize", handleResize);
-
-    // 모바일이 아닌 경우에만 기본 스크롤을 유지하기 위해 조건 추가
-    if (!(window.innerWidth <= 1280 || window.innerHeight <= 550)) {
-        window.addEventListener("wheel", handleScroll, { passive: false });
-    }
-    
+        handleResize();
+        window.addEventListener("resize", handleResize);
+        // 모바일이 아닌 경우에만 기본 스크롤을 유지하기 위해 조건 추가
+        if (!(window.innerWidth <= 1280 || window.innerHeight <= 550)) {
+            window.addEventListener("wheel", handleScroll, { passive: false });
+        }
         return () => {
-            // Remove event listeners when component unmounts
             window.removeEventListener("resize", handleResize);
             window.removeEventListener("wheel", handleScroll);
         };
     }, [activeSection, scrolling]);
 
-    const toggleDropdown = () => {
-        setIsSearchDropdownVisible(!isSearchDropdownVisible);
-    };
-
-    const handleOptionClick = (option) => {
-        setSelectedOption(option);
-        setIsSearchDropdownVisible(false);
-    };
-
-    // 클릭된 아이콘에 대한 처리
-    const handleIconClick = (iconIndex) => {
-        // 각 아이콘에 대한 링크를 정의합니다.
-        const iconLinks = {
-            0: "/https://www.heerim.com/kr/project/project_list.php?cate=1",
-            1: "/https://www.heerim.com/kr/project/project_list.php?cate=2",
-            2: "/https://www.heerim.com/kr/project/project_list.php?cate=3",
-            3: "/https://www.heerim.com/kr/project/project_list.php?cate=4",
-            4: "/https://www.heerim.com/kr/project/project_list.php?cate=5",
-            5: "/https://www.heerim.com/kr/project/project_list.php?cate=6",
-            // 다른 아이콘들에 대한 링크를 추가하세요
-        };
-
-        // 클릭된 아이콘에 해당하는 링크로 이동합니다.
-        const link = iconLinks[iconIndex];
-        if (link) {
-            window.location.href = link;
-        }
-    };
-
-    // 아이콘에 대한 설명을 반환
-    const getIconDescription = (iconIndex) => {
-        // 각 아이콘에 대한 설명을 정의합니다.
-        const iconDescriptions = {
-            0: "description0",
-            1: "description1",
-            2: "description2",
-            3: "description3",
-            4: "description4",
-            5: "description5",
-            // 다른 아이콘들에 대한 설명을 추가하세요
-        };
-
-        // 클릭된 아이콘에 해당하는 설명을 반환합니다.
-        return iconDescriptions[iconIndex] || "";
-    };
-
-    // 화면 너비 변화 감지 및 아이콘 개수 업데이트
-    useEffect(() => {
-        // 함수를 선언하여 화면 크기를 업데이트하는 로직
-        const updateWindowDimensions = () => {
-            setWindowWidth(window.innerWidth);
-            setWindowHeight(window.innerHeight);
-
-            // 화면 너비가 800 이하인 경우 아이콘 개수를 작게 설정, 그렇지 않으면 크게 설정
-            if (window.innerWidth <= 800) {
-                setIconIndexes(Array.from({ length: iconsPerPageSmall }, (_, i) => i));
-            } else {
-                setIconIndexes(Array.from({ length: iconsPerPageLarge }, (_, i) => i));
-            }
-        };
-
-        // 초기화 단계에서 한 번 실행하고, 화면 크기가 변경될 때마다 실행
-        updateWindowDimensions();
-        window.addEventListener("resize", updateWindowDimensions);
-
-        return () => {
-            window.removeEventListener("resize", updateWindowDimensions);
-        };
-    }, []);
-
     // 한,영 번역
     useEffect(() => {
         setLoading(true);
-
         if (!(lang === "kr" || lang === "en" || !lang)) {
             router.push("/404");
         } else {
@@ -776,12 +388,10 @@ const Home = () => {
                 setWindowWidth(window.innerWidth);
                 setWindowHeight(window.innerHeight);
             };
-
             // 초기화 단계에서 한 번 실행하고, 화면 크기가 변경될 때마다 실행
             updateWindowDimensions();
             window.addEventListener("resize", updateWindowDimensions);
         }
-
         // 이 컴포넌트가 언마운트될 때 이벤트 리스너 정리
         return () => {
             window.removeEventListener("resize", updateWindowDimensions);
@@ -792,63 +402,6 @@ const Home = () => {
         setWindowWidth(window.innerWidth);
         setWindowHeight(window.innerHeight);
     };
-
-
-    // 이전 아이콘 표시 함수
-    const showPreviousIcons = () => {
-        const newIconIndexes = iconIndexes.map((index) => {
-            let newIndex = index - 1;
-            if (newIndex < 0) {
-                newIndex = totalIcons - 1;
-            }
-            return newIndex;
-        });
-        setIconIndexes(newIconIndexes);
-    };
-
-    // 다음 아이콘 표시 함수
-    const showNextIcons = () => {
-        const newIconIndexes = iconIndexes.map((index) => {
-            let newIndex = index + 1;
-            if (newIndex >= totalIcons) {
-                newIndex = 0;
-            }
-            return newIndex;
-        });
-        setIconIndexes(newIconIndexes);
-    };
-
-    const handleSearchInputChange = (event) => { // 검색어 입력 창
-      setSearchQuery(event.target.value);
-    };
-  
-    const handleSearch = () => {
-      // 여기에서 검색 로직을 구현하고, 검색 결과를 검사하여 결과가 없으면 새 창을 띄웁니다.
-      // 예를 들어, 간단한 검색 로직을 시뮬레이션하여 검색 결과가 없다고 가정합니다.
-      const searchResult = simulateSearch(searchQuery); // 검색 결과를 시뮬레이션하는 함수
-  
-      if (!searchResult) {
-        // 검색 결과가 없을 때 새 창을 띄웁니다.
-      const errorMessage = `'${searchQuery}'를 찾을 수 없습니다.`;
-      openNewTab(errorMessage);
-      } else {
-        // 검색 결과가 있을 경우에 대한 로직을 여기에 추가할 수 있습니다.
-        setSearchResult(searchResult);
-      }
-    };
-  
-    // 시뮬레이션용 검색 함수
-    const simulateSearch = (query) => {
-      // 여기에 실제 검색 로직을 구현합니다. (예: 데이터베이스에서 검색)
-      // 이 함수는 단순히 시뮬레이션을 위한 예시입니다.
-      return null; // 검색 결과가 없다고 가정
-    };
-
-    // 새로운 탭 출현 함수
-  const openNewTab = (message) => {
-    const newWindow = window.open('', '_blank');
-    newWindow.document.write(message); // 새 탭에 메시지를 표시합니다.
-  };
 
     const isMobile = typeof window !== "undefined" ? window.innerWidth <= 1280 || window.innerHeight <= 550 : false;
     return (
@@ -870,84 +423,30 @@ const Home = () => {
                                             <M2YellowBox><p>Who we are</p></M2YellowBox>
                                         </AnimateRight>
                                         <AnimateUp>
-                                            <M2Subtitle> {langJson[lang]?.FOLLOW}</M2Subtitle>
-                                        </AnimateUp>
-                                        <AnimateUp>
-                                            <M2Subtitle> {langJson[lang]?.SUPPORT}</M2Subtitle>
-                                        </AnimateUp>
-                                        <AnimateUp>
-                                            <M2Description>{langJson[lang]?.DESCIRPTION}</M2Description>
-                                        </AnimateUp>
-                                        <AnimateUp>
+                                            <Section2Content langJson={langJson} />
                                             <TopicsContainer />
                                         </AnimateUp>
                                     </M2>
-                                    <M2IconContainer>
-                                        {/* 이전 버튼 */}
-                                        <PrevButton onClick={showPreviousIcons}>
-                                            <img src="/icon/prev.png" alt="Prev icon" />
-                                        </PrevButton>
-                                        {/* 아이콘 내용 */}
-                                        {iconIndexes.map((iconIndex) => (
-                                            <M2IconButton
-                                                key={`icon-${iconIndex}`}
-                                                onClick={() => handleIconClick(iconIndex)}
-                                            >
-                                                <img
-                                                    src={`/icon/${iconIndex}.svg`}
-                                                    alt={`Icon ${iconIndex}`}
-                                                />
-                                                <div className="section2icon-description">
-                                                    {/* 아이콘에 대한 설명 */}
-                                                    {getIconDescription(iconIndex)}
-                                                </div>
-                                            </M2IconButton>
-                                        ))}
-                                        {/* 다음 버튼 */}
-                                        <NextButton onClick={showNextIcons}>
-                                            <img src="/icon/next.png" alt="Next icon" />
-                                        </NextButton>
-                                    </M2IconContainer>
-                                    <M3>
-                                        <AnimateUp>
-                                            <M3Title>Our Service</M3Title>
-                                        </AnimateUp>
-                                        <AnimateUp>
-                                            <M3Subtitle>Follow your dream. We support your dream.</M3Subtitle>
-                                        </AnimateUp>
-                                        <AnimateUp>
-                                            <M3ImageContainer>
-      <MobileAccordion langJson={langJson} />
-                                            </M3ImageContainer>
-                                        </AnimateUp>
-                                    </M3>
-                                    <M4NewsList>
-      <AnimateUp>
-          {[0, 1, 2, 3, 4, 5].map((item, index) => (
-            <div>
-            <MobileNewsItem
-              key={index}
-              newsNumber={item}
-            />
-            </div>
-          ))}
-      </AnimateUp>
-                                    </M4NewsList>
+                                    <MobileIconSlide />
                                     <AnimateUp>
-                                        <M4ButtonContainer>
-                                            {/* news1 버튼 */}
-                                            <M4Button href="https://www.youtube.com/watch?v=OLrv8OGTUnQ" target="_blank" rel="noopener noreferrer">
-                                                <img src="/image/newsimage1.png" alt="youtube1 Image" />
-                                            </M4Button>
-                                            {/* news2 버튼 */}
-                                            <M4Button href="https://www.youtube.com/watch?v=REof-nC8Ck8&feature=youtu.be" target="_blank" rel="noopener noreferrer">
-                                                <img src="/image/newsimage2.png" alt="youtube2 Image" />
-                                            </M4Button>
-                                            {/* news3 버튼 */}
-                                            <M4Button href="https://www.youtube.com/watch?v=Lu8uHwNpHEQ" target="_blank" rel="noopener noreferrer">
-                                                <img src="/image/newsimage3.png" alt="youtube3 Image" />
-                                            </M4Button>
-                                        </M4ButtonContainer>
+                                        <M3Title>Our Service</M3Title>
+                                        <M3Subtitle>Follow your dream. We support your dream.</M3Subtitle>
+                                        <M3ImageContainer>
+                                            <MobileAccordion langJson={langJson} />
+                                        </M3ImageContainer>
+                                        <M4NewsList>
+                                            {[0, 1, 2, 3, 4, 5].map((item, index) => (
+                                                <div>
+                                                    <MobileNewsItem
+                                                        key={index}
+                                                        newsNumber={item}
+                                                    />
+                                                </div>
+                                            ))}
+                                        </M4NewsList>
+                                    </AnimateUp>
+                                    <AnimateUp>
+                                        <MobileNewsButton />
                                     </AnimateUp>
                                     <AnimateUp>
                                         <M5Title>
@@ -955,58 +454,13 @@ const Home = () => {
                                         </M5Title>
                                     </AnimateUp>
                                     <M5SearchContainer>
-                                        <div className="searchwraparea">
-                                            <AnimateUp>
-                                                <span style={{ color: "#FFC200", }}>Search</span>
-                                                <span style={{ color: "white" }}>Payvery.com</span>
-                                            </AnimateUp>
-                                            <AnimateUp>
-                                                <p style={{}}>Creative Leadership of Payvery designs the new future never experienced before.</p>
-                                            </AnimateUp>
-                                            <div className="searchheerim">
-                                                <AnimateUp>
-                                                    <div style={{ position: "relative", display: "block", width: "135px", borderBottom: "5px solid #FFC200" }}>
-                                                        <M5SearchDropdownContainer>
-                                                            <M5SearchDropdownButton onClick={toggleDropdown}>
-                                                                <p>{selectedOption}</p> <p>{isSearchDropdownVisible ? '▲' : '▼'} </p>
-                                                            </M5SearchDropdownButton>
-                                                            <M5SearchDropdownContent isVisible={isSearchDropdownVisible}>
-                                                                <li onClick={() => handleOptionClick('All')}>All</li>
-                                                                <li onClick={() => handleOptionClick('Project')}>Project</li>
-                                                                <li onClick={() => handleOptionClick('News')}>News</li>
-                                                                <li onClick={() => handleOptionClick('Leadership')}>Leadership</li>
-                                                            </M5SearchDropdownContent>
-                                                        </M5SearchDropdownContainer>
-                                                    </div>
-                                                    <div style={{ display: "flex", marginTop: "2%", borderBottom: "5px solid white", justifyContent: "space-between" }}>
-                                                        <M5SearchInput
-                                                            type="text"
-                                                            placeholder="Type here"
-                                                            value={searchQuery}
-                                                            onChange={handleSearchInputChange} // 검색 입력란 스타일 추가
-                                                        />
-                                                        <M5SearchButton className="searchheerim-button" onClick={handleSearch} style={{
-                                                            background: "transparent",
-                                                        }}>
-                                                            <img src="/icon/search.png" alt="Search Icon" />
-                                                        </M5SearchButton>
-                                                    </div>
-                                                    <M5SearchTag>
-                                                        <button onClick={() => { window.location.reload() }}><Link href="/Payvery">#Payvery</Link></button>
-                                                        <button onClick={() => { window.location.reload() }}><Link href="/Purplevery">#Purplevery</Link></button>
-                                                        <button onClick={() => { window.location.reload() }}><Link href="/Pg">#Pg</Link></button>
-                                                        <button onClick={() => { window.location.reload() }}><Link href="/Payment_gateway">#Payment_gateway</Link></button>
-                                                        <button onClick={() => { window.location.reload() }}><Link href="/Customer">#Customer</Link></button>
-                                                    </M5SearchTag>
-                                                </AnimateUp>
-                                            </div>
-                                            <AnimateUp>
-                                            </AnimateUp>
-                                        </div>
+                                        <AnimateUp>
+                                            <MobileSearch />
+                                        </AnimateUp>
                                     </M5SearchContainer>
                                     <div className="bottom">
                                         <M5Contact>
-      <HQ langJson={langJson} />
+                                            <HQ langJson={langJson} />
                                         </M5Contact>
                                     </div>
                                 </Mobile>
@@ -1018,211 +472,95 @@ const Home = () => {
                                     ref={el => (sectionRefs.current[index] = el)}
                                 >
                                     {index === 0 ? (
-                                        <section class="wheelcontainer"  data-scroll-index="1" id="wheelIndex1">
-                                            <Section height="100vh">
-                                                <AnimateUp>
-                                                    <W1Title magtop="30vh" > {langJson[lang]?.FOLLOW}</W1Title>
-                                                    <W1Title > {langJson[lang]?.SUPPORT}</W1Title>
-                                                </AnimateUp>
-                                                <W1ScrollDownYellowStick>
-                                                    <p>S C R O L L D O W N </p>
-                                                    <AnimateUp>
-                                                        <span></span>{/* 노란 막대 */}
-                                                    </AnimateUp>
-                                                </W1ScrollDownYellowStick>
-                                                <img  className="zoomInOut" style={{ position:"absolute", top:"0", width:"100%", height:"100vh", zIndex:"-1", }} src="/image/galaxy.png"/>
-                                            </Section>
-                                        </section>
+                                        <Section height="100vh">
+                                            <AnimateUp>
+                                                <W1Title magtop="30vh" > {langJson[lang]?.FOLLOW}</W1Title>
+                                                <W1Title > {langJson[lang]?.SUPPORT}</W1Title>
+                                            </AnimateUp>
+                                            <W1ScrollDownYellowStick>
+                                                <p>S C R O L L D O W N </p>
+                                                <span></span>{/* 노란 막대 */}
+                                            </W1ScrollDownYellowStick>
+                                            <img className="zoomInOut" style={{ position: "absolute", top: "0", width: "100%", height: "100vh", zIndex: "-1", }} src="/image/galaxy.png" />
+                                        </Section>
                                     ) : index === 1 ? (
-                                        <section class="" style={{ display: "block" }} data-scroll-index="2" id="wheelIndex2">
+                                        <section style={{ display: "block" }}>
                                             <Section height="calc(100vh - 130px)" image="/image/blue.png">
                                                 <div className="blue">
                                                     <div className="blueinner">
-                                                        <div className="sec2txt">
-                                                            <AnimateRight>
-                                                                {/* 노란색 배경에 녹색 박스 모양의 텍스트 박스와 소제목, 설명 */}
-                                                                <div className="yellow-box">
-                                                                    <p className="yellow-box-text">Who we are</p>
-                                                                </div>
-                                                            </AnimateRight>
-                                                            <AnimateUp>
-                                                                <div className="subtitle"> {langJson[lang]?.FOLLOW}</div>
-                                                                <div className="subtitle"> {langJson[lang]?.SUPPORT}</div>
-                                                                <div className="description">{langJson[lang]?.DESCIRPTION}</div>
-                                                                {/* 주제와 설명 */}
-                                                            </AnimateUp>
-                                                        </div>
+                                                        <AnimateRight>
+                                                            <div className="yellow-box">
+                                                                <p className="yellow-box-text">Who we are</p>
+                                                            </div>
+                                                        </AnimateRight>
                                                         <AnimateUp>
+                                                            <div className="subtitle"> {langJson[lang]?.FOLLOW}</div>
+                                                            <div className="subtitle"> {langJson[lang]?.SUPPORT}</div>
+                                                            <div className="description">{langJson[lang]?.DESCIRPTION}</div>
                                                             <TopicsContainer />
                                                         </AnimateUp>
                                                     </div>
                                                 </div>
                                             </Section>
-                                            <W2IconContainer>
-                                                {/* 이전 버튼 */}
-                                                <PrevButton onClick={showPreviousIcons}>
-                                                    <img src="/icon/prev.png" alt="Prev icon" />
-                                                </PrevButton>
-                                                {/*
-                                                */}
-                                                {iconIndexes.map((iconIndex) => (
-                                                    <W2IconButton
-                                                        key={`icon-${iconIndex}`}
-                                                        onClick={() => handleIconClick(iconIndex)}
-                                                    >
-                                                        <img
-                                                            src={`/icon/${iconIndex}.svg`}
-                                                            alt={`Icon ${iconIndex}`}
-                                                        />
-                                                        <div className="section2icon-description">
-                                                            {getIconDescription(iconIndex)}
-                                                        </div>
-                                                    </W2IconButton>
-                                                ))}
-                                                {/*  
-                        <IconSlide
-                            iconIndexes={iconIndexes}
-                            handleIconClick={handleIconClick}
-                            getIconDescription={getIconDescription}/>
-                        */}
-                                                {/* 다음 버튼 */}
-                                                <NextButton onClick={showNextIcons}>
-                                                    <img src="/icon/next.png" alt="Next icon" />
-                                                </NextButton>
-                                            </W2IconContainer>
+                                            <IconSlide />
                                         </section>
                                     ) : index === 2 ? (
-                                        <section class=""  data-scroll-index="3" id="wheelIndex3">
-                                            <Section height="vh">
-                                                <div className="sec3txt">
-                                                    <div style={{display:"table-cell", verticalAlign:"middle"}}>
-                                                        <AnimateUp>
-                                                            <div className="title">Our Service</div>
-                                                        </AnimateUp>
-                                                        <AnimateUp>
-                                                            <div className="sec3description" style={{ color: "black", margin: "none" }}>{langJson[lang]?.DESCIRPTION}
-                                                            </div>
-                                                        </AnimateUp>
-                                                    </div>
-                                                </div>
-                                                <AnimateUp>
-      <Accordion
-        accordionImages={accordionImages}
-        hoverIndex={hoverIndex}
-        handleItemOver={handleItemOver}
-        handleItemEnter={handleItemEnter}
-        activeIndex={activeIndex}
-        hoverTxtIndex={hoverTxtIndex}
-        accordionItems={accordionItems}
-      />
-                                                </AnimateUp>
-                                            </Section>
-                                        </section>
+                                        <Section>
+                                            <AnimateUp>
+                                                <Section3Title />
+                                                <Accordion
+                                                    accordionImages={accordionImages}
+                                                    hoverIndex={hoverIndex}
+                                                    handleItemOver={handleItemOver}
+                                                    handleItemEnter={handleItemEnter}
+                                                    activeIndex={activeIndex}
+                                                    hoverTxtIndex={hoverTxtIndex}
+                                                    accordionItems={accordionItems}
+                                                />
+                                            </AnimateUp>
+                                        </Section>
                                     ) : index === 3 ? (
-                                        <section class=""  data-scroll-index="4" id="wheelIndex4">
-                                            <Section height="100vh">
+                                        <Section height="100vh">
+                                            <AnimateUp>
                                                 <section className="newslistwrap">
-                                                    {/* 뉴스 아이템 리스트 */}
-    <div className="news-list">
-      <AnimateUp>
-        {/* 첫 번째 행 */}
-        <div className="news-row">
-          {[0, 1, 2].map((item, index) => (
-            <NewsItem
-              key={index}
-              newsNumber={item}
-            />
-          ))}
-        </div>
-      </AnimateUp>
-      {/* 두 번째 행 */}
-      <AnimateUp>
-        <div className="news-row">
-          {[3, 4, 5].map((item, index) => (
-            <NewsItem
-              key={index}
-              newsNumber={item}
-            />
-          ))}
-        </div>
-      </AnimateUp>
-    </div>
+                                                    <div className="news-list">
+                                                        <div className="news-row">
+                                                            {[0, 1, 2].map((item, index) => (
+                                                                <NewsItem
+                                                                    key={index}
+                                                                    newsNumber={item}
+                                                                />
+                                                            ))}
+                                                        </div>
+                                                        <div className="news-row">
+                                                            {[3, 4, 5].map((item, index) => (
+                                                                <NewsItem
+                                                                    key={index}
+                                                                    newsNumber={item}
+                                                                />
+                                                            ))}
+                                                        </div>
+                                                    </div>
                                                 </section>
-                                                {/* 뉴스 액자 버튼 */}
-                                                <AnimateUp>
-      <NewsButton />
-                                                </AnimateUp>
-                                            </Section>
-                                        </section>
+                                                <NewsButton />
+                                            </AnimateUp>
+                                        </Section>
                                     ) : (
-                                        <section class="" data-scroll-index="5" id="wheelIndex5">
-                                            <Section>
-                                                <AnimateUp>
-                                                    <div className="sec5title">
-                                                        <span class="bold-text">성공</span>으로 가는 과정을 계획하는데 <span class="bold-text">함께</span>하겠습니다.
-                                                    </div>
+                                        <Section>
+                                            <AnimateUp>
+                                                <Section5Title />
+                                            </AnimateUp>
+                                            <div className="searchheerim-container">
+                                                <AnimateUp >
+                                                    <Search />
                                                 </AnimateUp>
-                                                <div className="searchheerim-container">
-                                                    <div style={{ padding: "0 12vw 0 12vw" }}>
-                                                        <AnimateUp >
-                                                            <span className="search-title">Search
-                                                            </span>
-                                                            <span className="search-title2 " style={{ marginLeft: "0.25em" }}>Payvery.com
-                                                            </span>
-                                                        </AnimateUp>
-                                                        <AnimateUp>
-                                                            <p className="searchsub">Creative Leadership of Payvery designs the new future never experienced before.</p>
-                                                        </AnimateUp>
-                                                        <AnimateUp>
-                                                            <div className="searchheerim">
-                                                                <form style={{display:"flex", alignItems:"center", margin:"3vh 0 8vh"}}>
-                                                                    <div className="customselect" style={{ justifyContent:"space-between", position: "relative", display: "flex", width: "130px", lineHeight:"50px", borderBottom: "7px solid #FFC200" }}>
-                                                                        <WSearchDropdownContainer>
-                                                                            <WSearchDropdownButton onClick={toggleDropdown}>
-                                                                                <p>{selectedOption}</p><p>{isSearchDropdownVisible ? '▲' : '▼'}</p>
-                                                                            </WSearchDropdownButton>
-                                                                            <WSearchDropdownContent isVisible={isSearchDropdownVisible}>
-                                                                                <li onClick={() => handleOptionClick('All')}>All</li>
-                                                                                <li onClick={() => handleOptionClick('Project')}>Project</li>
-                                                                                <li onClick={() => handleOptionClick('News')}>News</li>
-                                                                                <li onClick={() => handleOptionClick('Leadership')}>Leadership</li>
-                                                                            </WSearchDropdownContent>
-                                                                        </WSearchDropdownContainer>
-                                                                    </div>
-                                                                    <div style={{display: "flex", width:"65%", height:"50px", borderBottom: "7px solid white",}}>
-                                                                    <input
-                                                                        className="searchheerim-input"
-                                                                        type="text"
-                                                                        placeholder="Type here"
-                                                                        value={searchQuery}
-                                                                        onChange={handleSearchInputChange} // 검색 입력란 스타일 추가
-                                                                    />
-                                                                    </div>
-                                                                    <div style={{ display: "flex", height:"50px", borderBottom: "7px solid white", alignItems:"center"}}>
-                                                                    <WSearchButton className="searchheerim-button" onClick={handleSearch}>
-                                                                        Search
-                                                                        <img src="/icon/search.png" alt="Search Icon" />
-                                                                    </WSearchButton>
-                                                                    </div>
-                                                                </form>
-                                                                <div className="searchtag-keywords">
-                                                                    <button className="searchtag-button" onClick={() => { window.location.reload() }}><Link href="/Payvery">#Payvery</Link></button>
-                                                                    <button className="searchtag-button" onClick={() => { window.location.reload() }}><Link href="/Purplevery">#Purplevery</Link></button>
-                                                                    <button className="searchtag-button" onClick={() => { window.location.reload() }}><Link href="/Pg">#Pg</Link></button>
-                                                                    <button className="searchtag-button" onClick={() => { window.location.reload() }}><Link href="/Payment_gateway">#Payment_gateway</Link></button>
-                                                                    <button className="searchtag-button" onClick={() => { window.location.reload() }}><Link href="/Customer">#Customer</Link></button>
-                                                                </div>
-                                                            </div>
-                                                        </AnimateUp>
-                                                    </div>
+                                            </div>
+                                            <div className="bottom">
+                                                <div className="seoulhqsupport">
+                                                    <HQ langJson={langJson} />
                                                 </div>
-                                                <div className="bottom">
-                                                    <div className="seoulhqsupport">
-      <HQ langJson={langJson} />
-                                                    </div>
-                                                </div>
-                                            </Section>
-                                        </section>
+                                            </div>
+                                        </Section>
                                     )}
                                 </div>
                             ))

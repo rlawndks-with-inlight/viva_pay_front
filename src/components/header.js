@@ -724,33 +724,33 @@ const Header = (props) => {
   const [showMore, setShowMore] = useState(false);
   const [BlinkAnimation, setBlinkAnimation] = useState(false)
   const [AnimationEnabled, setAnimationEnabled] = useState(false); // 상태 추가
-/* 이걸 쓰면 더보기 창에서 바디의 스크롤이 움직이진 않지만 더보기를 나올때 순간 스크롤이 없어졌다 생김
-  useEffect(() => {
-    const handleScroll = (e) => {
-      if (showMore) {
-		e.preventDefault();
-		e.stopPropagation();
-      }
-    };
-    
-    if (showMore) {
-      const originalStyle = window.getComputedStyle(document.body).cssText; // 현재 body의 스타일 저장
-      document.body.style.cssText = `
-        position: fixed; // 이걸 없애면 그 스크롤이 순간 사라지는것도 없어지는데 고정도 안되서 의미가 없어짐
-        top: -${window.scrollY}px;
-        overflow-y: scroll;
-        width: 100%;`;
-      window.addEventListener('wheel', handleScroll, { passive: false }); // wheel 이벤트 추가
-
-      return () => {
-        const scrollY = document.body.style.top;
-        document.body.style.cssText = originalStyle; // 이전에 저장한 body 스타일로 복원
-        window.scrollTo(0, parseInt(scrollY || '0', 10) * -1);
-        window.removeEventListener('wheel', handleScroll); // 컴포넌트 언마운트 시 이벤트 제거
+  /* 이걸 쓰면 더보기 창에서 바디의 스크롤이 움직이진 않지만 더보기를 나올때 순간 스크롤이 없어졌다 생김
+    useEffect(() => {
+      const handleScroll = (e) => {
+        if (showMore) {
+      e.preventDefault();
+      e.stopPropagation();
+        }
       };
-    }
-  }, [showMore]);
-  */
+      
+      if (showMore) {
+        const originalStyle = window.getComputedStyle(document.body).cssText; // 현재 body의 스타일 저장
+        document.body.style.cssText = `
+          position: fixed; // 이걸 없애면 그 스크롤이 순간 사라지는것도 없어지는데 고정도 안되서 의미가 없어짐
+          top: -${window.scrollY}px;
+          overflow-y: scroll;
+          width: 100%;`;
+        window.addEventListener('wheel', handleScroll, { passive: false }); // wheel 이벤트 추가
+  
+        return () => {
+          const scrollY = document.body.style.top;
+          document.body.style.cssText = originalStyle; // 이전에 저장한 body 스타일로 복원
+          window.scrollTo(0, parseInt(scrollY || '0', 10) * -1);
+          window.removeEventListener('wheel', handleScroll); // 컴포넌트 언마운트 시 이벤트 제거
+        };
+      }
+    }, [showMore]);
+    */
 
   // 호버시 마우스 추적
   const applyMagneticEffect = () => {
@@ -895,9 +895,9 @@ const Header = (props) => {
             setShowHeader(false)
           }
         }}>
-        </div>
+      </div>
       <div className="headerinner">
-      {isMobile ? null : <BlueStick activeSection={activeSection} showHeader={showHeader} />}
+        {isMobile ? null : <BlueStick activeSection={activeSection} showHeader={showHeader} />}
         <LogoButton
           BlinkAnimation={BlinkAnimation}
           showMore={showMore}
@@ -928,9 +928,9 @@ const Header = (props) => {
             </CloseMoreButton>
           ) : (
             <>
-            <Link href="/kr" legacyBehavior>
-              <a activeSection={activeSection} className={lang === 'kr' ? 'active' : ''}>KR</a>
-            </Link>
+              <Link href="/kr" legacyBehavior>
+                <a activeSection={activeSection} className={lang === 'kr' ? 'active' : ''}>KR</a>
+              </Link>
               <Link href="/en" legacyBehavior>
                 <a activeSection={activeSection} className={lang === 'en' ? 'active' : ''}>EN</a>
               </Link>
@@ -1070,14 +1070,14 @@ const Header = (props) => {
                     <li >
                       <h2 >
                         <a href="/projects" >
-                          <span className="char"  data-char="P" style={{ '--char-index': 0 }}>P</span>
-                          <span className="char"  data-char="R" style={{ '--char-index': 1 }}>R</span>
-                          <span className="char"  data-char="O" style={{ '--char-index': 2 }}>O</span>
-                          <span className="char"  data-char="J" style={{ '--char-index': 3 }}>J</span>
-                          <span className="char"  data-char="E" style={{ '--char-index': 4 }}>E</span>
-                          <span className="char"  data-char="C" style={{ '--char-index': 5 }}>C</span>
-                          <span className="char"  data-char="T" style={{ '--char-index': 6 }}>T</span>
-                          <span className="char"  data-char="S" style={{ '--char-index': 7 }}>S</span>
+                          <span className="char" data-char="P" style={{ '--char-index': 0 }}>P</span>
+                          <span className="char" data-char="R" style={{ '--char-index': 1 }}>R</span>
+                          <span className="char" data-char="O" style={{ '--char-index': 2 }}>O</span>
+                          <span className="char" data-char="J" style={{ '--char-index': 3 }}>J</span>
+                          <span className="char" data-char="E" style={{ '--char-index': 4 }}>E</span>
+                          <span className="char" data-char="C" style={{ '--char-index': 5 }}>C</span>
+                          <span className="char" data-char="T" style={{ '--char-index': 6 }}>T</span>
+                          <span className="char" data-char="S" style={{ '--char-index': 7 }}>S</span>
                         </a>
                       </h2>
                       <SubButton >
@@ -1111,7 +1111,7 @@ const Header = (props) => {
                     <li>
                       <h2>
                         <a href="/ir" >
-                          <span className="char"  data-char="I" style={{ '--char-index': 0 }}>I</span>
+                          <span className="char" data-char="I" style={{ '--char-index': 0 }}>I</span>
                           <span className="char" data-char="R" style={{ '--char-index': 1 }}>R</span>
                         </a>
                       </h2>
@@ -1124,13 +1124,13 @@ const Header = (props) => {
                     <li>
                       <h2>
                         <a href="/contact" >
-                          <span className="char" data-char="C"  style={{ '--char-index': 0 }}>C</span>
-                          <span className="char" data-char="O"  style={{ '--char-index': 1 }}>O</span>
-                          <span className="char" data-char="N"  style={{ '--char-index': 2 }}>N</span>
-                          <span className="char" data-char="T"  style={{ '--char-index': 3 }}>T</span>
-                          <span className="char" data-char="A"  style={{ '--char-index': 4 }}>A</span>
-                          <span className="char" data-char="C"  style={{ '--char-index': 5 }}>C</span>
-                          <span className="char" data-char="T"  style={{ '--char-index': 6 }}>T</span>
+                          <span className="char" data-char="C" style={{ '--char-index': 0 }}>C</span>
+                          <span className="char" data-char="O" style={{ '--char-index': 1 }}>O</span>
+                          <span className="char" data-char="N" style={{ '--char-index': 2 }}>N</span>
+                          <span className="char" data-char="T" style={{ '--char-index': 3 }}>T</span>
+                          <span className="char" data-char="A" style={{ '--char-index': 4 }}>A</span>
+                          <span className="char" data-char="C" style={{ '--char-index': 5 }}>C</span>
+                          <span className="char" data-char="T" style={{ '--char-index': 6 }}>T</span>
                         </a>
                       </h2>
                     </li>

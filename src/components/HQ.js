@@ -4,9 +4,9 @@ import { useRouter } from "next/router";
 const HQ = ({ langJson }) => {
     const router = useRouter();
     const { lang = 'en' } = router.query;
-
+    // console.log('langJson:', langJson); 
     return (
-        <div style={{display:"flex"}}>
+        <div style={{ display: "flex" }}>
             <div className="hq">
                 <div className="address">
                     <div className="hq1">

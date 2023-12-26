@@ -36,7 +36,6 @@ const Accordion = ({
                                 }}>
                                 </div>
                                 <div className="accordion-inner" style={{
-                                    left: hoverIndex === index ? '0' : image.innerLeft,
                                     background: `url(${image.innerBackground}) no-repeat 50% 50%`,
                                     transition: hoverIndex === index ? 'transform 5s ease-in-out' : '',
                                     transform: hoverIndex === index ? 'scale(1.1) rotate(0.002deg)' : '',
@@ -80,7 +79,6 @@ const Accordion = ({
                         ))}
                     </ul>
                 </article>
-                {/* ... */}
             </section>
         </div>
     );
