@@ -5,7 +5,6 @@ const Accordion = ({
     hoverIndex,
     handleItemOver,
     handleItemEnter,
-    activeIndex,
     hoverTxtIndex,
     accordionItems,
 }) => {
@@ -45,12 +44,12 @@ const Accordion = ({
                         ))}
                     </ul>
                 </article>
-                <article className={`accordion-over-container ${activeIndex !== null ? 'active' : ''}`}>
+                <article className={`accordion-over-container`}>
                     <ul className="accordion-over-list">
                         {accordionItems.map((item, index) => (
                             <li
                                 key={index}
-                                className={`accordion-over-item ${activeIndex === index ? 'active' : ''}`}
+                                className={`accordion-over-item`}
                                 onMouseEnter={() => handleItemEnter(index)}
                                 onMouseLeave={() => handleItemEnter(false)}
                             >

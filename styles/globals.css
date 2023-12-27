@@ -735,3 +735,13 @@ body {
   margin-left: 1em;
   font-size: 1.3em;
 }
+/* slick 관련 강제 수정 */
+.slick-slider{
+  display: flex !important;
+  position: static !important;
+  flex-direction: row !important;
+  margin: 1em 10% 0 10%;
+  @media only screen and (max-width: 1080px) {
+    margin: 1em 2% 0 2%;
+  }
+}

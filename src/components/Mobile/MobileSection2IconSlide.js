@@ -75,12 +75,12 @@ export const MobileIconSlide = ({ }) => {
     const handleIconClick = (iconIndex) => {
         // 각 아이콘에 대한 링크를 정의합니다.
         const iconLinks = {
-            0: "/https://www.heerim.com/kr/project/project_list.php?cate=1",
-            1: "/https://www.heerim.com/kr/project/project_list.php?cate=2",
-            2: "/https://www.heerim.com/kr/project/project_list.php?cate=3",
-            3: "/https://www.heerim.com/kr/project/project_list.php?cate=4",
-            4: "/https://www.heerim.com/kr/project/project_list.php?cate=5",
-            5: "/https://www.heerim.com/kr/project/project_list.php?cate=6",
+            0: "https://www.heerim.com/kr/project/project_list.php?cate=1",
+            1: "https://www.heerim.com/kr/project/project_list.php?cate=2",
+            2: "https://www.heerim.com/kr/project/project_list.php?cate=3",
+            3: "https://www.heerim.com/kr/project/project_list.php?cate=4",
+            4: "https://www.heerim.com/kr/project/project_list.php?cate=5",
+            5: "https://www.heerim.com/kr/project/project_list.php?cate=6",
             // 다른 아이콘들에 대한 링크를 추가하세요
         };
 

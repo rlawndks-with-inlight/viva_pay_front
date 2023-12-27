@@ -8,7 +8,7 @@ const App = (props) => {
 
   return (
     <>
-      <Head>
+      <Head basename="/payvery.com">
         <link rel="icon" href="/icon/favion.svg"></link>
         <title>Payvery</title>
       </Head>

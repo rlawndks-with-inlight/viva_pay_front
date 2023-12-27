@@ -16,6 +16,7 @@ import { MobileNewsItem, MobileNewsButton } from "src/components/Mobile/MobileSe
 import { MobileSearch } from "/src/components/Mobile/MobileSection5";
 import styled from "styled-components";
 import { useInView } from 'react-intersection-observer'; // react-intersection-observer 라이브러리 사용
+import { IconSlideDemo } from "src/components/IconSlideDemo";
 const sections = ["section1", "section2", "section3", "section4", "section5"]; // 섹션 이름
 
 const AnimateUp = ({ children }) => {
@@ -272,24 +273,22 @@ const Home = () => {
     const sectionRefs = useRef([]); // 섹션의 ref를 추적
     const [hoverIndex, setHoverIndex] = useState(false);
     const [hoverTxtIndex, sethoverTxtIndex] = useState(false);
-    const [activeIndex, setActiveIndex] = useState(null);
     const [isAnimating, setIsAnimating] = useState(false);
     const [scrolling, setScrolling] = useState(false);
 
     const handleItemEnter = (index) => {
-        setActiveIndex(index);
         setHoverIndex(index);
         sethoverTxtIndex(index);
     };
 
     useEffect(() => {
-        if (activeIndex !== null && !isAnimating) {
+        if (!isAnimating) {
             setIsAnimating(true);
             setTimeout(() => {
                 setIsAnimating(false);
             }, 1000);
         }
-    }, [activeIndex, isAnimating]);
+    }, [isAnimating]);
 
     const accordionItems = [
         {
@@ -427,7 +426,7 @@ const Home = () => {
                                             <TopicsContainer />
                                         </AnimateUp>
                                     </M2>
-                                    <MobileIconSlide />
+                                    <IconSlideDemo />
                                     <AnimateUp>
                                         <M3Title>Our Service</M3Title>
                                         <M3Subtitle>Follow your dream. We support your dream.</M3Subtitle>
@@ -502,7 +501,7 @@ const Home = () => {
                                                     </div>
                                                 </div>
                                             </Section>
-                                            <IconSlide />
+                                            <IconSlideDemo />
                                         </section>
                                     ) : index === 2 ? (
                                         <Section>
@@ -513,7 +512,6 @@ const Home = () => {
                                                     hoverIndex={hoverIndex}
                                                     handleItemOver={handleItemOver}
                                                     handleItemEnter={handleItemEnter}
-                                                    activeIndex={activeIndex}
                                                     hoverTxtIndex={hoverTxtIndex}
                                                     accordionItems={accordionItems}
                                                 />
