@@ -3,6 +3,9 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React, { useState, useEffect } from 'react';
 import styled, { css, keyframes } from 'styled-components';
+import { MobileDropdown } from './HeaderMobile/MobileDropDown';
+import { MobileIconContainer } from './HeaderMobile/MobileIcon';
+import { MenuButton } from './HeaderWeb/MainContents';
 
 const slideInLeft = keyframes`
 0%{
@@ -359,92 +362,6 @@ animation: ${props => props.AnimationEnabled ? css`${fadeInDown} 1s ` : css`${fa
 @media only screen and (max-width: 960px),(max-height: 600px) {
   font-size: 1em;
 }
-.char{
-  display: inline-block;
-  position: relative;
-  pointer-events: none;
-  visibility: hidden;
-  overflow: hidden;
-  color: white;
-  text-decoration: none;
-  ::before, ::after{
-    pointer-events: none;
-    user-select: none;
-    position: absolute;
-    top: 0;
-    left: 0;
-    content: attr(data-char);
-    visibility: visible;
-    transition: all 0.6s cubic-bezier(0.37, 0.03, 0.09, 0.98);
-    transition-delay: calc( 0.05s * var(--char-index));
-  }
-  ::after{
-    transform: translateY(100%);
-  }
-}
-  li{
-h2{
-  margin: 0;
-}
-  list-style: none;
-&:hover{
-  a{
-    transition: all 0.6s ;
-      opacity: 1;
-  span{
-  ::before{
-    transform: translateY(-100%);
-  }
-  ::after{
-    transform: translateY(0);
-  }
-  }
-  }
-}
-}
-`
-const SubButton = styled.button`
-display: flex;
-flex-direction: column; /* 서브 버튼을 세로로 정렬 */
-align-items: flex-start; /* 왼쪽 정렬 */
-border: none;
-padding: 0;
-margin-top: 1em;
-font-size: 1em;
-background: transparent; /* 투명 배경 추가 */
-text-align: left; /* 텍스트 왼쪽 정렬 */
-transition: all 0.3s;
-a{
-  position: relative;
-  transition: all 0.3s ;
-  opacity: 0.5;
-  text-decoration: none;
-  margin-bottom: 1.5em;
-  color: white; /* 서브 버튼 텍스트 색상 설정 */
-  ::before{
-    position: absolute;
-    width: 100%;
-    height: 2px;
-    margin-top: 1.3em;
-    content: "";
-    background-color: white;
-    transform: scaleX(0);
-    transition: transform 0.3s;
-    transform-origin: 100% 0;
-  }
-  :hover {
-    ::before{
-      transform:scaleX(1); 
-      transform-origin: 0 0
-    }
-  }
-}
-@media only screen and (max-height: 550px) {
-    margin-top: 0.4em;
-    a{
-        margin-bottom: 0.7em;
-    }
-}
 `
 const MoreIconButtonContainer = styled.div`
 display: flex; /* 더보기 아래쪽 아이콘 버튼 스타일*/
@@ -544,171 +461,6 @@ width: 100%;
 background-color: rgb(0, 104, 232); /* 파란색 배경 추가 */
 animation: ${props => props.AnimationEnabled ? css`${slideInLeft} 0.5s ` : css`${slideOutRight} 0.5s `};
 `
-const MTotalButtonContainer = styled.ul`
-text-decoration: none;
-margin-top : 6em;
-padding: 0;
-@media only screen and (max-height: 550px) {
-margin-top : 4em;
-}
-`
-const MDropDownButton = styled.li`
-border-top: 1px solid rgba(255,255,255,0.2);
-background-color: transparent;
-cursor: pointer;
-    color: white;
-list-style: none;
-  overflow: hidden;
-padding-top: 0.8em;
-a{
-    font-size: 1.3em;
-    padding-left: 1em;
-    text-decoration: none;
-    color: white;
-}
-p{ /* aboutus,projects,expertise,ir 디자인 */
-    margin: 0;
-    padding-left: 1em;
-    font-size: 1.3em;        
-    padding-top: 0;
-    padding-bottom: 0.7em;
-}
-@media only screen and (max-height: 550px) {
-padding-top: 0.3em;
-    a{
-        font-size: 0.8em;
-    }
-    p{ /* aboutus,projects,expertise,ir 디자인 */
-        margin: 0;
-        padding-left: 1em;
-        font-size: 0.8em;
-        padding-bottom: 0.3em;
-    }
-}
-`
-const MDropDownContent = styled.ul`
-width: 100%;
-background-color: white;
-list-style: none;
-opacity: ${(props) => (props.isVisible ? '1' : '0')};
-  max-height: ${(props) => (props.isVisible ? '110px' : '0')}; /* 110px : 0 에서 애니메이션 문제없음 185px이 모든걸 보여줌 */
-  padding: 0;
-  transition: ${(props) => (props.isVisible ? 'max-height 0.4s' : 'max-height 0.5s, opacity 4s')};
-  a {
-    padding-top: 0.5em;
-    padding-bottom: 0.5em;
-    font-size: 1.1em;
-    display: block;
-    color: gray;
-    &:hover{
-      color: black;
-        background-color: rgba(255, 194, 0, 0.5); /* 노란색 배경 추가 */
-      }
-  }
-@media only screen and (max-height: 550px) {
-    a{
-    padding-top: 0.2em;
-    padding-bottom: 0.2em;
-    font-size: 0.6em;
-    display: block;
-    color: gray;
-    &:hover{
-        background-color: rgb(255, 194, 0); /* 노란색 배경 추가 */
-      }
-    }
-}
-`
-const MMoreIconButtonContainer = styled.div`
-position: fixed;
-bottom: 10%;
-left: 10%;
-display: flex; /* 더보기 아래쪽 아이콘 버튼 스타일*/
-text-align: center;
-@media only screen and (max-width: 420px) {
-    left: 2%;
-}
-@media only screen and (max-height: 850px) {
-bottom: 2%;
-}
-`
-const MMoreIconButton = styled.a`
-transition: opacity 0.3s ease; /* 호버 시 투명도 전환 애니메이션 */
-text-decoration: none; /*링크 밑줄 제거*/
-  img{
-    width: 40px;
-    height: 40px;
-    &:hover{
-      opacity: 0.7; /* 호버 시 투명도를 0.7로 변경 (1이 원래 투명도) */
-}
-  }
-@media only screen and (max-width: 650px) {
-    img{
-    width: 25px;
-    height: 25px;
-  }
-}
-@media only screen and (max-width: 400px) {
-    img{
-    width: 5vw;
-    height: 5vw;
-  }
-}
-@media only screen and (max-height: 300px){
-    img{
-    width: 1.5em;
-    height: 1.5em;
-  }
-}
-`
-const MLocationButton = styled.div`
-display: flex; /* 더보기 아래쪽 map 버튼 스타일*/
-flex-direction: row;
-background-color: rgb(255, 194, 0); /* 노란색 배경 추가 */
-border-radius: 50px; /* 회색 배경과 함께 버튼에 radius 추가 */
-padding: 10px;
-cursor: pointer;
-  img{
-    width: 25px;
-    height: 25px;
-  }
-  a{
-    font-size: 20px;
-    margin: 0 10px 0 10px;
-    color: black;
-  }
-  &:hover{
-    opacity: 0.7; /* 호버 시 투명도를 0.7로 변경 (1이 원래 투명도) */
-}
-@media only screen and (max-width: 650px) {
-padding: 7px;
-  img{
-    width: 15px;
-    height: 15px;
-  }
-  a{
-    font-size: 12px;
-  }
-}
-@media only screen and (max-width: 400px) {
-  img{
-    width: 4vw;
-    height: 4vw;
-  }
-  a{
-    font-size: 3vw;
-  }
-}
-@media only screen and (max-height: 300px) {
-  img{
-    margin-top: 2px;
-    width: 1em;
-    height: 1em;
-  }
-  a{
-    font-size: 1em;
-  }
-}
-`
 const Header = (props) => {
   const { activeSection, showHeader, setShowHeader, scrollY } = props;
   const router = useRouter();
@@ -717,10 +469,6 @@ const Header = (props) => {
   const [isMobile, setIsMobile] = useState(false); // 모바일 화면 상태
   const [loading, setLoading] = useState(true);
   const [windowWidth, setWindowWidth] = useState(0); // 초기 화면 너비 설정
-  const [isAboutUsDropdownVisible, setAboutUsDropdownVisible] = useState(false);
-  const [isProjectDropdownVisible, setProjectDropdownVisible] = useState(false);
-  const [isExpertiseDropdownVisible, setExpertiseDropdownVisible] = useState(false);
-  const [isIRDropdownVisible, setIRDropdownVisible] = useState(false);
   const [showMore, setShowMore] = useState(false);
   const [BlinkAnimation, setBlinkAnimation] = useState(false)
   const [AnimationEnabled, setAnimationEnabled] = useState(false); // 상태 추가
@@ -783,13 +531,11 @@ const Header = (props) => {
       </IconButton>
     );
   };
-
   // More 버튼 클릭 시
   const handleMoreButtonClick = () => {
     setShowMore(true);
     setAnimationEnabled(true); // Animation 활성화
     setBlinkAnimation(true); // 로고 깜빡임 활성화
-
     setTimeout(() => {
       setBlinkAnimation(false); // close할때 애니메이션 작동하도록
     }, 400); // 1초 후에 CloseAnimation을 false로 변경
@@ -798,36 +544,11 @@ const Header = (props) => {
   const handleCloseButtonClick = () => {
     setAnimationEnabled(false); // Animation 활성화
     setBlinkAnimation(true); // 로고 깜빡임 활성화
-
     document.body.style.overflow = 'auto'; // body 요소의 스크롤을 다시 보이게 함
     setTimeout(() => {
       setShowMore(false);
       setBlinkAnimation(false); // more할때 애니메이션 작동하도록
     }, 400); // 1초 후에 CloseAnimation을 false로 변경
-  };
-
-  // 드롭다운 보이게 하는 기능
-  const toggleDropdown = (dropdown) => {
-    setAboutUsDropdownVisible(false);
-    setProjectDropdownVisible(false);
-    setExpertiseDropdownVisible(false);
-    setIRDropdownVisible(false);
-    switch (dropdown) {
-      case 'aboutUs':
-        setAboutUsDropdownVisible(!isAboutUsDropdownVisible);
-        break;
-      case 'projects':
-        setProjectDropdownVisible(!isProjectDropdownVisible);
-        break;
-      case 'expertise':
-        setExpertiseDropdownVisible(!isExpertiseDropdownVisible);
-        break;
-      case 'ir':
-        setIRDropdownVisible(!isIRDropdownVisible);
-        break;
-      default:
-        break;
-    }
   };
 
   useEffect(() => {
@@ -837,35 +558,28 @@ const Header = (props) => {
       const updateWindowDimensions = () => {
         setWindowWidth(window.innerWidth);
       };
-
       // 초기화 단계에서 한 번 실행하고, 화면 크기가 변경될 때마다 실행
       updateWindowDimensions();
       window.addEventListener("resize", updateWindowDimensions);
     }
-
     // 이 컴포넌트가 언마운트될 때 이벤트 리스너 정리
     return () => {
       window.removeEventListener("resize", updateWindowDimensions);
     };
   }, [activeSection, loading, windowWidth]);
-
   const updateWindowDimensions = () => {
     setWindowWidth(window.innerWidth);
   };
 
   useEffect(() => {
     setIsVisible(true);
-
     // 모바일 화면 확인
     const checkIsMobile = () => {
       setIsMobile(window.innerWidth <= 600 && window.innerHeight >= 300);
     };
-
     checkIsMobile(); // 컴포넌트 마운트 확인
-
     // 화면 크기에 따라 모바일 화면 확인
     window.addEventListener('resize', checkIsMobile);
-
     return () => {
       window.removeEventListener('resize', checkIsMobile); // 이벤트 리스너 제거
     };
@@ -953,85 +667,8 @@ const Header = (props) => {
         <div>
           {isMobile ? (
             <MMoreSection AnimationEnabled={AnimationEnabled}>
-              <div>
-                <MTotalButtonContainer>
-                  <MDropDownButton onClick={() => toggleDropdown('aboutUs')}>
-                    <p>ABOUT US {isAboutUsDropdownVisible ? '▲' : '▼'} </p>
-                    <MDropDownContent isVisible={isAboutUsDropdownVisible}>
-                      <li>
-                        <a href="/about-us/corporate profile" >Corporate Profile</a>
-                        <a href="/about-us/leadership">Leadership</a>
-                        <a href="/about-us/news">News</a>
-                        <a href="/about-us/pr">PR </a>
-                        <a href="/about-us/recruit" >Recruit</a>
-                      </li>
-                    </MDropDownContent>
-                  </MDropDownButton>
-                  <MDropDownButton onClick={() => toggleDropdown('projects')}>
-                    <p>PROJECTS {isProjectDropdownVisible ? '▲' : '▼'} </p>
-                    <MDropDownContent isVisible={isProjectDropdownVisible}>
-                      <li>
-                        <a href="/projects/selected works">Selected Works</a>
-                        <a href="/projects/all">All</a>
-                        <a href="/projects/design">DESIGN</a>
-                        <a href="/projects/cm">CM</a>
-                      </li>
-                    </MDropDownContent>
-                  </MDropDownButton>
-                  <MDropDownButton onClick={() => toggleDropdown('expertise')}>
-                    <p>EXPERTISE {isExpertiseDropdownVisible ? '▲' : '▼'} </p>
-                    <MDropDownContent isVisible={isExpertiseDropdownVisible}>
-                      <li>
-                        <a href="/expertise/services">Services</a>
-                        <a href="/expertise/markets">Markets</a>
-                        <a href="/expertise/research" >Research & Idea</a>
-                        <a href="/expertise/vr" >VR/AR</a>
-                      </li>
-                    </MDropDownContent>
-                  </MDropDownButton>
-                  <MDropDownButton onClick={() => toggleDropdown('ir')}>
-                    <p>IR {isIRDropdownVisible ? '▲' : '▼'} </p>
-                    <MDropDownContent isVisible={isIRDropdownVisible}>
-                      <li>
-                        <a href="/ir/finance">Finance</a>
-                        <a href="/ir/analyst report" >Analyst Report</a>
-                        <a href="/ir/ir material"  >IR Material</a>
-                      </li>
-                    </MDropDownContent>
-                  </MDropDownButton>
-                  <MDropDownButton >
-                    <a href="/contact">CONTACT</a>
-                  </MDropDownButton>
-                </MTotalButtonContainer>
-              </div>
-              <div>
-                <MMoreIconButtonContainer>
-                  {/* 인스타그램 버튼 */}
-                  <MMoreIconButton>
-                    <Link href="https://www.instagram.com/heerim_architects_official/" target="_blank" rel="noopener noreferrer">
-                      <img src="/icon/instagram.svg" alt="Instagram Icon" />
-                    </Link>
-                    {/* 유튜브 버튼 */}
-                    <Link style={{ marginLeft: "3vw" }} href="https://www.youtube.com/channel/UCPwQIrf17KFyqvXeq8NVY_Q" target="_blank" rel="noopener noreferrer">
-                      <img src="/icon/youtube.svg" alt="YouTube Icon" />
-                    </Link>
-                    {/* 핀터레스트 버튼 */}
-                    <Link style={{ marginLeft: "3vw" }} href="https://www.pinterest.co.kr/heerim_architects_official/" target="_blank" rel="noopener noreferrer">
-                      <img src="/icon/pinterest.svg" alt="Pinterest Icon" />
-                    </Link>
-                  </MMoreIconButton>
-                  {/* 디자인 지도 버튼 */}
-                  <MLocationButton style={{ marginLeft: "3vw" }} href="https://www.google.com/maps/d/viewer?mid=1ZYdnpbxRgC5-zu5GpoOU8zd_E-v24aXT&ll=13.728397502246512%2C71.13522019999999&z=3" target="_blank" rel="noopener noreferrer">
-                    <img src="/icon/location.svg" alt="Location Icon" />
-                    <a> Design map </a>
-                  </MLocationButton>
-                  {/* CM 지도 버튼 */}
-                  <MLocationButton style={{ marginLeft: "3vw" }} href="https://www.google.com/maps/d/viewer?mid=1aWEovb5OXGAdqH_D-QojV6l96tLYT2S0&ll=24.118227897040363%2C55.94565490000001&z=3" target="_blank" rel="noopener noreferrer">
-                    <img src="/icon/location.svg" alt="Location Icon" />
-                    <a> CM map </a>
-                  </MLocationButton>
-                </MMoreIconButtonContainer>
-              </div>
+                <MobileDropdown />
+                <MobileIconContainer />
             </MMoreSection>
           ) : (
             <MoreSection AnimationEnabled={AnimationEnabled}>
@@ -1047,93 +684,7 @@ const Header = (props) => {
               <MoreMenuInner>
                 <div class="menuinner">
                   <TotalButtonContainer AnimationEnabled={AnimationEnabled}>
-                    <li>
-                      <h2 style={{ /* 1.5em이 기본 사이즈 */ }}>
-                        <a href="/ABOUT US">
-                          <span className="char" data-char="A" style={{ '--char-index': 0 }}>A</span>
-                          <span className="char" data-char="B" style={{ '--char-index': 1 }}>B</span>
-                          <span className="char" data-char="O" style={{ '--char-index': 2 }}>O</span>
-                          <span className="char" data-char="U" style={{ '--char-index': 3 }}>U</span>
-                          <span className="char" data-char="T" style={{ '--char-index': 4 }}>T</span>
-                          <span className="char" data-char="U" style={{ '--char-index': 5 }}>U</span>
-                          <span className="char" data-char="S" style={{ '--char-index': 6 }}>S</span>
-                        </a>
-                      </h2>
-                      <SubButton>
-                        <a href="/about-us/corporate-profile">Corporate Profile</a>
-                        <a href="/about-us/leadership" >Leadership</a>
-                        <a href="/about-us/news" >News</a>
-                        <a href="/about-us/pr" >PR </a>
-                        <a href="/about-us/recruit" >Recruit</a>
-                      </SubButton>
-                    </li>
-                    <li >
-                      <h2 >
-                        <a href="/projects" >
-                          <span className="char" data-char="P" style={{ '--char-index': 0 }}>P</span>
-                          <span className="char" data-char="R" style={{ '--char-index': 1 }}>R</span>
-                          <span className="char" data-char="O" style={{ '--char-index': 2 }}>O</span>
-                          <span className="char" data-char="J" style={{ '--char-index': 3 }}>J</span>
-                          <span className="char" data-char="E" style={{ '--char-index': 4 }}>E</span>
-                          <span className="char" data-char="C" style={{ '--char-index': 5 }}>C</span>
-                          <span className="char" data-char="T" style={{ '--char-index': 6 }}>T</span>
-                          <span className="char" data-char="S" style={{ '--char-index': 7 }}>S</span>
-                        </a>
-                      </h2>
-                      <SubButton >
-                        <a href="/projects/selected works">Selected Works</a>
-                        <a href="/projects/all" >All</a>
-                        <a href="/projects/design" >DESIGN</a>
-                        <a href="/projects/cm" >CM</a>
-                      </SubButton>
-                    </li>
-                    <li >
-                      <h2>
-                        <a href="/expertise" >
-                          <span className="char" data-char="E" style={{ '--char-index': 0 }}>E</span>
-                          <span className="char" data-char="X" style={{ '--char-index': 1 }}>X</span>
-                          <span className="char" data-char="P" style={{ '--char-index': 2 }}>P</span>
-                          <span className="char" data-char="E" style={{ '--char-index': 3 }}>E</span>
-                          <span className="char" data-char="R" style={{ '--char-index': 4 }}>R</span>
-                          <span className="char" data-char="T" style={{ '--char-index': 5 }}>T</span>
-                          <span className="char" data-char="I" style={{ '--char-index': 6 }}>I</span>
-                          <span className="char" data-char="S" style={{ '--char-index': 7 }}>S</span>
-                          <span className="char" data-char="E" style={{ '--char-index': 8 }}>E</span>
-                        </a>
-                      </h2>
-                      <SubButton >
-                        <a href="/expertise/services" >Services</a>
-                        <a href="/expertise/markets" >Markets</a>
-                        <a href="/expertise/research" >Research & Idea</a>
-                        <a href="/expertise/vr" >VR/AR</a>
-                      </SubButton>
-                    </li>
-                    <li>
-                      <h2>
-                        <a href="/ir" >
-                          <span className="char" data-char="I" style={{ '--char-index': 0 }}>I</span>
-                          <span className="char" data-char="R" style={{ '--char-index': 1 }}>R</span>
-                        </a>
-                      </h2>
-                      <SubButton >
-                        <a href="/ir/finance">Finance</a>
-                        <a href="/ir/analyst_report" >Analyst Report</a>
-                        <a href="/ir/ir_material" >IR Material</a>
-                      </SubButton>
-                    </li>
-                    <li>
-                      <h2>
-                        <a href="/contact" >
-                          <span className="char" data-char="C" style={{ '--char-index': 0 }}>C</span>
-                          <span className="char" data-char="O" style={{ '--char-index': 1 }}>O</span>
-                          <span className="char" data-char="N" style={{ '--char-index': 2 }}>N</span>
-                          <span className="char" data-char="T" style={{ '--char-index': 3 }}>T</span>
-                          <span className="char" data-char="A" style={{ '--char-index': 4 }}>A</span>
-                          <span className="char" data-char="C" style={{ '--char-index': 5 }}>C</span>
-                          <span className="char" data-char="T" style={{ '--char-index': 6 }}>T</span>
-                        </a>
-                      </h2>
-                    </li>
+                    <MenuButton/>
                   </TotalButtonContainer>
                   <MoreIconButtonContainer AnimationEnabled={AnimationEnabled}>
                     {/* 인스타그램 버튼 */}
