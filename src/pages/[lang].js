@@ -3,20 +3,18 @@ import React, { useEffect, useState, useRef } from "react";
 import { useRouter } from "next/router";
 import UserLayout from 'src/layouts/UserLayout';
 import langJson from 'src/data/lang.json';
-import IconSlide from "src/components/Section2IconSlide";
 import { Section3Title } from "src/components/Section3";
 import Accordion from "src/components/Section3Accordion";
 import { NewsItem, NewsButton } from "/src/components/Section4";
 import { Search, Section5Title } from "src/components/Section5";
-import HQ from "src/components/HQ";
-import { Section2Content } from "src/components/Mobile/MobileSection2Content";
-import { MobileIconSlide } from "src/components/Mobile/MobileSection2IconSlide";
+import { IconSlide } from "src/components/IconSlide"; // 공통 위는 1280초과 사이즈
+import HQ from "src/components/HQ"; // 공통 아래는 1280이하 사이즈
+import { MSection2Content } from "src/components/Mobile/MobileSection2Content";
 import MobileAccordion from "src/components/Mobile/MobileSection3Accordion";
 import { MobileNewsItem, MobileNewsButton } from "src/components/Mobile/MobileSection4";
 import { MobileSearch } from "/src/components/Mobile/MobileSection5";
 import styled from "styled-components";
 import { useInView } from 'react-intersection-observer'; // react-intersection-observer 라이브러리 사용
-import { IconSlideDemo } from "src/components/IconSlideDemo";
 const sections = ["section1", "section2", "section3", "section4", "section5"]; // 섹션 이름
 
 const AnimateUp = ({ children }) => {
@@ -422,11 +420,11 @@ const Home = () => {
                                             <M2YellowBox><p>Who we are</p></M2YellowBox>
                                         </AnimateRight>
                                         <AnimateUp>
-                                            <Section2Content langJson={langJson} />
+                                            <MSection2Content langJson={langJson} />
                                             <TopicsContainer />
                                         </AnimateUp>
                                     </M2>
-                                    <IconSlideDemo />
+                                    <IconSlide />
                                     <AnimateUp>
                                         <M3Title>Our Service</M3Title>
                                         <M3Subtitle>Follow your dream. We support your dream.</M3Subtitle>
@@ -501,7 +499,7 @@ const Home = () => {
                                                     </div>
                                                 </div>
                                             </Section>
-                                            <IconSlideDemo />
+                                            <IconSlide />
                                         </section>
                                     ) : index === 2 ? (
                                         <Section>
@@ -522,22 +520,12 @@ const Home = () => {
                                             <AnimateUp>
                                                 <section className="newslistwrap">
                                                     <div className="news-list">
-                                                        <div className="news-row">
-                                                            {[0, 1, 2].map((item, index) => (
-                                                                <NewsItem
-                                                                    key={index}
-                                                                    newsNumber={item}
-                                                                />
-                                                            ))}
-                                                        </div>
-                                                        <div className="news-row">
-                                                            {[3, 4, 5].map((item, index) => (
-                                                                <NewsItem
-                                                                    key={index}
-                                                                    newsNumber={item}
-                                                                />
-                                                            ))}
-                                                        </div>
+                                                        {[0, 1, 2, 3, 4, 5].map((item, index) => (
+                                                            <NewsItem
+                                                                key={index}
+                                                                newsNumber={item}
+                                                            />
+                                                        ))}
                                                     </div>
                                                 </section>
                                                 <NewsButton />

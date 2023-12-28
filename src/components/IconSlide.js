@@ -7,19 +7,11 @@ import styled from "styled-components";
 const iconsPerPage = 9; // 전체 아이콘 개수
 const CustomSlider = styled(Slider)`   
 .slick-list{
-     margin: 0 1%;
+     margin: 0 1%; 
 }
 .slick-slide{
     display: flex;
     justify-content: space-evenly;
-}
-.slick-arrow{
-    /* 
-    padding-bottom: 60px;
-    @media only screen and (max-width: 760px) {
-    padding-bottom: 9%;
-    }
-    */
 }
 .slick-prev{
 background-image: url("/icon/prev.png");
@@ -47,13 +39,9 @@ width: 500px;
   }
 }
 
-.slick-prev:before{
-    display: none;
-    //background-image: url("/icon/prev.png");
-}
+.slick-prev:before,
 .slick-next:before{
     display: none;
-    //background-image: url("/icon/next.png");
 }
 button{
     display: flex !important;
@@ -76,9 +64,6 @@ button{
         margin-top: 1em;
         width: 5em;
         height: 5em;
-    @media only screen and (max-width: 1280px) {    
-    //    margin-top: 1.5em;
-    }
     @media only screen and (max-width: 800px) {    
         width: 4em;
         height: 4em;
@@ -130,7 +115,7 @@ const settings = {
     ]
 
 }
-export const IconSlideDemo = ({ }) => {
+export const IconSlide = ({ }) => {
     const [iconIndexes, setIconIndexes] = useState(Array.from({ length: iconsPerPage }, (_, i) => i)); // 표시되는 아이콘 인덱스 배열
     // 클릭된 아이콘에 대한 처리
     const handleIconClick = (iconIndex) => {

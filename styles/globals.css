@@ -189,23 +189,15 @@ body {
 .news-list {
   margin-top: 2vh;
 }
-.news-row {
-  display: flex;
-  text-align: left;
-  justify-content: space-around;
-  margin: 0 5em 0 5.2em;
-}
 /* 뉴스 아이템들 스타일 */
 .news-item {
-  background-color: transparent;
   text-decoration: none;
-  width: 33%;
   margin: 0 1em 2em 1em;
   cursor: pointer;
 }
 .news-item:hover .news-title {
   transition: color 0.2s ease;
-  color: rgb(0, 104, 232);  /* 호버 시 텍스트 색상을 파랑색으로 변경 */
+  color: rgb(0, 104, 232);  /* 호버 시a 텍스트 색상을 파랑색으로 변경 */
 }
 .news-item:hover .newsreadmore em {
   letter-spacing: 1px;

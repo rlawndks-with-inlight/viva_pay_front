@@ -1,7 +1,14 @@
 import React from 'react';
 import { useRouter } from "next/router";
 import langJson from 'src/data/lang.json';
+import styled from "styled-components";
 
+const Section4List = styled.li`
+list-style: none;
+float: left;
+margin: 0 1em;
+width: calc(33% - 2em);
+`
 export const NewsItem = ({ newsNumber }) => {
   const router = useRouter();
   const { lang = 'en' } = router.query;
@@ -27,16 +34,18 @@ export const NewsItem = ({ newsNumber }) => {
   const newsText = 'News';
 
   return (
-    <a href={newsLinks[newsNumber]} className="news-item">
-      <div className="news-box">
-        <p className="news-text">{newsText}</p>
-      </div>
-      <p className="news-title">{newsTitles[newsNumber]}</p>
-      <span className="newsreadmore">
-        <em>Read more</em>
-        <i>→</i>
-      </span>
-    </a>
+    <Section4List>
+      <a href={newsLinks[newsNumber]} className="news-item">
+        <div className="news-box">
+          <p className="news-text">{newsText}</p>
+        </div>
+        <p className="news-title">{newsTitles[newsNumber]}</p>
+        <span className="newsreadmore">
+          <em>Read more</em>
+          <i>→</i>
+        </span>
+      </a>
+    </Section4List>
   )
 }
 

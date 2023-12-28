@@ -21,7 +21,7 @@ color: white;
     }
 `
 
-export const Section2Content = ({ langJson }) => {
+export const MSection2Content = ({ langJson }) => {
     const router = useRouter();
     const { lang = 'en' } = router.query;
 
