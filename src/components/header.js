@@ -6,6 +6,7 @@ import styled, { css, keyframes } from 'styled-components';
 import { MobileDropdown } from './HeaderMobile/MobileDropDown';
 import { MobileIconContainer } from './HeaderMobile/MobileIcon';
 import { MenuButton } from './HeaderWeb/MainContents';
+import { MagneticIcon } from './HeaderWeb/MagneticIconContainer';
 
 const slideInLeft = keyframes`
 0%{
@@ -31,27 +32,23 @@ const fadeIn = keyframes`
   opacity: 1;
 }
 `
-const skewIn = keyframes`
+const skewIn = keyframes` // 배경 회전 애니메이션
 0%{
   width: 0%;
-  opacity: 0;
   transform: skewX(0deg);
 }
 100% {
   width: calc(25%+2px);
-  opacity: 1;
   transform: skewX(45deg);
 }
 `
-const skewOut = keyframes`
+const skewOut = keyframes` // 배경 회전 애니메이션
 0%{
   width: calc(25%+2px);
-  opacity: 1;
   transform: skewX(45deg);
 }
 100% {
   width: 0%;
-  opacity: 0;
   transform: skewX(0deg);
 }
 `
@@ -119,17 +116,7 @@ const fadeOutDown = keyframes`
   transform: translateY(50px);
 }
 `
-const fadeRight = keyframes`
-0%{
-  opacity: 1;
-  transform: translateX(0);
-}
-100% {
-  opacity: 0;
-  transform: translateX(40px);
-}
-`
-const fadeLeft = keyframes`
+const fadeInLeft = keyframes`
 0%, 50%{
   opacity: 0;
   transform: translateX(30px);
@@ -138,6 +125,16 @@ const fadeLeft = keyframes`
   visibility: visible;
   opacity: 1;
   transform: translateX(0);
+}
+`
+const fadeOutRight = keyframes`
+0%{
+  opacity: 1;
+  transform: translateX(0);
+}
+100% {
+  opacity: 0;
+  transform: translateX(40px);
 }
 `
 const Headerwrappers = styled.header`
@@ -306,19 +303,19 @@ strong{
     opacity: 0;
   }
   .em1{
-  animation: ${props => props.AnimationEnabled ? css`${fadeLeft} 1s 0.1s forwards` : css`${fadeRight} 0.4s 0.13s backwards`};
+  animation: ${props => props.AnimationEnabled ? css`${fadeInLeft} 1s 0.1s forwards` : css`${fadeOutRight} 0.4s 0.13s backwards`};
   }
   .em2{
-  animation: ${props => props.AnimationEnabled ? css`${fadeLeft} 1s 0.18s forwards` : css`${fadeRight} 0.4s 0.12s backwards`};
+  animation: ${props => props.AnimationEnabled ? css`${fadeInLeft} 1s 0.18s forwards` : css`${fadeOutRight} 0.4s 0.12s backwards`};
   }
   .em3{
-  animation: ${props => props.AnimationEnabled ? css`${fadeLeft} 1s 0.22s forwards` : css`${fadeRight} 0.4s 0.1s backwards`};
+  animation: ${props => props.AnimationEnabled ? css`${fadeInLeft} 1s 0.22s forwards` : css`${fadeOutRight} 0.4s 0.1s backwards`};
   }
   .em4{
-  animation: ${props => props.AnimationEnabled ? css`${fadeLeft} 1s 0.24s forwards` : css`${fadeRight} 0.4s 0.06s backwards`};
+  animation: ${props => props.AnimationEnabled ? css`${fadeInLeft} 1s 0.24s forwards` : css`${fadeOutRight} 0.4s 0.06s backwards`};
   }
   .em5{
-  animation: ${props => props.AnimationEnabled ? css`${fadeLeft} 1s 0.25s forwards` : css`${fadeRight} 0.4s backwards`};
+  animation: ${props => props.AnimationEnabled ? css`${fadeInLeft} 1s 0.25s forwards` : css`${fadeOutRight} 0.4s backwards`};
   }
 }
 @media screen and (max-width: 700px){
@@ -377,82 +374,6 @@ align-items: center;
 bottom: 5%;
 }
 `
-const MoreIconButton = styled.li`
-list-style: none;
-text-decoration: none; /*링크 밑줄 제거*/
-  &:hover{
-    img{
-transition: all 0.3s ease; /* 호버 시 투명도 전환 애니메이션 */
-      opacity: 0.5;
-    }
-  }
-`
-const IconButton = styled.a`
-display: inline-block;
-margin-right: 3vw;
-  transition: all 0.3s ease;
-  position: relative;
-  img {
-    width: 40px;
-    height: 40px;
-  }
-  &:hover {
-    img{
-      opacity: 1;
-    transform: scale(1.05);
-    }
-  } 
-@media only screen and (max-width: 650px),(max-height: 400px) {
-  img{
-    width: 25px;
-    height: 25px;
-}
-}
-`
-const LocationButton = styled.div`
-display: flex; /* 더보기 아래쪽 map 버튼 스타일*/
-align-items: center;
-background-color: rgb(255, 194, 0); /* 노란색 배경 추가 */
-border-radius: 50px; /* 회색 배경과 함께 버튼에 radius 추가 */
-padding: 10px;
-opacity: 0.8;
-cursor: pointer;
-  img{
-    width: 25px;
-    height: 25px;
-  }
-  a{
-    font-size: 20px;
-    margin: 0 10px 0 10px;
-    color: black;
-  }
-  &:hover{
-transition: all 0.3s ease; /* 호버 시 투명도 전환 애니메이션 */
-    opacity: 1; /* 호버 시 투명도를 0.7로 변경 (1이 원래 투명도) */
-    transform: scale(1.05);
-}
-@media only screen and (max-width: 650px) {
-padding: 5px 10px;
-  img{
-    width: 15px;
-    height: 15px;
-  }
-  a{
-    font-size: 12px;
-    padding: 0;
-  }
-}
-@media only screen and (max-height: 400px) {
-padding: 5px 10px;
-  img{
-    width: 1em;
-    height: 1em;
-  }
-  a{
-    font-size: 1em;
-  }
-}
-`
 const MMoreSection = styled.div`
 position: fixed;
 top: 0;
@@ -500,37 +421,6 @@ const Header = (props) => {
     }, [showMore]);
     */
 
-  // 호버시 마우스 추적
-  const applyMagneticEffect = () => {
-    document.querySelectorAll(".cm-magnetic-btn").forEach((el) => {
-      el.addEventListener('mousemove', function (e) {
-        const pos = this.getBoundingClientRect();
-        const mx = e.clientX - pos.left - pos.width / 2;
-        const my = e.clientY - pos.top - pos.height / 2;
-
-        this.style.transform = `translate(${mx * 0.15}px, ${my * 0.3}px) scale(1.05)`;
-      });
-
-      el.addEventListener('mouseleave', function () {
-        this.style.removeProperty('transform');
-      });
-    });
-  };
-
-  const MagneticButton = ({ href, children }) => {
-    useEffect(() => {
-      applyMagneticEffect();
-
-      return () => {
-      };
-    }, []);
-
-    return (
-      <IconButton className="cm-magnetic-btn" href={href} target="_blank" rel="noopener noreferrer">
-        {children}
-      </IconButton>
-    );
-  };
   // More 버튼 클릭 시
   const handleMoreButtonClick = () => {
     setShowMore(true);
@@ -544,7 +434,6 @@ const Header = (props) => {
   const handleCloseButtonClick = () => {
     setAnimationEnabled(false); // Animation 활성화
     setBlinkAnimation(true); // 로고 깜빡임 활성화
-    document.body.style.overflow = 'auto'; // body 요소의 스크롤을 다시 보이게 함
     setTimeout(() => {
       setShowMore(false);
       setBlinkAnimation(false); // more할때 애니메이션 작동하도록
@@ -583,10 +472,6 @@ const Header = (props) => {
     return () => {
       window.removeEventListener('resize', checkIsMobile); // 이벤트 리스너 제거
     };
-  }, []);
-
-  useEffect(() => {
-    setIsVisible(true);
   }, []);
 
   return (
@@ -629,15 +514,7 @@ const Header = (props) => {
                 <em class="em5">e</em>
               </strong>
               <CloseMore AnimationEnabled={AnimationEnabled}>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
+                <div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div>
               </CloseMore>
             </CloseMoreButton>
           ) : (
@@ -649,15 +526,7 @@ const Header = (props) => {
                 <a activeSection={activeSection} className={lang === 'en' ? 'active' : ''}>EN</a>
               </Link>
               <More onClick={handleMoreButtonClick}>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
+                <div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div>
               </More>
             </>
           )}
@@ -667,8 +536,8 @@ const Header = (props) => {
         <div>
           {isMobile ? (
             <MMoreSection AnimationEnabled={AnimationEnabled}>
-                <MobileDropdown />
-                <MobileIconContainer />
+              <MobileDropdown />
+              <MobileIconContainer />
             </MMoreSection>
           ) : (
             <MoreSection AnimationEnabled={AnimationEnabled}>
@@ -684,33 +553,10 @@ const Header = (props) => {
               <MoreMenuInner>
                 <div class="menuinner">
                   <TotalButtonContainer AnimationEnabled={AnimationEnabled}>
-                    <MenuButton/>
+                    <MenuButton />
                   </TotalButtonContainer>
                   <MoreIconButtonContainer AnimationEnabled={AnimationEnabled}>
-                    {/* 인스타그램 버튼 */}
-                    <MoreIconButton>
-                      <MagneticButton className="cm-magnetic-btn" href="https://www.instagram.com/heerim_architects_official/" target="_blank" rel="noopener noreferrer">
-                        <img src="/icon/instagram.svg" alt="YouTube Icon" />
-                      </MagneticButton>
-                      {/* 유튜브 버튼 */}
-                      <MagneticButton className="cm-magnetic-btn" href="https://www.youtube.com/channel/UCPwQIrf17KFyqvXeq8NVY_Q" target="_blank" rel="noopener noreferrer">
-                        <img src="/icon/youtube.svg" alt="YouTube Icon" />
-                      </MagneticButton>
-                      {/* 핀터레스트 버튼 */}
-                      <MagneticButton className="cm-magnetic-btn" href="https://www.pinterest.co.kr/heerim_architects_official/" target="_blank" rel="noopener noreferrer">
-                        <img src="/icon/pinterest.svg" alt="Pinterest Icon" />
-                      </MagneticButton>
-                    </MoreIconButton>
-                    {/* 디자인 지도 버튼 */}
-                    <LocationButton className="cm-magnetic-btn" style={{ marginLeft: "3vw" }} href="https://www.google.com/maps/d/viewer?mid=1ZYdnpbxRgC5-zu5GpoOU8zd_E-v24aXT&ll=13.728397502246512%2C71.13522019999999&z=3" target="_blank" rel="noopener noreferrer">
-                      <img src="/icon/location.svg" alt="Location Icon" />
-                      <a> Design map </a>
-                    </LocationButton>
-                    {/* CM 지도 버튼 */}
-                    <LocationButton className="cm-magnetic-btn" style={{ marginLeft: "3vw" }} href="https://www.google.com/maps/d/viewer?mid=1aWEovb5OXGAdqH_D-QojV6l96tLYT2S0&ll=24.118227897040363%2C55.94565490000001&z=3" target="_blank" rel="noopener noreferrer">
-                      <img src="/icon/location.svg" alt="Location Icon" />
-                      <a> CM map </a>
-                    </LocationButton>
+                    <MagneticIcon />
                   </MoreIconButtonContainer>
                 </div>
               </MoreMenuInner>
@@ -721,5 +567,4 @@ const Header = (props) => {
     </Headerwrappers >
   );
 };
-
 export default Header;
