@@ -454,8 +454,8 @@ const Home = () => {
                                                 <p>S C R O L L D O W N </p>
                                                 <span></span>{/* 노란 막대 */}
                                             </W1ScrollDownYellowStick>
-                                            <canvas className="herogradientbackground"/>
-                                            <div className="whitebackground"/>
+                                            <canvas className="herogradientbackground" />
+                                            <div className="whitebackground" />
                                         </Section>
                                     ) : index === 1 ? (
                                         <section style={{ display: "block" }}>
@@ -476,7 +476,32 @@ const Home = () => {
                                                     </div>
                                                 </div>
                                             </Section>
-                                            <IconSlide />
+                                            <article class="logowrapper">
+                                                <div id="logoMarqueeSection">
+                                                    <div class="marquee" >
+                                                        <a target="_blank"><img src="/icon/0.svg" class="marqueelogo" style={{ width: "auto", }} /></a>
+                                                        <a target="_blank"><img src="/icon/1.svg" class="marqueelogo" style={{ width: "auto", }} /></a>
+                                                        <a target="_blank"><img src="/icon/2.svg" class="marqueelogo" style={{ width: "auto", }} /></a>
+                                                        <a target="_blank"><img src="/icon/3.svg" class="marqueelogo" style={{ width: "auto", }} /></a>
+                                                        <a target="_blank"><img src="/icon/4.svg" class="marqueelogo" style={{ width: "auto", }} /></a>
+                                                        <a target="_blank"><img src="/icon/5.svg" class="marqueelogo" style={{ width: "auto", }} /></a>
+                                                        <a target="_blank"><img src="/icon/6.svg" class="marqueelogo" style={{ width: "auto", }} /></a>
+                                                        <a target="_blank"><img src="/icon/7.svg" class="marqueelogo" style={{ width: "auto", }} /></a>
+                                                        <a target="_blank"><img src="/icon/8.svg" class="marqueelogo" style={{ width: "auto", }} /></a>
+                                                    </div>
+                                                    <div class="marquee" >
+                                                        <a target="_blank"><img src="/icon/0.svg" class="marqueelogo" style={{ width: "auto", }} /></a>
+                                                        <a target="_blank"><img src="/icon/1.svg" class="marqueelogo" style={{ width: "auto", }} /></a>
+                                                        <a target="_blank"><img src="/icon/2.svg" class="marqueelogo" style={{ width: "auto", }} /></a>
+                                                        <a target="_blank"><img src="/icon/3.svg" class="marqueelogo" style={{ width: "auto", }} /></a>
+                                                        <a target="_blank"><img src="/icon/4.svg" class="marqueelogo" style={{ width: "auto", }} /></a>
+                                                        <a target="_blank"><img src="/icon/5.svg" class="marqueelogo" style={{ width: "auto", }} /></a>
+                                                        <a target="_blank"><img src="/icon/6.svg" class="marqueelogo" style={{ width: "auto", }} /></a>
+                                                        <a target="_blank"><img src="/icon/7.svg" class="marqueelogo" style={{ width: "auto", }} /></a>
+                                                        <a target="_blank"><img src="/icon/8.svg" class="marqueelogo" style={{ width: "auto", }} /></a>
+                                                    </div>
+                                                </div>
+                                            </article>
                                         </section>
                                     ) : index === 2 ? (
                                         <Section>

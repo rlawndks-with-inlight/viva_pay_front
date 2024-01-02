@@ -1,6 +1,15 @@
 @import url(https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@2.0/nanumsquare.css);
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&family=Playfair+Display&display=swap');
-
+:root {
+  --color-text: navy;
+  --color-bg: papayawhip;
+  --color-bg-accent: #ecdcc0;
+  --size: clamp(10rem, 1rem + 40vmin, 30rem);
+  --gap: calc(var(--size) / 14);
+  --duration: 60s;
+  --scroll-start: 0;
+  --scroll-end: calc(-100% - var(--gap));
+}
 .headerinner {
   position:relative;
   display:flex;
@@ -187,6 +196,64 @@ body {
     font-size: 5.5vw;
   }
 }
+
+.logowrapper {
+  display: flex;
+  padding: 0;
+  margin: auto;
+  max-width: 100vw;
+}
+
+#logoMarqueeSection { /* id로 받음 */
+  display: flex;
+  overflow: hidden;
+  user-select: none;
+  max-width: 1920px!important;
+  margin: 0 10%;
+  mask-image: linear-gradient(
+    var(--mask-direction, to right),
+    hsl(0 0% 0% / 0),
+    hsl(0 0% 0% / 1) 20%,
+    hsl(0 0% 0% / 1) 80%,
+    hsl(0 0% 0% / 0));
+}
+
+.marquee {
+  flex-shrink: 0;
+  display: flex;
+  gap: 2em;
+  align-items: center;
+  justify-content: space-around;
+  animation: marquee 60s linear infinite;
+  a{
+    cursor: pointer;
+  }
+  :hover{
+    animation: marquee 120s linear infinite;
+  }
+}
+
+.marquee a {
+  display: grid;
+  aspect-ratio: 16/9;
+  place-items: center;
+    width: 182px;
+    height: 110px;
+}
+.marquee a img {
+  height: 4.5vw;
+}
+
+@keyframes marquee {
+    0% {
+        transform: translate3d(0%, 0, 0);
+    }
+
+    100% {
+        transform: translate3d(-100%, 0, 0);
+    }
+}
+
 /* 3section sec3 */
 .sec3txt {
   display: table;
