@@ -5,17 +5,15 @@ import UserLayout from 'src/layouts/UserLayout';
 import langJson from 'src/data/lang.json';
 import { Section3Title } from "src/components/Section3";
 import Accordion from "src/components/Section3Accordion";
-import { NewsItem, NewsButton } from "/src/components/Section4";
 import { Search, Section5Title } from "src/components/Section5";
 import { IconSlide } from "src/components/IconSlide"; // 공통 위는 1280초과 사이즈
 import HQ from "src/components/HQ"; // 공통 아래는 1280이하 사이즈
 import { MSection2Content } from "src/components/Mobile/MobileSection2Content";
 import MobileAccordion from "src/components/Mobile/MobileSection3Accordion";
-import { MobileNewsItem, MobileNewsButton } from "src/components/Mobile/MobileSection4";
 import { MobileSearch } from "/src/components/Mobile/MobileSection5";
 import styled from "styled-components";
 import { useInView } from 'react-intersection-observer'; // react-intersection-observer 라이브러리 사용
-const sections = ["section1", "section2", "section3", "section4", "section5"]; // 섹션 이름
+const sections = ["section1", "section2", "section3", "section4"]; // 섹션 이름
 
 const AnimateUp = ({ children }) => {
     const [ref, inView] = useInView({
@@ -93,11 +91,6 @@ margin-left: 0.9em;
 font-weight: bold;
 font-size: 3em;
 font-family: 'Playfair Display', serif;
-`
-const M3Subtitle = styled.div`
-margin-left: 3.5em;
-font-weight: bold;
-font-size: 0.8em;
 `
 const M3ImageContainer = styled.div`
 margin-top: 2em;
@@ -184,7 +177,8 @@ font-size: 5em;
 font-weight: bold;
 font-family: 'Playfair Display', serif;
 border: 1px solid transparent;
-color: white;
+color: #3a3a3a;
+opacity: .3;
 `
 const W1ScrollDownYellowStick = styled.span`
 position: absolute;
@@ -193,7 +187,7 @@ right: 10%;
 text-align: center;
 p{
 font-weight: bold;
-color:white ;
+color: black;
 writing-mode: vertical-rl; /* 세로로 글자 눕힘 */
   font-size: 10px; /* 원하는 글자 크기로 조절 */
   animation: moveUpDown 2.5s infinite; /* 1s 동안 무한 반복되는 애니메이션 */
@@ -238,7 +232,7 @@ const Topic = ({ title, initialValue, finalValue }) => {
         }
     }, [inView, currentValue, finalValue, initialValue]);
 
-    const addPlusSign = title === "History of Payvery" || title === "Professional Employees" || title === "Overseas Projects";
+    const addPlusSign = title === "연간 거래액" || title === "가맹점 수" || title === "고객사 수";
 
     return (
         <div ref={inViewRef}>
@@ -252,11 +246,10 @@ const Topic = ({ title, initialValue, finalValue }) => {
 const TopicsContainer = () => {
     return (
         <div className="topics-container">
-            <Topic title="History of Payvery" initialValue={0} finalValue={50} />
-            <Topic title="Branch offices" initialValue={0} finalValue={15} />
-            <Topic title="Professional Employees" initialValue={0} finalValue={1400} />
-            <Topic title="Overseas Projects" initialValue={0} finalValue={300} />
-            <Topic title="World Ranking" initialValue={0} finalValue={8} />
+            <Topic title="연간 거래액" initialValue={0} finalValue={50} />
+            <Topic title="가맹점 수" initialValue={0} finalValue={15} />
+            <Topic title="연동 PG사" initialValue={0} finalValue={1400} />
+            <Topic title="고객사 수" initialValue={0} finalValue={300} />
         </div>
     );
 };
@@ -269,14 +262,14 @@ const Home = () => {
     const [windowWidth, setWindowWidth] = useState(0); // 초기 화면 너비 설정
     const [windowHeight, setWindowHeight] = useState(0); // 초기 화면 높이 설정
     const sectionRefs = useRef([]); // 섹션의 ref를 추적
-    const [hoverIndex, setHoverIndex] = useState(false);
-    const [hoverTxtIndex, sethoverTxtIndex] = useState(false);
+    const [activeIndex, setActiveIndex] = useState(false);
+    const [activeTxtIndex, setActiveTxtIndex] = useState(false);
     const [isAnimating, setIsAnimating] = useState(false);
     const [scrolling, setScrolling] = useState(false);
 
-    const handleItemEnter = (index) => {
-        setHoverIndex(index);
-        sethoverTxtIndex(index);
+    const handleItemClick = (index) => {
+        setActiveIndex(index);
+        setActiveTxtIndex(index);
     };
 
     useEffect(() => {
@@ -304,9 +297,6 @@ const Home = () => {
         },
     ];
 
-    const handleItemOver = (index) => {
-        setHoverIndex(index);
-    };
     const accordionImages = [
         {
             outerBackground: '/image/outer1.png',
@@ -427,23 +417,9 @@ const Home = () => {
                                     <IconSlide />
                                     <AnimateUp>
                                         <M3Title>Our Service</M3Title>
-                                        <M3Subtitle>Follow your dream. We support your dream.</M3Subtitle>
                                         <M3ImageContainer>
                                             <MobileAccordion langJson={langJson} />
                                         </M3ImageContainer>
-                                        <M4NewsList>
-                                            {[0, 1, 2, 3, 4, 5].map((item, index) => (
-                                                <div>
-                                                    <MobileNewsItem
-                                                        key={index}
-                                                        newsNumber={item}
-                                                    />
-                                                </div>
-                                            ))}
-                                        </M4NewsList>
-                                    </AnimateUp>
-                                    <AnimateUp>
-                                        <MobileNewsButton />
                                     </AnimateUp>
                                     <AnimateUp>
                                         <M5Title>
@@ -471,14 +447,15 @@ const Home = () => {
                                     {index === 0 ? (
                                         <Section height="100vh">
                                             <AnimateUp>
-                                                <W1Title magtop="30vh" > {langJson[lang]?.FOLLOW}</W1Title>
-                                                <W1Title > {langJson[lang]?.SUPPORT}</W1Title>
+                                                <W1Title magtop="30vh">PG사를 위한 최고의 러닝메이트</W1Title>
+                                                <W1Title>※러닝메이트란?</W1Title>
                                             </AnimateUp>
                                             <W1ScrollDownYellowStick>
                                                 <p>S C R O L L D O W N </p>
                                                 <span></span>{/* 노란 막대 */}
                                             </W1ScrollDownYellowStick>
-                                            <img className="zoomInOut" style={{ position: "absolute", top: "0", width: "100%", height: "100vh", zIndex: "-1", }} src="/image/galaxy.png" />
+                                            <canvas className="herogradientbackground"/>
+                                            <div className="whitebackground"/>
                                         </Section>
                                     ) : index === 1 ? (
                                         <section style={{ display: "block" }}>
@@ -507,35 +484,15 @@ const Home = () => {
                                                 <Section3Title />
                                                 <Accordion
                                                     accordionImages={accordionImages}
-                                                    hoverIndex={hoverIndex}
-                                                    handleItemOver={handleItemOver}
-                                                    handleItemEnter={handleItemEnter}
-                                                    hoverTxtIndex={hoverTxtIndex}
+                                                    activeIndex={activeIndex}
+                                                    handleItemClick={handleItemClick}
+                                                    activeTxtIndex={activeTxtIndex}
                                                     accordionItems={accordionItems}
                                                 />
                                             </AnimateUp>
                                         </Section>
-                                    ) : index === 3 ? (
-                                        <Section height="100vh">
-                                            <AnimateUp>
-                                                <section className="newslistwrap">
-                                                    <div className="news-list">
-                                                        {[0, 1, 2, 3, 4, 5].map((item, index) => (
-                                                            <NewsItem
-                                                                key={index}
-                                                                newsNumber={item}
-                                                            />
-                                                        ))}
-                                                    </div>
-                                                </section>
-                                                <NewsButton />
-                                            </AnimateUp>
-                                        </Section>
                                     ) : (
                                         <Section>
-                                            <AnimateUp>
-                                                <Section5Title />
-                                            </AnimateUp>
                                             <div className="searchheerim-container">
                                                 <AnimateUp >
                                                     <Search />

@@ -161,21 +161,6 @@ background-color: ${(props) => (props.activeSection === 0 ? 'transparent' : 'rgb
     background-color: rgba(0, 0, 0, 0.2);
 }
 `
-const BlueStick = styled.span`
-position: absolute;
-top: 0;
-left: 8%;
-height: ${(props) => (props.showHeader == 1 ? '250px' : 'none')};
-padding:"0";
-border-left: 10px solid rgb(0, 104, 232); 
-display: ${(props) => (props.activeSection === 0 ? '' : 'none')};
-/* rgb(0, 104, 232) 파랑색 코드 10px solid rgb(255, 194, 0)*/
-transition: 0.5s;
-/* 모바일 화면에서 숨김 */
-  @media only screen and (max-width: 1280px), (max-height: 600px) {
-    display: none;
-  }
-`
 const LogoButton = styled.div`
 position: ${(props) => (props.showMore ? 'fixed' : 'relative')};
 top: ${(props) => (props.showMore ? '19px' : '')};
@@ -233,8 +218,7 @@ div{
   height: 5px;
   background: #fff;
   }
-  div:nth-child(1) { top: 10px; left: 10px; 
-  background-color: rgb(255, 194, 0);}
+  div:nth-child(1) { top: 10px; left: 10px; background-color: rgb(255, 194, 0);}
   div:nth-child(2) { top: 10px; left: 20px; }
   div:nth-child(3) { top: 10px; left: 30px; }
   div:nth-child(4) { top: 20px; left: 10px; }
@@ -496,7 +480,6 @@ const Header = (props) => {
         }}>
       </div>
       <div className="headerinner">
-        {isMobile ? null : <BlueStick activeSection={activeSection} showHeader={showHeader} />}
         <LogoButton
           BlinkAnimation={BlinkAnimation}
           showMore={showMore}
@@ -519,12 +502,6 @@ const Header = (props) => {
             </CloseMoreButton>
           ) : (
             <>
-              <Link href="/kr" legacyBehavior>
-                <a activeSection={activeSection} className={lang === 'kr' ? 'active' : ''}>KR</a>
-              </Link>
-              <Link href="/en" legacyBehavior>
-                <a activeSection={activeSection} className={lang === 'en' ? 'active' : ''}>EN</a>
-              </Link>
               <More onClick={handleMoreButtonClick}>
                 <div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div>
               </More>

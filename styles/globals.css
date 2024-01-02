@@ -48,7 +48,6 @@ body {
   opacity: 1; /* 화면에 나타날 때 투명도를 1로 변경 */
   transform: translateX(0); /* 화면에 나타날 때 변환 초기값으로 복원 */
 }
-
 /* CSS Keyframes를 사용한 글자 위아래 움직임 애니메이션 */
 @keyframes moveUpDown {
   0%, 100% {
@@ -58,19 +57,41 @@ body {
     transform: translateY(-10px); /* 이 값은 글자가 움직이는 거리를 조절합니다. */
   }
 }
-@keyframes zoomInOut {
-  0%, 100% {
-    transform: scale(1);
+@keyframes gradient {
+  0% {
+      background-position: 0% 0%;
   }
   50% {
-    transform: scale(1.05);
+      background-position: 100% 100%;
+  }
+  100% {
+      background-position: 0% 0%;
   }
 }
-
-.zoomInOut {
-  animation: zoomInOut 10s infinite linear;
-}
 /* 1section sec1 1섹션 스타일 */
+
+.herogradientbackground {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: -1;
+  background: linear-gradient(100deg, #a960ee , #ff333d ,  #90e0ff ,  #ffcb57 );
+
+  animation: gradient 15s infinite;
+  background-size: 400% 400%;
+}
+.whitebackground {
+  width: 200%;
+  height: 200%;
+  z-index: -1;
+  rotate: 10deg;
+  background: white;
+  position: absolute;
+  top: 75%;
+  left: -30%;
+  
+}
 .wheelcontainer {
   height: 100vh;
 }
@@ -175,167 +196,12 @@ body {
 /*3섹션 타이틀 스타일*/
 .title {
   font-weight: bold;
-  font-size: 3vw;
+  font-size: 3.5vw;
   font-family: 'Playfair Display', serif;
-}
-/* 4section sec4 */
-.newslistwrap {
-  padding: 12vh 5% 0;
-
-    @media screen and (max-height: 750px) {
-      padding: 0;
-    }
-}
-.news-list {
-  margin-top: 2vh;
-}
-/* 뉴스 아이템들 스타일 */
-.news-item {
-  text-decoration: none;
-  margin: 0 1em 2em 1em;
-  cursor: pointer;
-}
-.news-item:hover .news-title {
-  transition: color 0.2s ease;
-  color: rgb(0, 104, 232);  /* 호버 시a 텍스트 색상을 파랑색으로 변경 */
-}
-.news-item:hover .newsreadmore em {
-  letter-spacing: 1px;
-}
-.news-item:hover .newsreadmore i {
-  transform: translateX(12px);
-  letter-spacing: -0.15px;
-}
-.news-item:hover .newsreadmore:before {
-  opacity: 0.5;
-  left: 92%;
-}
-/* 뉴스 박스 스타일 */
-.news-box {
-  width: 3.5em;  /* 네모 상자의 너비 설정 */
-  height: 1.6em;  /* 네모 상자의 높이 설정 */
-  background-color: rgb(0, 104, 232);  /* 파랑색 배경색 설정 */
-  border-radius: 50px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  @media screen and (max-width: 500px) {
-    width: 11vw;    /* 네모 상자의 너비 설정 */
-    height: 5vw;    /* 네모 상자의 높이 설정 */
-  }
-  @media screen and (max-width: 600px) {
-    width: 8.7vw;    /* 네모 상자의 너비 설정 */
-    height: 3.7vw;    /* 네모 상자의 높이 설정 */
-  }
-}
-/* 뉴스 스타일 */
-.news-text {
-  color: white;  /* 흰색 글자색 설정 */
-  font-size: 1em;  /* 글자 크기 설정 */
-
-  @media screen and (max-width: 600px) {
-    font-size: 2.6vw;
-  }
-}
-.news-title {
-  font-size: 1em;
-  font-family: 'NanumSquare', sans-serif; /* 나눔스퀘어 글꼴 */
-  color: gray;
-
-  @media screen and (max-width: 1000px) {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: -webkit-box;
-    -webkit-line-clamp: 9;
-    -webkit-box-orient: vertical;
-  }
-  @media screen and (max-height: 650px) {
-    margin: 3px 0 0 0;
-  }
-}
-.newsreadmore {
-  display: inline-block;
-  position: relative;
-  line-height: 30px;
-  font-size: 1.25em;
-  letter-spacing: -0.15px;
-  color: rgb(255, 194, 0);
-  :hover {
-    em{
-      letter-spacing: 1em;
-    }
-  }
-  em{
-    position: relative;
-    transition: all 0.7s;
-  }
-  i {
-    position: relative;
-    top: 3px;
-    margin-left: 1em;
-    font-size: 1.13em;
-    transition: all 0.7s;
-  }
-}
-.newsreadmore:before {
-  position: absolute;
-  top: 50%;
-  left: 0px;
-  width: 35px;
-  height: 35px;
-  transform: translate(-50%, -50%);
-  background-color: rgb(255, 242, 200);
-  content: "";
-  border-radius: 50%;
-  opacity: 0;
-  transition: all 0.7s;
-}
-.newsreadmore:hover:before {
-  opacity: 0.5;
-}
-.newsreadmore em,
-.newsreadmore i {
-  font-style: normal;
-  position: relative;
-  transition: all 0.7s;
-}
-.newsbutton-container {
-  justify-content: space-evenly;
-  margin: 0 auto;  /* 가운데 정렬을 위해 텍스트 정렬을 사용합니다. */
-  border: none; /* solid gray 1px; */
-  border-radius: 20px;
-  padding-top: 10px;
-  padding-bottom: 10px;  /* 버튼과 내용 사이의 간격을 조절합니다. */
-  width: 98%;
-  display: flex;
-
-  @media screen and (min-height: 800px) {
-    margin-bottom: 5em;    /* 버튼과 내용 사이의 간격을 조절합니다. */
-  }
-}
-.newsbutton {
-  display: flex;
-  max-width: 100%;
-  padding: none;
-  transition: transform 0.3s ease;  /* 마우스 호버 시 경계에 커지는효과를 추가합니다. */
-}
-.newsbutton:hover {
-  transform: scale(1.1);
-}
-.newsbutton img {
-  max-width: 100%;
- border-radius: 20px;
-
-  @media screen and (max-height: 450px) {
-    width: 15em;
-    height: 8em;
-  }
 }
 /* 5section */
 .sec5title {
   font-size: 2.5em;
-  font-family: 'Noto Sans KR', sans-serif;
   margin-bottom: 3.5vh;
   text-align: center;
   color: gray;
@@ -359,7 +225,6 @@ body {
   font-size: 4.8em;
   font-weight: bold;
   color: #FFC200;
-  font-family: 'Noto Sans KR', sans-serif;
 
   @media screen and (max-width: 1250px) {
     font-size: 4em;
@@ -374,7 +239,6 @@ body {
   font-size: 4.8em;
   font-weight: bold;
   color: white;  
-  font-family: 'Noto Sans KR', sans-serif;
 
   @media screen and (max-width: 1250px) {
     font-size: 4em;
@@ -387,7 +251,6 @@ body {
   margin: 0 0 7.2vh 0;
   font-size: 1.1em;
   color: #CACACA;
-  font-family: 'Noto Sans KR', sans-serif;
 
   @media screen and (max-width: 1000px) {
     font-size: 5.8vw;
@@ -416,7 +279,6 @@ body {
 }
 .searchtag-keywords {
   padding: 0 0 8vh 0;
-  font-family: 'Noto Sans KR', sans-serif;
 
   @media screen and (max-width: 1250px) {
     font-size: 1.5vw;
@@ -512,7 +374,7 @@ body {
   margin-left: 2em;
 }
 
-/* 수정중 */
+/* accordion 코드 */
 .main-project-list-container {
   position: relative;
   display: block;
@@ -565,11 +427,10 @@ body {
   z-index: 1;
   transition: all 0.2s ease;
 }
-
 .accordion-bg-list .accordion-bg-item.active .accordion-outer {
-  opacity: 0;
+  /*opacity: 0;*/
   z-index: 0;
-  transform: scale(1.05) rotate(0.002deg);
+  transform: scale(1.05);
 }
 
 
@@ -581,9 +442,9 @@ body {
   left: 0px;
   bottom: 0px;
   right: 0px;
-  z-index: 2;
+  z-index: 1;
 }
-.accordion-over-container :hover{
+.accordion-wrapper :hover{
   .accordion-off-tit-box {
     opacity: 0;
     transform: translate(0px, 100%);
@@ -664,70 +525,7 @@ body {
 .accordion-detail-txt {
   color: #252525;
 }
-.read-more-btn {
-  display: inline-block;
-  position: relative;
-  line-height: 30px;
-  font-size: 1.333em;
-  letter-spacing: -0.15px;
-  color: #ff8500;
-  :hover {
-    em{
-      letter-spacing: 1em;
-    }
-  }
-  em{
-    position: relative;
-    transition: all 0.7s;
-  }
-  i {
-    position: relative;
-    top: 3px;
-    margin-left: 1em;
-    font-size: 1.23em;
-    transition: all 0.7s;
-  }
-}
-.read-more-btn:before {
-  position: absolute;
-  top: 50%;
-  left: 0px;
-  width: 40px;
-  height: 40px;
-  transform: translate(-50%, -50%);
-  background-color: #fff2e5;
-  content: "";
-  border-radius: 50%;
-  opacity: 0;
-  transition: all 0.7s;
-}
-.read-more-btn:hover:before {
-  opacity: 0.5;
-}
-.read-more-btn em,
-.read-more-btn i {
-  position: relative;
-  transition: all 0.7s;
-}
-.read-more-btn i {
-  margin-left: 1em;
-  font-size: 1.4em;
-}
-.read-more-btn:hover:before {
-  left: 93%;
-}
-.read-more-btn:hover i {
-  transform: translateX(12px);
-  letter-spacing: -0.15px;
-}
-.read-more-btn:hover em {
-  letter-spacing: 1px;
-}
-.newsreadmore i {
-  margin-left: 1em;
-  font-size: 1.3em;
-}
-/* slick 관련 강제 수정 */
+/* react slick 관련 강제 수정 */
 .slick-slider{
   display: flex !important;
   position: static !important;
@@ -736,4 +534,29 @@ body {
   @media only screen and (max-width: 1080px) {
     margin: 1em 2% 0 2%;
   }
+}
+
+
+
+.color {
+  background: 
+#0067e6,
+ #e984fb,
+ #8693e9,
+ #cb81f8,
+ #8edceb,
+ #66d6f4,
+ #6445ed,
+ #7a62fd,
+ #8a96ef,
+ #5199ec,
+ #753ffd,
+ #8590e5,
+ #95aeef,
+ #6d3ef9,
+ #4b3ef9,
+ #a794f4,
+ #c254ed,
+ #9758fe
+ ;
 }
