@@ -284,16 +284,16 @@ const Home = () => {
     const accordionItems = [
         {
             category: 'Incheon, Korea',
-            title: [langJson[lang]?.ICN],
+            title: '보안 중심의 네트워크 아키텍처',
         }, {
             category: 'Seoul, Korea',
-            title: [langJson[lang]?.YEOUIDO],
+            title: '운영현황을 한눈에',
         }, {
             category: 'Gwacheon, Korea',
-            title: [langJson[lang]?.HYUNDAI],
+            title: '연 1조 2000억원의 거래량에도 안전하고 빠르게',
         }, {
             category: 'Baku, Azerbaijan',
-            title: [langJson[lang]?.SOCAR],
+            title: '섬세한 디자인 커스텀마이징',
         },
     ];
 
