@@ -168,10 +168,11 @@ top: ${(props) => (props.showMore ? '19px' : '')};
   cursor: pointer;
   z-index: 9999;
   background: url('/image/logo.svg');
-  width: 19em; 
+  width: ${props => props.showHeader == 1 ? '19em' : '0'};
   height: 3em;
   background-size: cover;
   animation: ${props => props.BlinkAnimation ? css`${blinkAnimation} 0.6s ` : 'none'};
+  transition: width 0.9s ease-in-out; /* 움직임에 transition 효과 추가 */
 @media only screen and (max-width: 700px) {
 top: ${(props) => (props.showMore ? '29px' : '')};
   width: 140px; 
@@ -369,7 +370,6 @@ animation: ${props => props.AnimationEnabled ? css`${slideInLeft} 0.5s ` : css`$
 const Header = (props) => {
   const { activeSection, showHeader, setShowHeader, scrollY } = props;
   const router = useRouter();
-  const { lang = 'en' } = router.query;
   const [isVisible, setIsVisible] = useState(false);
   const [isMobile, setIsMobile] = useState(false); // 모바일 화면 상태
   const [loading, setLoading] = useState(true);
@@ -481,6 +481,7 @@ const Header = (props) => {
       </div>
       <div className="headerinner">
         <LogoButton
+          showHeader={showHeader}
           BlinkAnimation={BlinkAnimation}
           showMore={showMore}
           activeSection={activeSection}
