@@ -43,8 +43,6 @@ padding: 0;
 width: 100%;
 `
 const M1 = styled.div`
-background-image: url("/image/galaxy.png");
-background-size: cover;
 height: 100vh;
 border: 1px solid transparent;
 `
@@ -54,7 +52,8 @@ margin-left: 14vw;
 font-size:3.1em;
 font-weight: bold;
 font-family: 'Playfair Display', serif;
-color: white;
+color: #ffffff;
+opacity: .5;
 @media only screen and (max-width: 430px) {
     margin-left: 1em;
     font-size: 12vw;
@@ -113,25 +112,6 @@ div{ /* 4개 이미지 위의 장소, 건물 텍스트 디자인 관리 */
     color: white;
 }
 `
-const M4NewsList = styled.div`
-margin-left: 10%;
-margin-right: 10%;
-text-align: left;
-a{
-    background-color: transparent;
-    text-decoration: none;
-}
-`
-const M5Title = styled.div`
-font-size: 2em;
-margin-bottom: 0.7em;
-text-align: center;
-color: gray;
-margin-top: 0.7em;
-span{
-    font-weight: bold;
-}
-`
 const M5SearchContainer = styled.div`
 background-color: rgb(0, 104, 232);
 width: 100%;
@@ -174,12 +154,28 @@ display: block;
 margin-top: ${(props) => props.magtop};
 margin-left: 14vw;
 font-size: 5em;
-font-weight: bold;
-font-family: 'Playfair Display', serif;
-border: 1px solid transparent;
-color: #3a3a3a;
-opacity: .3;
+font-weight: 800;
+font-family: 'NanumSquare', sans-serif;
+color: black;
 `
+const W1RunningMate = styled.span`
+display: block;
+margin-top: ${(props) => props.magtop};
+margin-left: 14vw;
+font-size: 2em;
+font-weight: 400;
+font-family: 'NanumSquare', sans-serif;
+color: black;
+`
+const W1RunningMateDescription = styled.span`
+display: block;
+margin-left: 14vw;
+font-size: 1.5em;
+font-weight: 300;
+font-family: 'NanumSquare', sans-serif;
+color: black;
+`
+
 const W1ScrollDownYellowStick = styled.span`
 position: absolute;
 bottom: -100px;
@@ -401,9 +397,10 @@ const Home = () => {
                                 <Mobile>
                                     <M1>
                                         <AnimateUp>
-                                            <M1Title>{langJson[lang]?.FOLLOW}</M1Title>
-                                            <M1Title style={{ marginTop: "0", marginBottom: "5em" }}> {langJson[lang]?.SUPPORT}</M1Title>
+                                            <M1Title>PG사를 위한 최고의 러닝메이트</M1Title>
+                                            <M1Title style={{ marginTop: "0", marginBottom: "5em" }}>*러닝메이트란</M1Title>
                                         </AnimateUp>
+                                        <canvas className="herogradientbackground" />
                                     </M1>
                                     <M2>
                                         <AnimateRight>
@@ -414,17 +411,37 @@ const Home = () => {
                                             <TopicsContainer />
                                         </AnimateUp>
                                     </M2>
-                                    <IconSlide />
+                                            <div class="logowrapper">
+                                                <div id="logoMarqueeSection">
+                                                    <div class="marquee" >
+                                                        <a target="_blank"><img src="/icon/0.svg"/></a>
+                                                        <a target="_blank"><img src="/icon/1.svg"/></a>
+                                                        <a target="_blank"><img src="/icon/2.svg"/></a>
+                                                        <a target="_blank"><img src="/icon/3.svg"/></a>
+                                                        <a target="_blank"><img src="/icon/4.svg"/></a>
+                                                        <a target="_blank"><img src="/icon/5.svg"/></a>
+                                                        <a target="_blank"><img src="/icon/6.svg"/></a>
+                                                        <a target="_blank"><img src="/icon/7.svg"/></a>
+                                                        <a target="_blank"><img src="/icon/8.svg"/></a>
+                                                    </div>
+                                                    <div class="marquee" >
+                                                        <a target="_blank"><img src="/icon/0.svg"/></a>
+                                                        <a target="_blank"><img src="/icon/1.svg"/></a>
+                                                        <a target="_blank"><img src="/icon/2.svg"/></a>
+                                                        <a target="_blank"><img src="/icon/3.svg"/></a>
+                                                        <a target="_blank"><img src="/icon/4.svg"/></a>
+                                                        <a target="_blank"><img src="/icon/5.svg"/></a>
+                                                        <a target="_blank"><img src="/icon/6.svg"/></a>
+                                                        <a target="_blank"><img src="/icon/7.svg"/></a>
+                                                        <a target="_blank"><img src="/icon/8.svg"/></a>
+                                                    </div>
+                                                </div>
+                                            </div>
                                     <AnimateUp>
                                         <M3Title>Our Service</M3Title>
                                         <M3ImageContainer>
                                             <MobileAccordion langJson={langJson} />
                                         </M3ImageContainer>
-                                    </AnimateUp>
-                                    <AnimateUp>
-                                        <M5Title>
-                                            <span>성공</span>으로 가는 과정을 계획하는데 <span>함께</span>하겠습니다.
-                                        </M5Title>
                                     </AnimateUp>
                                     <M5SearchContainer>
                                         <AnimateUp>
@@ -447,15 +464,19 @@ const Home = () => {
                                     {index === 0 ? (
                                         <Section height="100vh">
                                             <AnimateUp>
-                                                <W1Title magtop="30vh">PG사를 위한 최고의 러닝메이트</W1Title>
-                                                <W1Title>※러닝메이트란?</W1Title>
+                                                <W1Title magtop="30vh">PG사를 위한</W1Title>
+                                                <W1Title>최고의 러닝메이트</W1Title>
+                                                <W1RunningMate magtop="10px">*러닝메이트란?</W1RunningMate>
+                                                <W1RunningMateDescription>러닝크루와 같이 케어하면서 끝까지 함께 달리는 러너를 상징합니다</W1RunningMateDescription>
                                             </AnimateUp>
                                             <W1ScrollDownYellowStick>
                                                 <p>S C R O L L D O W N </p>
                                                 <span></span>{/* 노란 막대 */}
                                             </W1ScrollDownYellowStick>
                                             <canvas className="herogradientbackground" />
-                                            <div className="whitebackground" />
+                                            <div className="backradialgradient"/>
+                                            <div className="waveMiddle" />
+                                            <div className="whitebackground"/>
                                         </Section>
                                     ) : index === 1 ? (
                                         <section style={{ display: "block" }}>
@@ -476,32 +497,32 @@ const Home = () => {
                                                     </div>
                                                 </div>
                                             </Section>
-                                            <article class="logowrapper">
+                                            <div class="logowrapper">
                                                 <div id="logoMarqueeSection">
                                                     <div class="marquee" >
-                                                        <a target="_blank"><img src="/icon/0.svg" class="marqueelogo" style={{ width: "auto", }} /></a>
-                                                        <a target="_blank"><img src="/icon/1.svg" class="marqueelogo" style={{ width: "auto", }} /></a>
-                                                        <a target="_blank"><img src="/icon/2.svg" class="marqueelogo" style={{ width: "auto", }} /></a>
-                                                        <a target="_blank"><img src="/icon/3.svg" class="marqueelogo" style={{ width: "auto", }} /></a>
-                                                        <a target="_blank"><img src="/icon/4.svg" class="marqueelogo" style={{ width: "auto", }} /></a>
-                                                        <a target="_blank"><img src="/icon/5.svg" class="marqueelogo" style={{ width: "auto", }} /></a>
-                                                        <a target="_blank"><img src="/icon/6.svg" class="marqueelogo" style={{ width: "auto", }} /></a>
-                                                        <a target="_blank"><img src="/icon/7.svg" class="marqueelogo" style={{ width: "auto", }} /></a>
-                                                        <a target="_blank"><img src="/icon/8.svg" class="marqueelogo" style={{ width: "auto", }} /></a>
+                                                        <a target="_blank"><img src="/icon/0.svg"/></a>
+                                                        <a target="_blank"><img src="/icon/1.svg"/></a>
+                                                        <a target="_blank"><img src="/icon/2.svg"/></a>
+                                                        <a target="_blank"><img src="/icon/3.svg"/></a>
+                                                        <a target="_blank"><img src="/icon/4.svg"/></a>
+                                                        <a target="_blank"><img src="/icon/5.svg"/></a>
+                                                        <a target="_blank"><img src="/icon/6.svg"/></a>
+                                                        <a target="_blank"><img src="/icon/7.svg"/></a>
+                                                        <a target="_blank"><img src="/icon/8.svg"/></a>
                                                     </div>
                                                     <div class="marquee" >
-                                                        <a target="_blank"><img src="/icon/0.svg" class="marqueelogo" style={{ width: "auto", }} /></a>
-                                                        <a target="_blank"><img src="/icon/1.svg" class="marqueelogo" style={{ width: "auto", }} /></a>
-                                                        <a target="_blank"><img src="/icon/2.svg" class="marqueelogo" style={{ width: "auto", }} /></a>
-                                                        <a target="_blank"><img src="/icon/3.svg" class="marqueelogo" style={{ width: "auto", }} /></a>
-                                                        <a target="_blank"><img src="/icon/4.svg" class="marqueelogo" style={{ width: "auto", }} /></a>
-                                                        <a target="_blank"><img src="/icon/5.svg" class="marqueelogo" style={{ width: "auto", }} /></a>
-                                                        <a target="_blank"><img src="/icon/6.svg" class="marqueelogo" style={{ width: "auto", }} /></a>
-                                                        <a target="_blank"><img src="/icon/7.svg" class="marqueelogo" style={{ width: "auto", }} /></a>
-                                                        <a target="_blank"><img src="/icon/8.svg" class="marqueelogo" style={{ width: "auto", }} /></a>
+                                                        <a target="_blank"><img src="/icon/0.svg"/></a>
+                                                        <a target="_blank"><img src="/icon/1.svg"/></a>
+                                                        <a target="_blank"><img src="/icon/2.svg"/></a>
+                                                        <a target="_blank"><img src="/icon/3.svg"/></a>
+                                                        <a target="_blank"><img src="/icon/4.svg"/></a>
+                                                        <a target="_blank"><img src="/icon/5.svg"/></a>
+                                                        <a target="_blank"><img src="/icon/6.svg"/></a>
+                                                        <a target="_blank"><img src="/icon/7.svg"/></a>
+                                                        <a target="_blank"><img src="/icon/8.svg"/></a>
                                                     </div>
                                                 </div>
-                                            </article>
+                                            </div>
                                         </section>
                                     ) : index === 2 ? (
                                         <Section>
