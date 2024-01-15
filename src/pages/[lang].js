@@ -146,8 +146,6 @@ width: 100%;
 position: relative;
 overflow: hidden;
 height: ${(props) => props.height};
-background-size: cover;
-background-image:  url(${props => props.image});
 `
 const W1Title = styled.span`
 display: block;
@@ -175,30 +173,15 @@ font-weight: 300;
 font-family: 'NanumSquare', sans-serif;
 color: black;
 `
-
-const W1ScrollDownYellowStick = styled.span`
-position: absolute;
-bottom: -100px;
-right: 10%;
-text-align: center;
-p{
-font-weight: bold;
-color: black;
-writing-mode: vertical-rl; /* 세로로 글자 눕힘 */
-  font-size: 10px; /* 원하는 글자 크기로 조절 */
-  animation: moveUpDown 2.5s infinite; /* 1s 동안 무한 반복되는 애니메이션 */
-  margin: 0; /* 기본 마진을 제거합니다. */
-}
-span{
-display: block;
-height: 14em;
-width: 10px;
-background-color:  rgb(255, 194, 0);
-}
-/* 파랑색 코드 rgb(0, 104, 232) 노랑색 코드 rgb(255, 194, 0) */
-/* 모바일 화면에서 숨김 */
-  @media only screen and (max-width: 730px), (max-height: 600px) {
-    display: none;
+const W2Title = styled.div`
+padding: none;
+  font-size: 2.333vw;
+  font-weight: 700;
+font-family: 'NanumSquare', sans-serif;
+  color: white;
+  margin-left: 11vw;
+  @media screen and (height <= 630px) {
+    font-size: 3.5em;
   }
 `
 const Topic = ({ title, initialValue, finalValue }) => {
@@ -242,9 +225,9 @@ const Topic = ({ title, initialValue, finalValue }) => {
 const TopicsContainer = () => {
     return (
         <div className="topics-container">
-            <Topic title="연간 거래액" initialValue={0} finalValue={50} />
-            <Topic title="가맹점 수" initialValue={0} finalValue={15} />
-            <Topic title="연동 PG사" initialValue={0} finalValue={1400} />
+            <Topic title="연간 거래액" initialValue={0} finalValue={30} />
+            <Topic title="가맹점" initialValue={0} finalValue={1400} />
+            <Topic title="연동PG사" initialValue={0} finalValue={50} />
             <Topic title="고객사 수" initialValue={0} finalValue={300} />
         </div>
     );
@@ -400,7 +383,7 @@ const Home = () => {
                                             <M1Title>PG사를 위한 최고의 러닝메이트</M1Title>
                                             <M1Title style={{ marginTop: "0", marginBottom: "5em" }}>*러닝메이트란</M1Title>
                                         </AnimateUp>
-                                        <canvas className="herogradientbackground" />
+                                        <canvas className="pg1-linear" />
                                     </M1>
                                     <M2>
                                         <AnimateRight>
@@ -411,32 +394,32 @@ const Home = () => {
                                             <TopicsContainer />
                                         </AnimateUp>
                                     </M2>
-                                            <div class="logowrapper">
-                                                <div id="logoMarqueeSection">
-                                                    <div class="marquee" >
-                                                        <a target="_blank"><img src="/icon/0.svg"/></a>
-                                                        <a target="_blank"><img src="/icon/1.svg"/></a>
-                                                        <a target="_blank"><img src="/icon/2.svg"/></a>
-                                                        <a target="_blank"><img src="/icon/3.svg"/></a>
-                                                        <a target="_blank"><img src="/icon/4.svg"/></a>
-                                                        <a target="_blank"><img src="/icon/5.svg"/></a>
-                                                        <a target="_blank"><img src="/icon/6.svg"/></a>
-                                                        <a target="_blank"><img src="/icon/7.svg"/></a>
-                                                        <a target="_blank"><img src="/icon/8.svg"/></a>
-                                                    </div>
-                                                    <div class="marquee" >
-                                                        <a target="_blank"><img src="/icon/0.svg"/></a>
-                                                        <a target="_blank"><img src="/icon/1.svg"/></a>
-                                                        <a target="_blank"><img src="/icon/2.svg"/></a>
-                                                        <a target="_blank"><img src="/icon/3.svg"/></a>
-                                                        <a target="_blank"><img src="/icon/4.svg"/></a>
-                                                        <a target="_blank"><img src="/icon/5.svg"/></a>
-                                                        <a target="_blank"><img src="/icon/6.svg"/></a>
-                                                        <a target="_blank"><img src="/icon/7.svg"/></a>
-                                                        <a target="_blank"><img src="/icon/8.svg"/></a>
-                                                    </div>
-                                                </div>
+                                    <div class="logowrapper">
+                                        <div id="logoMarqueeSection">
+                                            <div class="marquee" >
+                                                <a target="_blank"><img src="/icon/0.svg" /></a>
+                                                <a target="_blank"><img src="/icon/1.svg" /></a>
+                                                <a target="_blank"><img src="/icon/2.svg" /></a>
+                                                <a target="_blank"><img src="/icon/3.svg" /></a>
+                                                <a target="_blank"><img src="/icon/4.svg" /></a>
+                                                <a target="_blank"><img src="/icon/5.svg" /></a>
+                                                <a target="_blank"><img src="/icon/6.svg" /></a>
+                                                <a target="_blank"><img src="/icon/7.svg" /></a>
+                                                <a target="_blank"><img src="/icon/8.svg" /></a>
                                             </div>
+                                            <div class="marquee" >
+                                                <a target="_blank"><img src="/icon/0.svg" /></a>
+                                                <a target="_blank"><img src="/icon/1.svg" /></a>
+                                                <a target="_blank"><img src="/icon/2.svg" /></a>
+                                                <a target="_blank"><img src="/icon/3.svg" /></a>
+                                                <a target="_blank"><img src="/icon/4.svg" /></a>
+                                                <a target="_blank"><img src="/icon/5.svg" /></a>
+                                                <a target="_blank"><img src="/icon/6.svg" /></a>
+                                                <a target="_blank"><img src="/icon/7.svg" /></a>
+                                                <a target="_blank"><img src="/icon/8.svg" /></a>
+                                            </div>
+                                        </div>
+                                    </div>
                                     <AnimateUp>
                                         <M3Title>Our Service</M3Title>
                                         <M3ImageContainer>
@@ -464,62 +447,67 @@ const Home = () => {
                                     {index === 0 ? (
                                         <Section height="100vh">
                                             <AnimateUp>
-                                                <W1Title magtop="30vh">PG사를 위한</W1Title>
-                                                <W1Title>최고의 러닝메이트</W1Title>
-                                                <W1RunningMate magtop="10px">*러닝메이트란?</W1RunningMate>
-                                                <W1RunningMateDescription>러닝크루와 같이 케어하면서 끝까지 함께 달리는 러너를 상징합니다</W1RunningMateDescription>
+                                                <div style={{ display: 'flex', flexDirection: 'row' }}>
+                                                    <div style={{ display: 'flex', flexDirection: "column", zIndex: '1' }}>
+                                                        <W1Title magtop="30vh">PG사를 위한</W1Title>
+                                                        <W1Title>최고의 러닝메이트</W1Title>
+                                                        <W1RunningMate magtop="10px">*러닝메이트란?</W1RunningMate>
+                                                        <W1RunningMateDescription>러닝크루와 같이 케어하면서 끝까지 함께 달리는 러너를 상징합니다</W1RunningMateDescription>
+                                                    </div>
+                                                    <div className="img-container">
+                                                        <div className="pg-web"><img src="image/1pageweb.png"></img></div>
+                                                        <div className="pg-ph"><img src="image/1pagephone.png"></img></div>
+                                                    </div>
+                                                </div>
                                             </AnimateUp>
-                                            <W1ScrollDownYellowStick>
-                                                <p>S C R O L L D O W N </p>
-                                                <span></span>{/* 노란 막대 */}
-                                            </W1ScrollDownYellowStick>
-                                            <canvas className="herogradientbackground" />
-                                            <div className="backradialgradient"/>
+                                            <canvas className="pg1-linear" />
+                                            <div className="pg1-radial" />
                                             <div className="waveMiddle" />
-                                            <div className="whitebackground"/>
+                                            <div className="whitebackground" />
                                         </Section>
                                     ) : index === 1 ? (
-                                        <section style={{ display: "block" }}>
-                                            <Section height="calc(100vh - 130px)" image="/image/blue.png">
-                                                <div className="blue">
+                                        <section>
+                                            <Section className="pg2-radial">
+                                                <div className="pg2-linear"/>
+                                                    <div className="page2back" />
                                                     <div className="blueinner">
-                                                        <AnimateRight>
-                                                            <div className="yellow-box">
-                                                                <p className="yellow-box-text">Who we are</p>
-                                                            </div>
-                                                        </AnimateRight>
                                                         <AnimateUp>
-                                                            <div className="subtitle"> {langJson[lang]?.FOLLOW}</div>
-                                                            <div className="subtitle"> {langJson[lang]?.SUPPORT}</div>
-                                                            <div className="description">{langJson[lang]?.DESCIRPTION}</div>
+                                                            <W2Title style={{ marginTop: '20vh' }}>국가안보 수준의 보안성</W2Title>
+                                                            <W2Title >전 고객 무사고 업계 최고 수준의 대응속도</W2Title>
+                                                            <W2Title style={{ marginBottom: '17vh' }}>경쟁사 대비 빠른 연산 처리 속도</W2Title>
                                                             <TopicsContainer />
                                                         </AnimateUp>
-                                                    </div>
                                                 </div>
                                             </Section>
                                             <div class="logowrapper">
                                                 <div id="logoMarqueeSection">
                                                     <div class="marquee" >
-                                                        <a target="_blank"><img src="/icon/0.svg"/></a>
-                                                        <a target="_blank"><img src="/icon/1.svg"/></a>
-                                                        <a target="_blank"><img src="/icon/2.svg"/></a>
-                                                        <a target="_blank"><img src="/icon/3.svg"/></a>
-                                                        <a target="_blank"><img src="/icon/4.svg"/></a>
-                                                        <a target="_blank"><img src="/icon/5.svg"/></a>
-                                                        <a target="_blank"><img src="/icon/6.svg"/></a>
-                                                        <a target="_blank"><img src="/icon/7.svg"/></a>
-                                                        <a target="_blank"><img src="/icon/8.svg"/></a>
+                                                        <a target="_blank"><img src="/icon/buddy.svg" /></a>
+                                                        <a target="_blank"><img src="/icon/bright.svg" /></a>
+                                                        <a target="_blank"><img src="/icon/coocon.svg" /></a>
+                                                        <a target="_blank"><img src="/icon/danal.svg" /></a>
+                                                        <a target="_blank"><img src="/icon/ez.svg" /></a>
+                                                        <a target="_blank"><img src="/icon/galaxia.svg" /></a>
+                                                        <a target="_blank"><img src="/icon/hecto.svg" /></a>
+                                                        <a target="_blank"><img src="/icon/kgmobil.svg" /></a>
+                                                        <a target="_blank"><img src="/icon/kiwoom.svg" /></a>
+                                                        <a target="_blank"><img src="/icon/payletter.svg" /></a>
+                                                        <a target="_blank"><img src="/icon/paytos.svg" /></a>
+                                                        <a target="_blank"><img src="/icon/welecome.svg" /></a>
                                                     </div>
                                                     <div class="marquee" >
-                                                        <a target="_blank"><img src="/icon/0.svg"/></a>
-                                                        <a target="_blank"><img src="/icon/1.svg"/></a>
-                                                        <a target="_blank"><img src="/icon/2.svg"/></a>
-                                                        <a target="_blank"><img src="/icon/3.svg"/></a>
-                                                        <a target="_blank"><img src="/icon/4.svg"/></a>
-                                                        <a target="_blank"><img src="/icon/5.svg"/></a>
-                                                        <a target="_blank"><img src="/icon/6.svg"/></a>
-                                                        <a target="_blank"><img src="/icon/7.svg"/></a>
-                                                        <a target="_blank"><img src="/icon/8.svg"/></a>
+                                                        <a target="_blank"><img src="/icon/buddy.svg" /></a>
+                                                        <a target="_blank"><img src="/icon/bright.svg" /></a>
+                                                        <a target="_blank"><img src="/icon/coocon.svg" /></a>
+                                                        <a target="_blank"><img src="/icon/danal.svg" /></a>
+                                                        <a target="_blank"><img src="/icon/ez.svg" /></a>
+                                                        <a target="_blank"><img src="/icon/galaxia.svg" /></a>
+                                                        <a target="_blank"><img src="/icon/hecto.svg" /></a>
+                                                        <a target="_blank"><img src="/icon/kgmobil.svg" /></a>
+                                                        <a target="_blank"><img src="/icon/kiwoom.svg" /></a>
+                                                        <a target="_blank"><img src="/icon/payletter.svg" /></a>
+                                                        <a target="_blank"><img src="/icon/paytos.svg" /></a>
+                                                        <a target="_blank"><img src="/icon/welecome.svg" /></a>
                                                     </div>
                                                 </div>
                                             </div>
