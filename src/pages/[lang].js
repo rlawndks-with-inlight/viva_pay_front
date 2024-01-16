@@ -13,6 +13,7 @@ import MobileAccordion from "src/components/Mobile/MobileSection3Accordion";
 import { MobileSearch } from "/src/components/Mobile/MobileSection5";
 import styled from "styled-components";
 import { useInView } from 'react-intersection-observer'; // react-intersection-observer 라이브러리 사용
+import { Marquee } from "src/components/Section2Slide";
 const sections = ["section1", "section2", "section3", "section4"]; // 섹션 이름
 
 const AnimateUp = ({ children }) => {
@@ -468,49 +469,18 @@ const Home = () => {
                                     ) : index === 1 ? (
                                         <section>
                                             <Section className="pg2-radial">
-                                                <div className="pg2-linear"/>
-                                                    <div className="page2back" />
-                                                    <div className="blueinner">
-                                                        <AnimateUp>
-                                                            <W2Title style={{ marginTop: '20vh' }}>국가안보 수준의 보안성</W2Title>
-                                                            <W2Title >전 고객 무사고 업계 최고 수준의 대응속도</W2Title>
-                                                            <W2Title style={{ marginBottom: '17vh' }}>경쟁사 대비 빠른 연산 처리 속도</W2Title>
-                                                            <TopicsContainer />
-                                                        </AnimateUp>
+                                                <div className="pg2-linear" />
+                                                <div className="page2back" />
+                                                <div className="blueinner">
+                                                    <AnimateUp>
+                                                        <W2Title style={{ marginTop: '20vh' }}>국가안보 수준의 보안성</W2Title>
+                                                        <W2Title >전 고객 무사고 업계 최고 수준의 대응속도</W2Title>
+                                                        <W2Title style={{ marginBottom: '17vh' }}>경쟁사 대비 빠른 연산 처리 속도</W2Title>
+                                                        <TopicsContainer />
+                                                    </AnimateUp>
                                                 </div>
                                             </Section>
-                                            <div class="logowrapper">
-                                                <div id="logoMarqueeSection">
-                                                    <div class="marquee" >
-                                                        <a target="_blank"><img src="/icon/buddy.svg" /></a>
-                                                        <a target="_blank"><img src="/icon/bright.svg" /></a>
-                                                        <a target="_blank"><img src="/icon/coocon.svg" /></a>
-                                                        <a target="_blank"><img src="/icon/danal.svg" /></a>
-                                                        <a target="_blank"><img src="/icon/ez.svg" /></a>
-                                                        <a target="_blank"><img src="/icon/galaxia.svg" /></a>
-                                                        <a target="_blank"><img src="/icon/hecto.svg" /></a>
-                                                        <a target="_blank"><img src="/icon/kgmobil.svg" /></a>
-                                                        <a target="_blank"><img src="/icon/kiwoom.svg" /></a>
-                                                        <a target="_blank"><img src="/icon/payletter.svg" /></a>
-                                                        <a target="_blank"><img src="/icon/paytos.svg" /></a>
-                                                        <a target="_blank"><img src="/icon/welecome.svg" /></a>
-                                                    </div>
-                                                    <div class="marquee" >
-                                                        <a target="_blank"><img src="/icon/buddy.svg" /></a>
-                                                        <a target="_blank"><img src="/icon/bright.svg" /></a>
-                                                        <a target="_blank"><img src="/icon/coocon.svg" /></a>
-                                                        <a target="_blank"><img src="/icon/danal.svg" /></a>
-                                                        <a target="_blank"><img src="/icon/ez.svg" /></a>
-                                                        <a target="_blank"><img src="/icon/galaxia.svg" /></a>
-                                                        <a target="_blank"><img src="/icon/hecto.svg" /></a>
-                                                        <a target="_blank"><img src="/icon/kgmobil.svg" /></a>
-                                                        <a target="_blank"><img src="/icon/kiwoom.svg" /></a>
-                                                        <a target="_blank"><img src="/icon/payletter.svg" /></a>
-                                                        <a target="_blank"><img src="/icon/paytos.svg" /></a>
-                                                        <a target="_blank"><img src="/icon/welecome.svg" /></a>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                            <Marquee/>
                                         </section>
                                     ) : index === 2 ? (
                                         <Section>
