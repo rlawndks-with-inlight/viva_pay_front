@@ -33,7 +33,9 @@ const Accordion = ({
                                 <div className="accordion-outer" style={{
                                         background: `url(${image.outerBackground}) no-repeat 50%`,
                                         backgroundSize: 'cover',
-                                        transform: hoveredIndex === index ? 'scale(1.05)' : '',
+                                        boxShadow: hoveredIndex === index ? '0 0 10px 10px black' : 'none',
+                                        border: hoveredIndex === index ? '5px solid white' : 'none', // Change 'red' to the desired outline color
+                                        transform: hoveredIndex === index ? 'scale(0.97)' : '',
                                         transition: hoveredIndex === index ? 'all 0.2s ease' : '',
                                     }}/>
                                 <div className="accordion-inner" style={{

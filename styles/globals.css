@@ -80,13 +80,13 @@ body {
 /* 1section sec1 1섹션 스타일 */
 
 .pg1-linear {
-  opacity: 0.1;
+  opacity: 0.2;
   position: absolute;
   top: 0;
   width: 100%;
   height: 100vh;
   z-index: -3;
-  background: linear-gradient(100deg, #D694F6, #BF75F6, #BE63EC, #9846FE, #6B4FFD, #98A9EB, #94E7FD, #50AFFB, #3E6EF7, #50AFFB, #104DC8,  );
+  background: linear-gradient(100deg, #D694F6, #BF75F6, #BE63EC, #9846FE, #6B4FFD, #98A9EB, #94E7FD, #50AFFB, #3E6EF7, #50AFFB, #104DC8  );
   animation: gradient 15s infinite;
   background-size: 400% 400%;
 }
@@ -368,7 +368,8 @@ font-family: 'NanumSquare', sans-serif;
   align-items: center;
 }
 .searchheerim-container {
-  background-color: rgb(0, 104, 232);
+  background: radial-gradient(#50AFFB 23%, transparent 67% 100%) 385px -24px, radial-gradient(#BF75F6 0, transparent 60% 100%) -940px 290px, radial-gradient(#50AFFB 40%, transparent 57% 100%) 495px -44px, radial-gradient(#50AFFB 30%, transparent 67% 100%) 122px -120px, radial-gradient(#6B4FFD 10%, transparent 60% 100%) -420px 120px, radial-gradient(#94E7FD 25%, transparent 50% 100%) 520px -250px, #215BDB;
+  background-repeat: repeat-y;
   width: 100vw;
   padding-top: 8vh;
   @media only screen and (max-height: 700px) {
