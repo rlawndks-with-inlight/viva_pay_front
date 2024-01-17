@@ -35,7 +35,7 @@ const Accordion = ({
                                         backgroundSize: 'cover',
                                         boxShadow: hoveredIndex === index ? '0 0 10px 10px black' : 'none',
                                         border: hoveredIndex === index ? '5px solid white' : 'none', // Change 'red' to the desired outline color
-                                        transform: hoveredIndex === index ? 'scale(0.97)' : '',
+                                        transform: hoveredIndex === index ? 'scale(0.98)' : '',
                                         transition: hoveredIndex === index ? 'all 0.2s ease' : '',
                                     }}/>
                                 <div className="accordion-inner" style={{

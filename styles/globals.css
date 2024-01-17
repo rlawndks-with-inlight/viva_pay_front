@@ -165,6 +165,7 @@ body {
 }
 /* 2section sec2 2섹션 스타일  */
 .pg2-radial {
+  background-size: cover;
   height: calc(100vh - 250px);
   background: radial-gradient( #104DC8 23%, transparent 67% 100%) 385px -24px, radial-gradient(#3E6EF7 0, transparent 60% 100%) -940px 290px, radial-gradient(#94E7FD 10%, transparent 60% 100%) -120px 250px, radial-gradient(#94E7FD 15%, transparent 50% 100%) -620px 0,radial-gradient(#BF75F6 25%, transparent 50% 100%) 520px -250px;
   background-repeat: repeat-y;
@@ -189,7 +190,7 @@ body {
 .blueinner {
   margin: 0;
 }
-.page2back {
+.pg2-gray {
   background-color: #F9F9F9;
   width: 300%;
   height: 2000px;

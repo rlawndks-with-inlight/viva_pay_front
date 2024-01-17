@@ -27,18 +27,6 @@ const AnimateUp = ({ children }) => {
         </div>
     );
 };
-
-const AnimateRight = ({ children }) => {
-    const [ref, inView] = useInView({
-        triggerOnce: false, // 한 번만 트리거
-    });
-
-    return (
-        <div className={`animatedright ${inView ? "in-view" : ""}`} ref={ref}>
-            {children}
-        </div>
-    );
-};
 const Mobile = styled.div`
 padding: 0;
 width: 100%;
@@ -46,44 +34,6 @@ width: 100%;
 const M1 = styled.div`
 height: 100vh;
 border: 1px solid transparent;
-`
-const M1Title = styled.div`
-margin-top: 30vh;
-margin-left: 14vw;
-font-size:3.1em;
-font-weight: bold;
-font-family: 'Playfair Display', serif;
-color: #ffffff;
-opacity: .5;
-@media only screen and (max-width: 430px) {
-    margin-left: 1em;
-    font-size: 12vw;
-}
-`
-const M2 = styled.div`
-background-image: url("/image/blue.png");
-background-size: cover; 
-border: 1px solid transparent;
-`
-const M2YellowBox = styled.div`
-width: 6em; /* 네모 상자의 너비 설정 */
-height: 1.4em; /* 네모 상자의 높이 설정 */
-background-color:rgb(255, 194, 0); /* 노란색 배경색 설정 */
-border-top-right-radius: 10px;
-border-bottom-right-radius: 10px;
-margin-top: 2em;
-margin-left: 2.7em;
-display: flex;
-justify-content: center;
-align-items: center;
-p{
-    color: black; /* 흰색 글자색 설정 */
-    font-size: 0.9em; /* 글자 크기 설정 */
-    font-weight: bold;
-}
-@media screen and (width >= 800px) {
-      margin-left: 12vw;
-    }
 `
 const M3Title = styled.div`
 margin-top: 0.5em;
@@ -156,6 +106,9 @@ font-size: 5em;
 font-weight: 800;
 font-family: 'NanumSquare', sans-serif;
 color: black;
+  @media screen and (max-width : 700px) {
+    font-size: 10vw;
+  }
 `
 const W1RunningMate = styled.span`
 display: block;
@@ -165,6 +118,9 @@ font-size: 2em;
 font-weight: 400;
 font-family: 'NanumSquare', sans-serif;
 color: black;
+  @media screen and (max-width : 700px) {
+    font-size: 4vw;
+  }
 `
 const W1RunningMateDescription = styled.span`
 display: block;
@@ -173,6 +129,9 @@ font-size: 1.5em;
 font-weight: 300;
 font-family: 'NanumSquare', sans-serif;
 color: black;
+  @media screen and (max-width : 700px) {
+    font-size: 3vw;
+  }
 `
 const W2Title = styled.div`
 padding: none;
@@ -381,46 +340,27 @@ const Home = () => {
                                 <Mobile>
                                     <M1>
                                         <AnimateUp>
-                                            <M1Title>PG사를 위한 최고의 러닝메이트</M1Title>
-                                            <M1Title style={{ marginTop: "0", marginBottom: "5em" }}>*러닝메이트란</M1Title>
+                                            <W1Title magtop="30vh">PG사를 위한</W1Title>
+                                            <W1Title>최고의 러닝메이트</W1Title>
+                                            <W1RunningMate magtop="10px">*러닝메이트란?</W1RunningMate>
+                                            <W1RunningMateDescription>러닝크루와 같이 케어하면서 끝까지 함께 달리는 러너를 상징합니다.</W1RunningMateDescription>
                                         </AnimateUp>
                                         <canvas className="pg1-linear" />
+                                        <div className="pg1-radial" />
+                                        <div className="waveMiddle" />
+                                        <div className="whitebackground" />
                                     </M1>
-                                    <M2>
-                                        <AnimateRight>
-                                            <M2YellowBox><p>Who we are</p></M2YellowBox>
-                                        </AnimateRight>
+                                    <Section className="pg2-radial">
+                                        <div className="pg2-linear" />
+                                        <div className="pg2-gray" />
                                         <AnimateUp>
-                                            <MSection2Content langJson={langJson} />
+                                            <W2Title style={{ marginTop: '' }}>국가안보 수준의 보안성</W2Title>
+                                            <W2Title >전 고객 무사고 업계 최고 수준의 대응속도</W2Title>
+                                            <W2Title style={{ marginBottom: '' }}>경쟁사 대비 빠른 연산 처리 속도</W2Title>
                                             <TopicsContainer />
                                         </AnimateUp>
-                                    </M2>
-                                    <div class="logowrapper">
-                                        <div id="logoMarqueeSection">
-                                            <div class="marquee" >
-                                                <a target="_blank"><img src="/icon/0.svg" /></a>
-                                                <a target="_blank"><img src="/icon/1.svg" /></a>
-                                                <a target="_blank"><img src="/icon/2.svg" /></a>
-                                                <a target="_blank"><img src="/icon/3.svg" /></a>
-                                                <a target="_blank"><img src="/icon/4.svg" /></a>
-                                                <a target="_blank"><img src="/icon/5.svg" /></a>
-                                                <a target="_blank"><img src="/icon/6.svg" /></a>
-                                                <a target="_blank"><img src="/icon/7.svg" /></a>
-                                                <a target="_blank"><img src="/icon/8.svg" /></a>
-                                            </div>
-                                            <div class="marquee" >
-                                                <a target="_blank"><img src="/icon/0.svg" /></a>
-                                                <a target="_blank"><img src="/icon/1.svg" /></a>
-                                                <a target="_blank"><img src="/icon/2.svg" /></a>
-                                                <a target="_blank"><img src="/icon/3.svg" /></a>
-                                                <a target="_blank"><img src="/icon/4.svg" /></a>
-                                                <a target="_blank"><img src="/icon/5.svg" /></a>
-                                                <a target="_blank"><img src="/icon/6.svg" /></a>
-                                                <a target="_blank"><img src="/icon/7.svg" /></a>
-                                                <a target="_blank"><img src="/icon/8.svg" /></a>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    </Section>
+                                    <Marquee />
                                     <AnimateUp>
                                         <M3Title>Our Service</M3Title>
                                         <M3ImageContainer>
@@ -453,7 +393,7 @@ const Home = () => {
                                                         <W1Title magtop="30vh">PG사를 위한</W1Title>
                                                         <W1Title>최고의 러닝메이트</W1Title>
                                                         <W1RunningMate magtop="10px">*러닝메이트란?</W1RunningMate>
-                                                        <W1RunningMateDescription>러닝크루와 같이 케어하면서 끝까지 함께 달리는 러너를 상징합니다</W1RunningMateDescription>
+                                                        <W1RunningMateDescription>러닝크루와 같이 케어하면서 끝까지 함께 달리는 러너를 상징합니다.</W1RunningMateDescription>
                                                     </div>
                                                     <div className="img-container">
                                                         <div className="pg-web"><img src="image/1pageweb.png"></img></div>
@@ -470,7 +410,7 @@ const Home = () => {
                                         <section>
                                             <Section className="pg2-radial">
                                                 <div className="pg2-linear" />
-                                                <div className="page2back" />
+                                                <div className="pg2-gray" />
                                                 <div className="blueinner">
                                                     <AnimateUp>
                                                         <W2Title style={{ marginTop: '20vh' }}>국가안보 수준의 보안성</W2Title>
@@ -480,7 +420,7 @@ const Home = () => {
                                                     </AnimateUp>
                                                 </div>
                                             </Section>
-                                            <Marquee/>
+                                            <Marquee />
                                         </section>
                                     ) : index === 2 ? (
                                         <Section>
