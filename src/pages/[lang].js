@@ -185,10 +185,10 @@ const Topic = ({ title, initialValue, finalValue }) => {
 const TopicsContainer = () => {
     return (
         <div className="topics-container">
-            <Topic title="연간 거래액" initialValue={0} finalValue={30} />
-            <Topic title="가맹점" initialValue={0} finalValue={1400} />
-            <Topic title="연동PG사" initialValue={0} finalValue={50} />
-            <Topic title="고객사 수" initialValue={0} finalValue={300} />
+            <Topic title="연간 거래액" initialValue={0} finalValue={12000} />
+            <Topic title="가맹점" initialValue={0} finalValue={20000} />
+            <Topic title="연동PG사" initialValue={0} finalValue={30} />
+            <Topic title="고객사 수" initialValue={0} finalValue={30} />
         </div>
     );
 };
