@@ -14,7 +14,7 @@ import { MobileSearch } from "/src/components/Mobile/MobileSection5";
 import styled from "styled-components";
 import { useInView } from 'react-intersection-observer'; // react-intersection-observer 라이브러리 사용
 import { Marquee } from "src/components/Section2Slide";
-import Waves from "src/components/Wave";
+import { CountUp } from "countup.js";
 const sections = ["section1", "section2", "section3", "section4"]; // 섹션 이름
 
 const AnimateUp = ({ children }) => {
@@ -159,26 +159,43 @@ const Topic = ({ title, initialValue, finalValue }) => {
     }, [inView, currentValue, finalValue, initialValue]);
 
     const addPlusSign = title === "연간 거래액" || title === "가맹점" || title === "연동PG사" || title === "고객사 수";
-    const formatNumberWithCommas = (number, add억) => {
+
+    const formatNumberWithCommas = (number) => {
         const formattedNumber = number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-        return add억 ? formattedNumber.slice(0, 1) + "억 " + formattedNumber.slice(1) : formattedNumber;
+        return formattedNumber;
     };
+
+    useEffect(() => {
+        if (inView && currentValue < finalValue) {
+            const numValue = Math.round(currentValue);
+            const numIntType = parseInt(numValue);
+            const options = {
+                useEasing: true,
+                useGrouping: true,
+                separator: ",",
+                decimal: "."
+            };
+            const upAnimation = new CountUp(`${title}-count`, 0, numIntType, 0, 5, options);
+            upAnimation.start();
+        }
+    }, [inView, currentValue, finalValue, title]);
 
     return (
         <div ref={inViewRef}>
             <p className="topic-title">{title}</p>
             <p className={`topic-number ${inView ? "in-view" : ""}`}>
-            {addPlusSign && title === "연간 거래액"
-                    ? formatNumberWithCommas(Math.round(currentValue), true) + "+"
-                    : formatNumberWithCommas(Math.round(currentValue))}
+                {addPlusSign && title === "연간 거래액"
+                    ? `1억 ${formatNumberWithCommas(Math.round(currentValue)) + "+"}`
+                    : formatNumberWithCommas(Math.round(currentValue)) + "+"}
             </p>
         </div>
     );
 };
+
 const TopicsContainer = () => {
     return (
         <div className="topics-container">
-            <Topic title="연간 거래액" initialValue={0} finalValue={12000} />
+            <Topic title="연간 거래액" initialValue={0} finalValue={2000} />
             <Topic title="가맹점" initialValue={0} finalValue={20000} />
             <Topic title="연동PG사" initialValue={0} finalValue={30} />
             <Topic title="고객사 수" initialValue={0} finalValue={30} />
