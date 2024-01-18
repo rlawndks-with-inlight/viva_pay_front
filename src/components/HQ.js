@@ -1,10 +1,6 @@
 import React from 'react';
-import { useRouter } from "next/router";
 
-const HQ = ({ langJson }) => {
-    const router = useRouter();
-    const { lang = 'en' } = router.query;
-    // console.log('langJson:', langJson); 
+const HQ = ({  }) => {
     return (
         <div style={{ display: "flex" }}>
             <div className="hq">
@@ -17,7 +13,7 @@ const HQ = ({ langJson }) => {
                     </div>
                 </div>
                 <div className="address">
-                    <div className="hq2">{langJson[lang]?.ADDRESS}</div>
+                    <div className="hq2">대전광역시 서구 대덕대로241번길 20, 5층 549-4호 (둔산동, 청남빌딩)</div>
                     <div className="hq2">070-8080-3499</div>
                 </div>
             </div>

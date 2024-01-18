@@ -231,6 +231,7 @@ body {
 .topics-container {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   margin-left: 1em;
     @media screen and (width >= 800px) {
       margin-left: 12vw;
@@ -255,18 +256,15 @@ font-family: 'NanumSquare', sans-serif;
   color: #2353D9;
 
   @media screen and (max-width: 900px) {
-    margin-top: 3vh;
-    font-size: 0.8em;
   }
 }
 .topic-number {
   color: #606060;
   font-weight: 800;
   font-size: 6em;
-  margin-bottom: 0.3em;
 
   @media screen and (max-width: 1400px) {
-    font-size: 5.5vw;
+    font-size: 4vw;
   }
 }
 
@@ -414,6 +412,9 @@ font-family: 'NanumSquare', sans-serif;
 
   @media screen and (max-width: 1280px) {
     font-size: 3.2em;
+  }
+  @media screen and (max-width: 900px) {
+    font-size: 10vw;
   }
 }
 .searchsub {

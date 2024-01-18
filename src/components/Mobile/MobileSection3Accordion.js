@@ -1,58 +1,44 @@
 import React from 'react';
-import { useRouter } from 'next/router';
 import styled from 'styled-components';
 
-const M3Place = styled.p`
-  margin: 0;
-  padding: 0;
-  font-size: 1em;
-`;
-
 const M3Building = styled.p`
-  margin: 0;
+  margin-top: 1.5em;
   padding: 0;
   font-size: 1.5em;
   font-weight: bold;
 `;
 
-const AccordionItem = ({ place, building, imageAlt, imageUrl }) => {
+const AccordionItem = ({ title, imageAlt, imageUrl }) => {
   return (
     <a href="/404">
       <div>
-        <M3Place>{place}</M3Place>
-        <M3Building>{building}</M3Building>
+        <M3Building>{title}</M3Building>
       </div>
       <img src={imageUrl} alt={imageAlt} />
     </a>
   );
 };
 
-const MobileAccordion = ({ langJson }) => {
-  const router = useRouter();
-  const { lang = 'en' } = router.query;
+const MobileAccordion = ({  }) => {
 
   const accordionData = [
     {
-      place: 'Incheon, Korea',
-      building: langJson[lang]?.MICN,
+      title: '보안 중심의 네트워크 아키텍처',
       imageUrl: '/image/outer1.png',
       imageAlt: 'outer1',
     },
     {
-      place: 'Seoul, Korea',
-      building: langJson[lang]?.MYEOUIDO,
+      title: '운영현황을 한눈에',
       imageUrl: '/image/outer2.png',
       imageAlt: 'outer2',
     },
     {
-      place: 'Seongnam, Korea',
-      building: langJson[lang]?.MHYUNDAI,
+      title: '연 1조 2000억원의 거래량에도 안전하고 빠르게',
       imageUrl: '/image/outer3.png',
       imageAlt: 'outer3',
     },
     {
-      place: 'Baku, Azerbaijan',
-      building: langJson[lang]?.SOCAR,
+      title: '섬세한 디자인 커스텀마이징',
       imageUrl: '/image/outer4.png',
       imageAlt: 'outer4',
     },
@@ -63,8 +49,7 @@ const MobileAccordion = ({ langJson }) => {
       {accordionData.map((item, index) => (
         <AccordionItem
           key={index}
-          place={item.place}
-          building={item.building}
+          title={item.title}
           imageUrl={item.imageUrl}
           imageAlt={item.imageAlt}
         />

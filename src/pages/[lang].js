@@ -181,7 +181,7 @@ const Topic = ({ title, initialValue, finalValue }) => {
     }, [inView, currentValue, finalValue, title]);
 
     return (
-        <div ref={inViewRef}>
+        <div ref={inViewRef} className="topic-contaier">
             <p className="topic-title">{title}</p>
             <p className={`topic-number ${inView ? "in-view" : ""}`}>
                 {addPlusSign && title === "연간 거래액"
@@ -232,16 +232,12 @@ const Home = () => {
 
     const accordionItems = [
         {
-            category: 'Incheon, Korea',
             title: '보안 중심의 네트워크 아키텍처',
         }, {
-            category: 'Seoul, Korea',
             title: '운영현황을 한눈에',
         }, {
-            category: 'Gwacheon, Korea',
             title: '연 1조 2000억원의 거래량에도 안전하고 빠르게',
         }, {
-            category: 'Baku, Azerbaijan',
             title: '섬세한 디자인 커스텀마이징',
         },
     ];
@@ -362,9 +358,9 @@ const Home = () => {
                                         <div className="pg2-linear" />
                                         <div className="pg2-gray" />
                                         <AnimateUp>
-                                            <W2Title style={{ marginTop: '224px' }}>국가안보 수준의 보안성</W2Title>
+                                            <W2Title style={{ marginTop: '18vh' }}>국가안보 수준의 보안성</W2Title>
                                             <W2Title >전 고객 무사고 업계 최고 수준의 대응속도</W2Title>
-                                            <W2Title style={{ marginBottom: '224px' }}>경쟁사 대비 빠른 연산 처리 속도</W2Title>
+                                            <W2Title style={{ marginBottom: '18vh' }}>경쟁사 대비 빠른 연산 처리 속도</W2Title>
                                             <TopicsContainer />
                                         </AnimateUp>
                                     </Section>
@@ -372,7 +368,7 @@ const Home = () => {
                                     <AnimateUp>
                                         <M3Title>Our Service</M3Title>
                                         <M3ImageContainer>
-                                            <MobileAccordion langJson={langJson} />
+                                            <MobileAccordion/>
                                         </M3ImageContainer>
                                     </AnimateUp>
                                     <M5SearchContainer>
