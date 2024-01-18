@@ -14,6 +14,7 @@ import { MobileSearch } from "/src/components/Mobile/MobileSection5";
 import styled from "styled-components";
 import { useInView } from 'react-intersection-observer'; // react-intersection-observer 라이브러리 사용
 import { Marquee } from "src/components/Section2Slide";
+import Waves from "src/components/Wave";
 const sections = ["section1", "section2", "section3", "section4"]; // 섹션 이름
 
 const AnimateUp = ({ children }) => {
@@ -64,27 +65,10 @@ div{ /* 4개 이미지 위의 장소, 건물 텍스트 디자인 관리 */
 }
 `
 const M5SearchContainer = styled.div`
-background-color: rgb(0, 104, 232);
-width: 100%;
+background: radial-gradient(#50AFFB 23%, transparent 67% 100%) 385px -24px, radial-gradient(#BF75F6 0, transparent 60% 100%) -940px 290px, radial-gradient(#50AFFB 40%, transparent 57% 100%) 495px -44px, radial-gradient(#50AFFB 30%, transparent 67% 100%) 122px -120px, radial-gradient(#6B4FFD 10%, transparent 60% 100%) -420px 120px, radial-gradient(#94E7FD 25%, transparent 50% 100%) 520px -250px, #215BDB;
+background-repeat: repeat-y;
+width: 100vw;
 padding-top: 3em;
-span{
-    font-size: 6vw;
-    font-weight: bold;
-}
-p{
-    font-size: 1.4vw;
-    color: #CACACA;
-}
-@media only screen and (max-width: 360px) {
-    span{
-        font-size: 1.5em;
-    }
-}
-@media only screen and (max-width: 1000px) {
-    p{
-        font-size: 1em;
-    }
-}
 `
 const M5Contact = styled.div`
 display: flex;
@@ -135,11 +119,14 @@ color: black;
 `
 const W2Title = styled.div`
 padding: none;
-  font-size: 2.333vw;
+  font-size: 4em;
   font-weight: 700;
 font-family: 'NanumSquare', sans-serif;
   color: white;
   margin-left: 11vw;
+  @media screen and (max-width : 1180px) {
+    font-size: 4.7vw;
+  }
   @media screen and (height <= 630px) {
     font-size: 3.5em;
   }
@@ -171,13 +158,19 @@ const Topic = ({ title, initialValue, finalValue }) => {
         }
     }, [inView, currentValue, finalValue, initialValue]);
 
-    const addPlusSign = title === "연간 거래액" || title === "가맹점 수" || title === "고객사 수";
+    const addPlusSign = title === "연간 거래액" || title === "가맹점" || title === "연동PG사" || title === "고객사 수";
+    const formatNumberWithCommas = (number, add억) => {
+        const formattedNumber = number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        return add억 ? formattedNumber.slice(0, 1) + "억 " + formattedNumber.slice(1) : formattedNumber;
+    };
 
     return (
         <div ref={inViewRef}>
             <p className="topic-title">{title}</p>
             <p className={`topic-number ${inView ? "in-view" : ""}`}>
-                {addPlusSign ? Math.round(currentValue) + "+" : Math.round(currentValue)}
+            {addPlusSign && title === "연간 거래액"
+                    ? formatNumberWithCommas(Math.round(currentValue), true) + "+"
+                    : formatNumberWithCommas(Math.round(currentValue))}
             </p>
         </div>
     );
@@ -347,16 +340,14 @@ const Home = () => {
                                         </AnimateUp>
                                         <canvas className="pg1-linear" />
                                         <div className="pg1-radial" />
-                                        <div className="waveMiddle" />
-                                        <div className="whitebackground" />
                                     </M1>
                                     <Section className="pg2-radial">
                                         <div className="pg2-linear" />
                                         <div className="pg2-gray" />
                                         <AnimateUp>
-                                            <W2Title style={{ marginTop: '' }}>국가안보 수준의 보안성</W2Title>
+                                            <W2Title style={{ marginTop: '224px' }}>국가안보 수준의 보안성</W2Title>
                                             <W2Title >전 고객 무사고 업계 최고 수준의 대응속도</W2Title>
-                                            <W2Title style={{ marginBottom: '' }}>경쟁사 대비 빠른 연산 처리 속도</W2Title>
+                                            <W2Title style={{ marginBottom: '224px' }}>경쟁사 대비 빠른 연산 처리 속도</W2Title>
                                             <TopicsContainer />
                                         </AnimateUp>
                                     </Section>
@@ -415,7 +406,7 @@ const Home = () => {
                                                     <AnimateUp>
                                                         <W2Title style={{ marginTop: '20vh' }}>국가안보 수준의 보안성</W2Title>
                                                         <W2Title >전 고객 무사고 업계 최고 수준의 대응속도</W2Title>
-                                                        <W2Title style={{ marginBottom: '17vh' }}>경쟁사 대비 빠른 연산 처리 속도</W2Title>
+                                                        <W2Title style={{ marginBottom: '12vh' }}>경쟁사 대비 빠른 연산 처리 속도</W2Title>
                                                         <TopicsContainer />
                                                     </AnimateUp>
                                                 </div>
@@ -423,7 +414,7 @@ const Home = () => {
                                             <Marquee />
                                         </section>
                                     ) : index === 2 ? (
-                                        <Section>
+                                        <Section style={{backgroundImage:`url('/image/3pageback.png')`, backgroundSize: 'cover'}}>
                                             <AnimateUp>
                                                 <Section3Title />
                                                 <Accordion
@@ -436,7 +427,7 @@ const Home = () => {
                                             </AnimateUp>
                                         </Section>
                                     ) : (
-                                        <Section>
+                                        <Section style={{height:'100vh'}}>
                                             <div className="searchheerim-container">
                                                 <AnimateUp >
                                                     <Search />

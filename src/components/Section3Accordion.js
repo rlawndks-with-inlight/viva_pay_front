@@ -59,7 +59,6 @@ const Accordion = ({
                             >
                                 <a className="accordion-inner-con">
                                     <div className="accordion-off-tit-box">
-                                        <span className="project-category">{item.category}</span>
                                         <strong className="project-tit">{item.title}</strong>
                                     </div>
                                     <aside className="accordion-detail-con"
@@ -69,7 +68,6 @@ const Accordion = ({
                                             transition: activeTxtIndex === index ? 'all 2s cubic-bezier(0.95, 0, 0.02, 1)' : ''
                                         }}>
                                         <p className="accordion-detail-txt">
-                                            <span className="project-category">{item.category}</span>
                                             <strong className="project-tit">{item.title}</strong>
                                         </p>
                                     </aside>
