@@ -6,7 +6,6 @@ import langJson from 'src/data/lang.json';
 import { Section3Title } from "src/components/Section3";
 import Accordion from "src/components/Section3Accordion";
 import { Search, Section5Title } from "src/components/Section5";
-import { IconSlide } from "src/components/IconSlide"; // 공통 위는 1280초과 사이즈
 import HQ from "src/components/HQ"; // 공통 아래는 1280이하 사이즈
 import { MSection2Content } from "src/components/Mobile/MobileSection2Content";
 import MobileAccordion from "src/components/Mobile/MobileSection3Accordion";
@@ -93,6 +92,9 @@ color: black;
   @media screen and (max-width : 700px) {
     font-size: 10vw;
   }
+  @media screen and (max-height : 600px) {
+    font-size: 3.5em;
+  }
 `
 const W1RunningMate = styled.span`
 display: block;
@@ -114,10 +116,11 @@ font-weight: 300;
 font-family: 'NanumSquare', sans-serif;
 color: black;
   @media screen and (max-width : 700px) {
-    font-size: 3vw;
+    font-size: 2.8vw;
   }
 `
 const W2Title = styled.div`
+word-break: keep-all;
 padding: none;
   font-size: 4em;
   font-weight: 700;
@@ -127,8 +130,8 @@ font-family: 'NanumSquare', sans-serif;
   @media screen and (max-width : 1180px) {
     font-size: 4.7vw;
   }
-  @media screen and (height <= 630px) {
-    font-size: 3.5em;
+  @media screen and (max-width : 800px) {
+    font-size: 2.7em;
   }
 `
 const Topic = ({ title, initialValue, finalValue }) => {
@@ -148,7 +151,7 @@ const Topic = ({ title, initialValue, finalValue }) => {
                     if (newValue >= finalValue) {
                         clearInterval(animationInterval); // 애니메이션 멈춤
                     }
-                }, 40); // 올라가는 속도 조절
+                }, 5); // 올라가는 속도 조절
             }
 
             return () => clearInterval(animationInterval);
@@ -185,7 +188,7 @@ const Topic = ({ title, initialValue, finalValue }) => {
             <p className="topic-title">{title}</p>
             <p className={`topic-number ${inView ? "in-view" : ""}`}>
                 {addPlusSign && title === "연간 거래액"
-                    ? `1억 ${formatNumberWithCommas(Math.round(currentValue)) + "+"}`
+                    ? `1조 ${formatNumberWithCommas(Math.round(currentValue)) + "억+"}`
                     : formatNumberWithCommas(Math.round(currentValue)) + "+"}
             </p>
         </div>
@@ -358,9 +361,9 @@ const Home = () => {
                                         <div className="pg2-linear" />
                                         <div className="pg2-gray" />
                                         <AnimateUp>
-                                            <W2Title style={{ marginTop: '18vh' }}>국가안보 수준의 보안성</W2Title>
+                                            <W2Title id="pg2-mt1">국가안보 수준의 보안성</W2Title>
                                             <W2Title >전 고객 무사고 업계 최고 수준의 대응속도</W2Title>
-                                            <W2Title style={{ marginBottom: '18vh' }}>경쟁사 대비 빠른 연산 처리 속도</W2Title>
+                                            <W2Title id="pg2-mt3">경쟁사 대비 빠른 연산 처리 속도</W2Title>
                                             <TopicsContainer />
                                         </AnimateUp>
                                     </Section>
@@ -368,7 +371,7 @@ const Home = () => {
                                     <AnimateUp>
                                         <M3Title>Our Service</M3Title>
                                         <M3ImageContainer>
-                                            <MobileAccordion/>
+                                            <MobileAccordion />
                                         </M3ImageContainer>
                                     </AnimateUp>
                                     <M5SearchContainer>
@@ -376,7 +379,7 @@ const Home = () => {
                                             <MobileSearch />
                                         </AnimateUp>
                                     </M5SearchContainer>
-                                    <div className="bottom">
+                                    <div className="m-bottom">
                                         <M5Contact>
                                             <HQ langJson={langJson} />
                                         </M5Contact>
@@ -400,8 +403,8 @@ const Home = () => {
                                                         <W1RunningMateDescription>러닝크루와 같이 케어하면서 끝까지 함께 달리는 러너를 상징합니다.</W1RunningMateDescription>
                                                     </div>
                                                     <div className="img-container">
-                                                        <div className="pg-web"><img src="image/1pageweb.png"></img></div>
-                                                        <div className="pg-ph"><img src="image/1pagephone.png"></img></div>
+                                                        <div className="pg1-web"><img src="image/1pageweb.png"></img></div>
+                                                        <div className="pg1-ph"><img src="image/1pagephone.png"></img></div>
                                                     </div>
                                                 </div>
                                             </AnimateUp>
@@ -417,9 +420,9 @@ const Home = () => {
                                                 <div className="pg2-gray" />
                                                 <div className="blueinner">
                                                     <AnimateUp>
-                                                        <W2Title style={{ marginTop: '20vh' }}>국가안보 수준의 보안성</W2Title>
-                                                        <W2Title >전 고객 무사고 업계 최고 수준의 대응속도</W2Title>
-                                                        <W2Title style={{ marginBottom: '12vh' }}>경쟁사 대비 빠른 연산 처리 속도</W2Title>
+                                                        <div className="subtitle" id="sub1">국가안보 수준의 보안성</div>
+                                                        <div className="subtitle" id="sub2">전 고객 무사고 업계 최고 수준의 대응속도</div>
+                                                        <div className="subtitle" id="sub3">경쟁사 대비 빠른 연산 처리 속도</div>
                                                         <TopicsContainer />
                                                     </AnimateUp>
                                                 </div>
@@ -427,7 +430,7 @@ const Home = () => {
                                             <Marquee />
                                         </section>
                                     ) : index === 2 ? (
-                                        <Section style={{backgroundImage:`url('/image/3pageback.png')`, backgroundSize: 'cover'}}>
+                                        <Section style={{ backgroundImage: `url('/image/3pageback.png')`, backgroundSize: 'cover' }}>
                                             <AnimateUp>
                                                 <Section3Title />
                                                 <Accordion
@@ -440,7 +443,7 @@ const Home = () => {
                                             </AnimateUp>
                                         </Section>
                                     ) : (
-                                        <Section style={{height:'100vh'}}>
+                                        <Section height="100vh">
                                             <div className="searchheerim-container">
                                                 <AnimateUp >
                                                     <Search />
@@ -448,7 +451,7 @@ const Home = () => {
                                             </div>
                                             <div className="bottom">
                                                 <div className="seoulhqsupport">
-                                                    <HQ langJson={langJson} />
+                                                    <HQ />
                                                 </div>
                                             </div>
                                         </Section>

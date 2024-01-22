@@ -150,7 +150,7 @@ body {
   display: flex;
   padding: 0;
 }
-.pg-web {
+.pg1-web {
   position: absolute;
   margin: 0;
   padding: 0;
@@ -158,7 +158,7 @@ body {
     height: 1280px;
   }
 }
-.pg-ph {
+.pg1-ph {
   position: absolute;
   top: 65%;
   margin: 0;
@@ -170,9 +170,15 @@ body {
 /* 2section sec2 2섹션 스타일  */
 .pg2-radial {
   background-size: cover;
-  height: calc(100vh - 250px);
-  background: radial-gradient( #104DC8 23%, transparent 67% 100%) 385px -24px, radial-gradient(#3E6EF7 0, transparent 60% 100%) -940px 290px, radial-gradient(#94E7FD 10%, transparent 60% 100%) -120px 250px, radial-gradient(#94E7FD 15%, transparent 50% 100%) -620px 0,radial-gradient(#BF75F6 25%, transparent 50% 100%) 520px -250px;
+  height: calc(100vh - 150px);
+  background:  radial-gradient(#3E6EF7 0, transparent 60% 100%) -940px 290px, radial-gradient(#94E7FD 10%, transparent 60% 100%) -120px 250px, radial-gradient(#94E7FD 15%, transparent 50% 100%) -620px 0,radial-gradient(#BF75F6 25%, transparent 50% 100%) 520px -250px;
   background-repeat: repeat-y;
+  @media screen and (max-width: 1280px) {
+    height: 600px;
+  }
+  @media screen and (max-height: 550px) {
+    height: 600px;
+  }
 }
 .pg2-linear {
   position: absolute;
@@ -183,6 +189,12 @@ body {
   background: linear-gradient( #3E6EF7, #50AFFB, #104DC8, #BF75F6, #D2E5E9 );
   animation: gradient 15s infinite;
   background-size: 400% 400%;
+  @media screen and (max-width: 1280px) {
+    height: 600px;
+  }
+  @media screen and (max-height: 550px) {
+    height: 600px;
+  }
 }
 .blue {
   position: relative;
@@ -204,17 +216,52 @@ body {
   @media screen and (max-width: 1800px) {
     top: 0px;
 }
+@media screen and (max-height: 900px) {
+  rotate: -12.5deg;
+}
+@media screen and (max-width: 1280px) {
+  rotate: -12.5deg;
+}
+}
+
+#pg2-mt1 {
+  margin-top: 112px;
+}
+#pg2-mt3 {
+  margin-bottom: 112px;
 }
 /* 2섹션 Follow 텍스트 스타일 */
 .subtitle {
+  word-break: keep-all;
   padding: none;
-  font-size: 3.333vw;
+  font-size: 3vw;
   font-weight: bold;
   font-family: 'Nanum Square', sans-serif;
   color: white;
   margin-left: 11vw;
-  @media screen and (height <= 630px) {
-    font-size: 3.5em;
+  @media screen and (max-height: 1080px)and(max-width: 1400px ) {
+    font-size: 4.5em;
+  }
+  @media screen and (max-height: 700px)  {
+    font-size: 8vh;
+  }
+}
+#sub1 {
+  margin-top: 18vh;
+  @media screen and (max-height: 1080px) {
+    margin-top: 16vh;
+  }
+  @media screen and (max-height: 750px) {
+    margin-top: 10vh;
+  }
+}
+#sub3 {
+  margin-bottom: 28vh;
+  @media screen and (max-height: 1080px) {
+    margin-bottom: 26vh;
+  }
+  @media screen and (max-height: 900px) {
+    margin-bottom: 14vh;
   }
 }
 /* 2섹션 innovation 텍스트 스타일 */
@@ -227,20 +274,19 @@ body {
     margin-top: 0.5em;
   }
 }
-/* 2섹션 history box 텍스트 스타일 */
 .topics-container {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-left: 1em;
-    @media screen and (width >= 800px) {
-      margin-left: 12vw;
-      margin-right: 12vw;
+    @media screen and (min-width: 1000px) {
+      margin: 0 12vw;
     }
 }
 /* 2섹션 historyof 글 텍스트 스타일 */
 .topic-title,
 .topic-number {
+  text-align: center;
 font-family: 'NanumSquare', sans-serif;
   margin: 0 3vh 0 0;
 
@@ -249,9 +295,7 @@ font-family: 'NanumSquare', sans-serif;
   }
 }
 .topic-title {
-  text-align: center;
   font-size: 1.5em;
-  margin-top: 8vh;
   font-weight: 700;
   color: #2353D9;
 
@@ -263,8 +307,14 @@ font-family: 'NanumSquare', sans-serif;
   font-weight: 800;
   font-size: 6em;
 
-  @media screen and (max-width: 1400px) {
+  @media screen and (max-width: 1800px) {
     font-size: 4vw;
+  }
+  @media screen and (max-width: 500px) {
+    font-size: 1.5em;
+  }
+  @media screen and (max-height: 1080px) {
+    font-size: 3em;
   }
 }
 
@@ -272,7 +322,7 @@ font-family: 'NanumSquare', sans-serif;
   box-sizing: border-box;
   position: relative;
   display: flex;
-  height: 250px;
+  height: 150px;
   padding: 0;
   margin: auto;
   justify-content: center;
@@ -317,7 +367,7 @@ font-family: 'NanumSquare', sans-serif;
 }
 .marquee a img {
   width: 250px;
-  height: 4.5vw;
+  height: 50px;
   @media only screen and (max-width: 1250px) {
     height: 4.5em;
   }
@@ -369,14 +419,30 @@ font-family: 'NanumSquare', sans-serif;
   align-items: center;
 }
 .searchheerim-container {
-  background: radial-gradient(#50AFFB 23%, transparent 67% 100%) 385px -24px, radial-gradient(#BF75F6 0, transparent 60% 100%) -940px 290px, radial-gradient(#50AFFB 40%, transparent 57% 100%) 495px -44px, radial-gradient(#50AFFB 30%, transparent 67% 100%) 122px -120px, radial-gradient(#6B4FFD 10%, transparent 60% 100%) -420px 120px, radial-gradient(#94E7FD 25%, transparent 50% 100%) 520px -250px, #215BDB;
+  background: radial-gradient(#50AFFB 23%, transparent 67% 100%) 385px -24px, radial-gradient(#BF75F6 0, transparent 60% 100%) -940px 290px, radial-gradient(#6B4FFD 10%, transparent 60% 100%) -420px 120px,  #215BDB;
   background-repeat: repeat-y;
   width: 100vw;
-  padding-top: 8vh;
-  margin-top: 10vh;
-  @media only screen and (max-height: 700px) {
-    padding-top: 4vh;
+  padding: 33vh 0;
+  margin-top: 5vh;
+  @media only screen and (max-height: 800px) {
+  padding: 27vh 0;
   }
+  @media only screen and (max-height: 650px) {
+  padding: 25vh 0;
+  }
+  @media only screen and (max-height: 600px) {
+  padding: 20vh 0;
+  }
+}
+.pg5-linear {
+  position: absolute;
+  opacity: 0.4;
+  z-index: -1;
+  width: 100%;
+  height: 100vh;
+  background: linear-gradient( #3E6EF7, #50AFFB, #104DC8, #BF75F6, #D2E5E9 );
+  animation: gradient 15s infinite;
+  background-size: 400% 400%;
 }
 @keyframes textgradient {
 0% {
@@ -391,20 +457,25 @@ font-family: 'NanumSquare', sans-serif;
 }
 
 .pg4-web {
+  position: absolute;
+  top: -200px;
   margin-left: 8vw;
   padding: 0;
 }
 .pg4-ph {
+  z-index: 1;
   margin-top: 13vh;
   margin-left: 2vw;
   padding: 0;
   position: absolute;
+  top: -200px;
 }
 .search-title {
+  font-family: 'NanumSquare', sans-serif;
   box-sizing: border-box;
   display: inline-block;
   font-size: 4em;
-  font-weight: bold;
+  font-weight: 800;
   color: transparent;
   background-image: url('/image/TextGradient.png');
   background-clip: text;
@@ -418,8 +489,10 @@ font-family: 'NanumSquare', sans-serif;
   }
 }
 .searchsub {
+  font-family: 'NanumSquare', sans-serif;
+  font-weight: 400;
   margin: 0;
-  font-size: 1.1em;
+  font-size: 2em;
   color: white;
 }
 /* 검색 입력란 스타일링 */
@@ -467,15 +540,20 @@ font-family: 'NanumSquare', sans-serif;
     color: white;
   }
 }
-.bottom {
+.m-bottom {
   position: relative;
   margin-top: 6vh;
 }
+.bottom {
+  background-color: white;
+  padding: 38px 0 ;
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+}
 .seoulhqsupport {
   display: flex;
-  padding: 0px 0 0 12vw;
-  margin-top: 8vh;
-  margin-bottom: 10vh;
+  margin-left:  12vw;
   @media screen and (max-width: 1250px) {
     flex-direction: column;
     margin-bottom: 2em;
@@ -686,16 +764,6 @@ font-family: 'NanumSquare', sans-serif;
 }
 .accordion-detail-txt {
   color: #252525;
-}
-/* react slick 관련 강제 수정 */
-.slick-slider{
-  display: flex !important;
-  position: static !important;
-  flex-direction: row !important;
-  margin: 1em 10% 0 10%;
-  @media only screen and (max-width: 1080px) {
-    margin: 1em 2% 0 2%;
-  }
 }
 
 

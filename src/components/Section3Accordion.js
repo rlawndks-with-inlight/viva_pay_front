@@ -28,7 +28,7 @@ const Accordion = ({
                                     width: activeIndex === index ? '100%' : '25%', /*'25%',*/
                                     zIndex: activeIndex === index ? '1' : '0', /*  */
                                     left:  activeIndex === index ? `0` : `${index * 25}%`, /* `${index * 25}%`,*/
-                                    transition: activeIndex === index ? 'width 2s cubic-bezier(0.86, 0.5, 0.07, 1), left 2s cubic-bezier(0.86, 0.5, 0.07, 1)' : 'all 0s',/* 1.1s cubic-bezier(0.86, 0.5, 0.07, 1) */
+                                    transition: activeIndex === index ? 'width 1s cubic-bezier(0.86, 0.5, 0.07, 1), left 1s cubic-bezier(0.86, 0.5, 0.07, 1)' : 'all 0s',/* 1.1s cubic-bezier(0.86, 0.5, 0.07, 1) */
                                 }}>
                                 <div className="accordion-outer" style={{
                                         background: `url(${image.outerBackground}) no-repeat 50%`,
