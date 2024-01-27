@@ -4,7 +4,7 @@ export const Search = ({ }) => {
 
     return (
         <div className="searchwraparea">
-            <div style={{flexDirection:'column'}}>
+            <div style={{flexDirection:'column', margin:"27vh 0"}}>
                 <h1 style={{ display: 'flex'}}>
                     <span className="search-title" >Start,</span>
                     <span className="search-title" >Scale,</span>

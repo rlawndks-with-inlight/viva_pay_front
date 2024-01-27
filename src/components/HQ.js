@@ -2,7 +2,7 @@ import React from 'react';
 
 const HQ = ({  }) => {
     return (
-        <div style={{ display: "flex" }}>
+        <div id='footer' style={{ display: "flex", }}>
             <div className="hq">
                 <div className="address">
                     <div className="hq1">
@@ -13,8 +13,8 @@ const HQ = ({  }) => {
                     </div>
                 </div>
                 <div className="address">
-                    <div className="hq2">대전광역시 서구 대덕대로241번길 20, 5층 549-4호 (둔산동, 청남빌딩)</div>
-                    <div className="hq2">070-8080-3499</div>
+                    <p className="hq2">대전광역시 서구 대덕대로241번길 20, 5층 549-4호 (둔산동, 청남빌딩)</p>
+                    <p className="hq2">070-8080-3499</p>
                 </div>
             </div>
             <div className="sup">

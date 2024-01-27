@@ -170,11 +170,17 @@ body {
 /* 2section sec2 2섹션 스타일  */
 .pg2-radial {
   background-size: cover;
-  height: calc(100vh - 150px);
+  height: calc(100vh - 140px);
   background:  radial-gradient(#3E6EF7 0, transparent 60% 100%) -940px 290px, radial-gradient(#94E7FD 10%, transparent 60% 100%) -120px 250px, radial-gradient(#94E7FD 15%, transparent 50% 100%) -620px 0,radial-gradient(#BF75F6 25%, transparent 50% 100%) 520px -250px;
   background-repeat: repeat-y;
   @media screen and (max-width: 1280px) {
     height: 600px;
+  }
+  @media screen and (max-width: 500px) {
+    height: 500px;
+  }
+  @media screen and (max-width: 430px) {
+    height: 400px;
   }
   @media screen and (max-height: 550px) {
     height: 600px;
@@ -191,6 +197,12 @@ body {
   background-size: 400% 400%;
   @media screen and (max-width: 1280px) {
     height: 600px;
+  }
+  @media screen and (max-width: 500px) {
+    height: 500px;
+  }
+  @media screen and (max-width: 430px) {
+    height: 400px;
   }
   @media screen and (max-height: 550px) {
     height: 600px;
@@ -226,9 +238,15 @@ body {
 
 #pg2-mt1 {
   margin-top: 112px;
+  @media screen and (max-width: 500px) {
+    margin-top: 60px;
+  }
 }
 #pg2-mt3 {
   margin-bottom: 112px;
+  @media screen and (max-width: 500px) {
+    margin-bottom: 90px;
+  }
 }
 /* 2섹션 Follow 텍스트 스타일 */
 .subtitle {
@@ -245,20 +263,23 @@ body {
   @media screen and (max-height: 700px)  {
     font-size: 8vh;
   }
+  @media screen and (max-width: 520px)  {
+    font-size: 8vh;
+  }
 }
 #sub1 {
   margin-top: 18vh;
   @media screen and (max-height: 1080px) {
     margin-top: 16vh;
   }
-  @media screen and (max-height: 750px) {
+  @media screen and (max-height: 800px) {
     margin-top: 10vh;
   }
 }
 #sub3 {
   margin-bottom: 28vh;
   @media screen and (max-height: 1080px) {
-    margin-bottom: 26vh;
+    margin-bottom: 20vh;
   }
   @media screen and (max-height: 900px) {
     margin-bottom: 14vh;
@@ -299,22 +320,26 @@ font-family: 'NanumSquare', sans-serif;
   font-weight: 700;
   color: #2353D9;
 
-  @media screen and (max-width: 900px) {
+  @media screen and (max-width: 590px) {
+    font-size: 3vw;
   }
 }
 .topic-number {
   color: #606060;
   font-weight: 800;
-  font-size: 6em;
+  font-size: 4em;
 
-  @media screen and (max-width: 1800px) {
-    font-size: 4vw;
+  @media screen and (max-width : 430px) {
+    font-size: 1em;
   }
-  @media screen and (max-width: 500px) {
-    font-size: 1.5em;
+  @media screen and (430px < width <= 750px) {
+    font-size: 6vw;
   }
-  @media screen and (max-height: 1080px) {
-    font-size: 3em;
+  @media screen and (750px <= width <= 1280px) {
+    font-size: 3.2em;
+  }
+  @media screen and (1280px <= width <= 1800px) {
+    font-size: 3vw;
   }
 }
 
@@ -322,7 +347,7 @@ font-family: 'NanumSquare', sans-serif;
   box-sizing: border-box;
   position: relative;
   display: flex;
-  height: 150px;
+  height: 140px;
   padding: 0;
   margin: auto;
   justify-content: center;
@@ -337,12 +362,6 @@ font-family: 'NanumSquare', sans-serif;
   user-select: none;
   max-width: 100vw;
   margin: 0 10%;
-  mask-image: linear-gradient(
-    var(--mask-direction, to right),
-    hsl(0 0% 0% / 0),
-    hsl(0 0% 0% / 1) 20%,
-    hsl(0 0% 0% / 1) 80%,
-    hsl(0 0% 0% / 0));
 }
 
 .marquee {
@@ -415,15 +434,30 @@ font-family: 'NanumSquare', sans-serif;
 }
 .searchwraparea {
   display: flex;
-  padding: 0 12vw 0 12vw;
+  margin: 0 12vw 0 12vw;
   align-items: center;
 }
 .searchheerim-container {
-  background: radial-gradient(#50AFFB 23%, transparent 67% 100%) 385px -24px, radial-gradient(#BF75F6 0, transparent 60% 100%) -940px 290px, radial-gradient(#6B4FFD 10%, transparent 60% 100%) -420px 120px,  #215BDB;
+  background: 
+  radial-gradient(at 92% 0%, hsla(249,97%,65%,1) 0px, transparent 50%),
+  radial-gradient(at 10% 12%, hsla(224,92%,60%,1) 0px, transparent 50%),
+  radial-gradient(at 98% 1%, hsla(237,97%,79%,1) 0px, transparent 50%),
+  radial-gradient(at 28% 80%, hsla(197,61%,73%,1) 0px, transparent 50%),
+  radial-gradient(at 12% 86%, hsla(190,100%,76%,1) 0px, transparent 50%),
+  radial-gradient(at 95% 85%, hsla(306,65%,61%,1) 0px, transparent 50%),
+  radial-gradient(at 81% 2%, hsla(253,97%,67%,1) 0px, transparent 50%),
+  radial-gradient(at 22% 80%, hsla(207,84%,69%,1) 0px, transparent 50%),
+  radial-gradient(at 86% 87%, hsla(289,98%,63%,1) 0px, transparent 50%),
+  #ffffff;
+  /*radial-gradient(#50AFFB 23%, transparent 67% 100%) 385px -24px,
+   radial-gradient(#BF75F6 0, transparent 60% 100%) -940px 290px,
+    radial-gradient(#6B4FFD 10%, transparent 60% 100%) -420px 120px,
+      #215BDB;*/
   background-repeat: repeat-y;
   width: 100vw;
-  padding: 33vh 0;
+  height: 100vh;
   margin-top: 5vh;
+  /*padding: 33vh 0;
   @media only screen and (max-height: 800px) {
   padding: 27vh 0;
   }
@@ -433,16 +467,19 @@ font-family: 'NanumSquare', sans-serif;
   @media only screen and (max-height: 600px) {
   padding: 20vh 0;
   }
+  */
 }
-.pg5-linear {
+.pg4-linear {
   position: absolute;
-  opacity: 0.4;
-  z-index: -1;
+  left: 0;
+  opacity: 0.12;
+  z-index: 0;
   width: 100%;
   height: 100vh;
-  background: linear-gradient( #3E6EF7, #50AFFB, #104DC8, #BF75F6, #D2E5E9 );
+  background: linear-gradient(90deg,  #104DC8, #BF75F6, #753ffd);
   animation: gradient 15s infinite;
   background-size: 400% 400%;
+  margin-top: 5vh;
 }
 @keyframes textgradient {
 0% {
@@ -458,17 +495,16 @@ font-family: 'NanumSquare', sans-serif;
 
 .pg4-web {
   position: absolute;
-  top: -200px;
+  top: 20px;
   margin-left: 8vw;
   padding: 0;
 }
 .pg4-ph {
   z-index: 1;
-  margin-top: 13vh;
   margin-left: 2vw;
   padding: 0;
   position: absolute;
-  top: -200px;
+  top: 200px;
 }
 .search-title {
   font-family: 'NanumSquare', sans-serif;
@@ -489,11 +525,15 @@ font-family: 'NanumSquare', sans-serif;
   }
 }
 .searchsub {
+  word-break: keep-all;
   font-family: 'NanumSquare', sans-serif;
   font-weight: 400;
   margin: 0;
   font-size: 2em;
   color: white;
+  @media screen and (max-width: 450px) {
+    font-size: 6vw;
+  }
 }
 /* 검색 입력란 스타일링 */
 .searchheerim-input {
@@ -542,7 +582,7 @@ font-family: 'NanumSquare', sans-serif;
 }
 .m-bottom {
   position: relative;
-  margin-top: 6vh;
+  margin: 2.5em 0 1em 2vw;
 }
 .bottom {
   background-color: white;
@@ -564,6 +604,12 @@ font-family: 'NanumSquare', sans-serif;
     font-size: 3vw;
   }
 }
+#footer {
+  @media screen and (max-width: 880px) {
+    display: flex;
+    flex-direction: column;
+  }
+}
 /* hq스타일 */
 .hq {
   display: flex;
@@ -578,13 +624,18 @@ font-family: 'NanumSquare', sans-serif;
   font-size: 1.15em;
   color: gray;
   
-  @media screen and (max-width: 550px) {
-    font-size: 3.25vw;
+  @media screen and (max-width: 360px) {
+    font-size: 4.2vw;
   }
 }
 /*  hq1 스타일 수정 */
 .hq1 {
+  white-space: nowrap;
   margin-bottom: 0.5em;
+  @media screen and (max-width: 880px) {
+    margin-left: 1.5vw;
+    margin-bottom: 1.5em;
+  }
 }
 .hq1 img {
   width: 0.75em;
@@ -592,16 +643,21 @@ font-family: 'NanumSquare', sans-serif;
 }
 /*  hq2 스타일 수정 */
 .hq2 {
-  margin-bottom: 0.5em;
-  margin-left: 2em;
+  margin: 0 0 0.5em 0.5em;
+  @media screen and (max-width: 880px) {
+    margin-bottom: 1.5em;
+  }
+  @media screen and (max-width: 570px) {
+    margin-bottom: 0px;
+  }
 }
 /*  hq3 스타일 수정 */
 .hq3 {
+  white-space: nowrap;
   margin-bottom: 0.5em;
   margin-left: 1.5vw;
-
-  @media screen and (max-width: 1280px) {
-    margin-left: 0;
+  @media screen and (max-width: 880px) {
+    margin-bottom: 1.5em;
   }
 }
 .hq3 img {
@@ -610,8 +666,12 @@ font-family: 'NanumSquare', sans-serif;
 }
 /*  hq4 스타일 수정 */
 .hq4 {
+  word-break: break-all;
   margin-bottom: 0.5em;
-  margin-left: 2em;
+  margin-left: 0.5em;
+  @media screen and (max-width: 880px) {
+    margin-bottom: 1.5em;
+  }
 }
 
 /* accordion 코드 */

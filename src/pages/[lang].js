@@ -33,7 +33,7 @@ width: 100%;
 `
 const M1 = styled.div`
 height: 100vh;
-border: 1px solid transparent;
+border: 1px transparent solid;
 `
 const M3Title = styled.div`
 margin-top: 0.5em;
@@ -64,7 +64,27 @@ div{ /* 4개 이미지 위의 장소, 건물 텍스트 디자인 관리 */
 }
 `
 const M5SearchContainer = styled.div`
-background: radial-gradient(#50AFFB 23%, transparent 67% 100%) 385px -24px, radial-gradient(#BF75F6 0, transparent 60% 100%) -940px 290px, radial-gradient(#50AFFB 40%, transparent 57% 100%) 495px -44px, radial-gradient(#50AFFB 30%, transparent 67% 100%) 122px -120px, radial-gradient(#6B4FFD 10%, transparent 60% 100%) -420px 120px, radial-gradient(#94E7FD 25%, transparent 50% 100%) 520px -250px, #215BDB;
+background: 
+radial-gradient(at 20% 75%, hsla(282,60%,70%,1) 0px, transparent 10%),
+radial-gradient(at 0% 0%, hsla(249,97%,65%,1) 0px, transparent 50%),
+radial-gradient(at 55% 0%, hsla(224,92%,60%,1) 0px, transparent 50%),
+radial-gradient(at 66% 13%, hsla(237,97%,79%,1) 0px, transparent 20%),
+radial-gradient(at 92% 36%, hsla(197,61%,73%,1) 0px, transparent 50%),
+radial-gradient(at 95% 94%, hsla(190,100%,76%,1) 0px, transparent 50%),
+radial-gradient(at 10% 93%, hsla(306,65%,61%,1) 0px, transparent 40%),
+radial-gradient(at 0% 19%, hsla(253,97%,67%,1) 0px, transparent 30%),
+radial-gradient(at 72% 68%, hsla(207,84%,69%,1) 0px, transparent 50%),
+radial-gradient(at 24% 58%, hsla(289,98%,63%,1) 0px, transparent 40%),
+  #99c5ff;
+  /*
+radial-gradient(#50AFFB 23%, transparent 67% 100%) 385px -24px,
+ radial-gradient(#BF75F6 0, transparent 60% 100%) -940px 290px,
+  radial-gradient(#50AFFB 40%, transparent 57% 100%) 495px -44px,
+   radial-gradient(#50AFFB 30%, transparent 67% 100%) 122px -120px,
+    radial-gradient(#6B4FFD 10%, transparent 60% 100%) -420px 120px,
+  radial-gradient(#94E7FD 25%, transparent 50% 100%) 520px -250px,
+  #215BDB;
+   */
 background-repeat: repeat-y;
 width: 100vw;
 padding-top: 3em;
@@ -72,8 +92,6 @@ padding-top: 3em;
 const M5Contact = styled.div`
 display: flex;
 flex-direction: column;
-margin-bottom: 2em;
-margin-left: 2vw;
 `
 const Section = styled.section`
 width: 100%;
@@ -132,6 +150,9 @@ font-family: 'NanumSquare', sans-serif;
   }
   @media screen and (max-width : 800px) {
     font-size: 2.7em;
+  }
+  @media screen and (max-width : 520px) {
+    font-size: 7vw;
   }
 `
 const Topic = ({ title, initialValue, finalValue }) => {
@@ -381,7 +402,7 @@ const Home = () => {
                                     </M5SearchContainer>
                                     <div className="m-bottom">
                                         <M5Contact>
-                                            <HQ langJson={langJson} />
+                                            <HQ/>
                                         </M5Contact>
                                     </div>
                                 </Mobile>
@@ -445,6 +466,7 @@ const Home = () => {
                                     ) : (
                                         <Section height="100vh">
                                             <div className="searchheerim-container">
+                                                <div className="pg4-linear" />
                                                 <AnimateUp >
                                                     <Search />
                                                 </AnimateUp>
