@@ -14,6 +14,7 @@ import styled from "styled-components";
 import { useInView } from 'react-intersection-observer'; // react-intersection-observer 라이브러리 사용
 import { Marquee } from "src/components/Section2Slide";
 import { CountUp } from "countup.js";
+import TestAccordion from "src/components/TestAccordion";
 const sections = ["section1", "section2", "section3", "section4"]; // 섹션 이름
 
 const AnimateUp = ({ children }) => {
@@ -470,7 +471,14 @@ const Home = () => {
                                     ) : index === 2 ? (
                                         <Section style={{ backgroundImage: `url('/image/3pageback.png')`, backgroundSize: 'cover' }}>
                                             <AnimateUp>
-                                                <Section3Title />
+                                                <Section3Title /> 
+                                                <TestAccordion
+                                                    accordionImages={accordionImages}
+                                                    activeIndex={activeIndex}
+                                                    handleItemClick={handleItemClick}
+                                                    activeTxtIndex={activeTxtIndex}
+                                                    accordionItems={accordionItems}/>
+                                               {/* 
                                                 <Accordion
                                                     accordionImages={accordionImages}
                                                     activeIndex={activeIndex}
@@ -478,6 +486,7 @@ const Home = () => {
                                                     activeTxtIndex={activeTxtIndex}
                                                     accordionItems={accordionItems}
                                                 />
+                                                */}
                                             </AnimateUp>
                                         </Section>
                                     ) : (

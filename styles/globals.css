@@ -1,5 +1,6 @@
 @import url(https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@2.0/nanumsquare.css);
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&family=Playfair+Display&display=swap');
+
 :root {
   --color-text: navy;
   --color-bg: papayawhip;
@@ -10,73 +11,102 @@
   --scroll-start: 0;
   --scroll-end: calc(-100% - var(--gap));
 }
+
 .headerinner {
-  position:relative;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  height:100%;
-  margin:0px auto;
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+  margin: 0px auto;
   padding: 0 10vw;
+
   @media screen and (max-width : 700px) {
     padding: 0 2%;
   }
 }
+
 body {
   font-size: 14px;
   font-family: 'Noto Sans KR', sans-serif;
   margin: 0 !important;
   overflow-x: hidden;
 }
+
 /* 애니메이션 up */
 .animatedup {
-  opacity: 0; /* 초기에 숨겨진 상태로 설정 */
-  transform: translateY(50px); /* 아래로 이동하는 변환 설정 */
-  transition: opacity 1s ease, transform 2s ease; 
+  opacity: 0;
+  /* 초기에 숨겨진 상태로 설정 */
+  transform: translateY(50px);
+  /* 아래로 이동하는 변환 설정 */
+  transition: opacity 1s ease, transform 2s ease;
 }
+
 .animatedup.in-view {
-  opacity: 1; /* 화면에 나타날 때 투명도를 1로 변경 */
-  transform: translateY(0); /* 화면에 나타날 때 변환 초기값으로 복원 */
+  opacity: 1;
+  /* 화면에 나타날 때 투명도를 1로 변경 */
+  transform: translateY(0);
+  /* 화면에 나타날 때 변환 초기값으로 복원 */
 }
+
 /* 애니메이션 down */
 .animateddown {
-  opacity: 0; /* 초기에 숨겨진 상태로 설정 */
-  transform: translateY(-50px); /* 아래로 이동하는 변환 설정 */
-  transition: opacity 1s ease, transform 2s ease; 
+  opacity: 0;
+  /* 초기에 숨겨진 상태로 설정 */
+  transform: translateY(-50px);
+  /* 아래로 이동하는 변환 설정 */
+  transition: opacity 1s ease, transform 2s ease;
 }
+
 .animateddown.in-view {
-  opacity: 1; /* 화면에 나타날 때 투명도를 1로 변경 */
-  transform: translateY(0); /* 화면에 나타날 때 변환 초기값으로 복원 */
+  opacity: 1;
+  /* 화면에 나타날 때 투명도를 1로 변경 */
+  transform: translateY(0);
+  /* 화면에 나타날 때 변환 초기값으로 복원 */
 }
+
 .animatedright {
-  opacity: 0; /* 초기에 숨겨진 상태로 설정 */
+  opacity: 0;
+  /* 초기에 숨겨진 상태로 설정 */
   transform: translateX(-60px);
-  transition: opacity 1s ease, transform 2s ease; 
+  transition: opacity 1s ease, transform 2s ease;
 }
+
 .animatedright.in-view {
-  opacity: 1; /* 화면에 나타날 때 투명도를 1로 변경 */
-  transform: translateX(0); /* 화면에 나타날 때 변환 초기값으로 복원 */
+  opacity: 1;
+  /* 화면에 나타날 때 투명도를 1로 변경 */
+  transform: translateX(0);
+  /* 화면에 나타날 때 변환 초기값으로 복원 */
 }
+
 /* CSS Keyframes를 사용한 글자 위아래 움직임 애니메이션 */
 @keyframes moveUpDown {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: translateY(0);
   }
+
   50% {
-    transform: translateY(-10px); /* 이 값은 글자가 움직이는 거리를 조절합니다. */
+    transform: translateY(-10px);
+    /* 이 값은 글자가 움직이는 거리를 조절합니다. */
   }
 }
+
 @keyframes gradient {
   0% {
-      background-position: 0% 0%;
+    background-position: 0% 0%;
   }
+
   50% {
-      background-position: 100% 100%;
+    background-position: 100% 100%;
   }
+
   100% {
-      background-position: 0% 0%;
+    background-position: 0% 0%;
   }
 }
+
 /* 1section sec1 1섹션 스타일 */
 
 .pg1-linear {
@@ -87,54 +117,65 @@ body {
   width: 100%;
   height: 100vh;
   z-index: -3;
-  background: linear-gradient(100deg, #D694F6, #BF75F6, #BE63EC, #9846FE, #6B4FFD, #98A9EB, #94E7FD, #50AFFB, #3E6EF7, #50AFFB, #104DC8  );
+  background: linear-gradient(100deg, #D694F6, #BF75F6, #BE63EC, #9846FE, #6B4FFD, #98A9EB, #94E7FD, #50AFFB, #3E6EF7, #50AFFB, #104DC8);
   animation: gradient 15s infinite;
   background-size: 400% 400%;
+
   @media screen and (max-width: 1280px) {
     height: 600px;
   }
+
   @media screen and (max-width: 500px) {
     height: 500px;
   }
+
   @media screen and (max-width: 400px) {
     height: 400px;
   }
-  @media screen and (max-height: 550px) and (min-width: 1280px ) {
+
+  @media screen and (max-height: 550px) and (min-width: 1280px) {
     height: 500px;
   }
 }
 
-.pg1-radial{
+.pg1-radial {
   overflow: hidden;
   position: absolute;
   top: 0;
   width: 100%;
   height: 100vh;
   z-index: -4;
-  background: radial-gradient(#BF75F6 23%, transparent 67% 100%) 385px -24px,radial-gradient(#6B4FFD 0, transparent 60% 100%) -940px 290px,radial-gradient(#94E7FD 10%, transparent 60% 100%) -120px 250px,radial-gradient(#6B4FFD 40%, transparent 57% 100%) 495px -44px,radial-gradient(#50AFFB 30%, transparent 67% 100%) 122px -120px,radial-gradient(#50AFFB 10%, transparent 60% 100%) -420px 120px,radial-gradient(#94E7FD 15%, transparent 50% 100%) -620px 0,radial-gradient(#94E7FD 25%, transparent 50% 100%) 520px -250px, #50AFFB;
+  background: radial-gradient(#BF75F6 23%, transparent 67% 100%) 385px -24px, radial-gradient(#6B4FFD 0, transparent 60% 100%) -940px 290px, radial-gradient(#94E7FD 10%, transparent 60% 100%) -120px 250px, radial-gradient(#6B4FFD 40%, transparent 57% 100%) 495px -44px, radial-gradient(#50AFFB 30%, transparent 67% 100%) 122px -120px, radial-gradient(#50AFFB 10%, transparent 60% 100%) -420px 120px, radial-gradient(#94E7FD 15%, transparent 50% 100%) -620px 0, radial-gradient(#94E7FD 25%, transparent 50% 100%) 520px -250px, #50AFFB;
   background-repeat: repeat-y;
+
   @media screen and (max-width: 1280px) {
     height: 600px;
   }
+
   @media screen and (max-width: 500px) {
     height: 500px;
   }
+
   @media screen and (max-width: 400px) {
     height: 400px;
   }
-  @media screen and (max-height: 550px) and (min-width: 1280px ) {
+
+  @media screen and (max-height: 550px) and (min-width: 1280px) {
     height: 500px;
   }
 }
+
 @keyframes move_wave {
   0% {
-      transform: translateX(0) translateZ(0)
+    transform: translateX(0) translateZ(0)
   }
+
   50% {
-      transform: translateX(-25%) translateZ(0)
+    transform: translateX(-25%) translateZ(0)
   }
+
   100% {
-      transform: translateX(-50%) translateZ(0)
+    transform: translateX(-50%) translateZ(0)
   }
 }
 
@@ -152,10 +193,12 @@ body {
   background-repeat: repeat no-repeat;
   background-position: 0 bottom;
   animation: move_wave 20s linear infinite;
+
   @media screen and (max-width: 1800px) {
     top: -150px;
+  }
 }
-}
+
 .whitebackground {
   overflow: hidden;
   background-color: white;
@@ -165,73 +208,90 @@ body {
   rotate: -25deg;
   position: absolute;
   top: -25%;
+
   @media screen and (max-width: 1800px) {
     top: 0px;
-}
+  }
 
 }
+
 .img-container {
   display: flex;
   padding: 0;
 }
+
 .pg1-web {
   position: absolute;
   margin: 0;
   padding: 0;
-  img{
+
+  img {
     height: 1280px;
   }
 }
+
 .pg1-ph {
   position: absolute;
   top: 65%;
   margin: 0;
   padding: 0;
-  img{
+
+  img {
     height: 900px;
   }
 }
+
 /* 2section sec2 2섹션 스타일  */
 .pg2-radial {
   background-size: cover;
   height: calc(100vh - 140px);
-  background:  radial-gradient(#3E6EF7 0, transparent 60% 100%) -940px 290px, radial-gradient(#94E7FD 10%, transparent 60% 100%) -120px 250px, radial-gradient(#94E7FD 15%, transparent 50% 100%) -620px 0,radial-gradient(#BF75F6 25%, transparent 50% 100%) 520px -250px;
+  background: radial-gradient(#3E6EF7 0, transparent 60% 100%) -940px 290px, radial-gradient(#94E7FD 10%, transparent 60% 100%) -120px 250px, radial-gradient(#94E7FD 15%, transparent 50% 100%) -620px 0, radial-gradient(#BF75F6 25%, transparent 50% 100%) 520px -250px;
   background-repeat: repeat-y;
+
   @media screen and (max-width: 1280px) {
     height: 600px;
   }
+
   @media screen and (max-width: 500px) {
     height: 500px;
   }
+
   @media screen and (max-width: 430px) {
     height: 400px;
   }
-  @media screen and (max-height: 550px) and (min-width: 1280px ) {
+
+  @media screen and (max-height: 550px) and (min-width: 1280px) {
     height: 600px;
   }
 }
+
 .pg2-linear {
   position: absolute;
   opacity: 0.4;
   z-index: -1;
   width: 100%;
   height: 100vh;
-  background: linear-gradient( #3E6EF7, #50AFFB, #104DC8, #BF75F6, #D2E5E9 );
+  background: linear-gradient(#3E6EF7, #50AFFB, #104DC8, #BF75F6, #D2E5E9);
   animation: gradient 15s infinite;
   background-size: 400% 400%;
+
   @media screen and (max-width: 1280px) {
     height: 600px;
   }
+
   @media screen and (max-width: 500px) {
     height: 500px;
   }
+
   @media screen and (max-width: 430px) {
     height: 400px;
   }
-  @media screen and (max-height: 550px) and (min-width: 1280px ) {
+
+  @media screen and (max-height: 550px) and (min-width: 1280px) {
     height: 600px;
   }
 }
+
 .blue {
   position: relative;
   display: table;
@@ -239,9 +299,11 @@ body {
   width: 100%;
   vertical-align: middle;
 }
+
 .blueinner {
   margin: 0;
 }
+
 .pg2-gray {
   background-color: #F9F9F9;
   width: 6000px;
@@ -249,29 +311,36 @@ body {
   rotate: -17deg;
   position: absolute;
   top: 100px;
+
   @media screen and (max-width: 1800px) {
     top: 0px;
-}
-@media screen and (max-height: 900px) {
-  rotate: -12.5deg;
-}
-@media screen and (max-width: 1280px) {
-  rotate: -12.5deg;
-}
+  }
+
+  @media screen and (max-height: 900px) {
+    rotate: -12.5deg;
+  }
+
+  @media screen and (max-width: 1280px) {
+    rotate: -12.5deg;
+  }
 }
 
 #pg2-mt1 {
   margin-top: 112px;
+
   @media screen and (max-width: 500px) {
     margin-top: 60px;
   }
 }
+
 #pg2-mt3 {
   margin-bottom: 112px;
+
   @media screen and (max-width: 500px) {
     margin-bottom: 90px;
   }
 }
+
 /* 2섹션 Follow 텍스트 스타일 */
 .subtitle {
   word-break: keep-all;
@@ -281,64 +350,79 @@ body {
   font-family: 'Nanum Square', sans-serif;
   color: white;
   margin-left: 11vw;
-  @media screen and (max-height: 1080px)and(max-width: 1400px ) {
+
+  @media screen and (max-height: 1080px)and(max-width: 1400px) {
     font-size: 4.5em;
   }
-  @media screen and (max-height: 700px)  {
+
+  @media screen and (max-height: 700px) {
     font-size: 8vh;
   }
-  @media screen and (max-width: 520px)  {
+
+  @media screen and (max-width: 520px) {
     font-size: 8vh;
   }
 }
+
 #sub1 {
   margin-top: 18vh;
+
   @media screen and (max-height: 1080px) {
     margin-top: 16vh;
   }
+
   @media screen and (max-height: 800px) {
     margin-top: 10vh;
   }
 }
+
 #sub3 {
   margin-bottom: 28vh;
+
   @media screen and (max-height: 1080px) {
     margin-bottom: 20vh;
   }
+
   @media screen and (max-height: 900px) {
     margin-bottom: 14vh;
   }
 }
+
 /* 2섹션 innovation 텍스트 스타일 */
 .description {
   font-size: 1.333vw;
   color: white;
   margin-top: 2vw;
   margin-left: 11vw;
-  @media screen and (height <= 630px) {
+
+  @media screen and (height <=630px) {
     margin-top: 0.5em;
   }
 }
+
 .topics-container {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-left: 1em;
-    @media screen and (min-width: 1000px) {
-      margin: 0 12vw;
-    }
+
+  @media screen and (min-width: 1000px) {
+    margin: 0 12vw;
+  }
 }
+
 /* 2섹션 historyof 글 텍스트 스타일 */
 .topic-title,
 .topic-number {
   text-align: center;
-font-family: 'NanumSquare', sans-serif;
+  font-family: 'NanumSquare', sans-serif;
   margin: 0 3vh 0 0;
 
   @media screen and (max-width: 800px) {
     margin-right: 0.2em;
   }
 }
+
 .topic-title {
   font-size: 1.5em;
   font-weight: 700;
@@ -348,6 +432,7 @@ font-family: 'NanumSquare', sans-serif;
     font-size: 3vw;
   }
 }
+
 .topic-number {
   color: #606060;
   font-weight: 800;
@@ -356,13 +441,16 @@ font-family: 'NanumSquare', sans-serif;
   @media screen and (max-width : 430px) {
     font-size: 1em;
   }
-  @media screen and (430px < width <= 750px) {
+
+  @media screen and (430px < width <=750px) {
     font-size: 6vw;
   }
-  @media screen and (750px <= width <= 1280px) {
+
+  @media screen and (750px <=width <=1280px) {
     font-size: 3.2em;
   }
-  @media screen and (1280px <= width <= 1800px) {
+
+  @media screen and (1280px <=width <=1800px) {
     font-size: 3vw;
   }
 }
@@ -376,14 +464,14 @@ font-family: 'NanumSquare', sans-serif;
   margin: auto;
   justify-content: center;
   background-color: white;
-    mask-image: linear-gradient(
-    var(--mask-direction, to right),
-    hsl(0 0% 0% / 0),
-    hsl(0 0% 0% / 1) 70%,
-    hsl(0 0% 0% / 0));
+  mask-image: linear-gradient(var(--mask-direction, to right),
+      hsl(0 0% 0% / 0),
+      hsl(0 0% 0% / 1) 70%,
+      hsl(0 0% 0% / 0));
 }
 
-#logoMarqueeSection { /* id로 받음 */
+#logoMarqueeSection {
+  /* id로 받음 */
   box-sizing: border-box;
   position: relative;
   display: flex;
@@ -402,37 +490,44 @@ font-family: 'NanumSquare', sans-serif;
   align-items: center;
   justify-content: space-around;
   animation: marquee 40s linear infinite;
-  a{
+
+  a {
     cursor: pointer;
   }
 }
+
 .marquee a {
   display: grid;
   aspect-ratio: 16/9;
   place-items: center;
-    width: 182px;
-    height: 110px;
+  width: 182px;
+  height: 110px;
 }
+
 .marquee a img {
   width: 250px;
   height: 50px;
+
   @media only screen and (max-width: 1250px) {
     height: 4.5em;
   }
 }
-@keyframes marquee {
-    0% {
-        transform: translateX(0%);
-    }
 
-    100% {
-        transform: translateX(-100%);
-    }
+@keyframes marquee {
+  0% {
+    transform: translateX(0%);
+  }
+
+  100% {
+    transform: translateX(-100%);
+  }
 }
+
 @keyframes marquee-hover {
   0% {
     transform: translate3d(0%, 0, 0);
   }
+
   100% {
     transform: translate3d(-100%, 0, 0);
   }
@@ -444,12 +539,14 @@ font-family: 'NanumSquare', sans-serif;
   height: 15vh;
   margin-left: 10vw;
 }
+
 /*3섹션 타이틀 스타일*/
 .title {
   font-weight: bold;
   font-size: 3.5vw;
   font-family: 'Playfair Display', serif;
 }
+
 /* 5section */
 .sec5title {
   font-size: 2.5em;
@@ -458,26 +555,29 @@ font-family: 'NanumSquare', sans-serif;
   color: gray;
   letter-spacing: -0.07em;
 }
+
 .bold-text {
   font-weight: bold;
 }
+
 .searchwraparea {
   display: flex;
   margin: 0 12vw 0 12vw;
   align-items: center;
 }
+
 .searchheerim-container {
-  background: 
-  radial-gradient(at 92% 0%, hsla(249,97%,65%,1) 0px, transparent 50%),
-  radial-gradient(at 10% 12%, hsla(224,92%,60%,1) 0px, transparent 50%),
-  radial-gradient(at 98% 1%, hsla(237,97%,79%,1) 0px, transparent 50%),
-  radial-gradient(at 28% 80%, hsla(197,61%,73%,1) 0px, transparent 50%),
-  radial-gradient(at 12% 86%, hsla(190,100%,76%,1) 0px, transparent 50%),
-  radial-gradient(at 95% 85%, hsla(306,65%,61%,1) 0px, transparent 50%),
-  radial-gradient(at 81% 2%, hsla(253,97%,67%,1) 0px, transparent 50%),
-  radial-gradient(at 22% 80%, hsla(207,84%,69%,1) 0px, transparent 50%),
-  radial-gradient(at 86% 87%, hsla(289,98%,63%,1) 0px, transparent 50%),
-  #ffffff;
+  background:
+    radial-gradient(at 92% 0%, hsla(249, 97%, 65%, 1) 0px, transparent 50%),
+    radial-gradient(at 10% 12%, hsla(224, 92%, 60%, 1) 0px, transparent 50%),
+    radial-gradient(at 98% 1%, hsla(237, 97%, 79%, 1) 0px, transparent 50%),
+    radial-gradient(at 28% 80%, hsla(197, 61%, 73%, 1) 0px, transparent 50%),
+    radial-gradient(at 12% 86%, hsla(190, 100%, 76%, 1) 0px, transparent 50%),
+    radial-gradient(at 95% 85%, hsla(306, 65%, 61%, 1) 0px, transparent 50%),
+    radial-gradient(at 81% 2%, hsla(253, 97%, 67%, 1) 0px, transparent 50%),
+    radial-gradient(at 22% 80%, hsla(207, 84%, 69%, 1) 0px, transparent 50%),
+    radial-gradient(at 86% 87%, hsla(289, 98%, 63%, 1) 0px, transparent 50%),
+    #ffffff;
   /*radial-gradient(#50AFFB 23%, transparent 67% 100%) 385px -24px,
    radial-gradient(#BF75F6 0, transparent 60% 100%) -940px 290px,
     radial-gradient(#6B4FFD 10%, transparent 60% 100%) -420px 120px,
@@ -498,6 +598,7 @@ font-family: 'NanumSquare', sans-serif;
   }
   */
 }
+
 .pg4-linear {
   position: absolute;
   left: 0;
@@ -505,21 +606,24 @@ font-family: 'NanumSquare', sans-serif;
   z-index: 0;
   width: 100%;
   height: 100vh;
-  background: linear-gradient(90deg,  #104DC8, #BF75F6, #753ffd);
+  background: linear-gradient(90deg, #104DC8, #BF75F6, #753ffd);
   animation: gradient 15s infinite;
   background-size: 400% 400%;
   margin-top: 5vh;
 }
+
 @keyframes textgradient {
-0% {
-  background-position-x: 0%;
-}
-50% {
-  background-position-x: 100%;
-}
-100%{
-  background-position-x: 0%;
-}
+  0% {
+    background-position-x: 0%;
+  }
+
+  50% {
+    background-position-x: 100%;
+  }
+
+  100% {
+    background-position-x: 0%;
+  }
 }
 
 .pg4-web {
@@ -528,6 +632,7 @@ font-family: 'NanumSquare', sans-serif;
   margin-left: 8vw;
   padding: 0;
 }
+
 .pg4-ph {
   z-index: 1;
   margin-left: 2vw;
@@ -535,6 +640,7 @@ font-family: 'NanumSquare', sans-serif;
   position: absolute;
   top: 200px;
 }
+
 .search-title {
   font-family: 'NanumSquare', sans-serif;
   box-sizing: border-box;
@@ -549,10 +655,12 @@ font-family: 'NanumSquare', sans-serif;
   @media screen and (max-width: 1280px) {
     font-size: 3.2em;
   }
+
   @media screen and (max-width: 900px) {
     font-size: 10vw;
   }
 }
+
 .searchsub {
   word-break: keep-all;
   font-family: 'NanumSquare', sans-serif;
@@ -560,27 +668,35 @@ font-family: 'NanumSquare', sans-serif;
   margin: 0;
   font-size: 2em;
   color: white;
+
   @media screen and (max-width: 450px) {
     font-size: 6vw;
   }
 }
+
 /* 검색 입력란 스타일링 */
 .searchheerim-input {
-  background: transparent;/* 투명 배경 추가 */
+  background: transparent;
+  /* 투명 배경 추가 */
   border: none;
   color: white;
-  width: 75%;/* 검색창의 가로 너비 조정 */
-  font-size: 1.2em;/* 폰트 크기 키우기 */
+  width: 75%;
+  /* 검색창의 가로 너비 조정 */
+  font-size: 1.2em;
+  /* 폰트 크기 키우기 */
   padding-left: 1.2em;
 
   @media screen and (max-width: 1250px) {
-    width: 50vw; /* 검색창의 가로 너비 조정 */
+    width: 50vw;
+    /* 검색창의 가로 너비 조정 */
     margin-left: 15vw;
   }
 }
+
 .searchheerim-input::placeholder {
   color: white;
 }
+
 .searchtag-keywords {
   padding: 0 0 8vh 0;
 
@@ -589,88 +705,110 @@ font-family: 'NanumSquare', sans-serif;
     padding: 1vw 0 2vw 14.5vw;
   }
 }
+
 /*검색태그 키워드 버튼*/
 .searchtag-button {
-  border: none;  /* 외곽선 없애기 */
+  border: none;
+  /* 외곽선 없애기 */
   font-size: 1.2em;
   letter-spacing: 0.06em;
   background-color: transparent;
-  border-radius: 50px;  /* 50px 반지름으로 둥글게 */
-  margin: 0 1.5em 0 0;  /* 버튼 간격 설정 */
+  border-radius: 50px;
+  /* 50px 반지름으로 둥글게 */
+  margin: 0 1.5em 0 0;
+  /* 버튼 간격 설정 */
   padding: 0;
 }
+
 .searchtag-button a {
   color: #CACACA;
   text-decoration: none;
-  transition: color 0.3s;  /* 글자색 전환 애니메이션 */
+  transition: color 0.3s;
+  /* 글자색 전환 애니메이션 */
 
   /* 호버 상태일 때 글자색 변경 */
   &:hover {
     color: white;
   }
 }
+
 .m-bottom {
   position: relative;
   margin: 2.5em 0 1.8em 2vw;
 }
+
 .bottom {
   background-color: white;
-  padding: 38px 0 ;
+  padding: 38px 0;
   width: 100%;
   position: absolute;
   bottom: 0;
 }
+
 .seoulhqsupport {
   margin: 0 12vw;
+
   @media screen and (max-width: 1250px) {
     margin-bottom: 2em;
     margin-left: 7em;
   }
+
   @media screen and (max-width: 500px) {
     margin-left: 2vw;
     font-size: 3vw;
   }
 }
+
 /* hq스타일 */
 #footer {
   display: flex;
   justify-content: space-between;
+
   @media screen and (max-width: 900px) {
     flex-direction: column;
   }
 }
+
 .hq {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+
   @media screen and (max-width: 900px) {
     flex-direction: column;
   }
 }
+
 .sup {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   margin-right: 20vw;
   margin-left: 10vw;
+
   @media screen and (max-width: 1280px) {
     margin-left: 0;
   }
 }
+
 /* address 스타일 */
 .address {
   font-size: 1.15em;
   color: gray;
+
   @media screen and (max-width: 340px) {
     font-size: 4.8vw;
   }
 }
+
 .img-content {
   width: 90px;
+
   @media screen and (max-width: 340px) {
     width: 80px;
   }
 }
+
 /*  hq1 스타일 수정 */
 .hq1 {
   white-space: nowrap;
@@ -678,47 +816,56 @@ font-family: 'NanumSquare', sans-serif;
   display: flex;
   flex-direction: row;
   margin-bottom: 0.5em;
+
   img {
     width: 0.75em;
     height: 1.1em;
   }
+
   @media screen and (max-width: 610px) {
     white-space: normal;
   }
 }
+
 /*  hq2 스타일 수정 */
 .hq2 {
   white-space: nowrap;
   align-items: center;
   display: flex;
   margin-bottom: 0.5em;
+
   img {
     width: 0.75em;
     height: 1.1em;
   }
 }
+
 /*  hq3 스타일 수정 */
 .hq3 {
   align-items: center;
   display: flex;
   white-space: nowrap;
   margin-bottom: 0.5em;
+
   img {
     width: 1em;
     height: 0.75em;
   }
 }
+
 /*  hq4 스타일 수정 */
 .hq4 {
   align-items: center;
   display: flex;
   word-break: break-all;
   margin-bottom: 0.5em;
+
   img {
     width: 1em;
     height: 1em;
   }
 }
+
 /* accordion 코드 */
 .main-project-list-container {
   position: relative;
@@ -727,7 +874,15 @@ font-family: 'NanumSquare', sans-serif;
   left: 0;
   right: 0;
   padding-top: 85vh;
+  :hover {
+    .accordion-off-tit-box {
+      opacity: 0;
+      transform: translate(0px, 100%);
+      transition: all 0.25s ease-in-out;
+    }
+  }
 }
+
 .accordion-wrapper {
   display: block;
   overflow: hidden;
@@ -741,6 +896,7 @@ font-family: 'NanumSquare', sans-serif;
   display: block;
   height: 100%;
 }
+
 .accordion-bg-list {
   position: relative;
   list-style: none;
@@ -748,6 +904,7 @@ font-family: 'NanumSquare', sans-serif;
   margin: 0;
   padding: 0;
 }
+
 .accordion-bg-item {
   position: absolute;
   top: 0px;
@@ -789,13 +946,6 @@ font-family: 'NanumSquare', sans-serif;
   right: 0px;
   z-index: 1;
 }
-.accordion-wrapper :hover{
-  .accordion-off-tit-box {
-    opacity: 0;
-    transform: translate(0px, 100%);
-    transition: all 0.25s ease-in-out;
-  }
-}
 .accordion-over-list {
   list-style: none;
   position: absolute;
@@ -806,28 +956,13 @@ font-family: 'NanumSquare', sans-serif;
   padding: 0;
   margin: 0;
 }
+
 .accordion-over-item {
   background: none !important;
   float: left;
   position: relative;
   width: 25%;
   height: 100%;
-}
-.accordion-over-item:before {
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  content: "";
-}
-.accordion-inner-con {
-  position: relative;
-  display: block;
-  height: 100%;
-  a{
-    text-decoration: none;
-  }
 }
 .accordion-off-tit-box {
   visibility: inherit;
@@ -844,6 +979,8 @@ font-family: 'NanumSquare', sans-serif;
   margin-bottom: 0.2em;
 }
 .project-tit {
+  pointer-events: none;
+  word-break: keep-all;
   display: block;
   font-size: 1.8em;
   letter-spacing: -0.3px;
@@ -851,6 +988,7 @@ font-family: 'NanumSquare', sans-serif;
   margin: 0;
   padding: 0;
 }
+
 .accordion-detail-con {
   position: absolute;
   bottom: 0px;
@@ -867,6 +1005,7 @@ font-family: 'NanumSquare', sans-serif;
   padding: 0 2.5em;
   box-sizing: border-box;
 }
+
 .accordion-detail-txt {
   color: #252525;
 }
@@ -874,37 +1013,105 @@ font-family: 'NanumSquare', sans-serif;
 
 
 .color {
-  background: 
-#0067e6,
- #e984fb,
- #8693e9,
- #cb81f8,
- #8edceb,
- #66d6f4,
- #6445ed,
- #7a62fd,
- #8a96ef,
- #5199ec,
- #753ffd,
- #8590e5,
- #95aeef,
- #6d3ef9,
- #4b3ef9,
- #a794f4,
- #c254ed,
- #9758fe
- ;
+  background:
+    #0067e6,
+    #e984fb,
+    #8693e9,
+    #cb81f8,
+    #8edceb,
+    #66d6f4,
+    #6445ed,
+    #7a62fd,
+    #8a96ef,
+    #5199ec,
+    #753ffd,
+    #8590e5,
+    #95aeef,
+    #6d3ef9,
+    #4b3ef9,
+    #a794f4,
+    #c254ed,
+    #9758fe;
 }
 
-#holder {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  z-index: 10;
+
+/* TestAccordion css style 코드 */
+.main-container {
+  position: relative;
+  display: block;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 85vh;
+  :hover {
+    .accordion-off-tit-box {
+      opacity: 0;
+      transform: translate(0px, 100%);
+      transition: all 0.25s ease-in-out;
+    }
+  }
+}
+.accordionwrapper {
+  display: block;
   position: absolute;
   top: 0;
   left: 0;
+  right: 0;
+  height: 90%;
+
+}
+.accordionlistcontainer { /* div 태그 */
+  display: flex;
+  height: 100%;
+}
+.outeraccordion :hover {
+  z-index: 1;
+  scale: 1.02;
+  box-shadow: 0 0 40px black;
+  border: 5px solid white;
+  transition: all 0.2s ease;
+  
+}
+.accordion-bg-item .outeraccordion {
+  position: absolute;
+  top: 0px;
+  left: 0px;
   width: 100%;
   height: 100%;
-  overflow: hidden;
+  z-index: 1;
+  transition: all 0.2s ease;
+}
+.accordion-bg-item .inneraccordion {
+  display: block;
+  position: relative;
+  width: 100vw;
+  height: 100%;
+  margin: 0;
+  background-size: cover !important;
+}
+.accordionovercontainer {
+  display: block;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  bottom: 0px;
+  right: 0px;
+}
+
+.accordionoverlist {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  bottom: 0px;
+  right: 0px;
+  padding: 0;
+  margin: 0;
+}
+.accordionoveritem {
+  list-style: none;
+  background: none !important;
+  float: left;
+  position: relative;
+  width: 25%;
+  height: 100%;
 }
