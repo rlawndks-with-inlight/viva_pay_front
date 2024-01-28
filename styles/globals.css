@@ -79,20 +79,6 @@ body {
   /* 화면에 나타날 때 변환 초기값으로 복원 */
 }
 
-/* CSS Keyframes를 사용한 글자 위아래 움직임 애니메이션 */
-@keyframes moveUpDown {
-
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-
-  50% {
-    transform: translateY(-10px);
-    /* 이 값은 글자가 움직이는 거리를 조절합니다. */
-  }
-}
-
 @keyframes gradient {
   0% {
     background-position: 0% 0%;
@@ -290,18 +276,6 @@ body {
   @media screen and (max-height: 550px) and (min-width: 1280px) {
     height: 600px;
   }
-}
-
-.blue {
-  position: relative;
-  display: table;
-  height: 100%;
-  width: 100%;
-  vertical-align: middle;
-}
-
-.blueinner {
-  margin: 0;
 }
 
 .pg2-gray {
@@ -523,6 +497,7 @@ body {
   }
 }
 
+/*
 @keyframes marquee-hover {
   0% {
     transform: translate3d(0%, 0, 0);
@@ -532,7 +507,7 @@ body {
     transform: translate3d(-100%, 0, 0);
   }
 }
-
+*/
 /* 3section sec3 */
 .sec3txt {
   display: table;
@@ -547,19 +522,7 @@ body {
   font-family: 'Playfair Display', serif;
 }
 
-/* 5section */
-.sec5title {
-  font-size: 2.5em;
-  margin-bottom: 3.5vh;
-  text-align: center;
-  color: gray;
-  letter-spacing: -0.07em;
-}
-
-.bold-text {
-  font-weight: bold;
-}
-
+/* 4section */
 .searchwraparea {
   display: flex;
   margin: 0 12vw 0 12vw;
@@ -586,17 +549,6 @@ body {
   width: 100vw;
   height: 100vh;
   margin-top: 5vh;
-  /*padding: 33vh 0;
-  @media only screen and (max-height: 800px) {
-  padding: 27vh 0;
-  }
-  @media only screen and (max-height: 650px) {
-  padding: 25vh 0;
-  }
-  @media only screen and (max-height: 600px) {
-  padding: 20vh 0;
-  }
-  */
 }
 
 .pg4-linear {
@@ -671,64 +623,6 @@ body {
 
   @media screen and (max-width: 450px) {
     font-size: 6vw;
-  }
-}
-
-/* 검색 입력란 스타일링 */
-.searchheerim-input {
-  background: transparent;
-  /* 투명 배경 추가 */
-  border: none;
-  color: white;
-  width: 75%;
-  /* 검색창의 가로 너비 조정 */
-  font-size: 1.2em;
-  /* 폰트 크기 키우기 */
-  padding-left: 1.2em;
-
-  @media screen and (max-width: 1250px) {
-    width: 50vw;
-    /* 검색창의 가로 너비 조정 */
-    margin-left: 15vw;
-  }
-}
-
-.searchheerim-input::placeholder {
-  color: white;
-}
-
-.searchtag-keywords {
-  padding: 0 0 8vh 0;
-
-  @media screen and (max-width: 1250px) {
-    font-size: 1.5vw;
-    padding: 1vw 0 2vw 14.5vw;
-  }
-}
-
-/*검색태그 키워드 버튼*/
-.searchtag-button {
-  border: none;
-  /* 외곽선 없애기 */
-  font-size: 1.2em;
-  letter-spacing: 0.06em;
-  background-color: transparent;
-  border-radius: 50px;
-  /* 50px 반지름으로 둥글게 */
-  margin: 0 1.5em 0 0;
-  /* 버튼 간격 설정 */
-  padding: 0;
-}
-
-.searchtag-button a {
-  color: #CACACA;
-  text-decoration: none;
-  transition: color 0.3s;
-  /* 글자색 전환 애니메이션 */
-
-  /* 호버 상태일 때 글자색 변경 */
-  &:hover {
-    color: white;
   }
 }
 
@@ -867,43 +761,6 @@ body {
 }
 
 /* accordion 코드 */
-.main-project-list-container {
-  position: relative;
-  display: block;
-  top: 0;
-  left: 0;
-  right: 0;
-  padding-top: 85vh;
-  :hover {
-    .accordion-off-tit-box {
-      opacity: 0;
-      transform: translate(0px, 100%);
-      transition: all 0.25s ease-in-out;
-    }
-  }
-}
-
-.accordion-wrapper {
-  display: block;
-  overflow: hidden;
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 90%;
-}
-.accordion-bg-list-container {
-  display: block;
-  height: 100%;
-}
-
-.accordion-bg-list {
-  position: relative;
-  list-style: none;
-  height: 100%;
-  margin: 0;
-  padding: 0;
-}
 
 .accordion-bg-item {
   position: absolute;
@@ -912,58 +769,8 @@ body {
   height: 100%;
   overflow: hidden;
 }
-.accordion-bg-list .accordion-bg-item .accordion-inner {
-  display: block;
-  position: relative;
-  width: 100vw;
-  height: 100%;
-  margin: 0;
-  background-size: cover !important;
-}
-.accordion-bg-list .accordion-bg-item .accordion-outer {
-  position: absolute;
-  top: 0px;
-  left: 0px;
-  width: 100%;
-  height: 100%;
-  z-index: 1;
-  transition: all 0.2s ease;
-}
-.accordion-bg-list .accordion-bg-item.active .accordion-outer {
-  /*opacity: 0;*/
-  z-index: 0;
-  transform: scale(1.05);
-}
-
 
 /* 일단 만들어둔 이미지 오버레이 위 텍스트 */
-.accordion-over-container {
-  display: block;
-  position: absolute;
-  top: 0px;
-  left: 0px;
-  bottom: 0px;
-  right: 0px;
-  z-index: 1;
-}
-.accordion-over-list {
-  list-style: none;
-  position: absolute;
-  top: 0px;
-  left: 0px;
-  bottom: 0px;
-  right: 0px;
-  padding: 0;
-  margin: 0;
-}
-
-.accordion-over-item {
-  background: none !important;
-  float: left;
-  position: relative;
-  width: 25%;
-  height: 100%;
-}
 .accordion-off-tit-box {
   visibility: inherit;
   position: absolute;
@@ -972,12 +779,7 @@ body {
   right: 2.5em;
   color: #fff;
 }
-.project-category {
-  display: block;
-  font-size: 1em;
-  letter-spacing: -0.15px;
-  margin-bottom: 0.2em;
-}
+
 .project-tit {
   pointer-events: none;
   word-break: keep-all;
@@ -1010,32 +812,6 @@ body {
   color: #252525;
 }
 
-
-
-.color {
-  background:
-    #0067e6,
-    #e984fb,
-    #8693e9,
-    #cb81f8,
-    #8edceb,
-    #66d6f4,
-    #6445ed,
-    #7a62fd,
-    #8a96ef,
-    #5199ec,
-    #753ffd,
-    #8590e5,
-    #95aeef,
-    #6d3ef9,
-    #4b3ef9,
-    #a794f4,
-    #c254ed,
-    #9758fe;
-}
-
-
-/* TestAccordion css style 코드 */
 .main-container {
   position: relative;
   display: block;
@@ -1043,6 +819,7 @@ body {
   left: 0;
   right: 0;
   height: 85vh;
+
   :hover {
     .accordion-off-tit-box {
       opacity: 0;
@@ -1051,6 +828,7 @@ body {
     }
   }
 }
+
 .accordionwrapper {
   display: block;
   position: absolute;
@@ -1060,18 +838,22 @@ body {
   height: 90%;
 
 }
-.accordionlistcontainer { /* div 태그 */
+
+.accordionlistcontainer {
+  /* div 태그 */
   display: flex;
   height: 100%;
 }
+
 .outeraccordion :hover {
   z-index: 1;
   scale: 1.02;
   box-shadow: 0 0 40px black;
   border: 5px solid white;
   transition: all 0.2s ease;
-  
+
 }
+
 .accordion-bg-item .outeraccordion {
   position: absolute;
   top: 0px;
@@ -1081,6 +863,7 @@ body {
   z-index: 1;
   transition: all 0.2s ease;
 }
+
 .accordion-bg-item .inneraccordion {
   display: block;
   position: relative;
@@ -1089,6 +872,7 @@ body {
   margin: 0;
   background-size: cover !important;
 }
+
 .accordionovercontainer {
   display: block;
   position: absolute;
@@ -1107,6 +891,7 @@ body {
   padding: 0;
   margin: 0;
 }
+
 .accordionoveritem {
   list-style: none;
   background: none !important;

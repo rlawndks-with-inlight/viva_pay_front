@@ -3,10 +3,10 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React, { useState, useEffect } from 'react';
 import styled, { css, keyframes } from 'styled-components';
-import { MobileDropdown } from './HeaderMobile/MobileDropDown';
-import { MobileIconContainer } from './HeaderMobile/MobileIcon';
-import { MenuButton } from './HeaderWeb/MainContents';
-import { MagneticIcon } from './HeaderWeb/MagneticIconContainer';
+import { MobileDropdown } from './MobileHeader/MDropDown';
+import { MobileIconContainer } from './MobileHeader/MIcon';
+import { MenuButton } from './WebHeader/MainContents';
+import { MagneticIcon } from './WebHeader/MagneticIconContainer';
 
 const slideInLeft = keyframes`
 0%{

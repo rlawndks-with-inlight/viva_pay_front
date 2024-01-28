@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const TestAccordion = ({
+const Accordion = ({
     accordionImages,
     activeIndex,
     handleItemClick,
@@ -49,7 +49,7 @@ const TestAccordion = ({
                                 <div className="inneraccordion" style={{
                                     zIndex: activeIndex === index ? '1' : '0',
                                     background: `url(${image.innerBackground}) no-repeat 50% 50%`,
-                                    transition: activeIndex === index ? 'transform 5s ease-in-out forward' : '',
+                                    transition: activeIndex === index ? 'transform 5s ease-in-out ' : '',
                                     transform: activeIndex === index ? 'scale(1.1)' : '',
                                 }} />
                             </div>
@@ -90,4 +90,4 @@ const TestAccordion = ({
     );
 };
 
-export default TestAccordion;
+export default Accordion;

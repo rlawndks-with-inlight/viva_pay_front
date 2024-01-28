@@ -2,19 +2,16 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useRouter } from "next/router";
 import UserLayout from 'src/layouts/UserLayout';
-import langJson from 'src/data/lang.json';
-import { Section3Title } from "src/components/Section3";
-import Accordion from "src/components/Section3Accordion";
-import { Search, Section5Title } from "src/components/Section5";
-import HQ from "src/components/HQ"; // 공통 아래는 1280이하 사이즈
-import { MSection2Content } from "src/components/Mobile/MobileSection2Content";
-import MobileAccordion from "src/components/Mobile/MobileSection3Accordion";
-import { MobileSearch } from "/src/components/Mobile/MobileSection5";
+import { Section3Title } from "src/components/Page3Title";
+import Accordion from "src/components/Page3Accordion";
+import { Search } from "src/components/Page4CommonTxt";
+import HQ from "src/components/Page4Footer"; // 공통 아래는 1280이하 사이즈
+import MobileAccordion from "src/components/Mobile/MPage3Accordion";
+import { MobileSearch } from "/src/components/Mobile/MPage4Text";
 import styled from "styled-components";
 import { useInView } from 'react-intersection-observer'; // react-intersection-observer 라이브러리 사용
-import { Marquee } from "src/components/Section2Slide";
+import { Marquee } from "src/components/Page2Slide";
 import { CountUp } from "countup.js";
-import TestAccordion from "src/components/TestAccordion";
 const sections = ["section1", "section2", "section3", "section4"]; // 섹션 이름
 
 const AnimateUp = ({ children }) => {
@@ -388,7 +385,7 @@ const Home = () => {
                                 <>
                                     <M1>
                                         <AnimateUp>
-                                            <W1Title magtop="25vh">PG사를 위한</W1Title>
+                                            <W1Title magtop="2.4em">PG사를 위한</W1Title>
                                             <W1Title>최고의 러닝메이트</W1Title>
                                             <W1RunningMate magtop="10px">*러닝메이트란?</W1RunningMate>
                                             <W1RunningMateDescription>러닝크루와 같이 케어하면서 끝까지 함께 달리는 러너를 상징합니다.</W1RunningMateDescription>
@@ -457,14 +454,12 @@ const Home = () => {
                                             <Section className="pg2-radial">
                                                 <div className="pg2-linear" />
                                                 <div className="pg2-gray" />
-                                                <div className="blueinner">
                                                     <AnimateUp>
                                                         <div className="subtitle" id="sub1">국가안보 수준의 보안성</div>
                                                         <div className="subtitle" id="sub2">전 고객 무사고 업계 최고 수준의 대응속도</div>
                                                         <div className="subtitle" id="sub3">경쟁사 대비 빠른 연산 처리 속도</div>
                                                         <TopicsContainer />
                                                     </AnimateUp>
-                                                </div>
                                             </Section>
                                             <Marquee />
                                         </section>
@@ -472,21 +467,12 @@ const Home = () => {
                                         <Section style={{ backgroundImage: `url('/image/3pageback.png')`, backgroundSize: 'cover' }}>
                                             <AnimateUp>
                                                 <Section3Title /> 
-                                                <TestAccordion
-                                                    accordionImages={accordionImages}
-                                                    activeIndex={activeIndex}
-                                                    handleItemClick={handleItemClick}
-                                                    activeTxtIndex={activeTxtIndex}
-                                                    accordionItems={accordionItems}/>
-                                               {/* 
                                                 <Accordion
                                                     accordionImages={accordionImages}
                                                     activeIndex={activeIndex}
                                                     handleItemClick={handleItemClick}
                                                     activeTxtIndex={activeTxtIndex}
-                                                    accordionItems={accordionItems}
-                                                />
-                                                */}
+                                                    accordionItems={accordionItems}/>
                                             </AnimateUp>
                                         </Section>
                                     ) : (
