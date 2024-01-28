@@ -27,13 +27,21 @@ const AnimateUp = ({ children }) => {
         </div>
     );
 };
-const Mobile = styled.div`
-padding: 0;
-width: 100%;
-`
 const M1 = styled.div`
 height: 100vh;
-border: 1px transparent solid;
+border: 0.1px transparent solid;
+  @media screen and (max-width: 1280px) {
+    height: 600px;
+  }
+  @media screen and (max-width: 500px) {
+    height: 500px;
+  }
+  @media screen and (max-width: 400px) {
+    height: 400px;
+  }
+  @media screen and (max-height: 550px) and (min-width: 1280px ) {
+    height: 500px;
+  }
 `
 const M3Title = styled.div`
 margin-top: 0.5em;
@@ -107,10 +115,11 @@ font-size: 5em;
 font-weight: 800;
 font-family: 'NanumSquare', sans-serif;
 color: black;
+word-break: keep-all;
   @media screen and (max-width : 700px) {
     font-size: 10vw;
   }
-  @media screen and (max-height : 600px) {
+  @media screen and (max-height : 600px) and (min-width: 1280px ) {
     font-size: 3.5em;
   }
 `
@@ -122,19 +131,27 @@ font-size: 2em;
 font-weight: 400;
 font-family: 'NanumSquare', sans-serif;
 color: black;
-  @media screen and (max-width : 700px) {
-    font-size: 4vw;
+word-break: keep-all;
+  @media screen and (max-width : 800px) {
+font-size: 1.5em;
+  }
+  @media screen and (max-width : 350px) {
+font-size: 1.2em;
   }
 `
 const W1RunningMateDescription = styled.span`
 display: block;
-margin-left: 14vw;
-font-size: 1.5em;
+margin-left: 14.5vw;
+font-size: 2em;
 font-weight: 300;
 font-family: 'NanumSquare', sans-serif;
 color: black;
-  @media screen and (max-width : 700px) {
-    font-size: 2.8vw;
+word-break: keep-all;
+  @media screen and (max-width : 800px) {
+font-size: 1.5em;
+  }
+  @media screen and (max-width : 350px) {
+font-size: 1.2em;
   }
 `
 const W2Title = styled.div`
@@ -367,10 +384,10 @@ const Home = () => {
                     <>
                         <div className="layout">
                             {isMobile ? (
-                                <Mobile>
+                                <>
                                     <M1>
                                         <AnimateUp>
-                                            <W1Title magtop="30vh">PG사를 위한</W1Title>
+                                            <W1Title magtop="25vh">PG사를 위한</W1Title>
                                             <W1Title>최고의 러닝메이트</W1Title>
                                             <W1RunningMate magtop="10px">*러닝메이트란?</W1RunningMate>
                                             <W1RunningMateDescription>러닝크루와 같이 케어하면서 끝까지 함께 달리는 러너를 상징합니다.</W1RunningMateDescription>
@@ -405,7 +422,7 @@ const Home = () => {
                                             <HQ/>
                                         </M5Contact>
                                     </div>
-                                </Mobile>
+                                </>
                             ) : (sections.map((section, index) => (
                                 <div
                                     key={section}

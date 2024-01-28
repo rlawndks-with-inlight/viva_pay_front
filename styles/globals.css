@@ -90,6 +90,18 @@ body {
   background: linear-gradient(100deg, #D694F6, #BF75F6, #BE63EC, #9846FE, #6B4FFD, #98A9EB, #94E7FD, #50AFFB, #3E6EF7, #50AFFB, #104DC8  );
   animation: gradient 15s infinite;
   background-size: 400% 400%;
+  @media screen and (max-width: 1280px) {
+    height: 600px;
+  }
+  @media screen and (max-width: 500px) {
+    height: 500px;
+  }
+  @media screen and (max-width: 400px) {
+    height: 400px;
+  }
+  @media screen and (max-height: 550px) and (min-width: 1280px ) {
+    height: 500px;
+  }
 }
 
 .pg1-radial{
@@ -101,6 +113,18 @@ body {
   z-index: -4;
   background: radial-gradient(#BF75F6 23%, transparent 67% 100%) 385px -24px,radial-gradient(#6B4FFD 0, transparent 60% 100%) -940px 290px,radial-gradient(#94E7FD 10%, transparent 60% 100%) -120px 250px,radial-gradient(#6B4FFD 40%, transparent 57% 100%) 495px -44px,radial-gradient(#50AFFB 30%, transparent 67% 100%) 122px -120px,radial-gradient(#50AFFB 10%, transparent 60% 100%) -420px 120px,radial-gradient(#94E7FD 15%, transparent 50% 100%) -620px 0,radial-gradient(#94E7FD 25%, transparent 50% 100%) 520px -250px, #50AFFB;
   background-repeat: repeat-y;
+  @media screen and (max-width: 1280px) {
+    height: 600px;
+  }
+  @media screen and (max-width: 500px) {
+    height: 500px;
+  }
+  @media screen and (max-width: 400px) {
+    height: 400px;
+  }
+  @media screen and (max-height: 550px) and (min-width: 1280px ) {
+    height: 500px;
+  }
 }
 @keyframes move_wave {
   0% {
@@ -182,7 +206,7 @@ body {
   @media screen and (max-width: 430px) {
     height: 400px;
   }
-  @media screen and (max-height: 550px) {
+  @media screen and (max-height: 550px) and (min-width: 1280px ) {
     height: 600px;
   }
 }
@@ -204,7 +228,7 @@ body {
   @media screen and (max-width: 430px) {
     height: 400px;
   }
-  @media screen and (max-height: 550px) {
+  @media screen and (max-height: 550px) and (min-width: 1280px ) {
     height: 600px;
   }
 }
@@ -352,6 +376,11 @@ font-family: 'NanumSquare', sans-serif;
   margin: auto;
   justify-content: center;
   background-color: white;
+    mask-image: linear-gradient(
+    var(--mask-direction, to right),
+    hsl(0 0% 0% / 0),
+    hsl(0 0% 0% / 1) 70%,
+    hsl(0 0% 0% / 0));
 }
 
 #logoMarqueeSection { /* id로 받음 */
@@ -472,7 +501,7 @@ font-family: 'NanumSquare', sans-serif;
 .pg4-linear {
   position: absolute;
   left: 0;
-  opacity: 0.12;
+  opacity: 0.075;
   z-index: 0;
   width: 100%;
   height: 100vh;
@@ -582,7 +611,7 @@ font-family: 'NanumSquare', sans-serif;
 }
 .m-bottom {
   position: relative;
-  margin: 2.5em 0 1em 2vw;
+  margin: 2.5em 0 1.8em 2vw;
 }
 .bottom {
   background-color: white;
@@ -592,10 +621,8 @@ font-family: 'NanumSquare', sans-serif;
   bottom: 0;
 }
 .seoulhqsupport {
-  display: flex;
-  margin-left:  12vw;
+  margin: 0 12vw;
   @media screen and (max-width: 1250px) {
-    flex-direction: column;
     margin-bottom: 2em;
     margin-left: 7em;
   }
@@ -604,76 +631,94 @@ font-family: 'NanumSquare', sans-serif;
     font-size: 3vw;
   }
 }
+/* hq스타일 */
 #footer {
-  @media screen and (max-width: 880px) {
-    display: flex;
+  display: flex;
+  justify-content: space-between;
+  @media screen and (max-width: 900px) {
     flex-direction: column;
   }
 }
-/* hq스타일 */
 .hq {
   display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  @media screen and (max-width: 900px) {
+    flex-direction: column;
+  }
 }
 .sup {
   display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-right: 20vw;
+  margin-left: 10vw;
+  @media screen and (max-width: 1280px) {
+    margin-left: 0;
+  }
 }
 /* address 스타일 */
 .address {
-  flex-direction: column;  /* 서브 버튼을 세로로 정렬 */
-  align-items: flex-start;  /* 왼쪽 정렬 */
   font-size: 1.15em;
   color: gray;
-  
-  @media screen and (max-width: 360px) {
-    font-size: 4.2vw;
+  @media screen and (max-width: 340px) {
+    font-size: 4.8vw;
+  }
+}
+.img-content {
+  width: 90px;
+  @media screen and (max-width: 340px) {
+    width: 80px;
   }
 }
 /*  hq1 스타일 수정 */
 .hq1 {
   white-space: nowrap;
+  align-items: center;
+  display: flex;
+  flex-direction: row;
   margin-bottom: 0.5em;
-  @media screen and (max-width: 880px) {
-    margin-left: 1.5vw;
-    margin-bottom: 1.5em;
+  img {
+    width: 0.75em;
+    height: 1.1em;
   }
-}
-.hq1 img {
-  width: 0.75em;
-  height: 1.1em;
+  @media screen and (max-width: 610px) {
+    white-space: normal;
+  }
 }
 /*  hq2 스타일 수정 */
 .hq2 {
-  margin: 0 0 0.5em 0.5em;
-  @media screen and (max-width: 880px) {
-    margin-bottom: 1.5em;
-  }
-  @media screen and (max-width: 570px) {
-    margin-bottom: 0px;
+  white-space: nowrap;
+  align-items: center;
+  display: flex;
+  margin-bottom: 0.5em;
+  img {
+    width: 0.75em;
+    height: 1.1em;
   }
 }
 /*  hq3 스타일 수정 */
 .hq3 {
+  align-items: center;
+  display: flex;
   white-space: nowrap;
   margin-bottom: 0.5em;
-  margin-left: 1.5vw;
-  @media screen and (max-width: 880px) {
-    margin-bottom: 1.5em;
+  img {
+    width: 1em;
+    height: 0.75em;
   }
-}
-.hq3 img {
-  width: 1em;
-  height: 0.75em;
 }
 /*  hq4 스타일 수정 */
 .hq4 {
+  align-items: center;
+  display: flex;
   word-break: break-all;
   margin-bottom: 0.5em;
-  margin-left: 0.5em;
-  @media screen and (max-width: 880px) {
-    margin-bottom: 1.5em;
+  img {
+    width: 1em;
+    height: 1em;
   }
 }
-
 /* accordion 코드 */
 .main-project-list-container {
   position: relative;
