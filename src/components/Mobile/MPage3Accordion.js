@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 const M3Building = styled.p`
+word-break: keep-all;
   margin-top: 1.5em;
   padding: 0;
   font-size: 1.5em;

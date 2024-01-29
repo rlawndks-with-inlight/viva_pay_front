@@ -320,7 +320,7 @@ const Home = () => {
 
     useEffect(() => {
         const handleResize = () => {
-            const isMobile = typeof window !== "undefined" ? window.innerWidth <= 1280 || window.innerHeight <= 550 : false;
+            const isMobile = typeof window !== "undefined" ? window.innerWidth <= 1281 || window.innerHeight <= 551 : false;
             if (!isMobile) {
                 // 모바일이 아닌 경우에는 스크롤 이벤트 리스너를 추가합니다.
                 window.addEventListener("wheel", handleScroll, { passive: false });
@@ -332,7 +332,7 @@ const Home = () => {
         handleResize();
         window.addEventListener("resize", handleResize);
         // 모바일이 아닌 경우에만 기본 스크롤을 유지하기 위해 조건 추가
-        if (!(window.innerWidth <= 1280 || window.innerHeight <= 550)) {
+        if (!(window.innerWidth <= 1281 || window.innerHeight <= 551)) {
             window.addEventListener("wheel", handleScroll, { passive: false });
         }
         return () => {
@@ -374,7 +374,7 @@ const Home = () => {
         setWindowHeight(window.innerHeight);
     };
 
-    const isMobile = typeof window !== "undefined" ? window.innerWidth <= 1280 || window.innerHeight <= 550 : false;
+    const isMobile = typeof window !== "undefined" ? window.innerWidth <= 1281 || window.innerHeight <= 551 : false;
     return (
         <>
             {!loading && (
