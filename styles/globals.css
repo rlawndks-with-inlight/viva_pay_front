@@ -191,7 +191,7 @@ body {
   width: 300%;
   height: 2000px;
   position: absolute;
-  box-shadow: 6px -16px 16px #00000029;
+  box-shadow: 6px -16px 16px #00000018;
   border-radius: 43%;
   @media screen and (max-width: 1800px) {
     top: 0px;
