@@ -417,7 +417,7 @@ const Home = () => {
                                     </M5SearchContainer>
                                     <div className="m-bottom">
                                         <M5Contact>
-                                            <HQ/>
+                                            <HQ />
                                         </M5Contact>
                                     </div>
                                 </>
@@ -444,35 +444,33 @@ const Home = () => {
                                                     </div>
                                                 </div>
                                             </AnimateUp>
-                                            <canvas className="pg1-linear" />
-                                            <div className="pg1-radial" />
-                                            <div className="waveMiddle" />
-                                            <div className="whitebackground" />
+                                            <canvas className="pg1-linear" />{/*  */}
+                                            <div className="whitebackground" />{/*  아래 오른쪽 흰색배경 */}
                                         </Section>
                                     ) : index === 1 ? (
                                         <section>
                                             <Section className="pg2-radial">
                                                 <div className="pg2-linear" />
                                                 <div className="pg2-gray" />
-                                                    <AnimateUp>
-                                                        <div className="subtitle" id="sub1">국가안보 수준의 보안성</div>
-                                                        <div className="subtitle" id="sub2">전 고객 무사고 업계 최고 수준의 대응속도</div>
-                                                        <div className="subtitle" id="sub3">경쟁사 대비 빠른 연산 처리 속도</div>
-                                                        <TopicsContainer />
-                                                    </AnimateUp>
+                                                <AnimateUp>
+                                                    <div className="subtitle" id="sub1">국가안보 수준의 보안성</div>
+                                                    <div className="subtitle" id="sub2">전 고객 무사고 업계 최고 수준의 대응속도</div>
+                                                    <div className="subtitle" id="sub3">경쟁사 대비 빠른 연산 처리 속도</div>
+                                                    <TopicsContainer />
+                                                </AnimateUp>
                                             </Section>
                                             <Marquee />
                                         </section>
                                     ) : index === 2 ? (
                                         <Section style={{ backgroundImage: `url('/image/3pageback.png')`, backgroundSize: 'cover' }}>
                                             <AnimateUp>
-                                                <Section3Title /> 
+                                                <Section3Title />
                                                 <Accordion
                                                     accordionImages={accordionImages}
                                                     activeIndex={activeIndex}
                                                     handleItemClick={handleItemClick}
                                                     activeTxtIndex={activeTxtIndex}
-                                                    accordionItems={accordionItems}/>
+                                                    accordionItems={accordionItems} />
                                             </AnimateUp>
                                         </Section>
                                     ) : (
